@@ -16,8 +16,9 @@ h1{font-size:clamp(38px,5vw,62px);line-height:1.02;margin:0 0 18px}
 .lead{font-size:20px;color:#5f6f7f}
 .card{background:white;border-radius:24px;padding:26px;box-shadow:0 18px 50px rgba(15,23,42,.08)}
 .price{font-size:58px;font-weight:900;color:#0f766e}
-.btn{background:#0f766e;color:white;border:0;border-radius:999px;padding:14px 22px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}
+.btn{background:#0f766e;color:white;border:0;border-radius:999px;padding:14px 22px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block;margin:6px 4px 6px 0}
 .btn.secondary{background:white;color:#0f766e;border:1px solid #0f766e}
+.btn.light{background:#e6fffb;color:#0f766e;border:1px solid #99f6e4}
 section{padding:46px 0}
 .app{background:#0f172a;color:white;border-radius:28px;padding:28px}
 textarea,input{width:100%;box-sizing:border-box;border-radius:14px;border:1px solid #334155;background:#111827;color:white;padding:14px;font-size:16px;margin:8px 0 14px}
@@ -25,9 +26,10 @@ textarea{min-height:120px}
 .answer{background:#ecfeff;color:#134e4a;border-radius:18px;padding:18px;white-space:pre-wrap;line-height:1.6;margin-top:18px}
 .chat{display:flex;flex-direction:column;gap:12px;margin-top:18px}
 .patient{background:#134e4a;color:white;border-radius:18px;padding:14px;white-space:pre-wrap}
-.ai{background:#ecfeff;color:#134e4a;border-radius:18px;padding:14px;white-space:pre-wrap;line-height:1.6;color:#134e4a}
+.ai{background:#ecfeff;color:#134e4a;border-radius:18px;padding:14px;white-space:pre-wrap;line-height:1.6}
 .hidden{display:none}
 .danger{background:#fff5f5;color:#b42318;border:1px solid #fecaca;border-radius:18px;padding:18px}
+.helper{color:#cbd5e1;font-size:15px;margin-top:-4px}
 @media(max-width:850px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -73,19 +75,22 @@ textarea{min-height:120px}
 <div class="app">
 
 <h2>Parere medico rapido</h2>
-<p>Scrivi il problema con parole semplici. Puoi continuare ad aggiungere dettagli: il parere si aggiorna man mano.</p>
+<p>Scrivi il problema con parole semplici. Ricevi un primo parere. Se vuoi aggiungere dettagli sullo stesso problema, usa il campo dedicato. Se invece hai un altro problema, premi “Nuova richiesta medica”.</p>
 
 <label>Descrivi il problema</label>
-<textarea id="problem" placeholder="Esempio: emicrania destra ricorrente in donna di 47 anni"></textarea>
+<textarea id="problem" placeholder="Esempio: mal di gola da 2 giorni con febbre"></textarea>
 
 <button class="btn" onclick="sendConsult()">Dammi subito un parere</button>
 
 <div id="chat" class="chat"></div>
 
 <div id="followupBox" class="hidden">
-<label>Aggiungi altri dettagli</label>
-<textarea id="followup" placeholder="Esempio: il dolore dura 8 ore, ho nausea, peggiora con la luce..."></textarea>
-<button class="btn secondary" onclick="sendFollowup()">Aggiorna il parere</button>
+<label>Aggiungi dettagli a questo problema</label>
+<p class="helper">Usa questo campo solo se vuoi precisare lo stesso problema già descritto.</p>
+<textarea id="followup" placeholder="Esempio: la febbre è 38,5, ho placche in gola, dolore a deglutire..."></textarea>
+
+<button class="btn secondary" onclick="sendFollowup()">Aggiorna il parere su questo problema</button>
+<button class="btn light" onclick="newMedicalRequest()">Nuova richiesta medica</button>
 <button class="btn" onclick="showDoctorForm()">Mi serve prescrizione, certificato o referto</button>
 </div>
 
@@ -151,7 +156,11 @@ async function sendConsult(){
   if(!problem) return alert("Scrivi il problema.");
 
   fullText = problem;
+  lastAnswer = "";
+
   document.getElementById("chat").innerHTML = "";
+  document.getElementById("doctorForm").classList.add("hidden");
+  document.getElementById("finalMessage").classList.add("hidden");
 
   addMessage(problem, "patient");
   addMessage("Sto preparando il parere medico...", "ai");
@@ -171,11 +180,12 @@ async function sendConsult(){
 
 async function sendFollowup(){
   const more = document.getElementById("followup").value.trim();
-  if(!more) return;
+  if(!more) return alert("Scrivi il dettaglio da aggiungere allo stesso problema.");
 
-  fullText += "\n" + more;
+  fullText += "\nDettaglio aggiunto dal paziente sullo stesso problema: " + more;
+
   addMessage(more, "patient");
-  addMessage("Aggiorno il parere medico...", "ai");
+  addMessage("Aggiorno il parere medico su questo problema...", "ai");
 
   document.getElementById("followup").value = "";
 
@@ -188,6 +198,22 @@ async function sendFollowup(){
   }catch(e){
     document.getElementById("chat").lastChild.textContent = "Errore: " + e.message;
   }
+}
+
+function newMedicalRequest(){
+  fullText = "";
+  lastAnswer = "";
+
+  document.getElementById("problem").value = "";
+  document.getElementById("followup").value = "";
+  document.getElementById("chat").innerHTML = "";
+
+  document.getElementById("followupBox").classList.add("hidden");
+  document.getElementById("doctorForm").classList.add("hidden");
+  document.getElementById("finalMessage").classList.add("hidden");
+
+  document.getElementById("problem").focus();
+  document.getElementById("consulto").scrollIntoView({behavior:"smooth"});
 }
 
 function showDoctorForm(){
