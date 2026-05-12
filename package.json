@@ -1,0 +1,14 @@
+{
+  "name": "medico-rapido-online",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.48.1",
+    "openai": "^4.80.1",
+    "stripe": "^17.5.0"
+  }
+}
