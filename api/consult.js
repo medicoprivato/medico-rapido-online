@@ -1,48 +1,51 @@
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).json({
-      error: "Method not allowed"
-    });
+    return res.status(405).json({ error: "Metodo non consentito" });
   }
 
   try {
-    const { message } = req.body;
+    const { text } = req.body;
+
+    if (!text) {
+      return res.status(400).json({ error: "Testo mancante" });
+    }
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
       },
       body: JSON.stringify({
-        model: "gpt-4.1-mini",
+        model: "gpt-4o-mini",
         messages: [
           {
             role: "system",
-            content:
-              "Sei un medico virtuale prudente. Non fare diagnosi definitive. Consiglia sempre valutazione medica reale in caso di dubbi o urgenze.",
+            content: "Rispondi come medico per primo orientamento clinico. Italiano semplice. Dai subito un parere utile, concreto, con ipotesi più probabili e segnali di allarme. Non dire frasi vuote."
           },
           {
             role: "user",
-            content: message,
-          },
-        ],
-        temperature: 0.4,
-      }),
+            content: text
+          }
+        ]
+      })
     });
 
     const data = await response.json();
 
-    const reply =
-      data.choices?.[0]?.message?.content ||
-      "Nessuna risposta disponibile.";
+    if (!response.ok) {
+      return res.status(500).json({
+        error: data.error?.message || "Errore OpenAI"
+      });
+    }
 
-    return res.status(200).json({
-      reply,
-    });
+    const answer = data.choices[0].message.content;
+
+    return res.status(200).json({ answer });
+
   } catch (error) {
     return res.status(500).json({
-      error: error.message,
+      error: error.message
     });
   }
 }
