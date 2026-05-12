@@ -1,68 +1,48 @@
-import OpenAI from "openai";
-import { createClient } from "@supabase/supabase-js";
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
-
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
-);
-
 export default async function handler(req, res) {
-
   if (req.method !== "POST") {
     return res.status(405).json({
-      error: "Metodo non consentito"
+      error: "Method not allowed"
     });
   }
 
   try {
+    const { message } = req.body;
 
-    const { text } = req.body;
-
-    if (!text || text.trim().length < 3) {
-      return res.status(400).json({
-        error: "Descrizione troppo breve"
-      });
-    }
-
-    const response = await openai.responses.create({
-      model: "gpt-5.5",
-      input: [
-        {
-          role: "system",
-          content:
-            "Sei un assistente medico per primo orientamento clinico. Rispondi in italiano semplice, concreto, utile. Dai un'impressione clinica immediata basata sui sintomi forniti. Non essere vago. Dai ipotesi ragionate."
-        },
-        {
-          role: "user",
-          content:
-            "Paziente: " + text
-        }
-      ]
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: "gpt-4.1-mini",
+        messages: [
+          {
+            role: "system",
+            content:
+              "Sei un medico virtuale prudente. Non fare diagnosi definitive. Consiglia sempre valutazione medica reale in caso di dubbi o urgenze.",
+          },
+          {
+            role: "user",
+            content: message,
+          },
+        ],
+        temperature: 0.4,
+      }),
     });
 
-    const aiText = response.output_text;
+    const data = await response.json();
 
-    await supabase
-      .from("consults")
-      .insert({
-        patient_text: text,
-        ai_response: aiText
-      });
+    const reply =
+      data.choices?.[0]?.message?.content ||
+      "Nessuna risposta disponibile.";
 
     return res.status(200).json({
-      answer: aiText
+      reply,
     });
-
   } catch (error) {
-
-    console.error(error);
-
     return res.status(500).json({
-      error: "Errore consulto AI"
+      error: error.message,
     });
   }
 }
