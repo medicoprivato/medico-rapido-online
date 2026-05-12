@@ -1,33 +1,70 @@
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Metodo non consentito" });
+    return res.status(405).json({
+      error: "Metodo non consentito"
+    });
   }
 
   try {
     const { text } = req.body;
 
-    if (!text) {
-      return res.status(400).json({ error: "Testo mancante" });
+    if (!text || text.trim() === "") {
+      return res.status(400).json({
+        error: "Descrizione del problema mancante"
+      });
     }
 
-    const prompt = `
+    const systemPrompt = `
 Sei un medico esperto in telemedicina.
 
-Rispondi SOLO al problema scritto qui sotto.
-NON inventare diagnosi assurde.
-NON mescolare richieste precedenti.
-NON aggiungere sintomi non presenti.
-NON parlare di altri distretti corporei non citati.
+Parli SEMPRE in italiano.
 
-Fornisci:
-- ipotesi più probabili
-- segnali di allarme
-- cosa fare nell'immediato
-- quando consultare urgentemente un medico
+Devi dare del TU al paziente.
 
-Risposta breve, chiara, professionale, rassicurante.
+Il tuo stile deve essere:
+- empatico
+- umano
+- rassicurante
+- prudente clinicamente
+- coerente con ciò che il paziente scrive
 
-Problema paziente:
+NON devi sembrare Google o Wikipedia.
+
+NON devi fare spiegazioni enciclopediche.
+
+NON devi ignorare il contesto del paziente.
+
+NON devi inventare sintomi, diagnosi o dettagli non presenti.
+
+NON devi parlare di parti del corpo non citate.
+
+NON devi cambiare argomento.
+
+NON devi dare diagnosi certe senza visita.
+
+NON devi essere freddo o automatico.
+
+Rispondi SOLO al problema specifico scritto dal paziente.
+
+La risposta deve:
+- riconoscere il disagio del paziente
+- spiegare in modo semplice cosa potrebbe significare
+- dire cosa fare nell’immediato
+- indicare eventuali segnali di allarme
+- dire quando è opportuno contattare urgentemente un medico
+
+Usa frasi brevi, semplici e naturali.
+
+NON usare elenchi lunghi.
+
+NON usare linguaggio troppo tecnico.
+
+Mantieni la risposta breve ma utile.
+`;
+
+    const userPrompt = `
+Problema del paziente:
+
 ${text}
 `;
 
@@ -44,16 +81,15 @@ ${text}
           messages: [
             {
               role: "system",
-              content:
-                "Sei un medico esperto in telemedicina. Rispondi in italiano in modo clinicamente prudente."
+              content: systemPrompt
             },
             {
               role: "user",
-              content: prompt
+              content: userPrompt
             }
           ],
-          temperature: 0.3,
-          max_tokens: 500
+          temperature: 0.4,
+          max_tokens: 450
         }),
       }
     );
@@ -62,19 +98,24 @@ ${text}
 
     if (!response.ok) {
       return res.status(500).json({
-        error: data.error?.message || "Errore OpenAI"
+        error:
+          data?.error?.message ||
+          "Errore durante la risposta AI"
       });
     }
 
     const answer =
-      data.choices?.[0]?.message?.content ||
-      "Nessuna risposta disponibile.";
+      data?.choices?.[0]?.message?.content ||
+      "Non sono riuscito a generare una risposta.";
 
-    return res.status(200).json({ answer });
+    return res.status(200).json({
+      answer
+    });
 
   } catch (error) {
     return res.status(500).json({
-      error: error.message || "Errore server"
+      error:
+        error.message || "Errore interno del server"
     });
   }
 }
