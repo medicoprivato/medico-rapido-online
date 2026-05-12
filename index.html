@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Medico Rapido Online</title>
+
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#f7f8fb;color:#17202a}
+.container{width:min(1100px,calc(100% - 36px));margin:auto}
+header{background:white;border-bottom:1px solid #dde5ed;padding:14px 0}
+.brand{font-size:21px;font-weight:800;color:#0f766e}
+.hero{padding:70px 0;background:linear-gradient(90deg,rgba(247,248,251,.98),rgba(247,248,251,.75)),url("https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=1800&q=80");background-size:cover;background-position:center right}
+.grid{display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:center}
+h1{font-size:clamp(38px,5vw,62px);line-height:1.02;margin:0 0 18px}
+.lead{font-size:20px;color:#5f6f7f}
+.card{background:white;border-radius:24px;padding:26px;box-shadow:0 18px 50px rgba(15,23,42,.08)}
+.price{font-size:58px;font-weight:900;color:#0f766e}
+.btn{background:#0f766e;color:white;border:0;border-radius:999px;padding:14px 22px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.secondary{background:white;color:#0f766e;border:1px solid #0f766e}
+section{padding:46px 0}
+.app{background:#0f172a;color:white;border-radius:28px;padding:28px}
+textarea,input{width:100%;box-sizing:border-box;border-radius:14px;border:1px solid #334155;background:#111827;color:white;padding:14px;font-size:16px;margin:8px 0 14px}
+textarea{min-height:120px}
+.answer{background:#ecfeff;color:#134e4a;border-radius:18px;padding:18px;white-space:pre-wrap;line-height:1.6;margin-top:18px}
+.chat{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.patient{background:#134e4a;color:white;border-radius:18px;padding:14px;white-space:pre-wrap}
+.ai{background:#ecfeff;color:#134e4a;border-radius:18px;padding:14px;white-space:pre-wrap;line-height:1.6}
+.hidden{display:none}
+.danger{background:#fff5f5;color:#b42318;border:1px solid #fecaca;border-radius:18px;padding:18px}
+@media(max-width:850px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container">
+<div class="brand">Medico Rapido Online</div>
+</div>
+</header>
+
+<main>
+
+<section class="hero">
+<div class="container grid">
+<div>
+<h1>Prescrizioni, rinnovi e consulti medici da casa.</h1>
+<p class="lead">Descrivi il tuo problema e ricevi subito un primo parere medico.</p>
+<a href="#consulto" class="btn">Inizia subito</a>
+</div>
+
+<div class="card">
+<h2>Abbonamento annuale</h2>
+<div class="price">60€</div>
+<p>Include fino a 10 consultazioni mediche online all’anno.</p>
+<p>Prescrizioni, certificati, referti e richieste esami sono compresi quando clinicamente appropriati.</p>
+<button class="btn" onclick="checkout()">Abbonati ora</button>
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
+<div class="danger">
+<strong>Non usare in urgenza.</strong> Dolore toracico, difficoltà respiratoria, deficit neurologici, trauma, sanguinamento importante, perdita di coscienza o peggioramento rapido richiedono pronto soccorso.
+</div>
+</div>
+</section>
+
+<section id="consulto">
+<div class="container">
+<div class="app">
+
+<h2>Parere medico rapido</h2>
+<p>Scrivi il problema con parole semplici. Puoi continuare ad aggiungere dettagli: il parere si aggiorna man mano.</p>
+
+<label>Descrivi il problema</label>
+<textarea id="problem" placeholder="Esempio: emicrania destra ricorrente in donna di 47 anni"></textarea>
+
+<button class="btn" onclick="sendConsult()">Dammi subito un parere</button>
+
+<div id="chat" class="chat"></div>
+
+<div id="followupBox" class="hidden">
+<label>Aggiungi altri dettagli</label>
+<textarea id="followup" placeholder="Esempio: il dolore dura 8 ore, ho nausea, peggiora con la luce..."></textarea>
+<button class="btn secondary" onclick="sendFollowup()">Aggiorna il parere</button>
+<button class="btn" onclick="showDoctorForm()">Mi serve prescrizione, certificato o referto</button>
+</div>
+
+<div id="doctorForm" class="hidden">
+<h3>Dati per atto medico</h3>
+
+<input id="name" placeholder="Nome e cognome"/>
+<input id="dob" placeholder="Data di nascita"/>
+<input id="email" placeholder="Email"/>
+<input id="phone" placeholder="Telefono"/>
+
+<textarea id="clinicalData" placeholder="Farmaci, allergie, patologie note, documenti disponibili"></textarea>
+
+<button class="btn" onclick="submitDoctorRequest()">Invia richiesta al medico</button>
+</div>
+
+<div id="finalMessage" class="answer hidden"></div>
+
+</div>
+</div>
+</section>
+
+</main>
+
+<script>
+let fullText = "";
+let lastAnswer = "";
+
+function addMessage(text, type){
+  const chat = document.getElementById("chat");
+  const div = document.createElement("div");
+  div.className = type;
+  div.textContent = text;
+  chat.appendChild(div);
+  div.scrollIntoView({behavior:"smooth"});
+}
+
+async function askAI(text){
+  const res = await fetch("/api/consult", {
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body:JSON.stringify({ text })
+  });
+
+  const data = await res.json();
+
+  if(!res.ok){
+    throw new Error(data.error || "Errore consulto");
+  }
+
+  return data.answer;
+}
+
+async function sendConsult(){
+  const problem = document.getElementById("problem").value.trim();
+  if(!problem) return alert("Scrivi il problema.");
+
+  fullText = problem;
+  addMessage(problem, "patient");
+
+  addMessage("Sto preparando il parere medico...", "ai");
+
+  try{
+    const answer = await askAI(fullText);
+    lastAnswer = answer;
+
+    const chat = document.getElementById("chat");
+    chat.lastChild.textContent = answer;
+
+    document.getElementById("followupBox").classList.remove("hidden");
+  }catch(e){
+    document.getElementById("chat").lastChild.textContent = "Errore: " + e.message;
+  }
+}
+
+async function sendFollowup(){
+  const more = document.getElementById("followup").value.trim();
+  if(!more) return;
+
+  fullText += "\n" + more;
+  addMessage(more, "patient");
+  addMessage("Aggiorno il parere medico...", "ai");
+
+  document.getElementById("followup").value = "";
+
+  try{
+    const answer = await askAI(fullText);
+    lastAnswer = answer;
+
+    const chat = document.getElementById("chat");
+    chat.lastChild.textContent = answer;
+  }catch(e){
+    document.getElementById("chat").lastChild.textContent = "Errore: " + e.message;
+  }
+}
+
+function showDoctorForm(){
+  document.getElementById("doctorForm").classList.remove("hidden");
+}
+
+async function submitDoctorRequest(){
+  const payload = {
+    patientText: fullText,
+    aiResponse: lastAnswer,
+    patientName: document.getElementById("name").value,
+    dateOfBirth: document.getElementById("dob").value,
+    email: document.getElementById("email").value,
+    phone: document.getElementById("phone").value,
+    clinicalData: document.getElementById("clinicalData").value
+  };
+
+  const res = await fetch("/api/submit-medical-request", {
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body:JSON.stringify(payload)
+  });
+
+  const data = await res.json();
+
+  if(!res.ok){
+    return alert(data.error || "Errore invio richiesta.");
+  }
+
+  document.getElementById("finalMessage").classList.remove("hidden");
+  document.getElementById("finalMessage").textContent =
+    "Richiesta inviata correttamente. Il medico valuterà i dati prima di eventuale prescrizione, certificato, referto o richiesta esami.";
+}
+
+async function checkout(){
+  const res = await fetch("/api/create-checkout-session", {
+    method:"POST"
+  });
+
+  const data = await res.json();
+
+  if(data.url){
+    window.location.href = data.url;
+  }else{
+    alert("Errore pagamento.");
+  }
+}
+</script>
+
+</body>
+</html>
