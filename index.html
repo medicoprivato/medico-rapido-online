@@ -3,279 +3,307 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Medico Rapido Online</title>
-
+<title>MedicoOra — Demo Interattivo</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;0,900;1,300;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#f7f8fb;color:#17202a}
-.container{width:min(1100px,calc(100% - 36px));margin:auto}
-header{background:white;border-bottom:1px solid #dde5ed;padding:14px 0}
-.brand{font-size:21px;font-weight:800;color:#0f766e}
-.hero{padding:70px 0;background:linear-gradient(90deg,rgba(247,248,251,.98),rgba(247,248,251,.75)),url("https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=1800&q=80");background-size:cover;background-position:center right}
-.grid{display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:center}
-h1{font-size:clamp(38px,5vw,62px);line-height:1.02;margin:0 0 18px}
-.lead{font-size:20px;color:#5f6f7f}
-.card{background:white;border-radius:24px;padding:26px;box-shadow:0 18px 50px rgba(15,23,42,.08)}
-.price{font-size:58px;font-weight:900;color:#0f766e}
-.btn{background:#0f766e;color:white;border:0;border-radius:999px;padding:14px 22px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block;margin:6px 4px 6px 0}
-.btn.secondary{background:white;color:#0f766e;border:1px solid #0f766e}
-.btn.light{background:#e6fffb;color:#0f766e;border:1px solid #99f6e4}
-section{padding:46px 0}
-.app{background:#0f172a;color:white;border-radius:28px;padding:28px}
-textarea,input{width:100%;box-sizing:border-box;border-radius:14px;border:1px solid #334155;background:#111827;color:white;padding:14px;font-size:16px;margin:8px 0 14px}
-textarea{min-height:120px}
-.answer{background:#ecfeff;color:#134e4a;border-radius:18px;padding:18px;white-space:pre-wrap;line-height:1.6;margin-top:18px}
-.chat{display:flex;flex-direction:column;gap:12px;margin-top:18px}
-.patient{background:#134e4a;color:white;border-radius:18px;padding:14px;white-space:pre-wrap}
-.ai{background:#ecfeff;color:#134e4a;border-radius:18px;padding:14px;white-space:pre-wrap;line-height:1.6}
-.hidden{display:none}
-.danger{background:#fff5f5;color:#b42318;border:1px solid #fecaca;border-radius:18px;padding:18px}
-.helper{color:#cbd5e1;font-size:15px;margin-top:-4px}
-@media(max-width:850px){.grid{grid-template-columns:1fr}}
+:root{
+  --teal:#0f766e;--teal2:#134e4a;--teal3:#ccfbf1;--teal4:#99f6e4;
+  --navy:#0f172a;--slate:#334155;--muted:#64748b;--light:#f0fdfa;
+  --white:#fff;--border:#e2e8f0;--red:#dc2626;--amber:#d97706;
+  --sh:0 4px 24px rgba(15,118,110,.10);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--light);color:var(--navy);min-height:100vh}
+
+/* HEADER */
+.header{background:var(--teal2);color:#fff;padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:600;letter-spacing:-.02em}
+.badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:100px;padding:4px 12px;font-size:.7rem;font-weight:600;letter-spacing:.08em}
+
+/* DEMO BANNER */
+.demo-banner{background:linear-gradient(135deg,#fef3c7,#fde68a);border-bottom:2px solid #f59e0b;padding:10px 24px;text-align:center;font-size:.85rem;color:#92400e;font-weight:600}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:0;height:calc(100vh - 110px)}
+
+/* PATIENT SIDE */
+.patient-side{background:var(--navy);color:#fff;padding:28px;overflow-y:auto;border-right:1px solid #1e293b}
+.side-label{font-size:.65rem;font-weight:700;letter-spacing:.15em;color:var(--teal4);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.side-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.1)}
+
+.cases{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.case-btn{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 14px;cursor:pointer;text-align:left;transition:all .2s;color:#fff;font-family:'DM Sans',sans-serif}
+.case-btn:hover{background:rgba(15,118,110,.3);border-color:var(--teal4)}
+.case-btn.active{background:rgba(15,118,110,.4);border-color:var(--teal4)}
+.case-btn-name{font-size:.9rem;font-weight:600;margin-bottom:2px}
+.case-btn-desc{font-size:.75rem;color:#94a3b8}
+
+.patient-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:18px;margin-bottom:16px}
+.patient-name{font-family:'Fraunces',serif;font-size:1.3rem;margin-bottom:4px}
+.patient-meta{font-size:.78rem;color:#94a3b8;margin-bottom:14px}
+.patient-complaint{background:rgba(15,118,110,.2);border:1px solid rgba(99,246,228,.2);border-radius:10px;padding:14px;font-size:.87rem;line-height:1.6;color:#e2e8f0}
+.complaint-label{font-size:.65rem;font-weight:700;letter-spacing:.1em;color:var(--teal4);margin-bottom:6px}
+
+.status-bar{display:flex;align-items:center;gap:8px;margin-top:14px;padding:10px 14px;background:rgba(255,255,255,.05);border-radius:10px}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;animation:pulse-dot 1.5s ease infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+.status-text{font-size:.78rem;color:#94a3b8}
+
+/* DOCTOR SIDE */
+.doctor-side{background:var(--white);padding:28px;overflow-y:auto}
+
+.doc-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.doc-avatar{width:44px;height:44px;background:linear-gradient(135deg,var(--teal),var(--teal2));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff;flex-shrink:0}
+.doc-name{font-family:'Fraunces',serif;font-size:1rem;font-weight:600;color:var(--navy)}
+.doc-title{font-size:.75rem;color:var(--muted)}
+
+.ai-summary{background:linear-gradient(135deg,#f0fdfa,#ccfbf1);border:1px solid var(--teal4);border-radius:14px;padding:16px;margin-bottom:18px}
+.ai-label{font-size:.65rem;font-weight:700;letter-spacing:.1em;color:var(--teal);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.ai-label span{background:var(--teal);color:#fff;border-radius:4px;padding:1px 6px;font-size:.6rem}
+.ai-text{font-size:.83rem;color:var(--teal2);line-height:1.65}
+
+.prescription-box{border:1.5px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px}
+.prescription-header{background:var(--navy);color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.prescription-title{font-size:.8rem;font-weight:700;letter-spacing:.08em}
+.prescription-editable{font-size:.8rem;color:#94a3b8;cursor:pointer}
+.prescription-body{padding:16px}
+.rx-symbol{font-family:'Fraunces',serif;font-size:2rem;color:var(--teal);line-height:1;margin-bottom:8px}
+.rx-drug{font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+.rx-dose{font-size:.88rem;color:var(--slate);margin-bottom:12px}
+.rx-instructions{background:var(--light);border-radius:8px;padding:10px 12px;font-size:.82rem;color:var(--slate);line-height:1.6}
+.rx-note{font-size:.75rem;color:var(--muted);margin-top:10px;font-style:italic}
+
+.exams-box{border:1.5px solid var(--border);border-radius:14px;padding:14px;margin-bottom:16px}
+.exams-title{font-size:.75rem;font-weight:700;letter-spacing:.08em;color:var(--navy);margin-bottom:10px}
+.exam-item{display:flex;align-items:center;gap:8px;font-size:.83rem;color:var(--slate);margin-bottom:6px}
+.exam-check{width:16px;height:16px;border-radius:4px;background:var(--teal3);border:1px solid var(--teal4);display:flex;align-items:center;justify-content:center;font-size:.6rem;color:var(--teal);flex-shrink:0}
+
+.action-bar{display:flex;gap:10px;margin-top:4px}
+.btn-sign{flex:1;background:linear-gradient(135deg,var(--teal),var(--teal2));color:#fff;border:none;border-radius:12px;padding:14px;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-sign:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(15,118,110,.3)}
+.btn-edit{background:var(--white);border:1.5px solid var(--border);color:var(--slate);border-radius:12px;padding:14px 18px;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer}
+
+.sent-confirm{display:none;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid #86efac;border-radius:14px;padding:20px;text-align:center;margin-top:16px}
+.sent-icon{font-size:2rem;margin-bottom:8px}
+.sent-title{font-family:'Fraunces',serif;font-size:1.1rem;color:#166534;margin-bottom:4px}
+.sent-text{font-size:.82rem;color:#15803d;line-height:1.6}
+
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;color:var(--muted)}
+.empty-icon{font-size:3rem;margin-bottom:12px;opacity:.4}
+.empty-text{font-size:.9rem}
+
+/* Responsive */
+@media(max-width:700px){
+  .layout{grid-template-columns:1fr;height:auto}
+  .patient-side,.doctor-side{height:auto}
+}
 </style>
 </head>
-
 <body>
 
-<header>
-<div class="container">
-<div class="brand">Medico Rapido Online</div>
-</div>
-</header>
-
-<main>
-
-<section class="hero">
-<div class="container grid">
-<div>
-<h1>Prescrizioni, rinnovi e consulti medici da casa.</h1>
-<p class="lead">Descrivi il tuo problema e ricevi subito un primo parere medico.</p>
-<a href="#consulto" class="btn">Inizia subito</a>
+<div class="header">
+  <div class="brand">✚ MedicoOra</div>
+  <div class="badge">DEMO INTERATTIVO</div>
 </div>
 
-<div class="card">
-<h2>Abbonamento annuale</h2>
-<div class="price">60€</div>
-<p>Include fino a 10 consultazioni mediche online all’anno.</p>
-<p>Prescrizioni, certificati, referti e richieste esami sono compresi quando clinicamente appropriati.</p>
-<button class="btn" onclick="checkout()">Abbonati ora</button>
-</div>
-</div>
-</section>
-
-<section>
-<div class="container">
-<div class="danger">
-<strong>Non usare in urgenza.</strong> Dolore toracico, difficoltà respiratoria, deficit neurologici, trauma, sanguinamento importante, perdita di coscienza o peggioramento rapido richiedono pronto soccorso.
-</div>
-</div>
-</section>
-
-<section id="consulto">
-<div class="container">
-<div class="app">
-
-<h2>Parere medico rapido</h2>
-<p>Scrivi il problema con parole semplici. Ricevi un primo parere. Se vuoi aggiungere dettagli sullo stesso problema, usa il campo dedicato. Se invece hai un altro problema, premi “Nuova richiesta medica”.</p>
-
-<label>Descrivi il problema</label>
-<textarea id="problem" placeholder="Esempio: mal di gola da 2 giorni con febbre"></textarea>
-
-<button class="btn" onclick="sendConsult()">Dammi subito un parere</button>
-
-<div id="chat" class="chat"></div>
-
-<div id="followupBox" class="hidden">
-<label>Aggiungi dettagli a questo problema</label>
-<p class="helper">Usa questo campo solo se vuoi precisare lo stesso problema già descritto.</p>
-<textarea id="followup" placeholder="Esempio: la febbre è 38,5, ho placche in gola, dolore a deglutire..."></textarea>
-
-<button class="btn secondary" onclick="sendFollowup()">Aggiorna il parere su questo problema</button>
-<button class="btn light" onclick="newMedicalRequest()">Nuova richiesta medica</button>
-<button class="btn" onclick="showDoctorForm()">Mi serve prescrizione, certificato o referto</button>
+<div class="demo-banner">
+  🎬 Demo — Clicca un paziente a sinistra per vedere il flusso completo
 </div>
 
-<div id="doctorForm" class="hidden">
-<h3>Dati per atto medico</h3>
+<div class="layout">
 
-<input id="name" placeholder="Nome e cognome"/>
-<input id="dob" placeholder="Data di nascita"/>
-<input id="email" placeholder="Email"/>
-<input id="phone" placeholder="Telefono"/>
+  <!-- LATO PAZIENTE -->
+  <div class="patient-side">
+    <div class="side-label">RICHIESTE IN ARRIVO</div>
 
-<textarea id="clinicalData" placeholder="Farmaci, allergie, patologie note, documenti disponibili"></textarea>
+    <div class="cases">
+      <button class="case-btn" onclick="loadCase(0)">
+        <div class="case-btn-name">Mario R., 73 anni</div>
+        <div class="case-btn-desc">Ipertrofia prostatica · Rinnovo farmaco + esami</div>
+      </button>
+      <button class="case-btn" onclick="loadCase(1)">
+        <div class="case-btn-name">Giulia M., 34 anni</div>
+        <div class="case-btn-desc">Miopia · Prescrizione occhiali</div>
+      </button>
+      <button class="case-btn" onclick="loadCase(2)">
+        <div class="case-btn-name">Francesca B., 47 anni</div>
+        <div class="case-btn-desc">Perimenopausa · Emicrania resistente</div>
+      </button>
+      <button class="case-btn" onclick="loadCase(3)">
+        <div class="case-btn-name">Giuseppe T., 78 anni</div>
+        <div class="case-btn-desc">Artrosi anca destra · Dolore cronico lieve</div>
+      </button>
+    </div>
 
-<button class="btn" onclick="submitDoctorRequest()">Invia richiesta al medico</button>
+    <div id="patient-display" style="display:none">
+      <div class="patient-card">
+        <div class="patient-name" id="p-name"></div>
+        <div class="patient-meta" id="p-meta"></div>
+        <div class="complaint-label">DESCRIZIONE DEL PAZIENTE</div>
+        <div class="patient-complaint" id="p-complaint"></div>
+      </div>
+      <div class="status-bar">
+        <div class="status-dot"></div>
+        <div class="status-text" id="status-text">Richiesta inviata · In attesa di risposta medica</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LATO MEDICO -->
+  <div class="doctor-side">
+    <div class="doc-header">
+      <div class="doc-avatar">👩‍⚕️</div>
+      <div>
+        <div class="doc-name">Dott.ssa Anna Maria Ferri</div>
+        <div class="doc-title">Medico Chirurgo · Ginecologia e Ostetricia</div>
+      </div>
+    </div>
+
+    <div id="doctor-display">
+      <div class="empty-state">
+        <div class="empty-icon">←</div>
+        <div class="empty-text">Seleziona un paziente<br>per vedere la richiesta</div>
+      </div>
+    </div>
+  </div>
+
 </div>
-
-<div id="finalMessage" class="answer hidden"></div>
-
-</div>
-</div>
-</section>
-
-</main>
 
 <script>
-let fullText = "";
-let lastAnswer = "";
+const cases = [
+  {
+    name: "Mario Rossi",
+    age: "73 anni",
+    meta: "73 anni · M · Ipertensione, IPB · Tamsulosina 0,4mg, Ramipril 5mg · Allergie: nessuna",
+    complaint: "Buongiorno, ho 73 anni e soffro di ipertrofia prostatica benigna da circa 4 anni. Prendo tamsulosina 0,4mg ogni sera dopo cena. Ho finito le compresse e non riesco a vedere il mio medico di base prima di 3 settimane. Ho bisogno del rinnovo della ricetta. Vorrei anche fare il controllo del PSA e della creatinina come mi ha detto l'urologo.",
+    aiSummary: "Paziente di 73 anni con IPB in terapia cronica con tamsulosina 0,4mg. Richiede rinnovo prescrizione e monitoraggio laboratoristico (PSA + creatinina) come da indicazione specialistica. Nessun segno di ritenzione urinaria acuta o peggioramento sintomatologico. Richiesta appropriata e di routine.",
+    hasExams: true,
+    exams: ["PSA totale", "PSA libero", "Creatininemia", "Esame urine completo"],
+    drug: "Tamsulosina cloridrato",
+    dose: "0,4 mg — 30 compresse",
+    instructions: "1 compressa la sera dopo il pasto principale.\nRinnovo terapia cronica per IPB.\nControllo clinico entro 3 mesi.",
+    note: "Inviare risultati esami al paziente per valutazione follow-up.",
+    email: "mario.rossi@email.it"
+  },
+  {
+    name: "Giulia Marchetti",
+    age: "34 anni",
+    meta: "34 anni · F · Nessuna patologia nota · Nessuna terapia · Allergie: nessuna",
+    complaint: "Salve, sono miope da sempre, porto occhiali con lenti -3,5 occhio destro e -3,0 occhio sinistro. Mi si sono rotti gli occhiali e ho bisogno di una prescrizione per farli rifare. La mia ultima visita oculistica risale a 2 anni fa con gli stessi valori.",
+    aiSummary: "Paziente giovane con miopia stabile bilaterale (-3,5 OD, -3,0 OS) da visita oculistica di 2 anni fa. Richiesta prescrizione ottica per sostituzione occhiali. Nessuna sintomatologia di peggioramento acuto, fotopsia o metamorfopsia riferita. Prescrizione ottica di routine appropriata.",
+    hasExams: false,
+    exams: [],
+    drug: "Prescrizione ottica",
+    dose: "OD: -3,50 sf · OS: -3,00 sf",
+    instructions: "Lenti monofocali per visione da lontano.\nOcchio destro (OD): -3,50 sfera\nOcchio sinistro (OS): -3,00 sfera\nPD (distanza interpupillare): da misurare in ottica.",
+    note: "Consigliata visita oculistica di controllo entro 12 mesi.",
+    email: "giulia.marchetti@email.it"
+  },
+  {
+    name: "Francesca Bianchi",
+    age: "47 anni",
+    meta: "47 anni · F · Perimenopausa · Contraccettivi orali (sospesi) · Allergie: penicillina",
+    complaint: "Ho 47 anni e sono in perimenopausa. Da circa 6 mesi ho emicranie ricorrenti sempre dal lato destro. Durano anche 2 giorni interi, con nausea e fastidio alla luce. Il paracetamolo non funziona quasi per niente. Ho già fatto una visita neurologica un anno fa che ha escluso cause secondarie. Cosa posso prendere?",
+    aiSummary: "Paziente in perimenopausa con emicrania senza aura lateralizzata a destra, crisi frequenti >48h, resistente a paracetamolo. Visita neurologica recente negativa per cause secondarie. Da considerare triptano come terapia d'attacco. Allergia a penicillina — non rilevante per questa terapia. Assenza di controindicazioni cardiovascolari note. Appropriata prescrizione di sumatriptan con istruzioni specifiche.",
+    hasExams: false,
+    exams: [],
+    drug: "Sumatriptan",
+    dose: "50 mg — 6 compresse",
+    instructions: "1 compressa (50mg) alla comparsa dell'emicrania.\nSe dopo 2 ore persiste: 1° compressa aggiuntiva (max 2 al giorno).\nNon assumere più di 10 giorni/mese per evitare cefalea da abuso.\nAssumere seduta o sdraiata, in ambiente silenzioso e buio.",
+    note: "Se le crisi superano 4/mese valutare profilassi con neurologo. Rivalutare in 1 mese.",
+    email: "francesca.bianchi@email.it"
+  },
+  {
+    name: "Giuseppe Tancredi",
+    age: "78 anni",
+    meta: "78 anni · M · Artrosi, Ipertensione · Ramipril 5mg, Paracetamolo al bisogno · Allergie: FANS",
+    complaint: "Ho 78 anni e ho artrosi all'anca destra da qualche anno. Il dolore è quasi sempre presente ma lieve, direi 2 su 10. A volte il paracetamolo non basta. L'ortopedico mi segue ogni 6 mesi. Vorrei qualcosa che mi aiuti nei momenti peggiori senza prendere antinfiammatori che mi fanno male allo stomaco.",
+    aiSummary: "Paziente anziano con coxartrosi destra, dolore cronico lieve-moderato (EVN 2/10), allergia a FANS documentata. Paracetamolo parzialmente efficace. Da considerare: gel topico a base di diclofenac (assorbimento locale minimo), oppure tramadolo a basso dosaggio per episodi acuti. Evitare FANS sistemici per allergia e gastroprotection. Considerare anche fisioterapia.",
+    hasExams: false,
+    exams: [],
+    drug: "Diclofenac gel 1%",
+    dose: "Tubo 100g — uso topico",
+    instructions: "Applicare 2-3 grammi sull'anca destra 3-4 volte al giorno.\nMassaggiare delicatamente fino ad assorbimento.\nEvitare contatto con occhi e mucose.\nNon applicare su cute lesionata.\nPuò essere usato in aggiunta al paracetamolo.",
+    note: "Topico locale: assorbimento sistemico minimo, sicuro anche con allergia a FANS orali. Rivalutare con ortopedico alla prossima visita programmata.",
+    email: "giuseppe.tancredi@email.it"
+  }
+];
 
-function addMessage(text, type){
-  const chat = document.getElementById("chat");
-  const div = document.createElement("div");
-  div.className = type;
-  div.textContent = text;
-  chat.appendChild(div);
-  div.scrollIntoView({behavior:"smooth"});
+let currentCase = null;
+let signed = false;
+
+function loadCase(idx) {
+  signed = false;
+  currentCase = cases[idx];
+  
+  document.querySelectorAll('.case-btn').forEach((b,i) => b.classList.toggle('active', i===idx));
+  
+  // Patient side
+  document.getElementById('patient-display').style.display = 'block';
+  document.getElementById('p-name').textContent = currentCase.name;
+  document.getElementById('p-meta').textContent = currentCase.meta;
+  document.getElementById('p-complaint').textContent = currentCase.complaint;
+  document.getElementById('status-text').textContent = 'Richiesta inviata · In attesa di risposta medica';
+
+  // Doctor side
+  const c = currentCase;
+  let examsHtml = '';
+  if(c.hasExams) {
+    examsHtml = `
+      <div class="exams-box">
+        <div class="exams-title">📋 RICHIESTA ESAMI</div>
+        ${c.exams.map(e => `<div class="exam-item"><div class="exam-check">✓</div>${e}</div>`).join('')}
+      </div>
+    `;
+  }
+
+  document.getElementById('doctor-display').innerHTML = `
+    <div class="ai-summary">
+      <div class="ai-label">🤖 ANALISI AI <span>SOLO PER TE</span></div>
+      <div class="ai-text">${c.aiSummary}</div>
+    </div>
+
+    <div class="prescription-box">
+      <div class="prescription-header">
+        <div class="prescription-title">📄 BOZZA PRESCRIZIONE</div>
+        <div class="prescription-editable">✏️ Modifica</div>
+      </div>
+      <div class="prescription-body">
+        <div class="rx-symbol">℞</div>
+        <div class="rx-drug">${c.drug}</div>
+        <div class="rx-dose">${c.dose}</div>
+        <div class="rx-instructions">${c.instructions.replace(/\n/g,'<br>')}</div>
+        <div class="rx-note">⚠️ ${c.note}</div>
+      </div>
+    </div>
+
+    ${examsHtml}
+
+    <div class="action-bar">
+      <button class="btn-edit" onclick="editCase()">✏️ Modifica</button>
+      <button class="btn-sign" onclick="signAndSend()">✅ Firma e invia al paziente</button>
+    </div>
+
+    <div class="sent-confirm" id="sent-confirm">
+      <div class="sent-icon">✅</div>
+      <div class="sent-title">Prescrizione firmata e inviata</div>
+      <div class="sent-text">Il paziente <strong>${c.name}</strong> ha ricevuto la prescrizione via email a <strong>${c.email}</strong></div>
+    </div>
+  `;
 }
 
-async function askAI(text){
-  const res = await fetch("/api/consult", {
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body:JSON.stringify({ text })
-  });
-
-  const raw = await res.text();
-
-  let data;
-  try {
-    data = JSON.parse(raw);
-  } catch {
-    throw new Error(raw || "Risposta non valida dal server");
-  }
-
-  if(!res.ok){
-    throw new Error(data.error || "Errore consulto");
-  }
-
-  return data.answer || data.reply || data.message || "Nessuna risposta ricevuta dall'AI.";
+function signAndSend() {
+  if(signed) return;
+  signed = true;
+  document.getElementById('sent-confirm').style.display = 'block';
+  document.getElementById('status-text').textContent = '✅ Risposta inviata dal medico';
+  document.querySelector('.status-dot').style.background = '#0f766e';
+  document.querySelector('.status-dot').style.animation = 'none';
 }
 
-async function sendConsult(){
-  const problem = document.getElementById("problem").value.trim();
-  if(!problem) return alert("Scrivi il problema.");
-
-  fullText = problem;
-  lastAnswer = "";
-
-  document.getElementById("chat").innerHTML = "";
-  document.getElementById("doctorForm").classList.add("hidden");
-  document.getElementById("finalMessage").classList.add("hidden");
-
-  addMessage(problem, "patient");
-  addMessage("Sto preparando il parere medico...", "ai");
-
-  try{
-    const answer = await askAI(fullText);
-    lastAnswer = answer;
-
-    const chat = document.getElementById("chat");
-    chat.lastChild.textContent = answer;
-
-    document.getElementById("followupBox").classList.remove("hidden");
-  }catch(e){
-    document.getElementById("chat").lastChild.textContent = "Errore: " + e.message;
-  }
-}
-
-async function sendFollowup(){
-  const more = document.getElementById("followup").value.trim();
-  if(!more) return alert("Scrivi il dettaglio da aggiungere allo stesso problema.");
-
-  fullText += "\nDettaglio aggiunto dal paziente sullo stesso problema: " + more;
-
-  addMessage(more, "patient");
-  addMessage("Aggiorno il parere medico su questo problema...", "ai");
-
-  document.getElementById("followup").value = "";
-
-  try{
-    const answer = await askAI(fullText);
-    lastAnswer = answer;
-
-    const chat = document.getElementById("chat");
-    chat.lastChild.textContent = answer;
-  }catch(e){
-    document.getElementById("chat").lastChild.textContent = "Errore: " + e.message;
-  }
-}
-
-function newMedicalRequest(){
-  fullText = "";
-  lastAnswer = "";
-
-  document.getElementById("problem").value = "";
-  document.getElementById("followup").value = "";
-  document.getElementById("chat").innerHTML = "";
-
-  document.getElementById("followupBox").classList.add("hidden");
-  document.getElementById("doctorForm").classList.add("hidden");
-  document.getElementById("finalMessage").classList.add("hidden");
-
-  document.getElementById("problem").focus();
-  document.getElementById("consulto").scrollIntoView({behavior:"smooth"});
-}
-
-function showDoctorForm(){
-  document.getElementById("doctorForm").classList.remove("hidden");
-}
-
-async function submitDoctorRequest(){
-  const payload = {
-    patientText: fullText,
-    aiResponse: lastAnswer,
-    patientName: document.getElementById("name").value,
-    dateOfBirth: document.getElementById("dob").value,
-    email: document.getElementById("email").value,
-    phone: document.getElementById("phone").value,
-    clinicalData: document.getElementById("clinicalData").value
-  };
-
-  const res = await fetch("/api/submit-medical-request", {
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body:JSON.stringify(payload)
-  });
-
-  const raw = await res.text();
-
-  let data;
-  try {
-    data = JSON.parse(raw);
-  } catch {
-    return alert(raw || "Errore invio richiesta.");
-  }
-
-  if(!res.ok){
-    return alert(data.error || "Errore invio richiesta.");
-  }
-
-  document.getElementById("finalMessage").classList.remove("hidden");
-  document.getElementById("finalMessage").textContent =
-    "Richiesta inviata correttamente. Il medico valuterà i dati prima di eventuale prescrizione, certificato, referto o richiesta esami.";
-}
-
-async function checkout(){
-  const res = await fetch("/api/create-checkout-session", {
-    method:"POST"
-  });
-
-  const raw = await res.text();
-
-  let data;
-  try {
-    data = JSON.parse(raw);
-  } catch {
-    return alert(raw || "Errore pagamento.");
-  }
-
-  if(data.url){
-    window.location.href = data.url;
-  }else{
-    alert(data.error || "Errore pagamento.");
-  }
+function editCase() {
+  alert('In questa demo la modifica è simulata. Nel sistema reale puoi modificare farmaco, dose e istruzioni prima di firmare.');
 }
 </script>
-
 </body>
 </html>
