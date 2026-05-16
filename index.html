@@ -2,698 +2,548 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MedicoOra - Medico online rapido</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>MedicoOra</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --green:#008a5b;
-  --green-dark:#006b48;
-  --green-light:#e9f8f2;
-  --text:#102033;
-  --muted:#5b6675;
-  --border:#e5e7eb;
-  --bg:#ffffff;
-  --soft:#f7f9fb;
-  --red:#b42318;
-  --red-bg:#fff1f0;
-  --amber-bg:#fff8ed;
-}
 
-*{box-sizing:border-box}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+}
 
 body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#fff;
-  color:var(--text);
+font-family:'Inter',sans-serif;
+background:#f5f7f7;
+color:#0f172a;
 }
 
-.header{
-  height:78px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 22px;
-  background:#fff;
-  border-bottom:1px solid #f0f0f0;
-  position:sticky;
-  top:0;
-  z-index:10;
+header{
+height:78px;
+background:white;
+border-bottom:1px solid #e5e7eb;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 20px;
+position:sticky;
+top:0;
+z-index:100;
 }
 
 .menu{
-  font-size:30px;
-  color:#263238;
+font-size:34px;
+font-weight:700;
+color:#1f2937;
+}
+
+.logo-wrap{
+display:flex;
+flex-direction:column;
+align-items:center;
 }
 
 .logo{
-  text-align:center;
-  line-height:1;
-  font-weight:900;
-  font-size:29px;
-  color:var(--green);
-  letter-spacing:-1px;
+font-size:30px;
+font-weight:800;
+color:#00995c;
+letter-spacing:-1px;
 }
 
-.logo small{
-  display:block;
-  font-size:9px;
-  letter-spacing:5px;
-  color:#425466;
-  margin-top:5px;
+.logo-sub{
+font-size:11px;
+font-weight:700;
+letter-spacing:6px;
+color:#475569;
+margin-top:-2px;
 }
 
-.login{
-  background:var(--green);
-  color:#fff;
-  border:0;
-  border-radius:18px;
-  padding:13px 20px;
-  font-size:16px;
-  font-weight:800;
+.login-btn{
+background:#00995c;
+color:white;
+border:none;
+border-radius:22px;
+padding:14px 24px;
+font-size:16px;
+font-weight:700;
 }
-
-.container{
-  max-width:1050px;
-  margin:0 auto;
-  padding:28px 22px 110px;
-}
-
-.alert{
-  background:var(--red-bg);
-  color:var(--red);
-  border:1px solid #ffc9c5;
-  border-radius:22px;
-  padding:22px;
-  font-size:20px;
-  line-height:1.45;
-  margin-bottom:34px;
-}
-
-.alert strong{font-weight:900}
 
 .hero{
-  margin-bottom:24px;
+padding:26px 18px 10px;
 }
 
-h1{
-  font-size:34px;
-  line-height:1.1;
-  margin:0 0 8px;
-  letter-spacing:-.5px;
+.hero-card{
+background:white;
+border-radius:28px;
+padding:26px 22px;
+border:1px solid #e5e7eb;
 }
 
-.subtitle{
-  font-size:18px;
-  color:var(--muted);
-  margin-bottom:26px;
+.hero-title{
+font-size:42px;
+line-height:1.02;
+font-weight:800;
+color:#0f172a;
+margin-bottom:16px;
+letter-spacing:-2px;
 }
 
-.services{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
+.hero-text{
+font-size:17px;
+line-height:1.6;
+color:#475569;
+margin-bottom:24px;
 }
 
-.service{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:22px 12px;
-  min-height:166px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  cursor:pointer;
-  box-shadow:0 4px 18px rgba(0,0,0,.035);
+.green-btn{
+width:100%;
+height:58px;
+border:none;
+border-radius:18px;
+background:#00995c;
+color:white;
+font-size:21px;
+font-weight:800;
+margin-top:14px;
 }
 
-.service:hover{
-  border-color:var(--green);
-  background:#fbfffd;
+.white-btn{
+width:100%;
+height:58px;
+border-radius:18px;
+background:white;
+border:2px solid #00995c;
+color:#00995c;
+font-size:21px;
+font-weight:800;
+margin-top:14px;
 }
 
-.icon{
-  font-size:38px;
-  color:var(--green);
-  margin-bottom:14px;
+.quick-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+margin-top:22px;
 }
 
-.service h3{
-  font-size:19px;
-  margin:0 0 8px;
-  line-height:1.15;
+.quick{
+background:#f0fdf4;
+border:1px solid #bbf7d0;
+border-radius:18px;
+padding:18px 14px;
+font-size:15px;
+font-weight:700;
+color:#065f46;
+text-align:center;
 }
 
-.service p{
-  margin:0;
-  color:var(--muted);
-  font-size:15px;
-  line-height:1.35;
+.section{
+padding:0 18px 18px;
 }
 
-.info{
-  margin-top:28px;
-  background:var(--amber-bg);
-  border:1px solid #f5dfbf;
-  border-radius:20px;
-  padding:20px;
-  display:flex;
-  gap:14px;
-  font-size:18px;
-  line-height:1.5;
+.card{
+background:white;
+border-radius:28px;
+padding:24px 20px;
+border:1px solid #e5e7eb;
+margin-top:16px;
 }
 
-.info-icon{
-  width:28px;
-  height:28px;
-  border:2px solid var(--text);
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:900;
-  flex-shrink:0;
+.label{
+font-size:13px;
+font-weight:800;
+letter-spacing:1px;
+color:#00995c;
+margin-bottom:14px;
+text-transform:uppercase;
 }
 
-.screen{
-  display:none;
+.title{
+font-size:20px;
+font-weight:800;
+margin-bottom:18px;
+color:#0f172a;
 }
 
-.screen.active{
-  display:block;
-}
-
-.form-card{
-  max-width:760px;
-  margin:0 auto;
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:24px;
-  padding:26px;
-  box-shadow:0 8px 26px rgba(0,0,0,.05);
-}
-
-.back{
-  background:none;
-  border:0;
-  color:var(--green);
-  font-size:16px;
-  font-weight:800;
-  margin-bottom:18px;
-}
-
-.question-title{
-  font-size:29px;
-  margin:0 0 10px;
-}
-
-.question-sub{
-  color:var(--muted);
-  margin-bottom:22px;
-  font-size:17px;
-}
-
-label{
-  display:block;
-  margin:18px 0 7px;
-  font-weight:800;
-  font-size:16px;
-}
-
-input,textarea,select{
-  width:100%;
-  padding:15px;
-  border:1px solid #cfd8dc;
-  border-radius:13px;
-  font-size:17px;
-  font-family:inherit;
+textarea,
+input,
+select{
+width:100%;
+border:1px solid #d1d5db;
+border-radius:18px;
+padding:18px;
+font-size:17px;
+background:white;
+margin-bottom:14px;
+font-family:'Inter',sans-serif;
 }
 
 textarea{
-  min-height:105px;
+min-height:120px;
+resize:none;
 }
 
-.options{
-  display:grid;
-  gap:10px;
+.answer{
+background:#f0fdf4;
+border-radius:22px;
+padding:20px;
+font-size:16px;
+line-height:1.7;
+color:#065f46;
+margin-top:18px;
+white-space:pre-wrap;
+border:1px solid #bbf7d0;
 }
 
-.option{
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:14px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  cursor:pointer;
-}
-
-.option input{
-  width:auto;
-}
-
-.primary{
-  width:100%;
-  background:var(--green);
-  color:#fff;
-  border:0;
-  border-radius:16px;
-  padding:16px;
-  margin-top:24px;
-  font-size:18px;
-  font-weight:900;
-}
-
-.secondary{
-  width:100%;
-  background:#fff;
-  color:var(--green);
-  border:1px solid var(--green);
-  border-radius:16px;
-  padding:15px;
-  margin-top:12px;
-  font-size:17px;
-  font-weight:900;
-}
-
-.result{
-  background:var(--green-light);
-  color:#064e3b;
-  border-radius:18px;
-  padding:20px;
-  white-space:pre-wrap;
-  line-height:1.55;
-  font-size:17px;
+.warning{
+background:#fff7ed;
+border:1px solid #fed7aa;
+color:#9a3412;
+padding:18px;
+border-radius:20px;
+line-height:1.6;
+font-size:15px;
+margin-top:18px;
 }
 
 .bottom-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:78px;
-  background:#fff;
-  border-top:1px solid var(--border);
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  z-index:20;
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+height:82px;
+background:white;
+border-top:1px solid #e5e7eb;
+display:flex;
+justify-content:space-around;
+align-items:center;
 }
 
 .nav-item{
-  text-align:center;
-  color:#667085;
-  font-size:13px;
+display:flex;
+flex-direction:column;
+align-items:center;
+font-size:13px;
+color:#6b7280;
+font-weight:600;
 }
 
 .nav-item.active{
-  color:var(--green);
-  font-weight:800;
+color:#00995c;
 }
 
-.nav-icon{
-  font-size:24px;
-  display:block;
-  margin-bottom:4px;
+.spacer{
+height:120px;
 }
 
-@media(max-width:760px){
-  .services{grid-template-columns:repeat(2,1fr)}
-  .service{min-height:150px}
-  h1{font-size:30px}
-  .alert{font-size:18px}
+.hidden{
+display:none;
 }
 
-@media(max-width:420px){
-  .services{grid-template-columns:1fr 1fr}
-  .logo{font-size:25px}
-  .login{padding:11px 16px}
+.loader{
+margin-top:18px;
+background:#f8fafc;
+border-radius:18px;
+padding:18px;
+font-size:16px;
+color:#475569;
 }
+
 </style>
 </head>
 
 <body>
 
-<header class="header">
-  <div class="menu">☰</div>
-  <div class="logo">MedicoOra<small>ONLINE DOCTOR</small></div>
-  <button class="login">Accedi</button>
+<header>
+
+<div class="menu">☰</div>
+
+<div class="logo-wrap">
+<div class="logo">MedicoOra</div>
+<div class="logo-sub">ONLINE DOCTOR</div>
+</div>
+
+<button class="login-btn">
+Accedi
+</button>
+
 </header>
 
-<main class="container">
+<div class="hero">
 
-<section id="home" class="screen active">
+<div class="hero-card">
 
-  <div class="alert">
-    <strong>Non usare in urgenza.</strong> Dolore toracico, difficoltà respiratoria, deficit neurologici, trauma, sanguinamento importante, perdita di coscienza o peggioramento rapido richiedono pronto soccorso.
-  </div>
+<div class="hero-title">
+Prescrizioni online rapide.
+</div>
 
-  <div class="hero">
-    <h1>Che cosa ti serve oggi?</h1>
-    <div class="subtitle">Seleziona il servizio medico di cui hai bisogno.</div>
-  </div>
+<div class="hero-text">
+Richiedi rinnovi terapia, impegnative, richieste esami, certificati e valutazioni mediche senza videochiamata.
+</div>
 
-  <div class="services">
-    <div class="service" onclick="startService('Prescrizioni / Rinnovo farmaci')">
-      <div class="icon">💊</div>
-      <h3>Prescrizioni /<br>Rinnovo farmaci</h3>
-      <p>Farmaci già prescritti in precedenza</p>
-    </div>
+<button class="green-btn">
+Inizia ora
+</button>
 
-    <div class="service" onclick="startService('Certificati')">
-      <div class="icon">📄</div>
-      <h3>Certificati</h3>
-      <p>Certificati medici se appropriati</p>
-    </div>
+<div class="quick-grid">
 
-    <div class="service" onclick="startService('Richiesta esami')">
-      <div class="icon">🧪</div>
-      <h3>Richiesta esami</h3>
-      <p>Analisi ed esami di laboratorio</p>
-    </div>
+<div class="quick">
+Rinnovo farmaco
+</div>
 
-    <div class="service" onclick="startService('Richiesta visita specialistica')">
-      <div class="icon">👤</div>
-      <h3>Richiesta visita specialistica</h3>
-      <p>Invio a specialista se appropriato</p>
-    </div>
+<div class="quick">
+Richiesta esami
+</div>
 
-    <div class="service" onclick="startService('Cistite')">
-      <div class="icon">💧</div>
-      <h3>Cistite</h3>
-      <p>Sintomi urinari semplici</p>
-    </div>
+<div class="quick">
+Certificato
+</div>
 
-    <div class="service" onclick="startService('Emicrania')">
-      <div class="icon">🧠</div>
-      <h3>Emicrania</h3>
-      <p>Mal di testa ricorrente</p>
-    </div>
+<div class="quick">
+Valutazione sintomi
+</div>
 
-    <div class="service" onclick="startService('PSA / Prostata')">
-      <div class="icon">🌱</div>
-      <h3>PSA / Prostata</h3>
-      <p>PSA alto, IPB, controlli prostata</p>
-    </div>
+</div>
 
-    <div class="service" onclick="startService('Dermatite')">
-      <div class="icon">✋</div>
-      <h3>Dermatite</h3>
-      <p>Rash, prurito, arrossamento</p>
-    </div>
+</div>
 
-    <div class="service" onclick="startService('Sinusite')">
-      <div class="icon">👃</div>
-      <h3>Sinusite</h3>
-      <p>Naso chiuso, dolore facciale</p>
-    </div>
+</div>
 
-    <div class="service" onclick="startService('Interpretazione referti')">
-      <div class="icon">📋</div>
-      <h3>Interpretazione referti</h3>
-      <p>Hai bisogno di capire i tuoi esami</p>
-    </div>
+<div class="section">
 
-    <div class="service" onclick="startService('Altro problema')">
-      <div class="icon">●●●</div>
-      <h3>Altro problema</h3>
-      <p>Richiesta semplice non urgente</p>
-    </div>
-  </div>
+<div class="card">
 
-  <div class="info">
-    <div class="info-icon">i</div>
-    <div>Questa non è una prescrizione automatica. Il medico valuta la richiesta e può approvare, modificare, chiedere integrazioni o rifiutare se non appropriata.</div>
-  </div>
+<div class="label">
+Richiesta medica
+</div>
 
-</section>
+<div class="title">
+Che cosa ti serve?
+</div>
 
-<section id="form" class="screen">
-  <div class="form-card">
-    <button class="back" onclick="goHome()">← Indietro</button>
-    <h2 id="serviceTitle" class="question-title"></h2>
-    <div class="question-sub">Rispondi al questionario. La richiesta sarà valutata da un medico.</div>
+<select id="requestType">
 
-    <label>Descrivi brevemente la richiesta</label>
-    <textarea id="description" placeholder="Esempio: ho finito il farmaco per la prostata e vorrei rinnovo + PSA"></textarea>
+<option value="">
+Seleziona richiesta
+</option>
 
-    <div id="questions"></div>
+<option>
+Rinnovo terapia
+</option>
 
-    <button class="primary" onclick="prepareRequest()">Continua</button>
-  </div>
-</section>
+<option>
+Richiesta esami
+</option>
 
-<section id="summary" class="screen">
-  <div class="form-card">
-    <button class="back" onclick="showScreen('form')">← Modifica</button>
-    <h2 class="question-title">Riepilogo richiesta</h2>
-    <div id="aiResult" class="result">Preparazione riepilogo...</div>
+<option>
+Certificato medico
+</option>
 
-    <button class="primary" onclick="showScreen('patientData')">Invia al medico</button>
-    <button class="secondary" onclick="goHome()">Nuova richiesta</button>
-  </div>
-</section>
+<option>
+Valutazione sintomi
+</option>
 
-<section id="patientData" class="screen">
-  <div class="form-card">
-    <button class="back" onclick="showScreen('summary')">← Indietro</button>
-    <h2 class="question-title">Dati paziente</h2>
+<option>
+Visita specialistica
+</option>
 
-    <label>Nome e cognome</label>
-    <input id="name" />
+<option>
+Altro
+</option>
 
-    <label>Data di nascita</label>
-    <input id="dob" />
+</select>
 
-    <label>Email</label>
-    <input id="email" />
+<textarea
+id="problem"
+placeholder="Descrivi il problema o la richiesta..."
+></textarea>
 
-    <label>Telefono</label>
-    <input id="phone" />
+<button class="green-btn" onclick="sendRequest()">
+Continua
+</button>
 
-    <label>Farmaci, allergie, patologie note, documenti disponibili</label>
-    <textarea id="clinicalData"></textarea>
+<div id="loading" class="loader hidden">
+Sto preparando il riepilogo medico...
+</div>
 
-    <button class="primary" onclick="submitDoctorRequest()">Invia richiesta medica</button>
+<div id="response" class="answer hidden"></div>
 
-    <div id="finalMessage" class="result" style="display:none;margin-top:18px"></div>
-  </div>
-</section>
+<div id="warning" class="warning hidden">
+Questa non è una prescrizione automatica.  
+Il medico valuta la richiesta e può approvare, modificare, richiedere integrazioni oppure rifiutare se clinicamente non appropriata.
+</div>
 
-</main>
+<div id="actions" class="hidden">
 
-<nav class="bottom-nav">
-  <div class="nav-item active"><span class="nav-icon">⌂</span>Home</div>
-  <div class="nav-item"><span class="nav-icon">▤</span>Le mie richieste</div>
-  <div class="nav-item"><span class="nav-icon">ⓘ</span>Informazioni</div>
-  <div class="nav-item"><span class="nav-icon">?</span>Aiuto</div>
-</nav>
+<button class="green-btn">
+Invia al medico
+</button>
+
+<button class="white-btn" onclick="newRequest()">
+Nuova richiesta
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="spacer"></div>
+
+<div class="bottom-nav">
+
+<div class="nav-item active">
+🏠
+<div>Home</div>
+</div>
+
+<div class="nav-item">
+📄
+<div>Richieste</div>
+</div>
+
+<div class="nav-item">
+ℹ️
+<div>Info</div>
+</div>
+
+<div class="nav-item">
+❓
+<div>Aiuto</div>
+</div>
+
+</div>
 
 <script>
-let selectedService = "";
-let fullText = "";
-let aiAnswer = "";
 
-const questionMap = {
-  "Prescrizioni / Rinnovo farmaci": [
-    "Nome del farmaco",
-    "Dosaggio",
-    "Per quale problema lo assumi?",
-    "Il farmaco ti è già stato prescritto da un medico?",
-    "Hai effetti collaterali o sintomi nuovi?"
-  ],
-  "Certificati": [
-    "Che certificato ti serve?",
-    "Da quale data?",
-    "Per quanti giorni?",
-    "Hai documentazione a supporto?"
-  ],
-  "Richiesta esami": [
-    "Quali esami ti servono?",
-    "Per quale motivo?",
-    "È un controllo periodico?",
-    "Hai referti precedenti?"
-  ],
-  "Richiesta visita specialistica": [
-    "Che visita specialistica ti serve?",
-    "Per quale motivo?",
-    "Da quanto tempo hai il problema?",
-    "Hai già documentazione o referti?"
-  ],
-  "Cistite": [
-    "Hai bruciore urinario?",
-    "Hai febbre?",
-    "Hai dolore al fianco?",
-    "Hai sangue nelle urine?",
-    "Sei in gravidanza?"
-  ],
-  "Emicrania": [
-    "Da quanto dura il mal di testa?",
-    "Dove è localizzato?",
-    "Hai nausea o fastidio alla luce?",
-    "Che farmaci hai già provato?",
-    "Hai debolezza, difficoltà a parlare, febbre o svenimento?"
-  ],
-  "PSA / Prostata": [
-    "Valore PSA se noto",
-    "Hai ipertrofia prostatica benigna nota?",
-    "Assumi farmaci per la prostata?",
-    "Hai febbre, sangue urine o impossibilità a urinare?",
-    "Che esami o prescrizioni ti servono?"
-  ],
-  "Dermatite": [
-    "Dove si trova il problema?",
-    "Da quanto tempo?",
-    "Hai prurito?",
-    "Hai febbre, pus o vescicole?",
-    "Hai foto o diagnosi precedente?"
-  ],
-  "Sinusite": [
-    "Da quanti giorni?",
-    "Hai febbre?",
-    "Hai secrezioni nasali dense?",
-    "Hai dolore al volto?",
-    "Hai difficoltà respiratoria?"
-  ],
-  "Interpretazione referti": [
-    "Quali valori risultano alterati?",
-    "Hai sintomi?",
-    "Assumi farmaci?",
-    "Hai patologie note?"
-  ],
-  "Altro problema": [
-    "Da quanto tempo hai il problema?",
-    "Quanto è intenso da 0 a 10?",
-    "Hai febbre, trauma o peggioramento rapido?",
-    "Cosa ti serve concretamente?"
-  ]
-};
+async function sendRequest(){
 
-function showScreen(id){
-  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  window.scrollTo(0,0);
+const type =
+document.getElementById("requestType").value;
+
+const text =
+document.getElementById("problem").value.trim();
+
+if(!type){
+alert("Seleziona il tipo di richiesta");
+return;
 }
 
-function goHome(){
-  selectedService = "";
-  fullText = "";
-  aiAnswer = "";
-  document.getElementById("description").value = "";
-  document.getElementById("questions").innerHTML = "";
-  showScreen("home");
+if(!text){
+alert("Descrivi il problema");
+return;
 }
 
-function startService(service){
-  selectedService = service;
-  document.getElementById("serviceTitle").textContent = service;
-  document.getElementById("description").value = "";
+document
+.getElementById("loading")
+.classList
+.remove("hidden");
 
-  let html = "";
-  questionMap[service].forEach((q,i)=>{
-    html += `<label>${q}</label><input id="q${i}" placeholder="Risposta">`;
-  });
+document
+.getElementById("response")
+.classList
+.add("hidden");
 
-  document.getElementById("questions").innerHTML = html;
-  showScreen("form");
+document
+.getElementById("warning")
+.classList
+.add("hidden");
+
+document
+.getElementById("actions")
+.classList
+.add("hidden");
+
+try{
+
+const res = await fetch("/api/consult",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+text:
+"Tipo richiesta: " +
+type +
+"\n\nRichiesta paziente:\n" +
+text
+})
+});
+
+const data = await res.json();
+
+document
+.getElementById("loading")
+.classList
+.add("hidden");
+
+document
+.getElementById("response")
+.classList
+.remove("hidden");
+
+document
+.getElementById("warning")
+.classList
+.remove("hidden");
+
+document
+.getElementById("actions")
+.classList
+.remove("hidden");
+
+document
+.getElementById("response")
+.textContent =
+data.answer || data.error || "Errore.";
+
+}catch(err){
+
+document
+.getElementById("loading")
+.classList
+.add("hidden");
+
+alert("Errore server");
+
 }
 
-function collectText(){
-  let text = `Tipo richiesta: ${selectedService}\n`;
-  text += `Descrizione: ${document.getElementById("description").value}\n`;
-
-  questionMap[selectedService].forEach((q,i)=>{
-    text += `${q}: ${document.getElementById("q"+i).value}\n`;
-  });
-
-  return text;
 }
 
-async function askAI(text){
-  const res = await fetch("/api/consult", {
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body:JSON.stringify({ text })
-  });
+function newRequest(){
 
-  const raw = await res.text();
-  let data;
+document.getElementById("problem").value = "";
 
-  try {
-    data = JSON.parse(raw);
-  } catch {
-    throw new Error(raw || "Risposta non valida dal server");
-  }
+document.getElementById("requestType").value = "";
 
-  if(!res.ok){
-    throw new Error(data.error || "Errore consulto");
-  }
+document
+.getElementById("response")
+.classList
+.add("hidden");
 
-  return data.answer || data.reply || data.message || "Nessuna risposta ricevuta.";
+document
+.getElementById("warning")
+.classList
+.add("hidden");
+
+document
+.getElementById("actions")
+.classList
+.add("hidden");
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
 }
 
-async function prepareRequest(){
-  fullText = collectText();
-  showScreen("summary");
-  document.getElementById("aiResult").textContent = "Preparazione riepilogo...";
-
-  try{
-    aiAnswer = await askAI(
-`Prepara una sintesi breve per medico reviewer.
-Non prescrivere automaticamente.
-Indica:
-1. tipo richiesta
-2. sintesi
-3. red flags da verificare
-4. possibile atto medico solo se appropriato.
-
-${fullText}`
-    );
-
-    document.getElementById("aiResult").textContent = aiAnswer;
-  }catch(e){
-    document.getElementById("aiResult").textContent = "Errore: " + e.message;
-  }
-}
-
-async function submitDoctorRequest(){
-  const payload = {
-    patientText: fullText,
-    aiResponse: aiAnswer,
-    patientName: document.getElementById("name").value,
-    dateOfBirth: document.getElementById("dob").value,
-    email: document.getElementById("email").value,
-    phone: document.getElementById("phone").value,
-    clinicalData: document.getElementById("clinicalData").value
-  };
-
-  const res = await fetch("/api/submit-medical-request", {
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body:JSON.stringify(payload)
-  });
-
-  const raw = await res.text();
-  let data;
-
-  try {
-    data = JSON.parse(raw);
-  } catch {
-    return alert(raw || "Errore invio richiesta.");
-  }
-
-  if(!res.ok){
-    return alert(data.error || "Errore invio richiesta.");
-  }
-
-  const msg = document.getElementById("finalMessage");
-  msg.style.display = "block";
-  msg.textContent = "Richiesta inviata correttamente. Il medico la valuterà e potrà approvare, modificare, chiedere integrazioni o rifiutare se non appropriata.";
-}
 </script>
 
 </body>
