@@ -3,805 +3,353 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>MedicoOra — Prescrizioni Online in Minuti</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<title>MedicoOra — Sportello Medico Rapido</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;600;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',sans-serif;background:#fff;color:#111827;line-height:1.5}
+:root{
+  --teal:#0f766e;--teal2:#134e4a;--teal3:#ccfbf1;--teal4:#99f6e4;
+  --navy:#0f172a;--slate:#334155;--muted:#64748b;--light:#f0fdfa;
+  --white:#fff;--border:#e2e8f0;--red:#dc2626;--amber:#d97706;
+  --green:#16a34a;--sh:0 4px 24px rgba(15,118,110,.10);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--light);color:var(--navy);min-height:100vh}
 
-/* NAV */
-nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.nav-logo{font-size:1.25rem;font-weight:800;color:#0d6e63;letter-spacing:-.02em}
-.nav-logo span{color:#111}
-.nav-links{display:flex;gap:8px;align-items:center}
-.nav-link{background:none;border:none;font-size:.9rem;color:#6b7280;cursor:pointer;padding:8px 12px;border-radius:8px;font-family:'Inter',sans-serif;font-weight:500}
-.nav-link:hover{background:#f3f4f6;color:#111}
-.nav-cta{background:#0d6e63;color:#fff;border:none;border-radius:100px;padding:10px 20px;font-size:.88rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
+.header{background:var(--teal2);color:#fff;padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:'Fraunces',serif;font-size:1.45rem;font-weight:700}
+.badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:100px;padding:5px 13px;font-size:.7rem;font-weight:700;letter-spacing:.08em}
 
-/* SCREENS */
-.screen{display:none}
-.screen.active{display:block}
+.layout{display:grid;grid-template-columns:1fr 1fr;height:calc(100vh - 65px)}
+.patient-side{background:var(--navy);color:#fff;padding:28px;overflow-y:auto;border-right:1px solid #1e293b}
+.doctor-side{background:var(--white);padding:28px;overflow-y:auto}
 
-/* HERO */
-.hero{background:linear-gradient(180deg,#f0fdf9 0%,#fff 100%);padding:80px 24px 60px;text-align:center}
-.hero-tag{display:inline-block;background:#dcfce7;color:#15803d;border-radius:100px;padding:6px 16px;font-size:.78rem;font-weight:600;margin-bottom:20px;letter-spacing:.04em}
-.hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:16px;color:#111}
-.hero h1 span{color:#0d6e63}
-.hero-sub{font-size:1.1rem;color:#6b7280;max-width:520px;margin:0 auto 36px;line-height:1.65}
-.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
-.btn-main{background:#0d6e63;color:#fff;border:none;border-radius:100px;padding:16px 32px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
-.btn-main:hover{background:#0a5a51;transform:translateY(-1px)}
-.btn-sec{background:#fff;color:#0d6e63;border:2px solid #0d6e63;border-radius:100px;padding:14px 28px;font-size:1rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
+.side-label{font-size:.65rem;font-weight:800;letter-spacing:.15em;color:var(--teal4);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.side-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.12)}
 
-/* STATS */
-.stats{display:flex;gap:0;justify-content:center;flex-wrap:wrap;margin-bottom:0}
-.stat{text-align:center;padding:16px 32px;border-right:1px solid #e5e7eb}
-.stat:last-child{border-right:none}
-.stat-n{font-size:1.8rem;font-weight:800;color:#0d6e63}
-.stat-l{font-size:.78rem;color:#9ca3af;margin-top:2px}
+.cases{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.case-btn{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 14px;cursor:pointer;text-align:left;transition:.2s;color:#fff;font-family:'DM Sans',sans-serif}
+.case-btn:hover{background:rgba(15,118,110,.30);border-color:var(--teal4)}
+.case-btn.active{background:rgba(15,118,110,.45);border-color:var(--teal4)}
+.case-btn-name{font-size:.9rem;font-weight:700;margin-bottom:2px}
+.case-btn-desc{font-size:.75rem;color:#94a3b8}
 
-/* SERVICES */
-.services{padding:60px 24px;background:#fff}
-.services-inner{max-width:900px;margin:0 auto}
-.section-tag{font-size:.72rem;font-weight:700;color:#0d6e63;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
-.section-title{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;letter-spacing:-.02em;margin-bottom:40px}
-.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.svc{border:1.5px solid #e5e7eb;border-radius:16px;padding:20px;cursor:pointer;transition:all .2s;background:#fff}
-.svc:hover{border-color:#0d6e63;background:#f0fdf9;transform:translateY(-2px);box-shadow:0 4px 16px rgba(13,110,99,.1)}
-.svc.sel{border-color:#0d6e63;background:#f0fdf9}
-.svc-ico{font-size:1.8rem;margin-bottom:10px}
-.svc-name{font-size:.95rem;font-weight:700;color:#111;margin-bottom:4px}
-.svc-desc{font-size:.78rem;color:#6b7280;line-height:1.4}
-.svc-price{font-size:.82rem;font-weight:700;color:#0d6e63;margin-top:10px}
+.patient-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:18px;margin-bottom:16px}
+.patient-name{font-family:'Fraunces',serif;font-size:1.3rem;margin-bottom:4px}
+.patient-meta{font-size:.78rem;color:#94a3b8;margin-bottom:14px}
+.complaint-label{font-size:.65rem;font-weight:800;letter-spacing:.1em;color:var(--teal4);margin-bottom:6px}
+.patient-complaint{background:rgba(15,118,110,.20);border:1px solid rgba(99,246,228,.20);border-radius:10px;padding:14px;font-size:.87rem;line-height:1.6;color:#e2e8f0}
 
-/* HOW IT WORKS */
-.how{background:#f9fafb;padding:60px 24px}
-.how-inner{max-width:700px;margin:0 auto}
-.steps{display:flex;flex-direction:column;gap:0;margin-top:32px}
-.step{display:flex;gap:20px;padding:20px 0;border-bottom:1px solid #e5e7eb}
-.step:last-child{border-bottom:none}
-.step-n{width:36px;height:36px;border-radius:50%;background:#0d6e63;color:#fff;font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.step-t{font-size:1rem;font-weight:700;color:#111;margin-bottom:4px}
-.step-d{font-size:.85rem;color:#6b7280;line-height:1.55}
+.workflow-box{margin-top:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px}
+.workflow-title{font-size:.72rem;font-weight:800;color:var(--teal4);letter-spacing:.08em;margin-bottom:10px}
+.workflow-item{display:flex;gap:8px;margin-bottom:7px;font-size:.82rem;color:#cbd5e1}
+.dot{width:8px;height:8px;border-radius:50%;background:#22c55e;margin-top:6px;flex-shrink:0}
 
-/* FORM */
-.form-wrap{max-width:560px;margin:0 auto;padding:32px 24px}
-.form-header{margin-bottom:28px}
-.form-title{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
-.form-sub{font-size:.88rem;color:#6b7280}
-.progress{display:flex;gap:4px;margin-bottom:28px}
-.progress-step{flex:1;height:4px;border-radius:2px;background:#e5e7eb;transition:background .3s}
-.progress-step.done{background:#0d6e63}
-.progress-step.active{background:#34d399}
-.field{margin-bottom:18px}
-.field label{display:block;font-size:.82rem;font-weight:600;color:#374151;margin-bottom:6px}
-.field input,.field textarea,.field select{width:100%;border:1.5px solid #d1d5db;border-radius:10px;padding:12px 14px;font-family:'Inter',sans-serif;font-size:.93rem;color:#111;outline:none;transition:border .2s;background:#fff}
-.field input:focus,.field textarea:focus,.field select:focus{border-color:#0d6e63;box-shadow:0 0 0 3px rgba(13,110,99,.08)}
-.field textarea{resize:vertical;min-height:100px}
-.err{font-size:.72rem;color:#dc2626;margin-top:4px;display:none}
-.err.show{display:block}
+.status-bar{display:flex;align-items:center;gap:8px;margin-top:14px;padding:10px 14px;background:rgba(255,255,255,.05);border-radius:10px}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;animation:pulse-dot 1.5s ease infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+.status-text{font-size:.78rem;color:#94a3b8}
 
-/* BUTTONS */
-.btn-full{width:100%;background:#0d6e63;color:#fff;border:none;border-radius:12px;padding:15px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-bottom:10px}
-.btn-full:hover{background:#0a5a51}
-.btn-ghost{width:100%;background:#fff;color:#6b7280;border:1.5px solid #e5e7eb;border-radius:12px;padding:13px;font-size:.9rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
-.btn-back{background:none;border:none;color:#6b7280;font-size:.85rem;cursor:pointer;padding:8px 0;margin-bottom:20px;font-family:'Inter',sans-serif;font-weight:500;display:flex;align-items:center;gap:6px}
+.doc-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.doc-avatar{width:44px;height:44px;background:linear-gradient(135deg,var(--teal),var(--teal2));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff}
+.doc-name{font-family:'Fraunces',serif;font-size:1rem;font-weight:700}
+.doc-title{font-size:.75rem;color:var(--muted)}
 
-/* QUESTION CARDS */
-.q-grid{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
-.q-card{border:1.5px solid #e5e7eb;border-radius:12px;padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .15s;font-size:.93rem;font-weight:500;color:#374151}
-.q-card:hover{border-color:#0d6e63;background:#f0fdf9}
-.q-card.sel{border-color:#0d6e63;background:#f0fdf9;color:#0d6e63}
-.q-radio{width:18px;height:18px;border-radius:50%;border:2px solid #d1d5db;flex-shrink:0;transition:all .15s;display:flex;align-items:center;justify-content:center}
-.q-card.sel .q-radio{border-color:#0d6e63;background:#0d6e63}
-.q-card.sel .q-radio::after{content:'';width:6px;height:6px;border-radius:50%;background:#fff}
+.ai-summary{background:linear-gradient(135deg,#f0fdfa,#ccfbf1);border:1px solid var(--teal4);border-radius:14px;padding:16px;margin-bottom:18px}
+.ai-label{font-size:.65rem;font-weight:800;letter-spacing:.1em;color:var(--teal);margin-bottom:8px}
+.ai-text{font-size:.84rem;color:var(--teal2);line-height:1.65}
 
-/* CONFIRM */
-.confirm{text-align:center;padding:48px 24px}
-.confirm-circle{width:80px;height:80px;border-radius:50%;background:#dcfce7;display:flex;align-items:center;justify-content:center;font-size:2.2rem;margin:0 auto 20px}
-.confirm h2{font-size:1.6rem;font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
-.confirm p{font-size:.93rem;color:#6b7280;max-width:380px;margin:0 auto 28px;line-height:1.65}
-.confirm-email{font-weight:700;color:#0d6e63}
+.box{border:1.5px solid var(--border);border-radius:14px;padding:15px;margin-bottom:16px;background:#fff}
+.box-title{font-size:.75rem;font-weight:800;letter-spacing:.08em;color:var(--navy);margin-bottom:10px}
+.row{display:flex;align-items:flex-start;gap:8px;font-size:.84rem;color:var(--slate);margin-bottom:8px;line-height:1.5}
+.check{width:17px;height:17px;border-radius:4px;background:var(--teal3);border:1px solid var(--teal4);display:flex;align-items:center;justify-content:center;font-size:.65rem;color:var(--teal);flex-shrink:0;margin-top:2px}
+.warn{background:#fff7ed;border-color:#fed7aa}
+.warn .box-title{color:#9a3412}
+.red{background:#fff5f5;border-color:#fecaca}
+.red .box-title{color:#b42318}
 
-/* DOCTOR */
-.doc-nav{background:#0f172a;color:#fff;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between}
-.doc-nav-brand{font-weight:700;font-size:1rem;display:flex;align-items:center;gap:10px}
-.doc-badge{background:rgba(255,255,255,.15);border-radius:100px;padding:2px 10px;font-size:.72rem;font-weight:600}
-.doc-exit{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);border-radius:8px;padding:6px 12px;font-size:.8rem;cursor:pointer;font-family:'Inter',sans-serif}
+.medical-act{border:1.5px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:16px}
+.medical-act-header{background:var(--navy);color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.medical-act-title{font-size:.8rem;font-weight:800;letter-spacing:.08em}
+.medical-act-body{padding:16px}
+.rx-symbol{font-family:'Fraunces',serif;font-size:2rem;color:var(--teal);line-height:1;margin-bottom:8px}
+.rx-drug{font-size:1.05rem;font-weight:800;color:var(--navy);margin-bottom:5px}
+.rx-dose{font-size:.88rem;color:var(--slate);margin-bottom:12px}
+.rx-instructions{background:var(--light);border-radius:8px;padding:10px 12px;font-size:.82rem;color:var(--slate);line-height:1.6}
+.rx-note{font-size:.75rem;color:var(--muted);margin-top:10px;font-style:italic}
 
-.tabs-bar{background:#fff;border-bottom:1px solid #e5e7eb;padding:0 20px;display:flex;gap:0}
-.tab{padding:14px 16px;font-size:.88rem;font-weight:500;color:#6b7280;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s}
-.tab.active{color:#0d6e63;border-bottom-color:#0d6e63;font-weight:700}
+.action-bar{display:flex;gap:10px;margin-top:4px}
+.btn-sign{flex:1;background:linear-gradient(135deg,var(--teal),var(--teal2));color:#fff;border:none;border-radius:12px;padding:14px;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:800;cursor:pointer}
+.btn-sign:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(15,118,110,.3)}
+.btn-edit{background:#fff;border:1.5px solid var(--border);color:var(--slate);border-radius:12px;padding:14px 18px;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer}
+.btn-refuse{background:#fff5f5;border:1.5px solid #fecaca;color:#b42318;border-radius:12px;padding:14px 18px;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer}
 
-.cases{max-width:640px;margin:0 auto;padding:20px}
-.case-item{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:16px 18px;margin-bottom:10px;cursor:pointer;transition:all .2s}
-.case-item:hover{border-color:#0d6e63;box-shadow:0 4px 16px rgba(13,110,99,.08);transform:translateY(-1px)}
-.case-item.new{border-left:3px solid #0d6e63}
-.case-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.case-name{font-weight:700;font-size:.95rem}
-.case-time{font-size:.72rem;color:#9ca3af}
-.case-tag{display:inline-block;font-size:.7rem;font-weight:700;background:#dcfce7;color:#15803d;border-radius:100px;padding:3px 10px;margin-bottom:8px}
-.case-tag.rx{background:#eff6ff;color:#1d4ed8}
-.case-tag.cert{background:#fefce8;color:#854d0e}
-.case-tag.ref{background:#fdf4ff;color:#7e22ce}
-.case-preview{font-size:.82rem;color:#6b7280;line-height:1.5}
-.case-status{font-size:.75rem;margin-top:10px;font-weight:600}
-.case-status.done{color:#15803d}
-.case-status.pending{color:#d97706}
+.sent-confirm{display:none;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid #86efac;border-radius:14px;padding:20px;text-align:center;margin-top:16px}
+.sent-title{font-family:'Fraunces',serif;font-size:1.1rem;color:#166534;margin-bottom:4px}
+.sent-text{font-size:.82rem;color:#15803d;line-height:1.6}
 
-/* CASE DETAIL */
-.case-detail{max-width:640px;margin:0 auto;padding:20px}
-.patient-card{background:#0f172a;color:#fff;border-radius:16px;padding:20px;margin-bottom:16px}
-.patient-card h3{font-size:1.2rem;font-weight:800;margin-bottom:4px}
-.patient-card p{font-size:.8rem;opacity:.65}
-.patient-card-body{display:flex;flex-direction:column;gap:8px;margin-top:14px}
-.pc-row{display:flex;justify-content:space-between;font-size:.83rem;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.08)}
-.pc-row:last-child{border-bottom:none}
-.pc-lbl{opacity:.55}
-.pc-val{font-weight:600;text-align:right;max-width:60%}
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;color:var(--muted)}
+.empty-icon{font-size:3rem;margin-bottom:12px;opacity:.4}
+.empty-text{font-size:.9rem}
 
-.complaint-card{background:#f9fafb;border:1px solid #e5e7eb;border-radius:14px;padding:16px;margin-bottom:16px}
-.complaint-label{font-size:.7rem;font-weight:700;color:#0d6e63;letter-spacing:.08em;margin-bottom:8px}
-.complaint-text{font-size:.88rem;color:#374151;line-height:1.7}
-
-/* AI — SOLO MEDICO */
-.ai-card{background:linear-gradient(135deg,#f0fdf9,#dcfce7);border:1px solid #86efac;border-radius:14px;padding:16px;margin-bottom:16px}
-.ai-label{font-size:.68rem;font-weight:700;color:#166534;letter-spacing:.1em;margin-bottom:8px;display:flex;align-items:center;gap:6px}
-.ai-label-badge{background:#166534;color:#fff;border-radius:4px;padding:1px 6px;font-size:.6rem}
-.ai-content{font-size:.85rem;color:#14532d;line-height:1.7;white-space:pre-wrap}
-
-/* PRESCRIZIONE */
-.rx-card{border:1.5px solid #d1d5db;border-radius:14px;overflow:hidden;margin-bottom:16px}
-.rx-header{background:#0f172a;color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
-.rx-header-title{font-size:.78rem;font-weight:700;letter-spacing:.08em}
-.rx-body{padding:18px}
-.rx-r{font-size:2.5rem;font-family:Georgia,serif;color:#0d6e63;line-height:1;margin-bottom:12px}
-.rx-textarea{width:100%;border:1.5px solid #e5e7eb;border-radius:10px;padding:12px;font-family:'Inter',sans-serif;font-size:.88rem;color:#111;resize:vertical;min-height:100px;outline:none;background:#f9fafb;transition:border .2s}
-.rx-textarea:focus{border-color:#0d6e63}
-
-/* RISPOSTA */
-.reply-card{border:1.5px solid #e5e7eb;border-radius:14px;padding:16px;margin-bottom:16px}
-.reply-label{font-size:.78rem;font-weight:700;color:#374151;margin-bottom:10px}
-.reply-textarea{width:100%;border:1.5px solid #e5e7eb;border-radius:10px;padding:12px;font-family:'Inter',sans-serif;font-size:.88rem;color:#111;resize:vertical;min-height:120px;outline:none;background:#fff;transition:border .2s}
-.reply-textarea:focus{border-color:#0d6e63}
-
-.action-btns{display:flex;gap:10px;margin-bottom:16px}
-.btn-approve{flex:1;background:#0d6e63;color:#fff;border:none;border-radius:12px;padding:15px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px}
-.btn-decline{background:#fff;color:#6b7280;border:1.5px solid #e5e7eb;border-radius:12px;padding:15px 20px;font-size:.88rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
-
-.sent-banner{background:#f0fdf9;border:1.5px solid #86efac;border-radius:14px;padding:18px;text-align:center;display:none}
-.sent-banner h3{font-size:1rem;font-weight:700;color:#166534;margin-bottom:4px}
-.sent-banner p{font-size:.83rem;color:#15803d}
-
-/* LOADING */
-.loader{display:flex;flex-direction:column;align-items:center;padding:60px 20px;text-align:center;display:none}
-.loader.show{display:flex}
-.spin{width:44px;height:44px;border:3px solid #e5e7eb;border-top-color:#0d6e63;border-radius:50%;animation:spin 1s linear infinite;margin-bottom:14px}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* ALERTS */
-.alert-red{background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:14px 16px;font-size:.85rem;color:#991b1b;margin:16px 24px}
-
-/* EMPTY */
-.empty{text-align:center;padding:60px 20px;color:#9ca3af}
-.empty-ico{font-size:3rem;margin-bottom:12px;opacity:.5}
-
-@media(max-width:600px){
-  .stats{flex-direction:column}
-  .stat{border-right:none;border-bottom:1px solid #e5e7eb;padding:12px 0}
-  .stat:last-child{border-bottom:none}
+@media(max-width:800px){
+  .layout{grid-template-columns:1fr;height:auto}
+  .patient-side,.doctor-side{height:auto}
+  .action-bar{flex-direction:column}
 }
 </style>
 </head>
+
 <body>
 
-<!-- ════════════════════════════════
-     HOME
-════════════════════════════════ -->
-<div id="s-home" class="screen active">
-  <nav>
-    <div class="nav-logo">Medico<span>Ora</span></div>
-    <div class="nav-links">
-      <button class="nav-link" onclick="go('s-form')">Inizia</button>
-      <button class="nav-link" onclick="go('s-doc-login')">Medico</button>
-      <button class="nav-cta" onclick="go('s-form')">Richiedi ora</button>
-    </div>
-  </nav>
-
-  <div class="hero">
-    <div class="hero-tag">🇮🇹 Medico italiano registrato · Risposta in 24h</div>
-    <h1>Prescrizioni e consulti<br><span>medici online</span></h1>
-    <p class="hero-sub">Descrivi il tuo problema, la dottoressa valuta e ti invia prescrizione, richiesta esami o certificato. Senza aspettare settimane.</p>
-    <div class="hero-btns">
-      <button class="btn-main" onclick="go('s-form')">Inizia subito →</button>
-      <button class="btn-sec" onclick="go('s-form')">Prova gratis</button>
-    </div>
-    <div class="stats">
-      <div class="stat"><div class="stat-n">24h</div><div class="stat-l">Tempo di risposta</div></div>
-      <div class="stat"><div class="stat-n">€60</div><div class="stat-l">Abbonamento annuale</div></div>
-      <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Medico certificato</div></div>
-    </div>
-  </div>
-
-  <div class="services">
-    <div class="services-inner">
-      <div class="section-tag">Cosa puoi richiedere</div>
-      <div class="section-title">Tutti i servizi in un click</div>
-      <div class="services-grid">
-        <div class="svc" onclick="startWith('prescrizione')">
-          <div class="svc-ico">💊</div>
-          <div class="svc-name">Prescrizione farmaci</div>
-          <div class="svc-desc">Rinnovo terapia cronica, nuovo farmaco, cambio dosaggio</div>
-          <div class="svc-price">Incluso nell'abbonamento</div>
-        </div>
-        <div class="svc" onclick="startWith('esami')">
-          <div class="svc-ico">🔬</div>
-          <div class="svc-name">Richiesta esami</div>
-          <div class="svc-desc">Analisi del sangue, urine, strumentali, visite specialistiche</div>
-          <div class="svc-price">Incluso nell'abbonamento</div>
-        </div>
-        <div class="svc" onclick="startWith('referto')">
-          <div class="svc-ico">📋</div>
-          <div class="svc-name">Interpretazione referto</div>
-          <div class="svc-desc">La dottoressa spiega i tuoi esami in modo chiaro</div>
-          <div class="svc-price">Incluso nell'abbonamento</div>
-        </div>
-        <div class="svc" onclick="startWith('consulto')">
-          <div class="svc-ico">🩺</div>
-          <div class="svc-name">Consulto medico</div>
-          <div class="svc-desc">Sintomi, dubbi, seconda opinione medica</div>
-          <div class="svc-price">Incluso nell'abbonamento</div>
-        </div>
-        <div class="svc" onclick="startWith('certificato')">
-          <div class="svc-ico">📄</div>
-          <div class="svc-name">Certificato medico</div>
-          <div class="svc-desc">Lavoro, sport, scuola, esenzione</div>
-          <div class="svc-price">Incluso nell'abbonamento</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="how">
-    <div class="how-inner">
-      <div class="section-tag">Come funziona</div>
-      <div class="section-title">In 3 semplici passi</div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-n">1</div>
-          <div>
-            <div class="step-t">Descrivi il tuo problema</div>
-            <div class="step-d">Compila il breve questionario. Inserisci farmaci in uso, allergie e dati clinici rilevanti. Ci vogliono 2 minuti.</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-n">2</div>
-          <div>
-            <div class="step-t">La dottoressa valuta</div>
-            <div class="step-d">La Dott.ssa Ferri riceve la tua richiesta, la valuta clinicamente e prepara la risposta. Entro 24 ore.</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-n">3</div>
-          <div>
-            <div class="step-t">Ricevi prescrizione o risposta</div>
-            <div class="step-d">Prescrizione, richiesta esami, certificato o consulto arrivano via email. Presentali in farmacia o al tuo medico.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="alert-red">
-    ⚠️ <strong>Non usare in urgenza.</strong> Per dolore toracico, difficoltà respiratoria, perdita di coscienza o emergenze chiama il <strong>118</strong> o vai al Pronto Soccorso.
-  </div>
+<div class="header">
+  <div class="brand">✚ MedicoOra</div>
+  <div class="badge">SPORTELLO MEDICO RAPIDO</div>
 </div>
 
-<!-- ════════════════════════════════
-     FORM PAZIENTE
-════════════════════════════════ -->
-<div id="s-form" class="screen">
-  <nav>
-    <div class="nav-logo">Medico<span>Ora</span></div>
-    <button class="nav-link" onclick="go('s-home')">← Home</button>
-  </nav>
+<div class="layout">
 
-  <div class="form-wrap">
-    <button class="btn-back" onclick="go('s-home')">← Indietro</button>
-    <div class="progress">
-      <div class="progress-step active" id="p1"></div>
-      <div class="progress-step" id="p2"></div>
-      <div class="progress-step" id="p3"></div>
+  <div class="patient-side">
+    <div class="side-label">RICHIESTE STANDARDIZZATE</div>
+
+    <div class="cases">
+      <button class="case-btn" onclick="loadCase(0)">
+        <div class="case-btn-name">Mario R., 73 anni</div>
+        <div class="case-btn-desc">Farmaco terminato · IPB · Richiesta esami</div>
+      </button>
+
+      <button class="case-btn" onclick="loadCase(1)">
+        <div class="case-btn-name">Giulia M., 34 anni</div>
+        <div class="case-btn-desc">Miopia · Richiesta controllo oculistico</div>
+      </button>
+
+      <button class="case-btn" onclick="loadCase(2)">
+        <div class="case-btn-name">Francesca B., 47 anni</div>
+        <div class="case-btn-desc">Emicrania · Richiesta terapia se appropriata</div>
+      </button>
+
+      <button class="case-btn" onclick="loadCase(3)">
+        <div class="case-btn-name">Giuseppe T., 78 anni</div>
+        <div class="case-btn-desc">Artrosi anca · Richiesta gestione dolore</div>
+      </button>
     </div>
 
-    <div class="form-header">
-      <div class="form-title">Nuova richiesta medica</div>
-      <div class="form-sub">Seleziona il tipo di richiesta e descrivi il problema</div>
-    </div>
+    <div id="patient-display" style="display:none">
+      <div class="patient-card">
+        <div class="patient-name" id="p-name"></div>
+        <div class="patient-meta" id="p-meta"></div>
 
-    <!-- STEP 1: TIPO -->
-    <div id="step1">
-      <div class="field">
-        <label>Cosa ti serve?</label>
-        <div class="q-grid" id="tipo-grid">
-          <div class="q-card" data-v="prescrizione" onclick="selectQ(this,'tipo')">
-            <div class="q-radio"></div>💊 Prescrizione farmaci (rinnovo o nuovo)
-          </div>
-          <div class="q-card" data-v="esami" onclick="selectQ(this,'tipo')">
-            <div class="q-radio"></div>🔬 Richiesta esami del sangue o strumentali
-          </div>
-          <div class="q-card" data-v="referto" onclick="selectQ(this,'tipo')">
-            <div class="q-radio"></div>📋 Interpretazione referto / analisi
-          </div>
-          <div class="q-card" data-v="consulto" onclick="selectQ(this,'tipo')">
-            <div class="q-radio"></div>🩺 Consulto medico per sintomi o dubbi
-          </div>
-          <div class="q-card" data-v="certificato" onclick="selectQ(this,'tipo')">
-            <div class="q-radio"></div>📄 Certificato medico
-          </div>
+        <div class="complaint-label">RICHIESTA DEL PAZIENTE</div>
+        <div class="patient-complaint" id="p-complaint"></div>
+
+        <div class="workflow-box">
+          <div class="workflow-title">DATI RACCOLTI DAL QUESTIONARIO</div>
+          <div id="p-workflow"></div>
         </div>
-        <div class="err" id="e-tipo">Seleziona un tipo</div>
       </div>
-      <button class="btn-full" onclick="goStep(2)">Continua →</button>
-    </div>
 
-    <!-- STEP 2: PROBLEMA -->
-    <div id="step2" style="display:none">
-      <div class="field">
-        <label>Descrivi il problema in dettaglio *</label>
-        <textarea id="f-descrizione" placeholder="Esempio: Ho 73 anni e soffro di ipertrofia prostatica. Prendo tamsulosina 0,4mg da 2 anni. Ho finito le compresse e non riesco a vedere il medico di base prima di 3 settimane. Ho bisogno del rinnovo."></textarea>
-        <div class="err" id="e-desc">Inserisci una descrizione</div>
+      <div class="status-bar">
+        <div class="status-dot"></div>
+        <div class="status-text" id="status-text">Richiesta ricevuta · In attesa di revisione medica</div>
       </div>
-      <div class="field">
-        <label>Farmaci attualmente in uso</label>
-        <textarea id="f-farmaci" placeholder="Es: tamsulosina 0,4mg, ramipril 5mg, metformina 850mg..." style="min-height:70px"></textarea>
-      </div>
-      <div class="field">
-        <label>Allergie note</label>
-        <input id="f-allergie" placeholder="Es: penicillina, FANS, lattosio... (scrivi 'nessuna' se non hai allergie)"/>
-      </div>
-      <div class="field">
-        <label>Patologie note</label>
-        <textarea id="f-patologie" placeholder="Es: ipertensione, diabete tipo 2, ipotiroidismo..." style="min-height:60px"></textarea>
-      </div>
-      <button class="btn-full" onclick="goStep(3)">Continua →</button>
-      <button class="btn-ghost" onclick="goStep(1)">← Indietro</button>
     </div>
-
-    <!-- STEP 3: DATI PERSONALI -->
-    <div id="step3" style="display:none">
-      <div class="field">
-        <label>Nome e cognome *</label>
-        <input id="f-nome" placeholder="Mario Rossi"/>
-        <div class="err" id="e-nome">Campo obbligatorio</div>
-      </div>
-      <div class="field">
-        <label>Data di nascita</label>
-        <input id="f-dob" type="date"/>
-      </div>
-      <div class="field">
-        <label>Email *</label>
-        <input id="f-email" type="email" placeholder="mario@email.it"/>
-        <div class="err" id="e-email">Email non valida</div>
-      </div>
-      <div class="field">
-        <label>Telefono</label>
-        <input id="f-tel" placeholder="+39 333 1234567"/>
-      </div>
-      <button class="btn-full" onclick="inviaRichiesta()">✅ Invia richiesta alla dottoressa</button>
-      <p style="font-size:.72rem;color:#9ca3af;text-align:center;margin-top:8px">La dottoressa risponde entro 24 ore · I tuoi dati sono protetti</p>
-      <button class="btn-ghost" onclick="goStep(2)">← Indietro</button>
-    </div>
-
   </div>
+
+  <div class="doctor-side">
+    <div class="doc-header">
+      <div class="doc-avatar">👩‍⚕️</div>
+      <div>
+        <div class="doc-name">Dott.ssa Anna Maria Ferri</div>
+        <div class="doc-title">Revisione medica finale · Nessuna videochiamata prevista</div>
+      </div>
+    </div>
+
+    <div id="doctor-display">
+      <div class="empty-state">
+        <div class="empty-icon">←</div>
+        <div class="empty-text">Seleziona una richiesta<br>per vedere il flusso operativo</div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<!-- ════════════════════════════════
-     ELABORAZIONE
-════════════════════════════════ -->
-<div id="s-elaborazione" class="screen">
-  <nav><div class="nav-logo">Medico<span>Ora</span></div></nav>
-  <div style="text-align:center;padding:80px 24px">
-    <div class="spin" style="display:inline-block;margin-bottom:20px"></div>
-    <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:8px">Invio in corso...</h2>
-    <p style="font-size:.9rem;color:#6b7280">Stiamo inviando la tua richiesta alla dottoressa.</p>
-  </div>
-</div>
-
-<!-- ════════════════════════════════
-     CONFERMA
-════════════════════════════════ -->
-<div id="s-conferma" class="screen">
-  <nav><div class="nav-logo">Medico<span>Ora</span></div></nav>
-  <div class="confirm">
-    <div class="confirm-circle">✅</div>
-    <h2>Richiesta inviata!</h2>
-    <p>La Dott.ssa Ferri ha ricevuto la tua richiesta e risponderà entro 24 ore a<br><span class="confirm-email" id="conf-email"></span></p>
-    <button class="btn-main" onclick="go('s-home')" style="width:auto;padding:14px 32px;border-radius:100px">Torna alla home</button>
-  </div>
-</div>
-
-<!-- ════════════════════════════════
-     MEDICO LOGIN
-════════════════════════════════ -->
-<div id="s-doc-login" class="screen">
-  <nav>
-    <div class="nav-logo">Medico<span>Ora</span></div>
-    <button class="nav-link" onclick="go('s-home')">← Home</button>
-  </nav>
-  <div class="form-wrap" style="max-width:400px">
-    <div style="text-align:center;margin:32px 0 28px">
-      <div style="font-size:2.5rem;margin-bottom:12px">🩺</div>
-      <div class="form-title">Area Medico</div>
-      <div class="form-sub">Dott.ssa Anna Maria Ferri</div>
-    </div>
-    <div class="field">
-      <label>Password</label>
-      <input type="password" id="doc-pwd" placeholder="••••••••" onkeydown="if(event.key==='Enter')loginMedico()"/>
-      <div class="err" id="e-doc-pwd">Password non corretta</div>
-    </div>
-    <button class="btn-full" onclick="loginMedico()">Accedi →</button>
-  </div>
-</div>
-
-<!-- ════════════════════════════════
-     MEDICO DASHBOARD
-════════════════════════════════ -->
-<div id="s-doc-dash" class="screen">
-  <div class="doc-nav">
-    <div class="doc-nav-brand">
-      MedicoOra
-      <span class="doc-badge" id="doc-badge">0 nuove</span>
-    </div>
-    <button class="doc-exit" onclick="go('s-home')">Esci</button>
-  </div>
-  <div class="tabs-bar">
-    <div class="tab active" onclick="loadCases('pending',this)">Da valutare</div>
-    <div class="tab" onclick="loadCases('done',this)">Completate</div>
-    <div class="tab" onclick="loadCases('all',this)">Tutte</div>
-  </div>
-  <div class="cases" id="cases-list">
-    <div class="loader show"><div class="spin"></div><p style="font-size:.85rem;color:#9ca3af">Caricamento...</p></div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════
-     CASO DETTAGLIO
-════════════════════════════════ -->
-<div id="s-doc-case" class="screen">
-  <div class="doc-nav">
-    <div class="doc-nav-brand">Caso paziente</div>
-    <button class="doc-exit" onclick="go('s-doc-dash')">← Dashboard</button>
-  </div>
-
-  <div class="case-detail">
-
-    <div class="patient-card">
-      <h3 id="dc-nome">—</h3>
-      <p id="dc-subtit">—</p>
-      <div class="patient-card-body" id="dc-info"></div>
-    </div>
-
-    <div class="complaint-card">
-      <div class="complaint-label">DESCRIZIONE DEL PAZIENTE</div>
-      <div class="complaint-text" id="dc-complaint">—</div>
-    </div>
-
-    <div class="ai-card" id="ai-card">
-      <div class="ai-label">
-        🤖 ANALISI AI
-        <span class="ai-label-badge">SOLO PER TE</span>
-      </div>
-      <div class="ai-content" id="ai-content">Preparazione in corso...</div>
-    </div>
-
-    <div class="rx-card" id="rx-card" style="display:none">
-      <div class="rx-header">
-        <span class="rx-header-title">📄 BOZZA PRESCRIZIONE — Modifica prima di firmare</span>
-      </div>
-      <div class="rx-body">
-        <div class="rx-r">℞</div>
-        <textarea class="rx-textarea" id="rx-content" placeholder="La bozza prescrizione apparirà qui..."></textarea>
-      </div>
-    </div>
-
-    <div class="reply-card">
-      <div class="reply-label">LA TUA RISPOSTA AL PAZIENTE</div>
-      <textarea class="reply-textarea" id="dc-risposta" placeholder="Scrivi qui la risposta medica che il paziente riceverà via email. Puoi modificare la bozza AI qui sopra o scrivere da zero."></textarea>
-    </div>
-
-    <div class="action-btns">
-      <button class="btn-decline" onclick="go('s-doc-dash')">Annulla</button>
-      <button class="btn-approve" onclick="inviaRisposta()">✅ Firma e invia al paziente</button>
-    </div>
-
-    <div class="sent-banner" id="sent-banner">
-      <h3>✅ Risposta firmata e inviata!</h3>
-      <p id="sent-msg">Il paziente ha ricevuto la risposta via email.</p>
-    </div>
-
-  </div>
-</div>
-
-<!-- ════════════════════════════════
-     JAVASCRIPT
-════════════════════════════════ -->
 <script>
-const DOC_PWD = 'medico2025';
-let tipoVal = '';
-let currentCaseId = null;
-let allCases = [];
-
-// ─── NAVIGAZIONE ───
-function go(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function startWith(tipo){
-  tipoVal = tipo;
-  document.querySelectorAll('#tipo-grid .q-card').forEach(c=>{
-    if(c.dataset.v === tipo){ c.classList.add('sel'); }
-    else { c.classList.remove('sel'); }
-  });
-  goStep(2);
-  go('s-form');
-}
-
-// ─── FORM STEPS ───
-function goStep(n){
-  [1,2,3].forEach(i=>{
-    document.getElementById('step'+i).style.display = i===n ? 'block' : 'none';
-    const p = document.getElementById('p'+i);
-    if(p){ p.className = 'progress-step' + (i<n?' done':i===n?' active':''); }
-  });
-  if(n===2){ validateStep1(); }
-  if(n===3){ validateStep2(); }
-}
-
-function selectQ(el, group){
-  el.closest('.q-grid').querySelectorAll('.q-card').forEach(c=>c.classList.remove('sel'));
-  el.classList.add('sel');
-  if(group==='tipo') tipoVal = el.dataset.v;
-}
-
-function validateStep1(){
-  const ok = !!tipoVal;
-  document.getElementById('e-tipo').classList.toggle('show', !ok);
-  return ok;
-}
-
-function validateStep2(){
-  const desc = document.getElementById('f-descrizione').value.trim();
-  document.getElementById('e-desc').classList.toggle('show', !desc);
-  return !!desc;
-}
-
-function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
-
-// ─── INVIO RICHIESTA ───
-async function inviaRichiesta(){
-  const nome = document.getElementById('f-nome').value.trim();
-  const email = document.getElementById('f-email').value.trim();
-  let ok = true;
-
-  document.getElementById('e-nome').classList.toggle('show', !nome); if(!nome) ok=false;
-  document.getElementById('e-email').classList.toggle('show', !isEmail(email)); if(!isEmail(email)) ok=false;
-  if(!ok) return;
-
-  go('s-elaborazione');
-
-  try{
-    const res = await fetch('/api/submit-medical-request', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        tipo: tipoVal,
-        patientText: document.getElementById('f-descrizione').value,
-        patientName: nome,
-        dateOfBirth: document.getElementById('f-dob').value,
-        email: email,
-        phone: document.getElementById('f-tel').value,
-        clinicalData: [
-          document.getElementById('f-farmaci').value,
-          document.getElementById('f-allergie').value,
-          document.getElementById('f-patologie').value
-        ].filter(Boolean).join('\n'),
-        aiResponse: ''
-      })
-    });
-
-    if(!res.ok) throw new Error('Errore server');
-    document.getElementById('conf-email').textContent = email;
-    go('s-conferma');
-
-  }catch(e){
-    alert('Errore: ' + e.message + '. Riprova.');
-    go('s-form');
-    goStep(3);
+const cases = [
+  {
+    name: "Mario Rossi",
+    meta: "73 anni · M · Ipertrofia prostatica benigna · Terapia cronica già nota",
+    complaint: "Ho finito il farmaco per la prostata. Non riesco a vedere il medico di base prima di tre settimane. Vorrei anche fare PSA e controlli.",
+    workflow: [
+      "Tipo pratica: farmaco terminato + richiesta esami",
+      "Farmaco già assunto in passato: sì",
+      "Sintomi di allarme urinari: negati",
+      "Febbre: negata",
+      "Sangue urine: negato",
+      "Ritenzione urinaria acuta: negata",
+      "Documentazione precedente: disponibile"
+    ],
+    aiSummary: "Richiesta compatibile con follow-up di ipertrofia prostatica benigna già nota. Il caso appare standardizzabile: rinnovo terapia cronica e richiesta esami di controllo, in assenza di red flags urinarie riferite.",
+    risk: "Basso rischio se confermata assenza di ritenzione urinaria, febbre, ematuria o peggioramento acuto.",
+    actTitle: "BOZZA ATTO MEDICO",
+    actMain: "Rinnovo terapia cronica + richiesta esami",
+    actDetail: "Valutare rinnovo del farmaco già in uso per IPB e richiesta esami di controllo.",
+    instructions: "Esami suggeriti se clinicamente appropriati:\n- PSA totale\n- PSA libero\n- Creatininemia\n- Esame urine completo\n\nIl medico verifica documentazione precedente e appropriatezza prima della firma.",
+    note: "Non è una prescrizione automatica. Il medico può approvare, modificare, richiedere integrazione o rifiutare.",
+    email: "mario.rossi@email.it"
+  },
+  {
+    name: "Giulia Marchetti",
+    meta: "34 anni · F · Miopia nota · Nessun sintomo acuto riferito",
+    complaint: "Sono miope e vedo peggio da lontano. Vorrei capire se posso avere una richiesta per controllo oculistico.",
+    workflow: [
+      "Tipo pratica: richiesta visita specialistica",
+      "Disturbo principale: peggioramento visivo progressivo",
+      "Dolore oculare: negato",
+      "Perdita improvvisa della vista: negata",
+      "Lampi luminosi o tenda nera: negati",
+      "Ultima visita: non recente"
+    ],
+    aiSummary: "Quadro compatibile con possibile variazione del difetto visivo in paziente miope. In assenza di dolore oculare, perdita improvvisa della vista o sintomi retinici riferiti, il caso appare non urgente ma appropriato per valutazione oculistica.",
+    risk: "Non emergono red flags oculistiche immediate dalla scheda riferita.",
+    actTitle: "BOZZA RICHIESTA SPECIALISTICA",
+    actMain: "Richiesta visita oculistica",
+    actDetail: "Valutare richiesta di controllo oculistico per miopia e riferito peggioramento visivo progressivo.",
+    instructions: "Motivo richiesta:\n- Miopia nota\n- Peggioramento visivo da lontano\n- Necessità aggiornamento correzione ottica\n\nIl medico può emettere richiesta specialistica se appropriata.",
+    note: "Se comparissero perdita improvvisa vista, dolore oculare, lampi o tenda scura, indicare valutazione urgente.",
+    email: "giulia.marchetti@email.it"
+  },
+  {
+    name: "Francesca Bianchi",
+    meta: "47 anni · F · Perimenopausa · Emicrania ricorrente destra",
+    complaint: "Ho emicrania ricorrente a destra, dura anche due giorni, nausea e fastidio alla luce. Paracetamolo inefficace. Vorrei sapere se posso avere una terapia più adatta.",
+    workflow: [
+      "Tipo pratica: richiesta terapia se appropriata",
+      "Durata episodio: fino a 48 ore",
+      "Fotofobia: riferita",
+      "Nausea: riferita",
+      "Paracetamolo: inefficace",
+      "Deficit neurologici: negati",
+      "Febbre: negata",
+      "Perdita coscienza: negata",
+      "Richiesta: valutazione terapeutica"
+    ],
+    aiSummary: "Quadro compatibile con episodio emicranico ricorrente, verosimilmente cefalea primaria, in contesto perimenopausale. La mancata risposta al paracetamolo è compatibile con emicrania. Non emergono red flags neurologiche dalla scheda riferita.",
+    risk: "Verificare sempre: primo episodio, peggior mal di testa della vita, deficit neurologici, disturbi della parola, febbre, rigidità nucale o peggioramento rapido.",
+    actTitle: "BOZZA VALUTAZIONE TERAPEUTICA",
+    actMain: "Terapia per emicrania se appropriata",
+    actDetail: "Il medico valuta eventuale terapia d’attacco, controindicazioni, interazioni e necessità di invio neurologico.",
+    instructions: "Dati già raccolti:\n- Cefalea destra ricorrente\n- Durata fino a 48 ore\n- Fotofobia e nausea\n- Paracetamolo inefficace\n- Red flags neurologiche negate\n\nIl medico decide se prescrivere, chiedere integrazioni o inviare a valutazione specialistica.",
+    note: "Non proporre terapia automatica. La prescrizione avviene solo dopo revisione medica.",
+    email: "francesca.bianchi@email.it"
+  },
+  {
+    name: "Giuseppe Tancredi",
+    meta: "78 anni · M · Artrosi anca destra · Dolore cronico lieve",
+    complaint: "Ho artrosi all’anca destra da anni. Dolore quasi cronico ma lieve, 2 su 10. Vorrei qualcosa per i momenti peggiori e magari sapere se servono controlli.",
+    workflow: [
+      "Tipo pratica: gestione dolore cronico semplice",
+      "Sede: anca destra",
+      "Durata: anni",
+      "Intensità: 2/10",
+      "Trauma recente: negato",
+      "Febbre: negata",
+      "Impossibilità a camminare: negata",
+      "Richiesta: terapia o controlli"
+    ],
+    aiSummary: "Quadro compatibile con dolore cronico degenerativo da artrosi dell’anca destra. Intensità lieve e andamento cronico rendono poco probabile una causa acuta urgente. Gestibile come richiesta semplice se confermata assenza di red flags.",
+    risk: "Attenzione a trauma recente, febbre, dolore notturno ingravescente, perdita funzionale improvvisa, dimagrimento o peggioramento rapido.",
+    actTitle: "BOZZA GESTIONE CLINICA",
+    actMain: "Valutazione terapia/controlli per coxartrosi",
+    actDetail: "Il medico valuta eventuale terapia sintomatica, richiesta RX/visita ortopedica o fisiatrica se appropriata.",
+    instructions: "Possibili atti medici:\n- Terapia sintomatica se appropriata\n- Richiesta RX bacino/anca se non recente\n- Visita ortopedica/fisiatrica se peggioramento funzionale\n\nIl medico firma solo quanto clinicamente giustificato.",
+    note: "Caso adatto a sportello medico rapido se non vi sono red flags.",
+    email: "giuseppe.tancredi@email.it"
   }
-}
+];
 
-// ─── MEDICO LOGIN ───
-function loginMedico(){
-  const pwd = document.getElementById('doc-pwd').value;
-  if(pwd === DOC_PWD){
-    document.getElementById('e-doc-pwd').classList.remove('show');
-    go('s-doc-dash');
-    loadCases('pending');
-  } else {
-    document.getElementById('e-doc-pwd').classList.add('show');
-  }
-}
+let currentCase = null;
+let signed = false;
 
-// ─── DASHBOARD MEDICO ───
-async function loadCases(filter, tabEl){
-  if(tabEl){
-    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-    tabEl.classList.add('active');
-  }
+function loadCase(idx) {
+  signed = false;
+  currentCase = cases[idx];
 
-  const list = document.getElementById('cases-list');
-  list.innerHTML = '<div class="loader show"><div class="spin"></div><p style="font-size:.85rem;color:#9ca3af">Caricamento...</p></div>';
+  document.querySelectorAll('.case-btn').forEach((b,i)=>b.classList.toggle('active', i===idx));
 
-  try{
-    const res = await fetch('/api/submit-medical-request', {
-      headers: { 'Authorization': `Bearer ${DOC_PWD}` }
-    });
+  document.getElementById('patient-display').style.display='block';
+  document.getElementById('p-name').textContent=currentCase.name;
+  document.getElementById('p-meta').textContent=currentCase.meta;
+  document.getElementById('p-complaint').textContent=currentCase.complaint;
+  document.getElementById('status-text').textContent='Richiesta ricevuta · In attesa di revisione medica';
 
-    allCases = await res.json();
-    if(!Array.isArray(allCases)) allCases = [];
+  document.getElementById('p-workflow').innerHTML = currentCase.workflow.map(w => `
+    <div class="workflow-item"><div class="dot"></div><div>${w}</div></div>
+  `).join('');
 
-    const pending = allCases.filter(c => !c.risposta_medico && !c.doctor_reply);
-    document.getElementById('doc-badge').textContent = pending.length + ' nuove';
+  const c=currentCase;
 
-    let filtered = allCases;
-    if(filter === 'pending') filtered = pending;
-    if(filter === 'done') filtered = allCases.filter(c => c.risposta_medico || c.doctor_reply);
+  document.getElementById('doctor-display').innerHTML = `
+    <div class="ai-summary">
+      <div class="ai-label">🤖 SINTESI AI PER IL MEDICO</div>
+      <div class="ai-text">${c.aiSummary}</div>
+    </div>
 
-    if(filtered.length === 0){
-      list.innerHTML = '<div class="empty"><div class="empty-ico">📭</div><p>Nessuna richiesta</p></div>';
-      return;
-    }
+    <div class="box warn">
+      <div class="box-title">⚠️ CONTROLLO SICUREZZA</div>
+      <div class="row"><div class="check">✓</div><div>${c.risk}</div></div>
+    </div>
 
-    const tagClass = {prescrizione:'rx',esami:'rx',referto:'ref',certificato:'cert',consulto:''};
+    <div class="medical-act">
+      <div class="medical-act-header">
+        <div class="medical-act-title">📄 ${c.actTitle}</div>
+        <div style="font-size:.75rem;color:#94a3b8">modificabile prima della firma</div>
+      </div>
+      <div class="medical-act-body">
+        <div class="rx-symbol">℞</div>
+        <div class="rx-drug">${c.actMain}</div>
+        <div class="rx-dose">${c.actDetail}</div>
+        <div class="rx-instructions">${c.instructions.replace(/\n/g,'<br>')}</div>
+        <div class="rx-note">⚠️ ${c.note}</div>
+      </div>
+    </div>
 
-    list.innerHTML = filtered.map(c => {
-      const isDone = !!(c.risposta_medico || c.doctor_reply);
-      const tag = c.tipo || c.type || 'consulto';
-      return `
-        <div class="case-item ${!isDone?'new':''}" onclick="openCase('${c.id}')">
-          <div class="case-top">
-            <div class="case-name">${c.patient_name || c.paziente_nome || '—'}</div>
-            <div class="case-time">${new Date(c.created_at).toLocaleDateString('it-IT')}</div>
-          </div>
-          <div class="case-tag ${tagClass[tag]||''}">${tag}</div>
-          <div class="case-preview">${(c.patient_text || c.descrizione || '').slice(0,150)}...</div>
-          <div class="case-status ${isDone?'done':'pending'}">${isDone ? '✅ Risposta inviata' : '⏳ In attesa di risposta'}</div>
-        </div>
-      `;
-    }).join('');
+    <div class="action-bar">
+      <button class="btn-edit" onclick="editCase()">✏️ Modifica</button>
+      <button class="btn-refuse" onclick="refuseCase()">Rifiuta / richiedi visita</button>
+      <button class="btn-sign" onclick="signAndSend()">✅ Firma e invia</button>
+    </div>
 
-  }catch(e){
-    list.innerHTML = `<div class="empty"><p style="color:#dc2626">Errore: ${e.message}</p></div>`;
-  }
-}
-
-// ─── CASO DETTAGLIO ───
-async function openCase(id){
-  currentCaseId = id;
-  document.getElementById('sent-banner').style.display = 'none';
-  document.getElementById('dc-risposta').value = '';
-  document.getElementById('ai-content').textContent = 'Preparazione analisi...';
-  document.getElementById('rx-card').style.display = 'none';
-  go('s-doc-case');
-
-  const c = allCases.find(x => x.id == id);
-  if(!c) return;
-
-  document.getElementById('dc-nome').textContent = c.patient_name || c.paziente_nome || '—';
-  document.getElementById('dc-subtit').textContent =
-    (c.tipo || c.type || 'consulto') + ' · ' +
-    new Date(c.created_at).toLocaleDateString('it-IT');
-
-  document.getElementById('dc-info').innerHTML = `
-    <div class="pc-row"><span class="pc-lbl">Email</span><span class="pc-val">${c.email || '—'}</span></div>
-    <div class="pc-row"><span class="pc-lbl">Telefono</span><span class="pc-val">${c.phone || '—'}</span></div>
-    <div class="pc-row"><span class="pc-lbl">Data di nascita</span><span class="pc-val">${c.date_of_birth || '—'}</span></div>
+    <div class="sent-confirm" id="sent-confirm">
+      <div class="sent-title">Atto medico inviato</div>
+      <div class="sent-text">Il paziente <strong>${c.name}</strong> ha ricevuto la risposta medica all’indirizzo <strong>${c.email}</strong></div>
+    </div>
   `;
-
-  let complaintHtml = c.patient_text || c.descrizione || '—';
-  if(c.clinical_data){
-    complaintHtml += `\n\n<strong style="font-size:.72rem;color:#6b7280;letter-spacing:.06em">DATI CLINICI</strong>\n${c.clinical_data}`;
-  }
-  document.getElementById('dc-complaint').innerHTML = complaintHtml.replace(/\n/g,'<br>');
-
-  // Genera analisi AI
-  generaAI(c);
 }
 
-async function generaAI(caso){
-  try{
-    const tipoLabel = {
-      prescrizione: 'Prescrizione farmaci',
-      esami: 'Richiesta esami',
-      referto: 'Interpretazione referto',
-      consulto: 'Consulto medico',
-      certificato: 'Certificato medico'
-    }[caso.tipo || caso.type] || caso.tipo;
-
-    const prompt = `Sei un assistente clinico che aiuta la Dott.ssa Ferri (medico chirurgo, ginecologa) a valutare le richieste dei pazienti.
-
-TIPO DI RICHIESTA: ${tipoLabel}
-PAZIENTE: ${caso.patient_name || caso.paziente_nome}, nato il ${caso.date_of_birth || 'n.d.'}
-PROBLEMA DESCRITTO: ${caso.patient_text || caso.descrizione}
-DATI CLINICI: ${caso.clinical_data || 'non specificati'}
-
-Prepara in italiano:
-1. RIEPILOGO CLINICO (2-3 frasi in linguaggio medico)
-2. VALUTAZIONE (breve, per aiutare la dottoressa a decidere)
-3. BOZZA RISPOSTA/PRESCRIZIONE da modificare e firmare
-
-Per le prescrizioni includi: farmaco, dosaggio, posologia, durata, eventuali note.
-Per gli esami includi: lista esami specifici.
-Sii preciso e diretto. Non aggiungere disclaimer inutili.`;
-
-    const res = await fetch('/api/consult', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: prompt })
-    });
-
-    const data = await res.json();
-    const testo = data.answer || 'Analisi non disponibile.';
-
-    document.getElementById('ai-content').textContent = testo;
-
-    // Mostra sezione prescrizione per certi tipi
-    if(['prescrizione','esami','certificato'].includes(caso.tipo || caso.type)){
-      document.getElementById('rx-card').style.display = 'block';
-      document.getElementById('rx-content').value = testo;
-    }
-
-    document.getElementById('dc-risposta').value = testo;
-
-  }catch(e){
-    document.getElementById('ai-content').textContent = 'Analisi non disponibile. Scrivi la risposta manualmente.';
-  }
+function signAndSend(){
+  if(signed)return;
+  signed=true;
+  document.getElementById('sent-confirm').style.display='block';
+  document.getElementById('status-text').textContent='✅ Risposta medica inviata';
+  document.querySelector('.status-dot').style.background='#0f766e';
+  document.querySelector('.status-dot').style.animation='none';
 }
 
-// ─── INVIA RISPOSTA ───
-async function inviaRisposta(){
-  const txt = document.getElementById('dc-risposta').value.trim();
-  if(!txt){ alert('Scrivi una risposta prima di inviare.'); return; }
+function editCase(){
+  alert('Nel sistema reale il medico modifica testo, esami, indicazioni o terapia prima della firma.');
+}
 
-  try{
-    await fetch('/api/submit-medical-request', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${DOC_PWD}`
-      },
-      body: JSON.stringify({
-        id: currentCaseId,
-        risposta_medico: txt,
-        stato: 'risposto'
-      })
-    });
-
-    const c = allCases.find(x => x.id == currentCaseId);
-    document.getElementById('sent-banner').style.display = 'block';
-    document.getElementById('sent-msg').textContent =
-      `Risposta inviata a ${c?.email || 'il paziente'}.`;
-
-    // Aggiorna cache locale
-    if(c) c.risposta_medico = txt;
-
-  }catch(e){
-    alert('Errore invio: ' + e.message);
-  }
+function refuseCase(){
+  if(!currentCase)return;
+  document.getElementById('sent-confirm').style.display='block';
+  document.querySelector('#sent-confirm .sent-title').textContent='Richiesta non approvata automaticamente';
+  document.querySelector('#sent-confirm .sent-text').textContent='Il paziente riceve indicazione a integrare documentazione, contattare il medico o effettuare visita in presenza.';
+  document.getElementById('status-text').textContent='⚠️ Richiesta da integrare o non gestibile online';
+  document.querySelector('.status-dot').style.background='#d97706';
+  document.querySelector('.status-dot').style.animation='none';
 }
 </script>
+
 </body>
 </html>
