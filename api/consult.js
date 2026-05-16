@@ -1,121 +1,48 @@
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).json({
-      error: "Metodo non consentito"
-    });
+    return res.status(405).json({ error: "Metodo non consentito" });
   }
 
   try {
-    const { text } = req.body;
+    const { text, isFirst } = req.body;
 
     if (!text || text.trim() === "") {
-      return res.status(400).json({
-        error: "Descrizione del problema mancante"
-      });
+      return res.status(400).json({ error: "Descrizione del problema mancante" });
     }
 
-    const systemPrompt = `
-Sei un medico esperto in telemedicina.
+    const systemPrompt = `Sei un assistente medico che aiuta una dottoressa italiana a preparare risposte per i suoi pazienti.
+Parla in italiano, in modo empatico e semplice.
+Dai del TU al paziente.
+NON fare diagnosi certe. NON essere freddo o automatico.
+Rispondi SOLO al problema specifico scritto.
+La risposta deve: riconoscere il disagio, spiegare cosa potrebbe significare, dire cosa fare, indicare segnali di allarme.
+Usa frasi brevi e naturali. Mantieni la risposta concisa ma utile.`;
 
-Parli SEMPRE in italiano.
-
-Devi dare del TU al paziente.
-
-Il tuo stile deve essere:
-- empatico
-- umano
-- rassicurante
-- prudente clinicamente
-- coerente con ciò che il paziente scrive
-
-NON devi sembrare Google o Wikipedia.
-
-NON devi fare spiegazioni enciclopediche.
-
-NON devi ignorare il contesto del paziente.
-
-NON devi inventare sintomi, diagnosi o dettagli non presenti.
-
-NON devi parlare di parti del corpo non citate.
-
-NON devi cambiare argomento.
-
-NON devi dare diagnosi certe senza visita.
-
-NON devi essere freddo o automatico.
-
-Rispondi SOLO al problema specifico scritto dal paziente.
-
-La risposta deve:
-- riconoscere il disagio del paziente
-- spiegare in modo semplice cosa potrebbe significare
-- dire cosa fare nell’immediato
-- indicare eventuali segnali di allarme
-- dire quando è opportuno contattare urgentemente un medico
-
-Usa frasi brevi, semplici e naturali.
-
-NON usare elenchi lunghi.
-
-NON usare linguaggio troppo tecnico.
-
-Mantieni la risposta breve ma utile.
-`;
-
-    const userPrompt = `
-Problema del paziente:
-
-${text}
-`;
-
-    const response = await fetch(
-      "https://api.openai.com/v1/chat/completions",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: "gpt-4.1-mini",
-          messages: [
-            {
-              role: "system",
-              content: systemPrompt
-            },
-            {
-              role: "user",
-              content: userPrompt
-            }
-          ],
-          temperature: 0.4,
-          max_tokens: 450
-        }),
-      }
-    );
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": process.env.ANTHROPIC_API_KEY,
+        "anthropic-version": "2023-06-01"
+      },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 500,
+        system: systemPrompt,
+        messages: [{ role: "user", content: `Problema del paziente:\n\n${text}` }]
+      })
+    });
 
     const data = await response.json();
 
     if (!response.ok) {
-      return res.status(500).json({
-        error:
-          data?.error?.message ||
-          "Errore durante la risposta AI"
-      });
+      return res.status(500).json({ error: data?.error?.message || "Errore AI" });
     }
 
-    const answer =
-      data?.choices?.[0]?.message?.content ||
-      "Non sono riuscito a generare una risposta.";
-
-    return res.status(200).json({
-      answer
-    });
+    const answer = data?.content?.[0]?.text || "Nessuna risposta generata.";
+    return res.status(200).json({ answer });
 
   } catch (error) {
-    return res.status(500).json({
-      error:
-        error.message || "Errore interno del server"
-    });
+    return res.status(500).json({ error: error.message || "Errore interno" });
   }
 }
