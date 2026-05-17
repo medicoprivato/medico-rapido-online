@@ -17,7 +17,7 @@ export default async function handler(req, res) {
         "anthropic-version": "2023-06-01"
       },
       body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
+        model: "claude-haiku-4-5-20251001",
         max_tokens: 600,
         system: "Sei un assistente medico italiano. Rispondi in italiano, in modo empatico e chiaro. Dai del TU al paziente. NON fare diagnosi certe. Rispondi SOLO al problema specifico. Sii conciso e utile.",
         messages: [{ role: "user", content: text }]
