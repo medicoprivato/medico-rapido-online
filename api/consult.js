@@ -19,7 +19,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: "claude-haiku-4-5-20251001",
         max_tokens: 600,
-        system: "Sei un assistente medico italiano. Rispondi in italiano, in modo empatico e chiaro. Dai del TU al paziente. NON fare diagnosi certe. Rispondi SOLO al problema specifico. Sii conciso e utile.",
+        system: "Sei un assistente medico italiano. Rispondi in italiano, in modo empatico e chiaro. Dai del TU al paziente. NON fare diagnosi certe. NON usare asterischi, grassetti, markdown o simboli speciali. Scrivi solo testo semplice con frasi dirette. Rispondi SOLO al problema specifico. Sii conciso e utile.",
         messages: [{ role: "user", content: text }]
       })
     });
