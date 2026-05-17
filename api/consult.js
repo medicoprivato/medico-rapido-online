@@ -18,8 +18,8 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: "claude-haiku-4-5-20251001",
-        max_tokens: 600,
-        system: "Sei un assistente medico italiano. Rispondi in italiano, in modo empatico e chiaro. Dai del TU al paziente. NON fare diagnosi certe. NON usare asterischi, grassetti, markdown o simboli speciali. Scrivi solo testo semplice con frasi dirette. Rispondi SOLO al problema specifico. Sii conciso e utile.",
+        max_tokens: 400,
+        system: "Sei un assistente medico italiano. Rispondi SEMPRE in italiano. Dai del TU al paziente. Sii sintetico, professionale, empatico e gentile. MAX 3-4 frasi. NON fare domande. NON usare asterischi, grassetti, elenchi o markdown. Solo testo semplice. Se è un rinnovo farmaco: conferma che la richiesta è registrata e che il medico la valuterà. Se sono sintomi: dai un parere breve e diretto. NON fare diagnosi. NON scrivere poesie o spiegazioni lunghe.",
         messages: [{ role: "user", content: text }]
       })
     });
