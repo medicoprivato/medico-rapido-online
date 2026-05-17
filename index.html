@@ -3,548 +3,274 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
 <title>MedicoOra</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
--webkit-tap-highlight-color:transparent;
-}
-
-body{
-font-family:'Inter',sans-serif;
-background:#f5f7f7;
-color:#0f172a;
-}
-
-header{
-height:78px;
-background:white;
-border-bottom:1px solid #e5e7eb;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 20px;
-position:sticky;
-top:0;
-z-index:100;
-}
-
-.menu{
-font-size:34px;
-font-weight:700;
-color:#1f2937;
-}
-
-.logo-wrap{
-display:flex;
-flex-direction:column;
-align-items:center;
-}
-
-.logo{
-font-size:30px;
-font-weight:800;
-color:#00995c;
-letter-spacing:-1px;
-}
-
-.logo-sub{
-font-size:11px;
-font-weight:700;
-letter-spacing:6px;
-color:#475569;
-margin-top:-2px;
-}
-
-.login-btn{
-background:#00995c;
-color:white;
-border:none;
-border-radius:22px;
-padding:14px 24px;
-font-size:16px;
-font-weight:700;
-}
-
-.hero{
-padding:26px 18px 10px;
-}
-
-.hero-card{
-background:white;
-border-radius:28px;
-padding:26px 22px;
-border:1px solid #e5e7eb;
-}
-
-.hero-title{
-font-size:42px;
-line-height:1.02;
-font-weight:800;
-color:#0f172a;
-margin-bottom:16px;
-letter-spacing:-2px;
-}
-
-.hero-text{
-font-size:17px;
-line-height:1.6;
-color:#475569;
-margin-bottom:24px;
-}
-
-.green-btn{
-width:100%;
-height:58px;
-border:none;
-border-radius:18px;
-background:#00995c;
-color:white;
-font-size:21px;
-font-weight:800;
-margin-top:14px;
-}
-
-.white-btn{
-width:100%;
-height:58px;
-border-radius:18px;
-background:white;
-border:2px solid #00995c;
-color:#00995c;
-font-size:21px;
-font-weight:800;
-margin-top:14px;
-}
-
-.quick-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-margin-top:22px;
-}
-
-.quick{
-background:#f0fdf4;
-border:1px solid #bbf7d0;
-border-radius:18px;
-padding:18px 14px;
-font-size:15px;
-font-weight:700;
-color:#065f46;
-text-align:center;
-}
-
-.section{
-padding:0 18px 18px;
-}
-
-.card{
-background:white;
-border-radius:28px;
-padding:24px 20px;
-border:1px solid #e5e7eb;
-margin-top:16px;
-}
-
-.label{
-font-size:13px;
-font-weight:800;
-letter-spacing:1px;
-color:#00995c;
-margin-bottom:14px;
-text-transform:uppercase;
-}
-
-.title{
-font-size:20px;
-font-weight:800;
-margin-bottom:18px;
-color:#0f172a;
-}
-
-textarea,
-input,
-select{
-width:100%;
-border:1px solid #d1d5db;
-border-radius:18px;
-padding:18px;
-font-size:17px;
-background:white;
-margin-bottom:14px;
-font-family:'Inter',sans-serif;
-}
-
-textarea{
-min-height:120px;
-resize:none;
-}
-
-.answer{
-background:#f0fdf4;
-border-radius:22px;
-padding:20px;
-font-size:16px;
-line-height:1.7;
-color:#065f46;
-margin-top:18px;
-white-space:pre-wrap;
-border:1px solid #bbf7d0;
-}
-
-.warning{
-background:#fff7ed;
-border:1px solid #fed7aa;
-color:#9a3412;
-padding:18px;
-border-radius:20px;
-line-height:1.6;
-font-size:15px;
-margin-top:18px;
-}
-
-.bottom-nav{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-height:82px;
-background:white;
-border-top:1px solid #e5e7eb;
-display:flex;
-justify-content:space-around;
-align-items:center;
-}
-
-.nav-item{
-display:flex;
-flex-direction:column;
-align-items:center;
-font-size:13px;
-color:#6b7280;
-font-weight:600;
-}
-
-.nav-item.active{
-color:#00995c;
-}
-
-.spacer{
-height:120px;
-}
-
-.hidden{
-display:none;
-}
-
-.loader{
-margin-top:18px;
-background:#f8fafc;
-border-radius:18px;
-padding:18px;
-font-size:16px;
-color:#475569;
-}
-
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Inter',sans-serif;background:#f5f7f7;color:#0f172a}
+header{height:78px;background:white;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:100}
+.menu{font-size:34px;font-weight:700;color:#1f2937}
+.logo-wrap{display:flex;flex-direction:column;align-items:center}
+.logo{font-size:30px;font-weight:800;color:#00995c;letter-spacing:-1px}
+.logo-sub{font-size:11px;font-weight:700;letter-spacing:6px;color:#475569;margin-top:-2px}
+.login-btn{background:#00995c;color:white;border:none;border-radius:22px;padding:14px 24px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif}
+.hero{padding:26px 18px 10px}
+.hero-card{background:white;border-radius:28px;padding:26px 22px;border:1px solid #e5e7eb}
+.hero-title{font-size:42px;line-height:1.02;font-weight:800;color:#0f172a;margin-bottom:16px;letter-spacing:-2px}
+.hero-text{font-size:17px;line-height:1.6;color:#475569;margin-bottom:24px}
+.green-btn{width:100%;height:58px;border:none;border-radius:18px;background:#00995c;color:white;font-size:18px;font-weight:800;margin-top:14px;cursor:pointer;font-family:'Inter',sans-serif}
+.white-btn{width:100%;height:58px;border-radius:18px;background:white;border:2px solid #00995c;color:#00995c;font-size:18px;font-weight:800;margin-top:14px;cursor:pointer;font-family:'Inter',sans-serif}
+.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+.quick{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:18px;padding:18px 14px;font-size:15px;font-weight:700;color:#065f46;text-align:center;cursor:pointer}
+.section{padding:0 18px 18px}
+.card{background:white;border-radius:28px;padding:24px 20px;border:1px solid #e5e7eb;margin-top:16px}
+.label{font-size:13px;font-weight:800;letter-spacing:1px;color:#00995c;margin-bottom:14px;text-transform:uppercase}
+.title{font-size:20px;font-weight:800;margin-bottom:18px;color:#0f172a}
+textarea,input,select{width:100%;border:1px solid #d1d5db;border-radius:18px;padding:18px;font-size:17px;background:white;margin-bottom:14px;font-family:'Inter',sans-serif;color:#0f172a}
+textarea{min-height:120px;resize:none}
+.answer{background:#f0fdf4;border-radius:22px;padding:20px;font-size:16px;line-height:1.7;color:#065f46;margin-top:18px;white-space:pre-wrap;border:1px solid #bbf7d0}
+.warning{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:18px;border-radius:20px;line-height:1.6;font-size:15px;margin-top:18px}
+.section-title{font-size:16px;font-weight:700;color:#0f172a;margin:18px 0 10px}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:82px;background:white;border-top:1px solid #e5e7eb;display:flex;justify-content:space-around;align-items:center}
+.nav-item{display:flex;flex-direction:column;align-items:center;font-size:13px;color:#6b7280;font-weight:600;cursor:pointer}
+.nav-item.active{color:#00995c}
+.spacer{height:120px}
+.hidden{display:none}
+.loader{margin-top:18px;background:#f8fafc;border-radius:18px;padding:18px;font-size:16px;color:#475569;text-align:center}
+.success{background:#f0fdf4;border:1px solid #86efac;border-radius:22px;padding:24px;text-align:center;margin-top:18px}
+.success h3{font-size:20px;font-weight:800;color:#15803d;margin-bottom:8px}
+.success p{font-size:15px;color:#166534;line-height:1.6}
 </style>
 </head>
-
 <body>
 
 <header>
-
 <div class="menu">☰</div>
-
 <div class="logo-wrap">
-<div class="logo">MedicoOra</div>
-<div class="logo-sub">ONLINE DOCTOR</div>
+  <div class="logo">MedicoOra</div>
+  <div class="logo-sub">ONLINE DOCTOR</div>
 </div>
-
-<button class="login-btn">
-Accedi
-</button>
-
+<button class="login-btn">Accedi</button>
 </header>
 
 <div class="hero">
-
 <div class="hero-card">
-
-<div class="hero-title">
-Prescrizioni online rapide.
+  <div class="hero-title">Prescrizioni online rapide.</div>
+  <div class="hero-text">Richiedi rinnovi terapia, impegnative, richieste esami, certificati e valutazioni mediche senza videochiamata.</div>
+  <button class="green-btn">Inizia ora</button>
+  <div class="quick-grid">
+    <div class="quick">Rinnovo farmaco</div>
+    <div class="quick">Richiesta esami</div>
+    <div class="quick">Certificato</div>
+    <div class="quick">Valutazione sintomi</div>
+  </div>
 </div>
-
-<div class="hero-text">
-Richiedi rinnovi terapia, impegnative, richieste esami, certificati e valutazioni mediche senza videochiamata.
-</div>
-
-<button class="green-btn">
-Inizia ora
-</button>
-
-<div class="quick-grid">
-
-<div class="quick">
-Rinnovo farmaco
-</div>
-
-<div class="quick">
-Richiesta esami
-</div>
-
-<div class="quick">
-Certificato
-</div>
-
-<div class="quick">
-Valutazione sintomi
-</div>
-
-</div>
-
-</div>
-
 </div>
 
 <div class="section">
-
 <div class="card">
+  <div class="label">Richiesta medica</div>
+  <div class="title">Che cosa ti serve?</div>
 
-<div class="label">
-Richiesta medica
-</div>
+  <select id="requestType">
+    <option value="">Seleziona richiesta</option>
+    <option>Rinnovo terapia</option>
+    <option>Richiesta esami</option>
+    <option>Certificato medico</option>
+    <option>Valutazione sintomi</option>
+    <option>Visita specialistica</option>
+    <option>Altro</option>
+  </select>
 
-<div class="title">
-Che cosa ti serve?
-</div>
+  <textarea id="problem" placeholder="Descrivi il problema o la richiesta..."></textarea>
 
-<select id="requestType">
+  <button class="green-btn" onclick="sendRequest()">Continua</button>
 
-<option value="">
-Seleziona richiesta
-</option>
+  <div id="loading" class="loader hidden">Sto preparando il parere medico...</div>
 
-<option>
-Rinnovo terapia
-</option>
+  <div id="response" class="answer hidden"></div>
 
-<option>
-Richiesta esami
-</option>
+  <!-- RISPOSTA FOLLOW-UP -->
+  <div id="followup-section" class="hidden">
+    <div class="section-title">Vuoi aggiungere dettagli o rispondere alle domande?</div>
+    <textarea id="followup" placeholder="Scrivi qui la tua risposta o aggiungi informazioni..."></textarea>
+    <button class="green-btn" onclick="sendFollowup()">Aggiorna parere</button>
+  </div>
 
-<option>
-Certificato medico
-</option>
+  <div id="warning" class="warning hidden">
+    Questa non è una prescrizione automatica. Il medico valuta la richiesta e può approvare, modificare, richiedere integrazioni oppure rifiutare se clinicamente non appropriata.
+  </div>
 
-<option>
-Valutazione sintomi
-</option>
+  <!-- FORM INVIO AL MEDICO -->
+  <div id="doctor-form" class="hidden">
+    <div class="section-title">Invia la richiesta alla dottoressa</div>
+    <input id="patient-name" placeholder="Nome e cognome *"/>
+    <input id="patient-dob" placeholder="Data di nascita (es: 15/03/1975)"/>
+    <input id="patient-email" type="email" placeholder="Email per ricevere la risposta *"/>
+    <input id="patient-phone" placeholder="Telefono (opzionale)"/>
+    <textarea id="patient-extra" placeholder="Farmaci in uso, allergie, patologie note..." style="min-height:80px"></textarea>
+    <button class="green-btn" onclick="submitToDoctor()">Invia al medico →</button>
+  </div>
 
-<option>
-Visita specialistica
-</option>
+  <div id="success-box" class="success hidden">
+    <h3>✅ Richiesta inviata!</h3>
+    <p>La dottoressa ha ricevuto la tua richiesta e risponderà entro 24 ore all'indirizzo email indicato.</p>
+  </div>
 
-<option>
-Altro
-</option>
-
-</select>
-
-<textarea
-id="problem"
-placeholder="Descrivi il problema o la richiesta..."
-></textarea>
-
-<button class="green-btn" onclick="sendRequest()">
-Continua
-</button>
-
-<div id="loading" class="loader hidden">
-Sto preparando il riepilogo medico...
-</div>
-
-<div id="response" class="answer hidden"></div>
-
-<div id="warning" class="warning hidden">
-Questa non è una prescrizione automatica.  
-Il medico valuta la richiesta e può approvare, modificare, richiedere integrazioni oppure rifiutare se clinicamente non appropriata.
-</div>
-
-<div id="actions" class="hidden">
-
-<button class="green-btn">
-Invia al medico
-</button>
-
-<button class="white-btn" onclick="newRequest()">
-Nuova richiesta
-</button>
+  <div id="actions" class="hidden">
+    <button class="green-btn" onclick="showDoctorForm()">📄 Richiedi prescrizione / certificato firmato</button>
+    <button class="white-btn" onclick="newRequest()">Nuova richiesta</button>
+  </div>
 
 </div>
-
-</div>
-
 </div>
 
 <div class="spacer"></div>
 
 <div class="bottom-nav">
-
-<div class="nav-item active">
-🏠
-<div>Home</div>
-</div>
-
-<div class="nav-item">
-📄
-<div>Richieste</div>
-</div>
-
-<div class="nav-item">
-ℹ️
-<div>Info</div>
-</div>
-
-<div class="nav-item">
-❓
-<div>Aiuto</div>
-</div>
-
+  <div class="nav-item active">🏠<div>Home</div></div>
+  <div class="nav-item">📄<div>Richieste</div></div>
+  <div class="nav-item">ℹ️<div>Info</div></div>
+  <div class="nav-item">❓<div>Aiuto</div></div>
 </div>
 
 <script>
+let conversazione = [];
+let tipoRichiesta = '';
+
+function stripMarkdown(text){
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '$1')
+    .replace(/\*(.*?)\*/g, '$1')
+    .replace(/#{1,6}\s/g, '')
+    .replace(/`(.*?)`/g, '$1')
+    .trim();
+}
 
 async function sendRequest(){
+  const type = document.getElementById("requestType").value;
+  const text = document.getElementById("problem").value.trim();
+  if(!type){ alert("Seleziona il tipo di richiesta"); return; }
+  if(!text){ alert("Descrivi il problema"); return; }
 
-const type =
-document.getElementById("requestType").value;
+  tipoRichiesta = type;
+  conversazione = [];
 
-const text =
-document.getElementById("problem").value.trim();
+  showLoading();
 
-if(!type){
-alert("Seleziona il tipo di richiesta");
-return;
+  const messaggio = "Tipo richiesta: " + type + "\n\nRichiesta paziente:\n" + text;
+  conversazione.push({ role: "user", content: messaggio });
+
+  await callAI();
 }
 
-if(!text){
-alert("Descrivi il problema");
-return;
+async function sendFollowup(){
+  const followup = document.getElementById("followup").value.trim();
+  if(!followup){ alert("Scrivi una risposta o un dettaglio"); return; }
+
+  document.getElementById("followup").value = "";
+  conversazione.push({ role: "user", content: followup });
+
+  showLoading();
+  await callAI();
 }
 
-document
-.getElementById("loading")
-.classList
-.remove("hidden");
+async function callAI(){
+  try{
+    const res = await fetch("/api/consult", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: conversazione.map(m => m.role + ": " + m.content).join("\n\n") })
+    });
 
-document
-.getElementById("response")
-.classList
-.add("hidden");
+    const data = await res.json();
+    const risposta = stripMarkdown(data.answer || data.error || "Errore.");
 
-document
-.getElementById("warning")
-.classList
-.add("hidden");
+    conversazione.push({ role: "assistant", content: risposta });
 
-document
-.getElementById("actions")
-.classList
-.add("hidden");
+    document.getElementById("loading").classList.add("hidden");
+    document.getElementById("response").classList.remove("hidden");
+    document.getElementById("response").textContent = risposta;
+    document.getElementById("followup-section").classList.remove("hidden");
+    document.getElementById("warning").classList.remove("hidden");
+    document.getElementById("actions").classList.remove("hidden");
+    document.getElementById("doctor-form").classList.add("hidden");
+    document.getElementById("success-box").classList.add("hidden");
 
-try{
+    document.getElementById("response").scrollIntoView({ behavior: "smooth" });
 
-const res = await fetch("/api/consult",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-text:
-"Tipo richiesta: " +
-type +
-"\n\nRichiesta paziente:\n" +
-text
-})
-});
-
-const data = await res.json();
-
-document
-.getElementById("loading")
-.classList
-.add("hidden");
-
-document
-.getElementById("response")
-.classList
-.remove("hidden");
-
-document
-.getElementById("warning")
-.classList
-.remove("hidden");
-
-document
-.getElementById("actions")
-.classList
-.remove("hidden");
-
-document
-.getElementById("response")
-.textContent =
-data.answer || data.error || "Errore.";
-
-}catch(err){
-
-document
-.getElementById("loading")
-.classList
-.add("hidden");
-
-alert("Errore server");
-
+  }catch(err){
+    document.getElementById("loading").classList.add("hidden");
+    alert("Errore server: " + err.message);
+  }
 }
 
+function showLoading(){
+  document.getElementById("loading").classList.remove("hidden");
+  document.getElementById("response").classList.add("hidden");
+  document.getElementById("followup-section").classList.add("hidden");
+  document.getElementById("warning").classList.add("hidden");
+  document.getElementById("actions").classList.add("hidden");
+}
+
+function showDoctorForm(){
+  document.getElementById("doctor-form").classList.remove("hidden");
+  document.getElementById("actions").classList.add("hidden");
+  document.getElementById("doctor-form").scrollIntoView({ behavior: "smooth" });
+}
+
+async function submitToDoctor(){
+  const nome = document.getElementById("patient-name").value.trim();
+  const email = document.getElementById("patient-email").value.trim();
+  if(!nome){ alert("Inserisci nome e cognome"); return; }
+  if(!email || !email.includes("@")){ alert("Inserisci un'email valida"); return; }
+
+  const testo = document.getElementById("problem").value;
+  const extra = document.getElementById("patient-extra").value;
+  const ultimaRisposta = conversazione.filter(m => m.role === "assistant").pop()?.content || "";
+
+  try{
+    await fetch("/api/submit-medical-request", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        tipo: tipoRichiesta,
+        patientText: testo,
+        patientName: nome,
+        dateOfBirth: document.getElementById("patient-dob").value,
+        email: email,
+        phone: document.getElementById("patient-phone").value,
+        clinicalData: extra,
+        aiResponse: ultimaRisposta,
+        conversazione: conversazione.map(m => m.role + ": " + m.content).join("\n\n")
+      })
+    });
+
+    document.getElementById("doctor-form").classList.add("hidden");
+    document.getElementById("followup-section").classList.add("hidden");
+    document.getElementById("actions").classList.add("hidden");
+    document.getElementById("success-box").classList.remove("hidden");
+    document.getElementById("success-box").scrollIntoView({ behavior: "smooth" });
+
+  }catch(err){
+    alert("Errore invio: " + err.message);
+  }
 }
 
 function newRequest(){
-
-document.getElementById("problem").value = "";
-
-document.getElementById("requestType").value = "";
-
-document
-.getElementById("response")
-.classList
-.add("hidden");
-
-document
-.getElementById("warning")
-.classList
-.add("hidden");
-
-document
-.getElementById("actions")
-.classList
-.add("hidden");
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
+  document.getElementById("problem").value = "";
+  document.getElementById("requestType").value = "";
+  document.getElementById("followup").value = "";
+  document.getElementById("response").classList.add("hidden");
+  document.getElementById("followup-section").classList.add("hidden");
+  document.getElementById("warning").classList.add("hidden");
+  document.getElementById("actions").classList.add("hidden");
+  document.getElementById("doctor-form").classList.add("hidden");
+  document.getElementById("success-box").classList.add("hidden");
+  conversazione = [];
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
-
 </script>
-
 </body>
 </html>
+
