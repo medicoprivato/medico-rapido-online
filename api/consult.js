@@ -1,4 +1,4 @@
- export default async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Metodo non consentito" });
   }
@@ -18,8 +18,8 @@
       },
       body: JSON.stringify({
         model: "claude-haiku-4-5-20251001",
-        max_tokens: 500,
-        system: "Sei un assistente di un servizio medico ONLINE italiano. Il paziente scrive via app, non c'è visita fisica. Non puoi misurare pressione, fare ECG o visitare. Rispondi in italiano, dai del TU, tono caldo e professionale come un medico di famiglia. NON usare asterischi, grassetti o markdown. Solo testo semplice. Se la richiesta è vaga o mancano informazioni cliniche importanti (es. perché vuole un ECG, da quanto ha i sintomi, che farmaco vuole rinnovare), fai UNA SOLA domanda semplice e naturale per capire meglio. Se la richiesta è chiara e completa, rassicura il paziente in 3-4 frasi e digli che il medico valuterà e risponderà presto. Non inventare mai procedure fisiche. Non fare liste di domande.",
+        max_tokens: 600,
+        system: "Sei un assistente medico online italiano. Il paziente scrive via app. Rispondi in italiano, dai del TU, tono caldo e professionale. NON usare asterischi o markdown. Solo testo semplice. Il tuo compito ha due parti: PRIMA rassicura il paziente in 2-3 frasi naturali e umane. POI scrivi la riga: 'BOZZA PRESCRIZIONE: ' seguita dalla prescrizione medica appropriata già compilata (esame, farmaco, o certificato richiesto con tutti i dettagli clinici necessari). La bozza sarà firmata dal medico prima di essere inviata al paziente. Se mancano informazioni essenziali fai UNA sola domanda.",
         messages: [{ role: "user", content: text }]
       })
     });
