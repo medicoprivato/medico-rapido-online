@@ -30,8 +30,9 @@ header{height:78px;background:white;border-bottom:1px solid #e5e7eb;display:flex
 textarea,input,select{width:100%;border:1px solid #d1d5db;border-radius:18px;padding:18px;font-size:17px;background:white;margin-bottom:14px;font-family:'Inter',sans-serif;color:#0f172a}
 textarea{min-height:120px;resize:none}
 .answer{background:#f0fdf4;border-radius:22px;padding:20px;font-size:16px;line-height:1.7;color:#065f46;margin-top:18px;white-space:pre-wrap;border:1px solid #bbf7d0}
-.warning{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:18px;border-radius:20px;line-height:1.6;font-size:15px;margin-top:18px}
+.rx-btn{width:100%;height:64px;border:none;border-radius:18px;background:#00995c;color:white;font-size:19px;font-weight:800;margin-top:16px;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 4px 14px rgba(0,153,92,.3)}
 .section-title{font-size:16px;font-weight:700;color:#0f172a;margin:18px 0 10px}
+.warning{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:18px;border-radius:20px;line-height:1.6;font-size:15px;margin-top:14px}
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;height:82px;background:white;border-top:1px solid #e5e7eb;display:flex;justify-content:space-around;align-items:center}
 .nav-item{display:flex;flex-direction:column;align-items:center;font-size:13px;color:#6b7280;font-weight:600;cursor:pointer}
 .nav-item.active{color:#00995c}
@@ -89,36 +90,37 @@ textarea{min-height:120px;resize:none}
 
   <div id="loading" class="loader hidden">Sto preparando il parere medico...</div>
 
+  <!-- RISPOSTA AI -->
   <div id="response" class="answer hidden"></div>
 
-  <div id="followup-section" class="hidden">
-    <div class="section-title">Vuoi aggiungere dettagli o rispondere alle domande?</div>
-    <textarea id="followup" placeholder="Scrivi qui la tua risposta o aggiungi informazioni..."></textarea>
-    <button class="green-btn" onclick="sendFollowup()">Aggiorna parere</button>
-  </div>
-
-  <div id="warning" class="warning hidden">
-    Questa non è una prescrizione automatica. Il medico valuta la richiesta e può approvare, modificare, richiedere integrazioni oppure rifiutare se clinicamente non appropriata.
-  </div>
-
-  <div id="actions" class="hidden">
-    <button class="green-btn" onclick="showDoctorForm()">📄 Richiedi prescrizione / certificato firmato</button>
+  <!-- TASTO PRESCRIZIONE — appare subito dopo la risposta -->
+  <div id="rx-section" class="hidden">
+    <button class="rx-btn" onclick="showDoctorForm()">📄 Richiedi prescrizione al medico</button>
+    <div class="section-title">Hai altri dettagli da aggiungere?</div>
+    <textarea id="followup" placeholder="Scrivi qui ulteriori informazioni o rispondi alle domande..."></textarea>
+    <button class="white-btn" onclick="sendFollowup()" style="margin-top:0">Aggiorna parere</button>
     <button class="white-btn" onclick="newRequest()">Nuova richiesta</button>
   </div>
 
+  <div id="warning" class="warning hidden">
+    Questa non è una prescrizione automatica. Il medico valuta la richiesta e può approvare, modificare o rifiutare se clinicamente non appropriata.
+  </div>
+
+  <!-- FORM DATI PAZIENTE -->
   <div id="doctor-form" class="hidden">
-    <div class="section-title">Invia la richiesta al medico</div>
+    <div class="section-title">Inserisci i tuoi dati per ricevere la prescrizione</div>
     <input id="patient-name" placeholder="Nome e cognome *"/>
     <input id="patient-dob" placeholder="Data di nascita (es: 15/03/1975)"/>
-    <input id="patient-email" type="email" placeholder="Email per ricevere la risposta *"/>
+    <input id="patient-email" type="email" placeholder="Email per ricevere la prescrizione *"/>
     <input id="patient-phone" placeholder="Telefono (opzionale)"/>
-    <textarea id="patient-extra" placeholder="Farmaci in uso, allergie, patologie note..." style="min-height:80px"></textarea>
-    <button class="green-btn" onclick="submitToDoctor()">Invia al medico →</button>
+    <textarea id="patient-extra" placeholder="Farmaci in uso, allergie, patologie note..." style="min-height:70px"></textarea>
+    <button class="green-btn" onclick="submitToDoctor()">Invia al medico per la firma →</button>
+    <button class="white-btn" onclick="hideDoctorForm()">Annulla</button>
   </div>
 
   <div id="success-box" class="success hidden">
     <h3>✅ Richiesta inviata!</h3>
-    <p>Il medico ha ricevuto la tua richiesta e risponderà entro 24 ore all'indirizzo email indicato.</p>
+    <p>Il medico ha ricevuto la tua richiesta. Riceverai la prescrizione firmata entro 24 ore all'indirizzo email indicato.</p>
   </div>
 
 </div>
@@ -170,7 +172,7 @@ async function sendRequest(){
 
 async function sendFollowup(){
   const followup = document.getElementById("followup").value.trim();
-  if(!followup){alert("Scrivi una risposta o un dettaglio");return;}
+  if(!followup){alert("Scrivi un dettaglio o una risposta");return;}
   document.getElementById("followup").value = "";
   conversazione.push({role:"user",content:followup});
   showLoading();
@@ -187,12 +189,12 @@ async function callAI(){
     const data = await res.json();
     const risposta = stripMarkdown(data.answer || data.error || "Errore.");
     conversazione.push({role:"assistant",content:risposta});
+
     document.getElementById("loading").classList.add("hidden");
     document.getElementById("response").classList.remove("hidden");
     document.getElementById("response").textContent = risposta;
-    document.getElementById("followup-section").classList.remove("hidden");
+    document.getElementById("rx-section").classList.remove("hidden");
     document.getElementById("warning").classList.remove("hidden");
-    document.getElementById("actions").classList.remove("hidden");
     document.getElementById("doctor-form").classList.add("hidden");
     document.getElementById("success-box").classList.add("hidden");
     document.getElementById("response").scrollIntoView({behavior:"smooth"});
@@ -205,15 +207,18 @@ async function callAI(){
 function showLoading(){
   document.getElementById("loading").classList.remove("hidden");
   document.getElementById("response").classList.add("hidden");
-  document.getElementById("followup-section").classList.add("hidden");
+  document.getElementById("rx-section").classList.add("hidden");
   document.getElementById("warning").classList.add("hidden");
-  document.getElementById("actions").classList.add("hidden");
+  document.getElementById("doctor-form").classList.add("hidden");
 }
 
 function showDoctorForm(){
   document.getElementById("doctor-form").classList.remove("hidden");
-  document.getElementById("actions").classList.add("hidden");
   document.getElementById("doctor-form").scrollIntoView({behavior:"smooth"});
+}
+
+function hideDoctorForm(){
+  document.getElementById("doctor-form").classList.add("hidden");
 }
 
 async function submitToDoctor(){
@@ -239,8 +244,8 @@ async function submitToDoctor(){
       })
     });
     document.getElementById("doctor-form").classList.add("hidden");
-    document.getElementById("followup-section").classList.add("hidden");
-    document.getElementById("actions").classList.add("hidden");
+    document.getElementById("rx-section").classList.add("hidden");
+    document.getElementById("warning").classList.add("hidden");
     document.getElementById("success-box").classList.remove("hidden");
     document.getElementById("success-box").scrollIntoView({behavior:"smooth"});
   }catch(err){
@@ -253,9 +258,8 @@ function newRequest(){
   document.getElementById("requestType").value="";
   document.getElementById("followup").value="";
   document.getElementById("response").classList.add("hidden");
-  document.getElementById("followup-section").classList.add("hidden");
+  document.getElementById("rx-section").classList.add("hidden");
   document.getElementById("warning").classList.add("hidden");
-  document.getElementById("actions").classList.add("hidden");
   document.getElementById("doctor-form").classList.add("hidden");
   document.getElementById("success-box").classList.add("hidden");
   conversazione=[];
