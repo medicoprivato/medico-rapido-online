@@ -56,15 +56,20 @@ export default async function handler(req, res) {
     });
     if (error) return res.status(500).json({ error: error.message });
 
-    // Email di conferma al paziente
+    // Notifica a te — il medico
     await sendEmail(
-      email,
-      "Richiesta ricevuta — MedicoOra",
-      `<p>Gentile ${patientName},</p>
-      <p>La tua richiesta medica è stata ricevuta correttamente.</p>
-      <p>Il medico la valuterà e riceverai una risposta entro 24 ore a questo indirizzo email.</p>
-      <p>Tipo richiesta: <strong>${tipo}</strong></p>
-      <br><p>MedicoOra</p>`
+      "ferriam78@gmail.com",
+      "Nuova richiesta medica — " + patientName,
+      `<h2>Nuova richiesta da ${patientName}</h2>
+      <p><strong>Tipo:</strong> ${tipo}</p>
+      <p><strong>Email paziente:</strong> ${email}</p>
+      <p><strong>Telefono:</strong> ${phone||'—'}</p>
+      <p><strong>Data nascita:</strong> ${dateOfBirth||'—'}</p>
+      <p><strong>Problema:</strong></p>
+      <p style="white-space:pre-wrap">${patientText}</p>
+      <p><strong>Dati clinici:</strong> ${clinicalData||'—'}</p>
+      <hr>
+      <p>Vai su <a href="https://medico-rapido-online.vercel.app/#medico">medico-rapido-online.vercel.app/#medico</a> per rispondere.</p>`
     );
 
     return res.status(200).json({ ok: true });
@@ -77,7 +82,6 @@ export default async function handler(req, res) {
     }
     const { id, risposta_medico, stato } = req.body;
 
-    // Leggi i dati del paziente
     const { data: consult } = await supabase
       .from("consults")
       .select("*")
@@ -90,19 +94,17 @@ export default async function handler(req, res) {
       .eq("id", id);
     if (error) return res.status(500).json({ error: error.message });
 
-    // Email con risposta al paziente
-    if (consult?.email) {
-      await sendEmail(
-        consult.email,
-        "Risposta medica — MedicoOra",
-        `<p>Gentile ${consult.patient_name},</p>
-        <p>Il medico ha valutato la tua richiesta. Ecco la risposta:</p>
-        <hr>
-        <p style="white-space:pre-wrap">${risposta_medico}</p>
-        <hr>
-        <p><em>MedicoOra — Questo documento è stato redatto e firmato dal medico.</em></p>`
-      );
-    }
+    // Email di risposta sempre a ferriam78@gmail.com per ora
+    await sendEmail(
+      "ferriam78@gmail.com",
+      "Risposta firmata per " + (consult?.patient_name||'paziente'),
+      `<h2>Hai firmato la risposta per ${consult?.patient_name||'il paziente'}</h2>
+      <p><strong>Email paziente:</strong> ${consult?.email||'—'}</p>
+      <p><strong>La tua risposta:</strong></p>
+      <p style="white-space:pre-wrap">${risposta_medico}</p>
+      <hr>
+      <p><em>Quando configurerai il dominio email, questa risposta verrà inviata automaticamente al paziente.</em></p>`
+    );
 
     return res.status(200).json({ ok: true });
   }
