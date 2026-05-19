@@ -13,7 +13,6 @@ header{height:78px;background:white;border-bottom:1px solid #e5e7eb;display:flex
 .logo-wrap{display:flex;flex-direction:column;align-items:center}
 .logo{font-size:30px;font-weight:800;color:#00995c;letter-spacing:-1px}
 .logo-sub{font-size:11px;font-weight:700;letter-spacing:6px;color:#475569;margin-top:-2px}
-.login-btn{background:#00995c;color:white;border:none;border-radius:22px;padding:14px 24px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif}
 .hero{padding:26px 18px 10px}
 .hero-card{background:white;border-radius:28px;padding:26px 22px;border:1px solid #e5e7eb}
 .hero-title{font-size:42px;line-height:1.02;font-weight:800;color:#0f172a;margin-bottom:16px;letter-spacing:-2px}
@@ -42,12 +41,8 @@ textarea{min-height:120px;resize:none}
 .success{background:#f0fdf4;border:1px solid #86efac;border-radius:22px;padding:24px;text-align:center;margin-top:18px}
 .success h3{font-size:20px;font-weight:800;color:#15803d;margin-bottom:8px}
 .success p{font-size:15px;color:#166534;line-height:1.6}
-
-/* SCREENS */
 .screen{display:none}
 .screen.active{display:block}
-
-/* DOCTOR AREA */
 .doc-header{background:#0f172a;color:white;padding:0 20px;height:64px;display:flex;align-items:center;justify-content:space-between}
 .doc-header-title{font-size:1rem;font-weight:700}
 .doc-exit{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);border-radius:10px;padding:8px 14px;font-size:.82rem;cursor:pointer;font-family:'Inter',sans-serif}
@@ -59,8 +54,6 @@ textarea{min-height:120px;resize:none}
 .case-preview{font-size:.83rem;color:#475569;line-height:1.5}
 .case-status-pending{font-size:.75rem;font-weight:700;color:#d97706;margin-top:8px}
 .case-status-done{font-size:.75rem;font-weight:700;color:#059669;margin-top:8px}
-
-/* CASE DETAIL */
 .detail-section{padding:16px 18px}
 .patient-block{background:#0f172a;color:white;border-radius:18px;padding:18px;margin-bottom:14px}
 .patient-block h3{font-size:1.1rem;font-weight:800;margin-bottom:4px}
@@ -85,14 +78,11 @@ textarea{min-height:120px;resize:none}
 .sent-ok p{font-size:.83rem;color:#166534}
 .empty-state{text-align:center;padding:60px 20px;color:#9ca3af}
 .empty-icon{font-size:3rem;margin-bottom:12px}
-
-/* LOGIN */
-.login-card{max-width:400px;margin:60px auto;padding:0 20px}
 </style>
 </head>
 <body>
 
-<!-- ═══ SCHERMATA PAZIENTE ═══ -->
+<!-- PAZIENTE -->
 <div id="s-paziente" class="screen active">
   <header>
     <div class="menu">☰</div>
@@ -100,7 +90,7 @@ textarea{min-height:120px;resize:none}
       <div class="logo">MedicoOra</div>
       <div class="logo-sub">ONLINE DOCTOR</div>
     </div>
-    <button class="login-btn" onclick="showScreen('s-doc-login')">Medico</button>
+    <div style="width:60px"></div>
   </header>
 
   <div class="hero">
@@ -135,32 +125,31 @@ textarea{min-height:120px;resize:none}
       <div id="loading" class="loader hidden">Sto preparando il parere medico...</div>
       <div id="response" class="answer hidden"></div>
       <div id="rx-section" class="hidden">
-        <button class="rx-btn" onclick="showDoctorForm()">📄 Richiedi prescrizione al medico</button>
+        <button class="rx-btn" onclick="showDoctorForm()">📄 Invia richiesta al medico</button>
         <div class="section-title">Hai altri dettagli da aggiungere?</div>
         <textarea id="followup" placeholder="Scrivi qui ulteriori informazioni..."></textarea>
         <button class="white-btn" onclick="sendFollowup()" style="margin-top:0">Aggiorna parere</button>
         <button class="white-btn" onclick="newRequest()">Nuova richiesta</button>
       </div>
       <div id="warning" class="warning hidden">
-        Questa non è una prescrizione automatica. Il medico valuta la richiesta e può approvare, modificare o rifiutare se clinicamente non appropriata.
+        Il medico valuterà la richiesta e risponderà entro 24 ore. Se appropriato, la risposta potrà includere prescrizione, certificato, richiesta esami o indicazioni cliniche.
       </div>
       <div id="doctor-form" class="hidden">
-        <div class="section-title">Inserisci i tuoi dati per ricevere la prescrizione</div>
+        <div class="section-title">Inserisci i tuoi dati</div>
         <input id="patient-name" placeholder="Nome e cognome *"/>
         <input id="patient-dob" placeholder="Data di nascita (es: 15/03/1975)"/>
-        <input id="patient-email" type="email" placeholder="Email per ricevere la prescrizione *"/>
+        <input id="patient-email" type="email" placeholder="Email per ricevere la risposta *"/>
         <input id="patient-phone" placeholder="Telefono (opzionale)"/>
         <textarea id="patient-extra" placeholder="Farmaci in uso, allergie, patologie note..." style="min-height:70px"></textarea>
-        <button class="green-btn" onclick="submitToDoctor()">Invia al medico per la firma →</button>
+        <button class="green-btn" onclick="submitToDoctor()">Invia al medico →</button>
         <button class="white-btn" onclick="hideDoctorForm()">Annulla</button>
       </div>
       <div id="success-box" class="success hidden">
         <h3>✅ Richiesta inviata!</h3>
-        <p>Il medico ha ricevuto la tua richiesta. Riceverai la prescrizione firmata entro 24 ore all'indirizzo email indicato.</p>
+        <p>Il medico ha ricevuto la tua richiesta. Riceverai una risposta medica entro 24 ore all'indirizzo email indicato. Se appropriato, potrà includere prescrizione, certificato o richiesta esami.</p>
       </div>
     </div>
   </div>
-
   <div class="spacer"></div>
   <div class="bottom-nav">
     <div class="nav-item active">🏠<div>Home</div></div>
@@ -170,36 +159,31 @@ textarea{min-height:120px;resize:none}
   </div>
 </div>
 
-<!-- ═══ LOGIN MEDICO ═══ -->
+<!-- LOGIN MEDICO -->
 <div id="s-doc-login" class="screen">
-  <header>
-    <div class="logo-wrap" style="margin:auto">
-      <div class="logo">MedicoOra</div>
-      <div class="logo-sub">AREA MEDICO</div>
-    </div>
-  </header>
-  <div class="login-card">
+  <div class="doc-header">
+    <div class="doc-header-title">MedicoOra — Accesso Medico</div>
+  </div>
+  <div style="max-width:400px;margin:40px auto;padding:0 20px">
     <div class="card">
       <div style="text-align:center;margin-bottom:20px">
         <div style="font-size:2.5rem">🩺</div>
-        <div class="title" style="margin-bottom:4px">Accesso medico</div>
-        <div style="font-size:.85rem;color:#6b7280">Dott.ssa Anna Maria Ferri</div>
+        <div class="title" style="margin-bottom:4px">Area Medico</div>
       </div>
       <input type="password" id="doc-pwd" placeholder="Password" onkeydown="if(event.key==='Enter')loginMedico()"/>
       <div id="e-pwd" style="color:#dc2626;font-size:.8rem;margin-top:-10px;margin-bottom:10px;display:none">Password non corretta</div>
       <button class="green-btn" onclick="loginMedico()">Accedi →</button>
-      <button class="white-btn" onclick="showScreen('s-paziente')">← Torna al sito</button>
     </div>
   </div>
 </div>
 
-<!-- ═══ DASHBOARD MEDICO ═══ -->
+<!-- DASHBOARD MEDICO -->
 <div id="s-doc-dash" class="screen">
   <div class="doc-header">
-    <div class="doc-header-title">MedicoOra — Richieste <span id="doc-count" style="background:rgba(255,255,255,.15);border-radius:100px;padding:2px 10px;font-size:.72rem;margin-left:6px"></span></div>
+    <div class="doc-header-title">Richieste <span id="doc-count" style="background:rgba(255,255,255,.15);border-radius:100px;padding:2px 10px;font-size:.72rem;margin-left:6px"></span></div>
     <button class="doc-exit" onclick="showScreen('s-paziente')">Esci</button>
   </div>
-  <div style="display:flex;gap:8px;padding:16px 18px 0;flex-wrap:wrap">
+  <div style="display:flex;gap:8px;padding:16px 18px 0">
     <button onclick="loadCases('pending',this)" id="tab-pending" style="background:#00995c;color:white;border:none;border-radius:100px;padding:8px 16px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif">In attesa</button>
     <button onclick="loadCases('all',this)" id="tab-all" style="background:white;color:#6b7280;border:1px solid #e5e7eb;border-radius:100px;padding:8px 16px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif">Tutte</button>
   </div>
@@ -208,43 +192,36 @@ textarea{min-height:120px;resize:none}
   </div>
 </div>
 
-<!-- ═══ DETTAGLIO CASO ═══ -->
+<!-- DETTAGLIO CASO -->
 <div id="s-doc-case" class="screen">
   <div class="doc-header">
     <div class="doc-header-title">Dettaglio richiesta</div>
     <button class="doc-exit" onclick="showScreen('s-doc-dash')">← Dashboard</button>
   </div>
   <div class="detail-section">
-
     <div class="patient-block">
       <h3 id="dc-nome">—</h3>
       <p id="dc-sub">—</p>
       <div id="dc-info"></div>
     </div>
-
     <div class="complaint-block">
       <div class="complaint-lbl">DESCRIZIONE DEL PAZIENTE</div>
       <div id="dc-complaint">—</div>
     </div>
-
     <div class="ai-block">
       <div class="ai-lbl">🤖 ANALISI AI <span class="ai-badge">SOLO PER TE</span></div>
       <div class="ai-text" id="dc-ai">Preparazione in corso...</div>
     </div>
-
     <div class="reply-block">
-      <div class="reply-lbl">LA TUA RISPOSTA / PRESCRIZIONE</div>
-      <textarea class="reply-area" id="dc-reply" placeholder="Modifica la bozza o scrivi la tua risposta medica..."></textarea>
+      <div class="reply-lbl">LA TUA RISPOSTA / PRESCRIZIONE — modifica se necessario</div>
+      <textarea class="reply-area" id="dc-reply" placeholder="La bozza AI apparirà qui..."></textarea>
     </div>
-
-    <button class="sign-btn" onclick="inviaRisposta()">✅ Firma e invia al paziente</button>
-    <button class="white-btn" style="margin-bottom:20px" onclick="showScreen('s-doc-dash')">Annulla</button>
-
+    <button class="sign-btn" id="sign-btn" onclick="inviaRisposta()">✅ Firma e invia al paziente</button>
+    <button class="white-btn" style="margin-bottom:20px" onclick="showScreen('s-doc-dash')">← Torna alla dashboard</button>
     <div class="sent-ok" id="dc-sent">
-      <h3>✅ Risposta firmata e inviata!</h3>
-      <p id="dc-sent-msg">Il paziente ha ricevuto la risposta.</p>
+      <h3>✅ Risposta firmata!</h3>
+      <p id="dc-sent-msg">Risposta salvata. Quando configurerai le email, il paziente la riceverà automaticamente.</p>
     </div>
-
   </div>
 </div>
 
@@ -255,7 +232,11 @@ let tipoRichiesta = '';
 let allCases = [];
 let currentCaseId = null;
 
-// ─── NAVIGAZIONE ───
+// Accesso segreto via hash
+window.addEventListener('load', function(){
+  if(window.location.hash === '#medico') showScreen('s-doc-login');
+});
+
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -281,7 +262,6 @@ function stripMarkdown(text){
     .trim();
 }
 
-// ─── PAZIENTE ───
 async function sendRequest(){
   const type = document.getElementById("requestType").value;
   const text = document.getElementById("problem").value.trim();
@@ -305,11 +285,7 @@ async function sendFollowup(){
 
 async function callAI(){
   try{
-    const res = await fetch("/api/consult",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({text:conversazione.map(m=>m.role+": "+m.content).join("\n\n")})
-    });
+    const res = await fetch("/api/consult",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:conversazione.map(m=>m.role+": "+m.content).join("\n\n")})});
     const data = await res.json();
     const risposta = stripMarkdown(data.answer||data.error||"Errore.");
     conversazione.push({role:"assistant",content:risposta});
@@ -351,21 +327,8 @@ async function submitToDoctor(){
   if(!email||!email.includes("@")){alert("Inserisci un'email valida");return;}
   const ultimaRisposta = conversazione.filter(m=>m.role==="assistant").pop()?.content||"";
   try{
-    await fetch("/api/submit-medical-request",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        tipo:tipoRichiesta,
-        patientText:document.getElementById("problem").value,
-        patientName:nome,
-        dateOfBirth:document.getElementById("patient-dob").value,
-        email:email,
-        phone:document.getElementById("patient-phone").value,
-        clinicalData:document.getElementById("patient-extra").value,
-        aiResponse:ultimaRisposta,
-        conversazione:conversazione.map(m=>m.role+": "+m.content).join("\n\n")
-      })
-    });
+    const res = await fetch("/api/submit-medical-request",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({tipo:tipoRichiesta,patientText:document.getElementById("problem").value,patientName:nome,dateOfBirth:document.getElementById("patient-dob").value,email:email,phone:document.getElementById("patient-phone").value,clinicalData:document.getElementById("patient-extra").value,aiResponse:ultimaRisposta,conversazione:conversazione.map(m=>m.role+": "+m.content).join("\n\n")})});
+    if(!res.ok) throw new Error("Errore server");
     document.getElementById("doctor-form").classList.add("hidden");
     document.getElementById("rx-section").classList.add("hidden");
     document.getElementById("warning").classList.add("hidden");
@@ -380,16 +343,11 @@ function newRequest(){
   document.getElementById("problem").value="";
   document.getElementById("requestType").value="";
   document.getElementById("followup").value="";
-  document.getElementById("response").classList.add("hidden");
-  document.getElementById("rx-section").classList.add("hidden");
-  document.getElementById("warning").classList.add("hidden");
-  document.getElementById("doctor-form").classList.add("hidden");
-  document.getElementById("success-box").classList.add("hidden");
+  ["response","rx-section","warning","doctor-form","success-box"].forEach(id=>document.getElementById(id).classList.add("hidden"));
   conversazione=[];
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
-// ─── MEDICO LOGIN ───
 function loginMedico(){
   const pwd = document.getElementById("doc-pwd").value;
   if(pwd===DOC_PWD){
@@ -401,23 +359,14 @@ function loginMedico(){
   }
 }
 
-// ─── DASHBOARD ───
 async function loadCases(filter, btn){
-  if(btn){
-    document.querySelectorAll('#s-doc-dash button').forEach(b=>{
-      if(b.id&&b.id.startsWith('tab-')){b.style.background='white';b.style.color='#6b7280';b.style.border='1px solid #e5e7eb';}
-    });
-    btn.style.background='#00995c';btn.style.color='white';btn.style.border='none';
-  }
   const cont = document.getElementById("cases-container");
-  cont.innerHTML = '<div class="loader" style="margin:20px 18px">Caricamento...</div>';
+  cont.innerHTML='<div class="loader" style="margin:20px 18px">Caricamento...</div>';
   try{
-    const res = await fetch("/api/submit-medical-request",{
-      headers:{"Authorization":"Bearer "+DOC_PWD}
-    });
+    const res = await fetch("/api/submit-medical-request",{headers:{"Authorization":"Bearer "+DOC_PWD}});
     allCases = await res.json();
     if(!Array.isArray(allCases)) allCases=[];
-    const pending = allCases.filter(c=>!c.risposta_medico&&!c.doctor_reply);
+    const pending = allCases.filter(c=>!c.risposta_medico);
     document.getElementById("doc-count").textContent = pending.length+" in attesa";
     let filtered = filter==='pending' ? pending : allCases;
     if(filtered.length===0){
@@ -425,16 +374,12 @@ async function loadCases(filter, btn){
       return;
     }
     cont.innerHTML = filtered.map(c=>{
-      const isDone = !!(c.risposta_medico||c.doctor_reply);
-      const nome = c.patient_name||c.paziente_nome||'—';
-      const tipo = c.tipo||c.type||'consulto';
-      const preview = (c.patient_text||c.descrizione||'').slice(0,120);
-      const data = new Date(c.created_at).toLocaleDateString('it-IT');
+      const isDone = !!c.risposta_medico;
       return `<div class="case-card ${!isDone?'pending':''}" onclick="openCase('${c.id}')">
-        <div class="case-name">${nome}</div>
-        <div class="case-meta">${tipo} · ${data} · ${c.email||''}</div>
-        <div class="case-preview">${preview}...</div>
-        <div class="${isDone?'case-status-done':'case-status-pending'}">${isDone?'✅ Risposto':'⏳ In attesa di risposta'}</div>
+        <div class="case-name">${c.patient_name||'—'}</div>
+        <div class="case-meta">${c.tipo||'consulto'} · ${new Date(c.created_at).toLocaleDateString('it-IT')} · ${c.email||''}</div>
+        <div class="case-preview">${(c.patient_text||'').slice(0,120)}...</div>
+        <div class="${isDone?'case-status-done':'case-status-pending'}">${isDone?'✅ Risposto':'⏳ In attesa'}</div>
       </div>`;
     }).join('');
   }catch(e){
@@ -442,71 +387,70 @@ async function loadCases(filter, btn){
   }
 }
 
-// ─── DETTAGLIO CASO ───
 async function openCase(id){
   currentCaseId = id;
   document.getElementById("dc-sent").style.display="none";
   document.getElementById("dc-reply").value="";
-  document.getElementById("dc-ai").textContent="Preparazione analisi...";
+  document.getElementById("dc-ai").textContent="Preparazione analisi AI...";
+  document.getElementById("sign-btn").disabled=false;
+  document.getElementById("sign-btn").textContent="✅ Firma e invia al paziente";
   showScreen('s-doc-case');
   const c = allCases.find(x=>x.id==id);
   if(!c) return;
-  document.getElementById("dc-nome").textContent = c.patient_name||c.paziente_nome||'—';
+  document.getElementById("dc-nome").textContent = c.patient_name||'—';
   document.getElementById("dc-sub").textContent = (c.tipo||'consulto')+' · '+new Date(c.created_at).toLocaleDateString('it-IT');
-  document.getElementById("dc-info").innerHTML = `
+  document.getElementById("dc-info").innerHTML=`
     <div class="patient-row"><span class="patient-lbl">Email</span><span class="patient-val">${c.email||'—'}</span></div>
     <div class="patient-row"><span class="patient-lbl">Telefono</span><span class="patient-val">${c.phone||'—'}</span></div>
     <div class="patient-row"><span class="patient-lbl">Data nascita</span><span class="patient-val">${c.date_of_birth||'—'}</span></div>
   `;
-  let testo = c.patient_text||c.descrizione||'—';
-  if(c.clinical_data) testo += '\n\nDati clinici: '+c.clinical_data;
-  document.getElementById("dc-complaint").textContent = testo;
+  let testo = c.patient_text||'—';
+  if(c.clinical_data) testo+='\n\nDati clinici: '+c.clinical_data;
+  document.getElementById("dc-complaint").textContent=testo;
   generaAI(c);
 }
 
 async function generaAI(caso){
   try{
-    const prompt = `Sei un assistente clinico per il medico. Analizza questa richiesta e prepara una bozza di risposta/prescrizione.
-TIPO: ${caso.tipo||'consulto'}
-PAZIENTE: ${caso.patient_name||caso.paziente_nome}, nato ${caso.date_of_birth||'n.d.'}
-PROBLEMA: ${caso.patient_text||caso.descrizione}
-DATI CLINICI: ${caso.clinical_data||'non specificati'}
-CONVERSAZIONE AI: ${caso.aiResponse||caso.ai_response||'non disponibile'}
+    const prompt = "Sei un assistente clinico italiano. Prepara una bozza di risposta/prescrizione per il medico. Tipo: "+
+      (caso.tipo||'consulto')+". Paziente: "+(caso.patient_name||'')+", nato "+
+      (caso.date_of_birth||'n.d.')+". Problema: "+(caso.patient_text||'')+
+      ". Dati clinici: "+(caso.clinical_data||'non specificati')+
+      ". Scrivi: 1) Riepilogo clinico in 2 frasi. 2) Bozza prescrizione/risposta pronta. Per farmaci: nome, dosaggio, posologia, durata. Per esami: lista specifica. Sii diretto e clinico.";
 
-Prepara in italiano:
-1. Riepilogo clinico breve
-2. Bozza prescrizione/risposta già pronta da modificare e firmare
-Per prescrizioni: farmaco, dosaggio, posologia, durata.
-Per esami: lista specifica. Sii diretto e clinico.`;
-    const res = await fetch("/api/consult",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({text:prompt})
-    });
+    const res = await fetch("/api/consult",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:prompt})});
     const data = await res.json();
-    const testo = data.answer||'Analisi non disponibile.';
+    const testo = stripMarkdown(data.answer||'Analisi non disponibile.');
     document.getElementById("dc-ai").textContent = testo;
     document.getElementById("dc-reply").value = testo;
   }catch(e){
-    document.getElementById("dc-ai").textContent = "Analisi non disponibile. Scrivi la risposta manualmente.";
+    document.getElementById("dc-ai").textContent="Analisi non disponibile. Scrivi la risposta manualmente.";
+    document.getElementById("dc-reply").value="";
   }
 }
 
 async function inviaRisposta(){
   const txt = document.getElementById("dc-reply").value.trim();
   if(!txt){alert("Scrivi una risposta prima di inviare.");return;}
+  const btn = document.getElementById("sign-btn");
+  btn.disabled=true;
+  btn.textContent="Salvataggio in corso...";
   try{
-    await fetch("/api/submit-medical-request",{
+    const res = await fetch("/api/submit-medical-request",{
       method:"PUT",
       headers:{"Content-Type":"application/json","Authorization":"Bearer "+DOC_PWD},
       body:JSON.stringify({id:currentCaseId,risposta_medico:txt,stato:'risposto'})
     });
+    if(!res.ok) throw new Error("Errore server "+res.status);
     const c = allCases.find(x=>x.id==currentCaseId);
-    if(c) c.risposta_medico = txt;
+    if(c) c.risposta_medico=txt;
     document.getElementById("dc-sent").style.display="block";
-    document.getElementById("dc-sent-msg").textContent = "Risposta inviata a "+(c?.email||'il paziente')+".";
+    document.getElementById("dc-sent-msg").textContent="Risposta salvata per "+(c?.patient_name||'il paziente')+" ("+c?.email+"). Configurando Resend, verrà inviata automaticamente via email.";
+    btn.textContent="✅ Firmato";
   }catch(e){
     alert("Errore: "+e.message);
+    btn.disabled=false;
+    btn.textContent="✅ Firma e invia al paziente";
   }
 }
 </script>
