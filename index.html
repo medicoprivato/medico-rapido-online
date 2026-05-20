@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>MedicoOra</title>
+<title>MedicoOra — Prescrizioni Online</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -56,6 +56,14 @@ textarea{min-height:120px;resize:none}
 .file-name{color:#374151;font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .file-remove{color:#dc2626;cursor:pointer;font-weight:700;margin-left:8px;flex-shrink:0}
 
+/* CONSENSO */
+.consent-box{background:#f8fafc;border:1px solid #e5e7eb;border-radius:14px;padding:16px;margin-bottom:14px}
+.consent-item{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+.consent-item:last-child{margin-bottom:0}
+.consent-item input[type="checkbox"]{width:20px;height:20px;margin:0;flex-shrink:0;accent-color:#00995c;cursor:pointer;border-radius:4px}
+.consent-label{font-size:13px;color:#374151;line-height:1.5;cursor:pointer}
+.consent-label a{color:#00995c;text-decoration:underline}
+
 /* INFO */
 .info-section{padding:20px 18px}
 .info-card{background:white;border-radius:20px;padding:20px;border:1px solid #e5e7eb;margin-bottom:14px}
@@ -68,6 +76,13 @@ textarea{min-height:120px;resize:none}
 .contact-ico{font-size:1.8rem;flex-shrink:0}
 .contact-title{font-size:15px;font-weight:700;color:#0f172a;margin-bottom:2px}
 .contact-sub{font-size:13px;color:#6b7280}
+
+/* PRIVACY SCREEN */
+.privacy-section{padding:20px 18px;padding-bottom:100px}
+.privacy-section h2{font-size:20px;font-weight:800;color:#0f172a;margin-bottom:16px}
+.privacy-section h3{font-size:15px;font-weight:700;color:#0f172a;margin:16px 0 8px}
+.privacy-section p{font-size:13px;color:#475569;line-height:1.7;margin-bottom:10px}
+.privacy-section ul{font-size:13px;color:#475569;line-height:1.7;margin-bottom:10px;padding-left:18px}
 
 /* DOCTOR */
 .doc-header{background:#0f172a;color:white;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between}
@@ -121,7 +136,7 @@ textarea{min-height:120px;resize:none}
   <div class="hero">
     <div class="hero-card">
       <div class="hero-title">Prescrizioni online rapide.</div>
-      <div class="hero-text">Rinnovi terapia, richieste esami, certificati e valutazioni mediche senza videochiamata.</div>
+      <div class="hero-text">Rinnovi terapia, richieste esami, certificati e valutazioni mediche senza videochiamata. Attivo 7 giorni su 7.</div>
       <button class="green-btn" onclick="showScreen('s-richiesta')">Inizia ora →</button>
       <div class="quick-grid">
         <div class="quick" onclick="quickStart('Rinnovo terapia')">💊 Rinnovo farmaco</div>
@@ -142,7 +157,7 @@ textarea{min-height:120px;resize:none}
         </div>
         <div style="display:flex;gap:14px;align-items:flex-start">
           <div class="step-num">2</div>
-          <div><div style="font-weight:700;font-size:15px;margin-bottom:3px">Il medico valuta</div><div style="font-size:13px;color:#475569;line-height:1.5">Il medico riceve la tua richiesta e la valuta clinicamente il prima possibile.</div></div>
+          <div><div style="font-weight:700;font-size:15px;margin-bottom:3px">Il medico valuta</div><div style="font-size:13px;color:#475569;line-height:1.5">Il medico riceve la richiesta e la valuta clinicamente 7 giorni su 7.</div></div>
         </div>
         <div style="display:flex;gap:14px;align-items:flex-start">
           <div class="step-num">3</div>
@@ -211,21 +226,37 @@ textarea{min-height:120px;resize:none}
         <input id="patient-phone" placeholder="Telefono (opzionale)"/>
         <textarea id="patient-extra" placeholder="Farmaci in uso, allergie, patologie note..." style="min-height:70px"></textarea>
 
-        <!-- UPLOAD FOTO/DOCUMENTI -->
         <div class="section-title">📎 Allega foto o documenti (opzionale)</div>
         <div class="upload-area" id="upload-area" onclick="document.getElementById('file-input').click()">
           <div class="upload-icon">📷</div>
-          <div class="upload-text">Tocca per allegare <strong>foto</strong> o <strong>referti</strong><br><span style="font-size:12px">Lesioni cutanee, esami, documenti medici</span></div>
+          <div class="upload-text">Tocca per allegare <strong>foto</strong> o <strong>referti</strong><br><span style="font-size:12px">Lesioni cutanee, esami, documenti medici · Max 5 file, 10MB ciascuno</span></div>
           <div class="file-list" id="file-list"></div>
         </div>
         <input type="file" id="file-input" multiple accept="image/*,.pdf" style="display:none" onchange="handleFiles(this.files)"/>
+
+        <!-- CONSENSO OBBLIGATORIO -->
+        <div class="section-title">Consenso e privacy</div>
+        <div class="consent-box">
+          <div class="consent-item">
+            <input type="checkbox" id="c1"/>
+            <label class="consent-label" for="c1">Ho letto e accetto i <a onclick="showScreen('s-termini')">Termini e Condizioni</a> del servizio MedicoOra. *</label>
+          </div>
+          <div class="consent-item">
+            <input type="checkbox" id="c2"/>
+            <label class="consent-label" for="c2">Acconsento al trattamento dei miei dati personali e sanitari secondo la <a onclick="showScreen('s-privacy')">Privacy Policy</a> (GDPR art. 9). *</label>
+          </div>
+          <div class="consent-item">
+            <input type="checkbox" id="c3"/>
+            <label class="consent-label" for="c3">Comprendo che questo servizio non sostituisce il medico di medicina generale e non deve essere usato in caso di emergenza medica. *</label>
+          </div>
+        </div>
 
         <button class="green-btn" onclick="submitToDoctor()">Invia al medico →</button>
         <button class="white-btn" onclick="hideDoctorForm()">Annulla</button>
       </div>
       <div id="success-box" class="success hidden">
         <h3>✅ Richiesta inviata!</h3>
-        <p>Il medico ha ricevuto la tua richiesta e risponderà il prima possibile all'indirizzo email indicato. Se appropriato, includerà prescrizione, certificato o richiesta esami.</p>
+        <p>Il medico ha ricevuto la tua richiesta e risponderà il prima possibile all'indirizzo email indicato. Il servizio è attivo 7 giorni su 7.</p>
       </div>
     </div>
   </div>
@@ -258,7 +289,7 @@ textarea{min-height:120px;resize:none}
     </div>
     <div class="info-card">
       <h3><div class="step-num">3</div>Il medico valuta e risponde</h3>
-      <p>La tua richiesta viene inviata al medico che la valuta clinicamente e risponde il prima possibile. La risposta potrà includere prescrizione, richiesta esami, certificato o indicazioni cliniche.</p>
+      <p>La tua richiesta viene inviata al medico che la valuta clinicamente 7 giorni su 7 e risponde il prima possibile. La risposta potrà includere prescrizione, richiesta esami, certificato o indicazioni cliniche.</p>
     </div>
     <div class="info-card">
       <h3>💊 Cosa puoi richiedere</h3>
@@ -271,6 +302,13 @@ textarea{min-height:120px;resize:none}
     <div class="info-card">
       <h3>💶 Costo del servizio</h3>
       <p>Abbonamento annuale: <strong>€60/anno</strong><br>Include consulti illimitati, prescrizioni, richieste esami e certificati quando clinicamente appropriati.</p>
+    </div>
+    <div class="info-card">
+      <h3>📋 Documenti legali</h3>
+      <p>
+        <a onclick="showScreen('s-privacy')" style="color:#00995c;text-decoration:underline;cursor:pointer">Privacy Policy (GDPR)</a><br>
+        <a onclick="showScreen('s-termini')" style="color:#00995c;text-decoration:underline;cursor:pointer">Termini e Condizioni</a>
+      </p>
     </div>
   </div>
   <div class="spacer"></div>
@@ -301,11 +339,18 @@ textarea{min-height:120px;resize:none}
     </div>
     <div class="info-card">
       <h3>🕐 Tempi di risposta</h3>
-      <p>Il medico risponde il prima possibile, di solito entro poche ore nei giorni feriali. Le richieste inviate nel weekend vengono processate il lunedì mattina.</p>
+      <p>Il servizio è attivo <strong>7 giorni su 7</strong>. Il medico risponde il prima possibile, di solito entro poche ore dalla ricezione della richiesta.</p>
     </div>
     <div class="info-card">
       <h3>🔒 Privacy e sicurezza</h3>
-      <p>I tuoi dati medici e le foto allegate sono trattati con la massima riservatezza nel rispetto del GDPR e delle normative sulla privacy sanitaria.</p>
+      <p>I tuoi dati medici e le foto allegate sono trattati con la massima riservatezza nel rispetto del GDPR e delle normative sulla privacy sanitaria italiana ed europea.</p>
+    </div>
+    <div class="info-card">
+      <h3>📋 Documenti legali</h3>
+      <p>
+        <a onclick="showScreen('s-privacy')" style="color:#00995c;text-decoration:underline;cursor:pointer">→ Privacy Policy</a><br><br>
+        <a onclick="showScreen('s-termini')" style="color:#00995c;text-decoration:underline;cursor:pointer">→ Termini e Condizioni</a>
+      </p>
     </div>
     <div style="margin-top:16px">
       <button class="green-btn" onclick="showScreen('s-richiesta')">Fai una richiesta →</button>
@@ -317,6 +362,96 @@ textarea{min-height:120px;resize:none}
     <div class="nav-item" onclick="showScreen('s-richiesta')">📋<div>Richiesta</div></div>
     <div class="nav-item" onclick="showScreen('s-info')">ℹ️<div>Info</div></div>
     <div class="nav-item active" onclick="showScreen('s-contatti')">✉️<div>Contatti</div></div>
+  </div>
+</div>
+
+<!-- ═══ PRIVACY POLICY ═══ -->
+<div id="s-privacy" class="screen">
+  <header>
+    <div class="logo-wrap">
+      <div class="logo">MedicoOra</div>
+      <div class="logo-sub">ONLINE DOCTOR</div>
+    </div>
+  </header>
+  <div class="privacy-section">
+    <button onclick="history.back()" style="background:none;border:none;color:#00995c;font-size:14px;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:16px;padding:0">← Indietro</button>
+    <h2>Informativa sulla Privacy</h2>
+    <p>Ultimo aggiornamento: maggio 2025</p>
+
+    <h3>1. Titolare del trattamento</h3>
+    <p>Titolare del trattamento dei dati è la Dott.ssa Anna Maria Ferri, Medico Chirurgo specialista in Ginecologia e Ostetricia, contattabile all'indirizzo info@medicoora.com.</p>
+
+    <h3>2. Dati raccolti</h3>
+    <p>MedicoOra raccoglie le seguenti categorie di dati personali:</p>
+    <ul>
+      <li>Dati anagrafici (nome, cognome, data di nascita)</li>
+      <li>Dati di contatto (email, telefono)</li>
+      <li>Dati sanitari (descrizione sintomi, farmaci, allergie, patologie, foto mediche, referti)</li>
+    </ul>
+    <p>I dati sanitari rientrano nelle categorie particolari ai sensi dell'art. 9 GDPR e sono trattati solo con il consenso esplicito dell'interessato.</p>
+
+    <h3>3. Finalità del trattamento</h3>
+    <p>I dati sono raccolti esclusivamente per:</p>
+    <ul>
+      <li>Erogare il servizio di consulenza medica online</li>
+      <li>Preparare e inviare prescrizioni, certificati e risposte mediche</li>
+      <li>Adempiere a obblighi di legge</li>
+    </ul>
+
+    <h3>4. Base giuridica</h3>
+    <p>Il trattamento si basa sul consenso esplicito dell'interessato (art. 6, par. 1, lett. a e art. 9, par. 2, lett. a GDPR) e sull'esecuzione del contratto di servizio medico.</p>
+
+    <h3>5. Conservazione dei dati</h3>
+    <p>I dati sanitari sono conservati per 10 anni dalla data dell'ultima prestazione, in conformità con la normativa italiana sulla documentazione sanitaria.</p>
+
+    <h3>6. Fornitori terzi</h3>
+    <p>I dati sono trattati mediante i seguenti fornitori che offrono garanzie GDPR adeguate: Supabase Inc. (database), Vercel Inc. (hosting), Resend Inc. (invio email). Con ciascun fornitore è stipulato un accordo di trattamento dati (DPA).</p>
+
+    <h3>7. Diritti dell'interessato</h3>
+    <p>L'interessato ha diritto di accesso, rettifica, cancellazione, limitazione del trattamento e portabilità dei dati. Per esercitare questi diritti scrivere a info@medicoora.com.</p>
+
+    <h3>8. Reclami</h3>
+    <p>È possibile proporre reclamo al Garante per la Protezione dei Dati Personali (www.garanteprivacy.it).</p>
+  </div>
+</div>
+
+<!-- ═══ TERMINI E CONDIZIONI ═══ -->
+<div id="s-termini" class="screen">
+  <header>
+    <div class="logo-wrap">
+      <div class="logo">MedicoOra</div>
+      <div class="logo-sub">ONLINE DOCTOR</div>
+    </div>
+  </header>
+  <div class="privacy-section">
+    <button onclick="history.back()" style="background:none;border:none;color:#00995c;font-size:14px;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:16px;padding:0">← Indietro</button>
+    <h2>Termini e Condizioni</h2>
+    <p>Ultimo aggiornamento: maggio 2025</p>
+
+    <h3>1. Descrizione del servizio</h3>
+    <p>MedicoOra è un servizio di telemedicina che permette ai pazienti di richiedere consulenze mediche, prescrizioni, richieste di esami e certificati attraverso una piattaforma digitale. Il servizio è erogato dalla Dott.ssa Anna Maria Ferri, Medico Chirurgo, iscritta all'Ordine dei Medici.</p>
+
+    <h3>2. Limitazioni del servizio</h3>
+    <p>MedicoOra NON è un servizio di emergenza. Non deve essere utilizzato in presenza di sintomi gravi o urgenti. In caso di emergenza chiamare il 118 o recarsi al Pronto Soccorso.</p>
+    <p>Il servizio non sostituisce il medico di medicina generale né elimina la necessità di visite di persona quando clinicamente indicate.</p>
+
+    <h3>3. Prescrizioni e atti medici</h3>
+    <p>Tutte le prescrizioni e gli atti medici sono emessi esclusivamente dalla Dott.ssa Ferri, che valuta ogni richiesta individualmente. Il medico si riserva il diritto di non emettere una prescrizione qualora non la ritenga clinicamente appropriata.</p>
+
+    <h3>4. Responsabilità del paziente</h3>
+    <p>Il paziente è responsabile della veridicità e completezza delle informazioni fornite. Informazioni false o incomplete possono pregiudicare la qualità della risposta medica e sono a rischio esclusivo del paziente.</p>
+
+    <h3>5. Servizio attivo</h3>
+    <p>Il servizio riceve richieste 7 giorni su 7. I tempi di risposta possono variare in base al volume di richieste. Il medico si impegna a rispondere il prima possibile.</p>
+
+    <h3>6. Pagamento</h3>
+    <p>Il servizio è disponibile tramite abbonamento annuale di €60. Il pagamento dà diritto a consulti illimitati per 12 mesi dalla data di iscrizione.</p>
+
+    <h3>7. Legge applicabile</h3>
+    <p>I presenti termini sono regolati dalla legge italiana. Per qualsiasi controversia è competente il Foro di Roma.</p>
+
+    <h3>8. Contatti</h3>
+    <p>Per qualsiasi questione relativa ai presenti termini: info@medicoora.com</p>
   </div>
 </div>
 
@@ -423,7 +558,6 @@ function stripMarkdown(text){
     .trim();
 }
 
-// ─── UPLOAD FILE ───
 function handleFiles(files){
   for(const f of files){
     if(uploadedFiles.length >= 5){ alert("Massimo 5 allegati"); break; }
@@ -436,11 +570,7 @@ function handleFiles(files){
 function renderFileList(){
   const list = document.getElementById("file-list");
   const area = document.getElementById("upload-area");
-  if(uploadedFiles.length === 0){
-    list.innerHTML = '';
-    area.classList.remove('has-files');
-    return;
-  }
+  if(uploadedFiles.length === 0){ list.innerHTML=''; area.classList.remove('has-files'); return; }
   area.classList.add('has-files');
   list.innerHTML = uploadedFiles.map((f,i)=>`
     <div class="file-item">
@@ -450,10 +580,7 @@ function renderFileList(){
   `).join('');
 }
 
-function removeFile(i){
-  uploadedFiles.splice(i,1);
-  renderFileList();
-}
+function removeFile(i){ uploadedFiles.splice(i,1); renderFileList(); }
 
 function toBase64(file){
   return new Promise((resolve,reject)=>{
@@ -464,7 +591,6 @@ function toBase64(file){
   });
 }
 
-// ─── AI ───
 async function sendRequest(){
   const type = document.getElementById("requestType").value;
   const text = document.getElementById("problem").value.trim();
@@ -528,20 +654,18 @@ async function submitToDoctor(){
   const email = document.getElementById("patient-email").value.trim();
   if(!nome){alert("Inserisci nome e cognome");return;}
   if(!email||!email.includes("@")){alert("Inserisci un'email valida");return;}
+  if(!document.getElementById("c1").checked){alert("Devi accettare i Termini e Condizioni");return;}
+  if(!document.getElementById("c2").checked){alert("Devi accettare il trattamento dei dati sanitari");return;}
+  if(!document.getElementById("c3").checked){alert("Devi confermare di aver compreso i limiti del servizio");return;}
 
   const btn = document.querySelector('#doctor-form .green-btn');
   btn.textContent = "Invio in corso...";
   btn.disabled = true;
 
   const ultimaRisposta = conversazione.filter(m=>m.role==="assistant").pop()?.content||"";
-
-  // Converti file in base64
   let allegati = [];
   for(const f of uploadedFiles){
-    try{
-      const b64 = await toBase64(f);
-      allegati.push({name:f.name, type:f.type, data:b64});
-    }catch(e){ console.error(e); }
+    try{ const b64 = await toBase64(f); allegati.push({name:f.name,type:f.type,data:b64}); }catch(e){}
   }
 
   try{
@@ -558,7 +682,8 @@ async function submitToDoctor(){
         clinicalData:document.getElementById("patient-extra").value,
         aiResponse:ultimaRisposta,
         conversazione:conversazione.map(m=>m.role+": "+m.content).join("\n\n"),
-        allegati:allegati
+        allegati:allegati,
+        consenso:true
       })
     });
     if(!res.ok) throw new Error("Errore server");
@@ -567,12 +692,12 @@ async function submitToDoctor(){
     document.getElementById("warning").classList.add("hidden");
     document.getElementById("success-box").classList.remove("hidden");
     document.getElementById("success-box").scrollIntoView({behavior:"smooth"});
-    uploadedFiles = [];
+    uploadedFiles=[];
     renderFileList();
   }catch(err){
     alert("Errore: "+err.message);
-    btn.textContent = "Invia al medico →";
-    btn.disabled = false;
+    btn.textContent="Invia al medico →";
+    btn.disabled=false;
   }
 }
 
@@ -582,12 +707,12 @@ function newRequest(){
   document.getElementById("followup").value="";
   uploadedFiles=[];
   renderFileList();
+  ["c1","c2","c3"].forEach(id=>document.getElementById(id).checked=false);
   ["response","rx-section","warning","doctor-form","success-box"].forEach(id=>document.getElementById(id).classList.add("hidden"));
   conversazione=[];
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
-// ─── MEDICO ───
 function loginMedico(){
   const pwd = document.getElementById("doc-pwd").value;
   if(pwd===DOC_PWD){
@@ -614,8 +739,8 @@ async function loadCases(filter, btn){
       return;
     }
     cont.innerHTML = filtered.map(c=>{
-      const isDone = !!c.risposta_medico;
-      const hasFiles = c.allegati && c.allegati.length > 0;
+      const isDone=!!c.risposta_medico;
+      const hasFiles=c.allegati&&c.allegati.length>0;
       return `<div class="case-card ${!isDone?'pending':''}" onclick="openCase('${c.id}')">
         <div class="case-name">${c.patient_name||'—'} ${hasFiles?'📎':''}</div>
         <div class="case-meta">${c.tipo||'consulto'} · ${new Date(c.created_at).toLocaleDateString('it-IT')} · ${c.email||''}</div>
@@ -629,7 +754,7 @@ async function loadCases(filter, btn){
 }
 
 async function openCase(id){
-  currentCaseId = id;
+  currentCaseId=id;
   document.getElementById("dc-sent").style.display="none";
   document.getElementById("dc-reply").value="";
   document.getElementById("dc-ai").textContent="Preparazione analisi AI...";
@@ -637,46 +762,43 @@ async function openCase(id){
   document.getElementById("sign-btn").textContent="✅ Firma e invia al paziente";
   document.getElementById("dc-attachments-block").style.display="none";
   showScreen('s-doc-case');
-  const c = allCases.find(x=>x.id==id);
+  const c=allCases.find(x=>x.id==id);
   if(!c) return;
-  document.getElementById("dc-nome").textContent = c.patient_name||'—';
-  document.getElementById("dc-sub").textContent = (c.tipo||'consulto')+' · '+new Date(c.created_at).toLocaleDateString('it-IT');
+  document.getElementById("dc-nome").textContent=c.patient_name||'—';
+  document.getElementById("dc-sub").textContent=(c.tipo||'consulto')+' · '+new Date(c.created_at).toLocaleDateString('it-IT');
   document.getElementById("dc-info").innerHTML=`
     <div class="patient-row"><span class="patient-lbl">Email</span><span class="patient-val">${c.email||'—'}</span></div>
     <div class="patient-row"><span class="patient-lbl">Telefono</span><span class="patient-val">${c.phone||'—'}</span></div>
     <div class="patient-row"><span class="patient-lbl">Data nascita</span><span class="patient-val">${c.date_of_birth||'—'}</span></div>
   `;
-  let testo = c.patient_text||'—';
+  let testo=c.patient_text||'—';
   if(c.clinical_data) testo+='\n\nDati clinici: '+c.clinical_data;
   document.getElementById("dc-complaint").textContent=testo;
-
-  // Mostra allegati se presenti
-  if(c.allegati && c.allegati.length > 0){
+  if(c.allegati&&c.allegati.length>0){
     document.getElementById("dc-attachments-block").style.display="block";
-    document.getElementById("dc-attachments").innerHTML = c.allegati.map(a=>{
-      if(a.type && a.type.startsWith('image/')){
+    document.getElementById("dc-attachments").innerHTML=c.allegati.map(a=>{
+      if(a.type&&a.type.startsWith('image/')){
         return `<div style="margin-bottom:8px"><img src="${a.data}" style="max-width:100%;border-radius:10px;border:1px solid #e5e7eb"/><div style="font-size:12px;color:#6b7280;margin-top:4px">${a.name}</div></div>`;
       }else{
         return `<div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:6px">📄 ${a.name}</div>`;
       }
     }).join('');
   }
-
   generaAI(c);
 }
 
 async function generaAI(caso){
   try{
-    const prompt = "Sei un assistente clinico italiano. Prepara una bozza di risposta/prescrizione per il medico. Tipo: "+
+    const prompt="Sei un assistente clinico italiano. Prepara una bozza di risposta/prescrizione per il medico. Tipo: "+
       (caso.tipo||'consulto')+". Paziente: "+(caso.patient_name||'')+", nato "+
       (caso.date_of_birth||'n.d.')+". Problema: "+(caso.patient_text||'')+
       ". Dati clinici: "+(caso.clinical_data||'non specificati')+
       ". Scrivi: 1) Riepilogo clinico in 2 frasi. 2) Bozza prescrizione/risposta pronta. Per farmaci: nome, dosaggio, posologia, durata. Per esami: lista specifica. Sii diretto e clinico.";
-    const res = await fetch("/api/consult",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:prompt})});
-    const data = await res.json();
-    const testo = stripMarkdown(data.answer||'Analisi non disponibile.');
-    document.getElementById("dc-ai").textContent = testo;
-    document.getElementById("dc-reply").value = testo;
+    const res=await fetch("/api/consult",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:prompt})});
+    const data=await res.json();
+    const testo=stripMarkdown(data.answer||'Analisi non disponibile.');
+    document.getElementById("dc-ai").textContent=testo;
+    document.getElementById("dc-reply").value=testo;
   }catch(e){
     document.getElementById("dc-ai").textContent="Analisi non disponibile. Scrivi la risposta manualmente.";
     document.getElementById("dc-reply").value="";
@@ -684,19 +806,19 @@ async function generaAI(caso){
 }
 
 async function inviaRisposta(){
-  const txt = document.getElementById("dc-reply").value.trim();
+  const txt=document.getElementById("dc-reply").value.trim();
   if(!txt){alert("Scrivi una risposta prima di inviare.");return;}
-  const btn = document.getElementById("sign-btn");
+  const btn=document.getElementById("sign-btn");
   btn.disabled=true;
   btn.textContent="Invio in corso...";
   try{
-    const res = await fetch("/api/submit-medical-request",{
+    const res=await fetch("/api/submit-medical-request",{
       method:"PUT",
       headers:{"Content-Type":"application/json","Authorization":"Bearer "+DOC_PWD},
       body:JSON.stringify({id:currentCaseId,risposta_medico:txt,stato:'risposto'})
     });
     if(!res.ok) throw new Error("Errore server "+res.status);
-    const c = allCases.find(x=>x.id==currentCaseId);
+    const c=allCases.find(x=>x.id==currentCaseId);
     if(c) c.risposta_medico=txt;
     document.getElementById("dc-sent").style.display="block";
     document.getElementById("dc-sent-msg").textContent="Risposta inviata a "+(c?.email||'il paziente')+".";
