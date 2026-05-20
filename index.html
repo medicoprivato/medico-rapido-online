@@ -3,112 +3,107 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Medico Subito — Prescrizioni e Consulti Medici Online</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Medico Subito — Consulti Medici Online</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#1e40af">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Medico Subito">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="description" content="Prescrizioni, richieste esami e certificati medici online. Risposta medica certificata 7 giorni su 7.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:'Inter',sans-serif;background:#f8fafc;color:#0f172a}
-header{height:64px;background:white;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;gap:12px;padding:0 18px;position:sticky;top:0;z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-.logo{font-size:24px;font-weight:800;color:#1e40af;letter-spacing:-0.5px}
-.logo-sub{font-size:12px;color:#475569;font-weight:500}
-.green-btn{width:100%;height:56px;border:none;border-radius:16px;background:#1e40af;color:white;font-size:17px;font-weight:800;margin-top:14px;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 4px 12px rgba(30,64,175,.3)}
-.green-btn:disabled{background:#94a3b8;box-shadow:none;cursor:not-allowed}
-.white-btn{width:100%;height:56px;border-radius:16px;background:white;border:2px solid #1e40af;color:#1e40af;font-size:17px;font-weight:800;margin-top:12px;cursor:pointer;font-family:'Inter',sans-serif}
-.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
-.quick{background:#eff6ff;border:1px solid #bfdbfe;border-radius:14px;padding:16px 12px;font-size:14px;font-weight:700;color:#1e3a8a;text-align:center;cursor:pointer}
-.quick:hover{background:#dbeafe}
-.section{padding:0 18px 18px}
-.card{background:white;border-radius:24px;padding:24px 20px;border:1px solid #e2e8f0;margin-top:16px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
-.label{font-size:13px;font-weight:800;letter-spacing:1px;color:#1e40af;margin-bottom:12px;text-transform:uppercase}
-textarea,input,select{width:100%;border:1px solid #cbd5e1;border-radius:14px;padding:16px;font-size:16px;background:white;margin-bottom:14px;font-family:'Inter',sans-serif;color:#0f172a}
-textarea{min-height:140px;resize:none}
-input:focus,textarea:focus,select:focus{outline:none;border-color:#1e40af}
-.answer{background:#f0f9ff;border-radius:18px;padding:18px;font-size:15px;line-height:1.7;color:#0f172a;margin-top:18px;white-space:pre-wrap;border:1px solid #bae6fd}
-.rx-btn{width:100%;height:60px;border:none;border-radius:16px;background:#1e40af;color:white;font-size:18px;font-weight:800;margin-top:16px;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 4px 14px rgba(30,64,175,.3)}
-.section-title{font-size:15px;font-weight:700;color:#0f172a;margin:18px 0 10px}
-.warning{background:#fef3c7;border:1px solid #f59e0b;color:#92400e;padding:16px;border-radius:16px;line-height:1.6;font-size:14px}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:72px;background:white;border-top:1px solid #e2e8f0;display:flex;justify-content:space-around;align-items:center;z-index:50;box-shadow:0 -2px 8px rgba(0,0,0,.06)}
-.nav-item{display:flex;flex-direction:column;align-items:center;font-size:11px;color:#94a3b8;font-weight:600;cursor:pointer;gap:2px;padding:6px 12px;border-radius:12px;transition:all .15s}
-.nav-item:hover{background:#eff6ff;color:#1e40af}
-.nav-item.active{color:#1e40af}
-.spacer{height:120px}
+body{font-family:'Inter',sans-serif;background:#f1f5f9;color:#0f172a;line-height:1.6}
+header{height:60px;background:white;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;gap:10px;padding:0 16px;position:sticky;top:0;z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.logo{font-size:21px;font-weight:800;color:#1e40af;letter-spacing:-0.5px}
+.logo-sub{font-size:11px;color:#64748b;font-weight:500}
+.btn-primary{width:100%;height:52px;border:none;border-radius:12px;background:#1e40af;color:white;font-size:16px;font-weight:700;margin-top:12px;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 4px 12px rgba(30,64,175,.25)}
+.btn-primary:disabled{background:#94a3b8;box-shadow:none;cursor:not-allowed}
+.btn-secondary{width:100%;height:52px;border-radius:12px;background:white;border:1.5px solid #1e40af;color:#1e40af;font-size:16px;font-weight:700;margin-top:10px;cursor:pointer;font-family:'Inter',sans-serif}
+.btn-ghost{background:none;border:none;color:#1e40af;font-size:15px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600;padding:0}
+.section{padding:0 16px 16px}
+.card{background:white;border-radius:20px;padding:20px;border:1px solid #e2e8f0;margin-top:14px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.label{font-size:11px;font-weight:700;letter-spacing:1.5px;color:#1e40af;margin-bottom:10px;text-transform:uppercase}
+.spacer{height:110px}
 .hidden{display:none}
-.loader{margin-top:18px;background:#f8fafc;border-radius:14px;padding:18px;font-size:15px;color:#475569;text-align:center;border:1px solid #e2e8f0}
-.success{background:#ecfdf5;border:1px solid #34d399;border-radius:18px;padding:24px;text-align:center;margin-top:18px}
-.success h3{font-size:19px;font-weight:800;color:#065f46;margin-bottom:8px}
-.success p{font-size:14px;color:#065f46;line-height:1.6}
 .screen{display:none}
 .screen.active{display:block}
-.upload-area{border:2px dashed #cbd5e1;border-radius:14px;padding:20px;text-align:center;cursor:pointer;margin-bottom:14px;transition:all .2s;background:#f8fafc}
-.upload-area:hover,.upload-area.has-files{border-color:#1e40af;background:#eff6ff}
-.upload-icon{font-size:2rem;margin-bottom:6px}
-.upload-text{font-size:14px;color:#64748b;line-height:1.5}
-.upload-text strong{color:#1e40af}
-.file-list{margin-top:8px;display:flex;flex-direction:column;gap:6px}
-.file-item{display:flex;align-items:center;justify-content:space-between;background:white;border:1px solid #e2e8f0;border-radius:10px;padding:8px 12px;font-size:13px}
+textarea,input,select{width:100%;border:1px solid #cbd5e1;border-radius:12px;padding:14px 16px;font-size:15px;background:white;margin-bottom:12px;font-family:'Inter',sans-serif;color:#0f172a;-webkit-appearance:none}
+textarea{min-height:130px;resize:none}
+input:focus,textarea:focus,select:focus{outline:none;border-color:#1e40af;box-shadow:0 0 0 3px rgba(30,64,175,.08)}
+.answer{background:#f0f9ff;border-radius:16px;padding:16px;font-size:14px;line-height:1.75;color:#0f172a;margin-top:16px;white-space:pre-wrap;border:1px solid #bae6fd}
+.rx-btn{width:100%;height:56px;border:none;border-radius:12px;background:#1e40af;color:white;font-size:17px;font-weight:700;margin-top:14px;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 4px 14px rgba(30,64,175,.25)}
+.section-title{font-size:14px;font-weight:700;color:#374151;margin:16px 0 8px}
+.warning-box{background:#fffbeb;border:1px solid #fde68a;color:#92400e;padding:14px 16px;border-radius:12px;line-height:1.6;font-size:13.5px;margin-top:12px}
+.loader{margin-top:16px;background:#f8fafc;border-radius:12px;padding:20px;font-size:14px;color:#475569;text-align:center;border:1px solid #e2e8f0}
+.success-box{background:#f0fdf4;border:1px solid #86efac;border-radius:16px;padding:22px;text-align:center;margin-top:16px}
+.success-box h3{font-size:18px;font-weight:800;color:#15803d;margin-bottom:6px}
+.success-box p{font-size:13px;color:#166534;line-height:1.6}
+.upload-zone{border:2px dashed #cbd5e1;border-radius:12px;padding:18px;text-align:center;cursor:pointer;margin-bottom:12px;transition:all .2s;background:#f8fafc}
+.upload-zone:hover,.upload-zone.active{border-color:#1e40af;background:#eff6ff}
+.file-list{margin-top:8px;display:flex;flex-direction:column;gap:5px}
+.file-item{display:flex;align-items:center;justify-content:space-between;background:white;border:1px solid #e2e8f0;border-radius:8px;padding:7px 11px;font-size:12px}
 .file-name{color:#374151;font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.file-remove{color:#dc2626;cursor:pointer;font-weight:700;margin-left:8px;flex-shrink:0}
-.consent-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:14px}
-.consent-item{display:flex;align-items:flex-start;gap:12px}
-.consent-item input[type="checkbox"]{width:20px;height:20px;margin:0;flex-shrink:0;accent-color:#1e40af;cursor:pointer;margin-top:2px}
-.consent-label{font-size:13px;color:#374151;line-height:1.6;cursor:pointer}
-.consent-label a{color:#1e40af;text-decoration:underline;cursor:pointer}
-.info-section{padding:20px 18px;padding-bottom:100px}
-.info-card{background:white;border-radius:18px;padding:20px;border:1px solid #e2e8f0;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-.info-card h3{font-size:16px;font-weight:800;color:#0f172a;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.info-card p{font-size:14px;color:#475569;line-height:1.65}
-.step-num{width:28px;height:28px;border-radius:50%;background:#1e40af;color:white;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.contact-card{background:white;border-radius:18px;padding:20px;border:1px solid #e2e8f0;margin-bottom:14px;display:flex;align-items:center;gap:16px;cursor:pointer}
-.contact-ico{font-size:1.8rem;flex-shrink:0}
-.contact-title{font-size:15px;font-weight:700;color:#0f172a;margin-bottom:2px}
-.contact-sub{font-size:13px;color:#64748b}
-.privacy-section{padding:20px 18px;padding-bottom:100px}
-.privacy-section h2{font-size:20px;font-weight:800;color:#0f172a;margin-bottom:16px}
-.privacy-section h3{font-size:15px;font-weight:700;color:#0f172a;margin:16px 0 8px}
-.privacy-section p{font-size:13px;color:#475569;line-height:1.7;margin-bottom:10px}
-.privacy-section ul{font-size:13px;color:#475569;line-height:1.7;margin-bottom:10px;padding-left:18px}
-.back-btn{background:none;border:none;color:#1e40af;font-size:15px;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:16px;padding:0;font-weight:600}
-.trust-bar{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
-.trust-item{display:flex;align-items:center;gap:5px;font-size:12px;color:#475569;font-weight:600;background:#f8fafc;border:1px solid #e2e8f0;border-radius:20px;padding:5px 10px}
-/* DOCTOR */
-.doc-header{background:#1e3a8a;color:white;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between}
-.doc-header-title{font-size:.95rem;font-weight:700}
-.doc-exit{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);border-radius:10px;padding:7px 13px;font-size:.8rem;cursor:pointer;font-family:'Inter',sans-serif}
-.case-card{background:white;border:1px solid #e2e8f0;border-radius:16px;padding:15px 17px;margin:10px 18px 0;cursor:pointer;transition:all .2s}
-.case-card:hover{border-color:#1e40af;box-shadow:0 4px 12px rgba(30,64,175,.1)}
-.case-card.pending{border-left:4px solid #1e40af}
-.case-name{font-size:.93rem;font-weight:700;margin-bottom:4px}
-.case-meta{font-size:.73rem;color:#64748b;margin-bottom:8px}
-.case-preview{font-size:.82rem;color:#475569;line-height:1.5}
-.case-status-pending{font-size:.73rem;font-weight:700;color:#d97706;margin-top:8px}
-.case-status-done{font-size:.73rem;font-weight:700;color:#15803d;margin-top:8px}
-.detail-section{padding:16px 18px;padding-bottom:40px}
-.patient-block{background:#1e3a8a;color:white;border-radius:16px;padding:16px;margin-bottom:12px}
-.patient-block h3{font-size:1.05rem;font-weight:800;margin-bottom:4px}
-.patient-block p{font-size:.76rem;opacity:.6;margin-bottom:10px}
-.patient-row{display:flex;justify-content:space-between;font-size:.82rem;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.file-remove{color:#dc2626;cursor:pointer;font-weight:700;margin-left:8px}
+.consent-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:14px;margin-bottom:12px}
+.consent-row{display:flex;align-items:flex-start;gap:10px}
+.consent-row input[type="checkbox"]{width:18px;height:18px;margin:0;flex-shrink:0;accent-color:#1e40af;cursor:pointer;margin-top:2px}
+.consent-row label{font-size:12.5px;color:#374151;line-height:1.6;cursor:pointer}
+.consent-row a{color:#1e40af;text-decoration:underline;cursor:pointer}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:68px;background:white;border-top:1px solid #e2e8f0;display:flex;justify-content:space-around;align-items:center;z-index:50;box-shadow:0 -1px 6px rgba(0,0,0,.06)}
+.nav-item{display:flex;flex-direction:column;align-items:center;font-size:10px;color:#94a3b8;font-weight:600;cursor:pointer;gap:2px;padding:5px 10px;border-radius:10px;transition:all .15s}
+.nav-item:hover,.nav-item.active{color:#1e40af}
+.info-section{padding:16px;padding-bottom:90px}
+.info-card{background:white;border-radius:16px;padding:18px;border:1px solid #e2e8f0;margin-bottom:12px}
+.info-card h3{font-size:15px;font-weight:700;color:#0f172a;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.info-card p{font-size:13px;color:#475569;line-height:1.65}
+.step-circle{width:26px;height:26px;border-radius:50%;background:#1e40af;color:white;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.trust-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:10px 12px;font-size:11.5px;color:#374151;font-weight:600;display:flex;align-items:center;gap:6px}
+.legal-section{padding:16px;padding-bottom:90px}
+.legal-section h2{font-size:19px;font-weight:800;color:#0f172a;margin-bottom:14px}
+.legal-section h3{font-size:14px;font-weight:700;color:#0f172a;margin:14px 0 6px}
+.legal-section p{font-size:12.5px;color:#475569;line-height:1.7;margin-bottom:8px}
+.legal-section ul{font-size:12.5px;color:#475569;line-height:1.7;margin-bottom:8px;padding-left:16px}
+.doc-header{background:#1e3a8a;color:white;padding:0 16px;height:56px;display:flex;align-items:center;justify-content:space-between}
+.doc-header-title{font-size:.9rem;font-weight:700}
+.doc-exit{background:none;border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.75);border-radius:8px;padding:6px 12px;font-size:.78rem;cursor:pointer;font-family:'Inter',sans-serif}
+.case-card{background:white;border:1px solid #e2e8f0;border-radius:14px;padding:14px 16px;margin:8px 16px 0;cursor:pointer;transition:all .2s}
+.case-card:hover{border-color:#1e40af;box-shadow:0 3px 10px rgba(30,64,175,.1)}
+.case-card.pending{border-left:3px solid #1e40af}
+.case-name{font-size:.9rem;font-weight:700;margin-bottom:3px}
+.case-meta{font-size:.7rem;color:#64748b;margin-bottom:6px}
+.case-preview{font-size:.8rem;color:#475569;line-height:1.5}
+.case-badge-pending{font-size:.7rem;font-weight:700;color:#d97706;margin-top:6px}
+.case-badge-done{font-size:.7rem;font-weight:700;color:#15803d;margin-top:6px}
+.detail-wrap{padding:14px 16px;padding-bottom:40px}
+.patient-block{background:#1e3a8a;color:white;border-radius:14px;padding:14px;margin-bottom:10px}
+.patient-block h3{font-size:1rem;font-weight:800;margin-bottom:3px}
+.patient-block .sub{font-size:.72rem;opacity:.6;margin-bottom:10px}
+.patient-row{display:flex;justify-content:space-between;font-size:.8rem;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.08)}
 .patient-row:last-child{border-bottom:none}
 .patient-lbl{opacity:.55}
 .patient-val{font-weight:600;text-align:right;max-width:65%;word-break:break-all}
-.complaint-block{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:14px;margin-bottom:12px;font-size:.86rem;line-height:1.7;color:#374151}
-.complaint-lbl{font-size:.68rem;font-weight:700;color:#1e40af;letter-spacing:.06em;margin-bottom:8px}
-.ai-block{background:#eff6ff;border:1px solid #bfdbfe;border-radius:14px;padding:14px;margin-bottom:12px}
-.ai-lbl{font-size:.68rem;font-weight:700;color:#1e40af;letter-spacing:.06em;margin-bottom:8px}
-.ai-text{font-size:.84rem;color:#1e3a8a;line-height:1.7;white-space:pre-wrap}
-.ai-loading{font-size:.84rem;color:#64748b;font-style:italic}
-.reply-block{border:1.5px solid #e2e8f0;border-radius:14px;padding:14px;margin-bottom:12px}
-.reply-lbl{font-size:.76rem;font-weight:700;color:#374151;margin-bottom:8px}
-.reply-area{width:100%;border:1.5px solid #e2e8f0;border-radius:10px;padding:12px;font-family:'Inter',sans-serif;font-size:.86rem;resize:vertical;min-height:140px;outline:none;color:#0f172a}
+.complaint-block{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;margin-bottom:10px;font-size:.83rem;line-height:1.7;color:#374151}
+.block-lbl{font-size:.64rem;font-weight:700;color:#1e40af;letter-spacing:.08em;margin-bottom:6px;text-transform:uppercase}
+.ai-block{background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:12px;margin-bottom:10px}
+.ai-text{font-size:.82rem;color:#1e3a8a;line-height:1.7;white-space:pre-wrap}
+.ai-loading{font-size:.82rem;color:#64748b;font-style:italic}
+.reply-block{border:1.5px solid #e2e8f0;border-radius:12px;padding:12px;margin-bottom:10px}
+.reply-area{width:100%;border:1.5px solid #e2e8f0;border-radius:8px;padding:10px;font-family:'Inter',sans-serif;font-size:.82rem;resize:vertical;min-height:130px;outline:none;color:#0f172a}
 .reply-area:focus{border-color:#1e40af}
-.sign-btn{width:100%;background:#1e40af;color:white;border:none;border-radius:14px;padding:15px;font-size:.95rem;font-weight:800;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:10px;box-shadow:0 4px 12px rgba(30,64,175,.3)}
+.sign-btn{width:100%;background:#1e40af;color:white;border:none;border-radius:12px;padding:14px;font-size:.92rem;font-weight:800;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:8px;box-shadow:0 4px 10px rgba(30,64,175,.25)}
 .sign-btn:disabled{background:#94a3b8;box-shadow:none;cursor:not-allowed}
-.sent-ok{background:#f0fdf4;border:1.5px solid #86efac;border-radius:14px;padding:16px;text-align:center;margin-top:12px;display:none}
-.sent-ok h3{color:#15803d;margin-bottom:4px;font-size:.95rem}
-.sent-ok p{font-size:.81rem;color:#166534}
-.empty-state{text-align:center;padding:60px 20px;color:#94a3b8}
-.empty-icon{font-size:3rem;margin-bottom:12px}
-footer{text-align:center;padding:24px 18px 90px;font-size:13px;color:#64748b;background:white;border-top:1px solid #e2e8f0;margin-top:20px}
-footer a{color:#1e40af;text-decoration:none;cursor:pointer}
+.sent-ok{background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:14px;text-align:center;margin-top:10px;display:none}
+.sent-ok h3{color:#15803d;margin-bottom:3px;font-size:.9rem}
+.sent-ok p{font-size:.78rem;color:#166534}
+.empty-state{text-align:center;padding:50px 20px;color:#94a3b8}
+.empty-icon{font-size:2.5rem;margin-bottom:10px}
+footer{text-align:center;padding:20px 16px 85px;font-size:12px;color:#64748b;background:white;border-top:1px solid #e2e8f0;margin-top:16px}
+footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
 </style>
 </head>
 <body>
@@ -116,63 +111,68 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer}
 <!-- HOME -->
 <div id="s-home" class="screen active">
   <header>
-    <div style="font-size:34px">🩺</div>
+    <div style="font-size:30px">🩺</div>
     <div>
       <div class="logo">Medico Subito</div>
-      <div class="logo-sub">Consulti medici online</div>
+      <div class="logo-sub">Consulti medici certificati online</div>
     </div>
   </header>
 
-  <div style="padding:20px 18px 0">
-    <div class="card">
-      <h1 style="font-size:30px;line-height:1.1;font-weight:800;margin-bottom:12px;letter-spacing:-1px">Il tuo medico online, sempre disponibile.</h1>
-      <p style="font-size:15px;color:#475569;line-height:1.6;margin-bottom:4px">Prescrizioni, richieste esami, certificati e valutazioni mediche. Risposta medica certificata, 7 giorni su 7.</p>
-      <div class="trust-bar">
-        <div class="trust-item">🩺 Medico certificato</div>
-        <div class="trust-item">🔒 GDPR</div>
+  <div style="padding:16px 16px 0">
+    <div class="card" style="padding:22px">
+      <div style="font-size:13px;font-weight:700;background:#1e40af;color:white;border-radius:8px;padding:6px 12px;display:inline-block;margin-bottom:10px">Prescrizioni e pareri medici online</div>
+      <h1 style="font-size:27px;line-height:1.15;font-weight:800;margin-bottom:10px;letter-spacing:-0.5px;color:#1e40af">Il tuo medico online,<br>sempre disponibile.</h1>
+      <p style="font-size:14px;color:#475569;line-height:1.65">Prescrizioni, richieste esami, certificati e valutazioni mediche. Risposta medica firmata, <strong>7 giorni su 7</strong>.</p>
+      <div class="trust-grid">
+        <div class="trust-item">✅ Medici certificati</div>
+        <div class="trust-item">🔒 GDPR compliant</div>
         <div class="trust-item">📋 Risposta firmata</div>
         <div class="trust-item">⚡ 7 giorni su 7</div>
       </div>
-      <button class="green-btn" onclick="showScreen('s-payment')">Attiva abbonamento — €60/anno</button>
-      <button class="white-btn" onclick="showScreen('s-richiesta')">Invia richiesta al medico</button>
-      <div class="quick-grid">
-        <div class="quick" onclick="quickStart('Rinnovo terapia')">💊 Rinnovo farmaco</div>
-        <div class="quick" onclick="quickStart('Richiesta esami')">🔬 Richiesta esami</div>
-        <div class="quick" onclick="quickStart('Certificato medico')">📄 Certificato</div>
-        <div class="quick" onclick="quickStart('Valutazione sintomi')">🩺 Valutazione</div>
-      </div>
+      <button class="btn-primary" onclick="showScreen('s-payment')">Attiva abbonamento — €60/anno</button>
+      <button class="btn-secondary" onclick="showScreen('s-richiesta')">Invia richiesta al medico</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px">
+      <div onclick="quickStart('Rinnovo terapia')" style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:14px;font-size:13px;font-weight:700;color:#1e3a8a;text-align:center;cursor:pointer">💊<br>Rinnovo farmaco</div>
+      <div onclick="quickStart('Richiesta esami')" style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:14px;font-size:13px;font-weight:700;color:#1e3a8a;text-align:center;cursor:pointer">🔬<br>Richiesta esami</div>
+      <div onclick="quickStart('Certificato medico')" style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:14px;font-size:13px;font-weight:700;color:#1e3a8a;text-align:center;cursor:pointer">📄<br>Certificato</div>
+      <div onclick="quickStart('Valutazione sintomi')" style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:14px;font-size:13px;font-weight:700;color:#1e3a8a;text-align:center;cursor:pointer">🩺<br>Valutazione</div>
     </div>
   </div>
 
   <div class="section">
     <div class="card">
       <div class="label">Come funziona</div>
-      <div style="display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;gap:14px;align-items:flex-start">
-          <div class="step-num">1</div>
-          <div><div style="font-weight:700;font-size:15px;margin-bottom:3px">Descrivi la tua situazione</div><div style="font-size:13px;color:#475569;line-height:1.5">Seleziona il servizio, descrivi il problema e allega documenti se necessario.</div></div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div class="step-circle">1</div>
+          <div><div style="font-weight:700;font-size:14px;margin-bottom:2px">Descrivi la tua situazione</div><div style="font-size:12.5px;color:#475569;line-height:1.5">Seleziona il servizio e descrivi il problema. Puoi allegare foto o documenti medici.</div></div>
         </div>
-        <div style="display:flex;gap:14px;align-items:flex-start">
-          <div class="step-num">2</div>
-          <div><div style="font-weight:700;font-size:15px;margin-bottom:3px">Il medico valuta</div><div style="font-size:13px;color:#475569;line-height:1.5">Il medico esamina la tua situazione clinica e prepara la risposta.</div></div>
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div class="step-circle">2</div>
+          <div><div style="font-weight:700;font-size:14px;margin-bottom:2px">Il medico valuta</div><div style="font-size:12.5px;color:#475569;line-height:1.5">Un medico qualificato esamina la tua situazione clinica con attenzione e professionalità.</div></div>
         </div>
-        <div style="display:flex;gap:14px;align-items:flex-start">
-          <div class="step-num">3</div>
-          <div><div style="font-weight:700;font-size:15px;margin-bottom:3px">Ricevi la risposta via email</div><div style="font-size:13px;color:#475569;line-height:1.5">Prescrizione firmata, richiesta esami, certificato o indicazioni cliniche nella tua email.</div></div>
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div class="step-circle">3</div>
+          <div><div style="font-weight:700;font-size:14px;margin-bottom:2px">Ricevi la risposta via email</div><div style="font-size:12.5px;color:#475569;line-height:1.5">Prescrizione firmata, richiesta esami, certificato o indicazioni cliniche nella tua email.</div></div>
         </div>
       </div>
     </div>
   </div>
 
   <div class="section">
-    <div class="warning">⚠️ <strong>Non usare in urgenza.</strong> Per dolore toracico, difficoltà respiratoria o emergenze chiama il <strong>118</strong>.</div>
+    <div class="warning-box">⚠️ <strong>Non usare in urgenza.</strong> Per dolore toracico, difficoltà respiratoria o qualsiasi emergenza chiama il <strong>118</strong>.</div>
   </div>
 
   <footer>
     © 2025 Medico Subito &nbsp;·&nbsp;
     <a onclick="prevScreen='s-home';showScreen('s-privacy')">Privacy</a> &nbsp;·&nbsp;
     <a onclick="prevScreen='s-home';showScreen('s-termini')">Termini</a> &nbsp;·&nbsp;
-    GDPR · Linee Guida Telemedicina 2022
+    <a onclick="prevScreen='s-home';showScreen('s-medici')">I nostri medici</a> &nbsp;·&nbsp;
+    GDPR · Telemedicina Min. Salute 2022
   </footer>
 
   <div class="bottom-nav">
@@ -183,31 +183,31 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer}
   </div>
 </div>
 
-<!-- PAGAMENTO -->
+<!-- ABBONAMENTO -->
 <div id="s-payment" class="screen">
   <header>
-    <button onclick="showScreen('s-home')" style="background:none;border:none;font-size:22px;cursor:pointer;color:#1e40af">←</button>
+    <button onclick="showScreen('s-home')" class="btn-ghost" style="font-size:20px">←</button>
     <div style="margin-left:8px"><div class="logo">Abbonamento</div></div>
   </header>
-  <div class="section" style="padding-top:20px">
-    <div class="card" style="text-align:center">
-      <div style="font-size:3rem;margin-bottom:12px">💳</div>
-      <h2 style="font-size:36px;font-weight:800;color:#1e40af">€60<span style="font-size:18px;color:#475569">/anno</span></h2>
-      <p style="color:#1e40af;font-weight:700;margin:8px 0 4px">Consulti illimitati · 7 giorni su 7</p>
-      <p style="font-size:13px;color:#475569;margin-bottom:20px">Prescrizioni, esami, certificati e valutazioni mediche per 12 mesi</p>
-      <button class="green-btn" onclick="startStripeCheckout()" style="margin-top:0">Paga in sicurezza →</button>
-      <div style="margin-top:16px;font-size:12px;color:#94a3b8">🔒 Pagamento sicuro con Stripe · Carta di credito/debito</div>
+  <div class="section" style="padding-top:16px">
+    <div class="card" style="text-align:center;padding:28px 20px">
+      <div style="font-size:2.5rem;margin-bottom:10px">💳</div>
+      <div style="font-size:42px;font-weight:800;color:#1e40af;letter-spacing:-1px">€60<span style="font-size:18px;color:#64748b;font-weight:500">/anno</span></div>
+      <div style="color:#1e40af;font-weight:700;margin:6px 0 4px;font-size:15px">Consulti illimitati · 7 giorni su 7</div>
+      <div style="font-size:12.5px;color:#64748b;margin-bottom:20px">Accesso completo per 12 mesi</div>
+      <button class="btn-primary" onclick="startStripeCheckout()" style="margin-top:0">Attiva ora — Pagamento sicuro →</button>
+      <div style="margin-top:12px;font-size:11.5px;color:#94a3b8">🔒 Pagamento sicuro con Stripe</div>
     </div>
     <div class="card">
-      <div class="label">Incluso nell'abbonamento</div>
-      <ul style="padding-left:18px;line-height:2;font-size:14px;color:#475569;margin-top:8px">
-        <li>Consulti medici illimitati</li>
-        <li>Prescrizioni farmacologiche</li>
-        <li>Richieste esami (sangue, ecografie, RMN)</li>
-        <li>Certificati medici</li>
-        <li>Valutazione foto e referti</li>
-        <li>Risposta 7 giorni su 7</li>
-      </ul>
+      <div class="label">Incluso</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+        <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#374151"><span style="color:#1e40af">✓</span>Consulti medici illimitati</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#374151"><span style="color:#1e40af">✓</span>Prescrizioni farmacologiche</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#374151"><span style="color:#1e40af">✓</span>Richieste esami (sangue, ecografie, RMN)</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#374151"><span style="color:#1e40af">✓</span>Certificati medici</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#374151"><span style="color:#1e40af">✓</span>Valutazione foto e referti</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#374151"><span style="color:#1e40af">✓</span>Risposta 7 giorni su 7</div>
+      </div>
     </div>
   </div>
   <div class="spacer"></div>
@@ -216,10 +216,10 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer}
 <!-- RICHIESTA -->
 <div id="s-richiesta" class="screen">
   <header>
-    <div style="font-size:34px">🩺</div>
+    <div style="font-size:30px">🩺</div>
     <div><div class="logo">Medico Subito</div></div>
   </header>
-  <div class="section" style="padding-top:16px">
+  <div class="section" style="padding-top:14px">
     <div class="card" id="main-form">
       <div class="label">Nuova richiesta medica</div>
       <select id="requestType">
@@ -232,50 +232,49 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer}
         <option>Interpretazione referto</option>
         <option>Altro</option>
       </select>
-      <textarea id="problem" placeholder="Descrivi la tua situazione clinica, i farmaci che assumi, le allergie e i sintomi presenti..."></textarea>
-      <button class="green-btn" onclick="sendRequest()">Continua →</button>
+      <textarea id="problem" placeholder="Descrivi la tua situazione: farmaci che assumi, allergie, sintomi, durata..."></textarea>
+      <button class="btn-primary" onclick="sendRequest()">Invia al medico →</button>
       <div id="loading" class="loader hidden">
         <div style="font-size:1.4rem;margin-bottom:8px">🩺</div>
-        Il medico sta analizzando la tua richiesta...
+        <div style="font-weight:600;margin-bottom:4px">Richiesta in elaborazione</div>
+        <div style="font-size:12px;color:#94a3b8">Il medico sta valutando la tua situazione...</div>
       </div>
       <div id="response" class="answer hidden"></div>
       <div id="rx-section" class="hidden">
         <button class="rx-btn" onclick="showDoctorForm()">📋 Completa e invia al medico</button>
         <div class="section-title">Vuoi aggiungere altri dettagli?</div>
-        <textarea id="followup" placeholder="Aggiungi informazioni utili..."></textarea>
-        <button class="white-btn" onclick="sendFollowup()" style="margin-top:0">Aggiorna</button>
-        <button class="white-btn" onclick="newRequest()">Nuova richiesta</button>
+        <textarea id="followup" placeholder="Aggiungi informazioni utili..." style="min-height:80px"></textarea>
+        <button class="btn-secondary" onclick="sendFollowup()" style="margin-top:0;height:44px;font-size:14px">Aggiorna</button>
+        <button class="btn-secondary" onclick="newRequest()" style="height:44px;font-size:14px">Nuova richiesta</button>
       </div>
-      <div id="warning" style="background:#fef3c7;border:1px solid #f59e0b;color:#92400e;padding:16px;border-radius:16px;line-height:1.6;font-size:14px;margin-top:14px;display:none">
-        La tua richiesta sarà valutata dal medico. Se clinicamente appropriato, la risposta potrà includere prescrizione, certificato o richiesta di esami diagnostici.
-      </div>
+      <div id="warning" style="display:none" class="warning-box">La tua richiesta sarà valutata dal medico. Se clinicamente appropriato, la risposta potrà includere prescrizione, certificato o richiesta esami.</div>
       <div id="doctor-form" class="hidden">
         <div class="section-title">I tuoi dati</div>
         <input id="patient-name" placeholder="Nome e cognome *"/>
         <input id="patient-dob" placeholder="Data di nascita (es: 15/03/1975)"/>
-        <input id="patient-email" type="email" placeholder="Email per ricevere la risposta medica *"/>
+        <input id="patient-email" type="email" placeholder="Email per ricevere la risposta *"/>
         <input id="patient-phone" placeholder="Telefono (opzionale)"/>
-        <textarea id="patient-extra" placeholder="Farmaci in uso, allergie, patologie croniche..." style="min-height:70px"></textarea>
+        <textarea id="patient-extra" placeholder="Farmaci in uso, allergie, patologie croniche..." style="min-height:65px"></textarea>
         <div class="section-title">📎 Documenti allegati (opzionale)</div>
-        <div class="upload-area" id="upload-area" onclick="document.getElementById('file-input').click()">
-          <div class="upload-icon">📷</div>
-          <div class="upload-text">Allega <strong>foto</strong> o <strong>documenti medici</strong><br><span style="font-size:12px">Referti, esami, foto di lesioni · Max 5 file, 10MB</span></div>
+        <div class="upload-zone" id="upload-area" onclick="document.getElementById('file-input').click()">
+          <div style="font-size:1.8rem;margin-bottom:6px">📷</div>
+          <div style="font-size:13px;color:#64748b;line-height:1.5">Allega <strong style="color:#1e40af">foto</strong> o <strong style="color:#1e40af">documenti medici</strong><br><span style="font-size:11.5px">Referti, esami, foto di lesioni · Max 5 file, 10MB</span></div>
           <div class="file-list" id="file-list"></div>
         </div>
         <input type="file" id="file-input" multiple accept="image/*,.pdf" style="display:none" onchange="handleFiles(this.files)"/>
         <div class="section-title">Consenso informato</div>
         <div class="consent-box">
-          <div class="consent-item">
+          <div class="consent-row">
             <input type="checkbox" id="consenso"/>
-            <label class="consent-label" for="consenso">Ho letto e accetto i <a onclick="prevScreen='s-richiesta';showScreen('s-termini')">Termini e Condizioni</a> e l'<a onclick="prevScreen='s-richiesta';showScreen('s-privacy')">Informativa Privacy</a> (GDPR art. 9). Dichiaro di aver compreso che questo servizio non sostituisce il medico di base e non va usato in emergenza. *</label>
+            <label for="consenso">Ho letto e accetto i <a onclick="prevScreen='s-richiesta';showScreen('s-termini')">Termini</a> e l'<a onclick="prevScreen='s-richiesta';showScreen('s-privacy')">Informativa Privacy</a> (GDPR art. 9). Comprendo che questo servizio non sostituisce il medico di base e non va usato in emergenza. *</label>
           </div>
         </div>
-        <button class="green-btn" onclick="submitToDoctor()">Invia la richiesta al medico →</button>
-        <button class="white-btn" onclick="hideDoctorForm()">Annulla</button>
+        <button class="btn-primary" onclick="submitToDoctor()">Invia la richiesta →</button>
+        <button class="btn-secondary" onclick="hideDoctorForm()">Annulla</button>
       </div>
-      <div id="success-box" class="success hidden">
-        <h3>✅ Richiesta inviata con successo</h3>
-        <p>Il medico ha ricevuto la tua richiesta e la valuterà il prima possibile. Riceverai la risposta all'indirizzo email indicato. Servizio attivo 7 giorni su 7.</p>
+      <div id="success-box" class="success-box hidden">
+        <h3>✅ Richiesta inviata</h3>
+        <p>Il medico ha ricevuto la tua richiesta. Riceverai la risposta all'indirizzo email indicato. Servizio attivo 7 giorni su 7.</p>
       </div>
     </div>
   </div>
@@ -294,18 +293,19 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer}
 
 <!-- INFO -->
 <div id="s-info" class="screen">
-  <header><div style="font-size:34px">🩺</div><div><div class="logo">Medico Subito</div></div></header>
+  <header><div style="font-size:30px">🩺</div><div><div class="logo">Medico Subito</div></div></header>
   <div class="info-section">
-    <div style="font-size:20px;font-weight:800;color:#0f172a;margin-bottom:16px">Il servizio</div>
-    <div class="info-card"><h3><div class="step-num">1</div>Descrivi la tua situazione</h3><p>Compila il modulo con la tua richiesta. Puoi allegare foto, referti o altri documenti clinici per aiutare il medico nella valutazione.</p></div>
-    <div class="info-card"><h3><div class="step-num">2</div>Valutazione medica professionale</h3><p>Il medico esamina personalmente ogni richiesta con attenzione clinica. Ogni risposta è firmata dal medico e basata sulla situazione specifica del paziente.</p></div>
-    <div class="info-card"><h3><div class="step-num">3</div>Risposta certificata via email</h3><p>Ricevi via email la risposta medica firmata: prescrizione farmacologica, richiesta esami diagnostici, certificato medico o indicazioni cliniche.</p></div>
-    <div class="info-card"><h3>💊 Prestazioni disponibili</h3><p>Rinnovo terapia · Richiesta esami (sangue, ecografia, RMN, TAC) · Certificati medici (lavoro, sport, scuola) · Valutazione sintomi · Interpretazione referti · Valutazione lesioni cutanee · Richiesta visita specialistica</p></div>
-    <div class="info-card"><h3>⚠️ Quando NON utilizzare</h3><p>Dolore toracico, difficoltà respiratoria, perdita di coscienza, sanguinamento: chiama il <strong>118</strong> o vai al Pronto Soccorso.</p></div>
-    <div class="info-card"><h3>💶 Tariffe</h3><p>Abbonamento annuale: <strong>€60/anno</strong> — accesso illimitato per 12 mesi a prescrizioni, richieste di esami e certificati quando clinicamente appropriati.</p></div>
+    <div style="font-size:18px;font-weight:800;color:#0f172a;margin-bottom:14px">Il servizio</div>
+    <div class="info-card"><h3><div class="step-circle">1</div>Descrivi la tua situazione</h3><p>Compila il modulo con la tua richiesta. Puoi allegare foto, referti o altri documenti clinici.</p></div>
+    <div class="info-card"><h3><div class="step-circle">2</div>Valutazione medica professionale</h3><p>Un medico qualificato esamina personalmente ogni richiesta. Ogni risposta è firmata e basata sulla situazione specifica del paziente.</p></div>
+    <div class="info-card"><h3><div class="step-circle">3</div>Risposta certificata via email</h3><p>Prescrizione farmacologica, richiesta esami, certificato medico o indicazioni cliniche firmate.</p></div>
+    <div class="info-card"><h3>💊 Prestazioni disponibili</h3><p>Rinnovo terapia · Esami (sangue, ecografia, RMN, TAC) · Certificati medici · Valutazione sintomi · Interpretazione referti · Valutazione lesioni cutanee · Visita specialistica</p></div>
+    <div class="info-card"><h3>⚠️ Quando NON utilizzare</h3><p>Dolore toracico, difficoltà respiratoria, perdita di coscienza, sanguinamento: <strong>118</strong> o Pronto Soccorso.</p></div>
+    <div class="info-card"><h3>💶 Tariffe</h3><p><strong>€60/anno</strong> — Consulti, prescrizioni, esami e certificati illimitati per 12 mesi.</p></div>
     <div class="info-card"><h3>📋 Documenti legali</h3><p>
       <a onclick="prevScreen='s-info';showScreen('s-privacy')" style="color:#1e40af;text-decoration:underline;cursor:pointer">Informativa Privacy (GDPR)</a><br>
-      <a onclick="prevScreen='s-info';showScreen('s-termini')" style="color:#1e40af;text-decoration:underline;cursor:pointer">Termini e Condizioni del servizio</a>
+      <a onclick="prevScreen='s-info';showScreen('s-termini')" style="color:#1e40af;text-decoration:underline;cursor:pointer">Termini e Condizioni</a><br>
+      <a onclick="prevScreen='s-info';showScreen('s-medici')" style="color:#1e40af;text-decoration:underline;cursor:pointer">I nostri medici</a>
     </p></div>
   </div>
   <div class="bottom-nav">
@@ -318,21 +318,20 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer}
 
 <!-- CONTATTI -->
 <div id="s-contatti" class="screen">
-  <header><div style="font-size:34px">🩺</div><div><div class="logo">Medico Subito</div></div></header>
+  <header><div style="font-size:30px">🩺</div><div><div class="logo">Medico Subito</div></div></header>
   <div class="info-section">
-    <div style="font-size:20px;font-weight:800;color:#0f172a;margin-bottom:16px">Contatti</div>
-    <div class="contact-card" onclick="window.location.href='mailto:info@medicoora.com'">
-      <div class="contact-ico">✉️</div>
-      <div><div class="contact-title">Email</div><div class="contact-sub">info@medicoora.com</div></div>
+    <div style="font-size:18px;font-weight:800;color:#0f172a;margin-bottom:14px">Contatti</div>
+    <div class="info-card" style="cursor:pointer" onclick="window.location.href='mailto:info@medicoora.com'">
+      <h3>✉️ Email</h3><p>info@medicoora.com</p>
     </div>
-    <div class="info-card"><h3>🕐 Disponibilità</h3><p>Servizio attivo <strong>7 giorni su 7</strong>, inclusi sabato, domenica e festivi. Il medico risponde il prima possibile dalla ricezione della richiesta.</p></div>
-    <div class="info-card"><h3>🔒 Sicurezza e riservatezza</h3><p>Tutti i dati sanitari e i documenti allegati sono protetti con crittografia e trattati nel rispetto del GDPR e delle normative italiane ed europee.</p></div>
-    <div class="info-card"><h3>🩺 Il medico</h3><p>Dott.ssa Anna Maria Ferri<br>Medico Chirurgo — Specialista in Ginecologia e Ostetricia<br>Master in Management delle Strutture Sanitarie</p></div>
+    <div class="info-card"><h3>🕐 Disponibilità</h3><p>Servizio attivo <strong>7 giorni su 7</strong>. Il medico risponde il prima possibile.</p></div>
+    <div class="info-card"><h3>🔒 Sicurezza</h3><p>Dati protetti con crittografia nel rispetto del GDPR e delle Linee Guida Telemedicina 2022.</p></div>
+    <div class="info-card"><h3>👨‍⚕️ Il team medico</h3><p>Il nostro team è composto da medici qualificati e iscritti all'Ordine dei Medici.<br><a onclick="prevScreen='s-contatti';showScreen('s-medici')" style="color:#1e40af;text-decoration:underline;cursor:pointer">→ Scopri i nostri medici</a></p></div>
     <div class="info-card"><h3>📋 Documenti legali</h3><p>
       <a onclick="prevScreen='s-contatti';showScreen('s-privacy')" style="color:#1e40af;text-decoration:underline;cursor:pointer">→ Informativa Privacy</a><br><br>
       <a onclick="prevScreen='s-contatti';showScreen('s-termini')" style="color:#1e40af;text-decoration:underline;cursor:pointer">→ Termini e Condizioni</a>
     </p></div>
-    <div style="margin-top:16px"><button class="green-btn" onclick="showScreen('s-richiesta')">Fai una richiesta →</button></div>
+    <button class="btn-primary" onclick="showScreen('s-richiesta')" style="margin-top:6px">Fai una richiesta →</button>
   </div>
   <div class="bottom-nav">
     <div class="nav-item" onclick="showScreen('s-home')">🏠<div>Home</div></div>
@@ -342,28 +341,52 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer}
   </div>
 </div>
 
+<!-- I NOSTRI MEDICI (nome nascosto qui, raggiungibile solo da link) -->
+<div id="s-medici" class="screen">
+  <header>
+    <button class="btn-ghost" onclick="showScreen(prevScreen||'s-home')" style="font-size:20px">←</button>
+    <div style="margin-left:8px"><div class="logo">Il team medico</div></div>
+  </header>
+  <div class="info-section">
+    <div style="font-size:18px;font-weight:800;color:#0f172a;margin-bottom:14px">I nostri medici</div>
+    <div style="background:linear-gradient(135deg,#1e3a8a 0%,#1e40af 100%);border-radius:16px;padding:20px;color:white;margin-bottom:14px">
+      <div style="font-size:11px;opacity:.65;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Medico responsabile</div>
+      <div style="font-size:17px;font-weight:800;margin-bottom:3px">Dott.ssa Anna Maria Ferri</div>
+      <div style="font-size:12px;opacity:.8;margin-bottom:14px">Medico Chirurgo · Specialista in Ginecologia e Ostetricia<br>Master in Management delle Strutture Sanitarie</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:600">🏥 Iscritta all'Ordine dei Medici</span>
+        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:600">🇮🇹 Abilitata in Italia</span>
+      </div>
+    </div>
+    <div class="info-card">
+      <p style="font-size:13px;color:#475569;line-height:1.7">I medici che operano su Medico Subito sono professionisti iscritti all'Ordine dei Medici Chirurghi e Odontoiatri, abilitati alla professione medica in Italia e in possesso delle necessarie competenze specialistiche.</p>
+      <p style="font-size:13px;color:#475569;line-height:1.7;margin-top:8px">Ogni risposta medica è firmata dal professionista responsabile, che si assume piena responsabilità clinica e deontologica della valutazione.</p>
+    </div>
+  </div>
+</div>
+
 <!-- PRIVACY -->
 <div id="s-privacy" class="screen">
-  <header><button class="back-btn" onclick="showScreen(prevScreen||'s-home')" style="margin:0;font-size:22px">←</button><div style="margin-left:8px"><div class="logo">Privacy Policy</div></div></header>
-  <div class="privacy-section">
+  <header><button class="btn-ghost" onclick="showScreen(prevScreen||'s-home')" style="font-size:20px">←</button><div style="margin-left:8px"><div class="logo">Privacy Policy</div></div></header>
+  <div class="legal-section">
     <h2>Informativa sulla Privacy</h2>
     <p><strong>Ultimo aggiornamento:</strong> Maggio 2025</p>
     <p>Medico Subito tratta i dati sanitari in conformità al <strong>Regolamento UE 2016/679 (GDPR)</strong>, D.Lgs. 196/2003 e alle Linee Guida sulla Telemedicina del Ministero della Salute (21 settembre 2022).</p>
     <h3>1. Titolare del trattamento</h3>
-    <p>Dott.ssa Anna Maria Ferri, Medico Chirurgo specialista in Ginecologia e Ostetricia — info@medicoora.com</p>
+    <p>Il titolare del trattamento è il medico responsabile del servizio, identificabile nella sezione "I nostri medici". Per contatti: info@medicoora.com</p>
     <h3>2. Dati trattati</h3>
     <ul><li>Dati anagrafici (nome, cognome, data di nascita)</li><li>Dati di contatto (email, telefono)</li><li>Dati sanitari (sintomi, farmaci, allergie, patologie, foto mediche, referti)</li></ul>
     <p>I dati sanitari rientrano nelle categorie particolari ex art. 9 GDPR e sono trattati solo previo consenso esplicito.</p>
     <h3>3. Finalità</h3>
     <ul><li>Erogazione del servizio di consulenza medica online</li><li>Predisposizione di prescrizioni, certificati e risposte mediche firmate</li><li>Adempimento di obblighi di legge</li></ul>
     <h3>4. Sicurezza</h3>
-    <p>Crittografia dei dati in transito e a riposo, accesso limitato al solo personale autorizzato, hosting conforme GDPR, backup sicuri.</p>
+    <p>Crittografia in transito e a riposo, accesso limitato al personale autorizzato, hosting conforme GDPR.</p>
     <h3>5. Conservazione</h3>
-    <p>I dati sanitari sono conservati per 10 anni dall'ultima prestazione ai sensi della normativa italiana sulla documentazione sanitaria.</p>
+    <p>I dati sanitari sono conservati per 10 anni dall'ultima prestazione ai sensi della normativa italiana.</p>
     <h3>6. Subfornitori</h3>
-    <p>Supabase Inc. (database), Vercel Inc. (hosting), Resend Inc. (email). Con ciascun fornitore è in essere un Data Processing Agreement conforme al GDPR.</p>
+    <p>Supabase Inc. (database), Vercel Inc. (hosting), Resend Inc. (email). Con ciascun fornitore è in essere un DPA conforme al GDPR.</p>
     <h3>7. Diritti dell'interessato</h3>
-    <p>Accesso, rettifica, cancellazione, limitazione, portabilità e opposizione. Richieste: info@medicoora.com</p>
+    <p>Accesso, rettifica, cancellazione, limitazione, portabilità. Richieste: info@medicoora.com</p>
     <h3>8. Reclami</h3>
     <p>Garante per la Protezione dei Dati Personali — www.garanteprivacy.it</p>
   </div>
@@ -371,22 +394,22 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer}
 
 <!-- TERMINI -->
 <div id="s-termini" class="screen">
-  <header><button class="back-btn" onclick="showScreen(prevScreen||'s-home')" style="margin:0;font-size:22px">←</button><div style="margin-left:8px"><div class="logo">Termini di Servizio</div></div></header>
-  <div class="privacy-section">
+  <header><button class="btn-ghost" onclick="showScreen(prevScreen||'s-home')" style="font-size:20px">←</button><div style="margin-left:8px"><div class="logo">Termini di Servizio</div></div></header>
+  <div class="legal-section">
     <h2>Termini e Condizioni</h2>
     <p><strong>Ultimo aggiornamento:</strong> Maggio 2025</p>
     <h3>1. Il servizio</h3>
-    <p>Medico Subito è una piattaforma di telemedicina asincrona che consente di richiedere consulenze mediche, prescrizioni, richieste esami e certificati. Il servizio è erogato dalla Dott.ssa Anna Maria Ferri, Medico Chirurgo iscritta all'Ordine dei Medici, in conformità alle Linee Guida sulla Telemedicina del Ministero della Salute (settembre 2022).</p>
+    <p>Medico Subito è una piattaforma di telemedicina asincrona. Il servizio è erogato da medici qualificati iscritti all'Ordine dei Medici, in conformità alle Linee Guida sulla Telemedicina del Ministero della Salute (settembre 2022).</p>
     <h3>2. Limiti del servizio</h3>
-    <p>Medico Subito <strong>non è un servizio di emergenza</strong>. Non va utilizzato per sintomi acuti, gravi o urgenti. In emergenza: chiamare il 118 o recarsi al Pronto Soccorso. Il servizio non sostituisce il medico di base né elimina la necessità di visite ambulatoriali.</p>
+    <p>Medico Subito <strong>non è un servizio di emergenza</strong>. In emergenza: 118 o Pronto Soccorso. Il servizio non sostituisce il medico di base.</p>
     <h3>3. Atti medici</h3>
-    <p>Tutte le prescrizioni sono emesse esclusivamente dalla Dott.ssa Ferri, che valuta ogni richiesta individualmente. Il medico si riserva il diritto di non emettere una prescrizione qualora non la ritenga clinicamente appropriata.</p>
+    <p>Tutte le prescrizioni sono emesse da medici qualificati che valutano ogni richiesta individualmente. Il medico si riserva il diritto di non emettere una prescrizione se non clinicamente appropriata.</p>
     <h3>4. Responsabilità del paziente</h3>
-    <p>Il paziente è responsabile della veridicità e completezza delle informazioni fornite. Dichiarazioni false o incomplete possono pregiudicare la qualità della risposta medica.</p>
+    <p>Il paziente è responsabile della veridicità delle informazioni fornite.</p>
     <h3>5. Disponibilità</h3>
-    <p>Il servizio è attivo 7 giorni su 7. I tempi di risposta dipendono dal volume delle richieste.</p>
+    <p>Servizio attivo 7 giorni su 7. I tempi di risposta dipendono dal volume delle richieste.</p>
     <h3>6. Tariffe</h3>
-    <p>Abbonamento annuale €60, accesso illimitato per 12 mesi. Il pagamento non garantisce automaticamente l'emissione di prescrizioni, che sono subordinate alla valutazione clinica del medico.</p>
+    <p>Abbonamento annuale €60, accesso illimitato per 12 mesi. Il pagamento non garantisce automaticamente l'emissione di prescrizioni.</p>
     <h3>7. Legge applicabile</h3>
     <p>Diritto italiano. Foro esclusivo: Roma.</p>
     <h3>8. Contatti</h3>
@@ -396,17 +419,16 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer}
 
 <!-- LOGIN MEDICO -->
 <div id="s-doc-login" class="screen">
-  <div class="doc-header"><div class="doc-header-title">Medico Subito — Accesso Riservato</div></div>
-  <div style="max-width:400px;margin:40px auto;padding:0 20px">
+  <div class="doc-header"><div class="doc-header-title">Accesso Riservato</div></div>
+  <div style="max-width:380px;margin:40px auto;padding:0 16px">
     <div class="card">
-      <div style="text-align:center;margin-bottom:20px">
-        <div style="font-size:2.5rem">🩺</div>
-        <div style="font-size:20px;font-weight:800;margin-bottom:4px">Area Riservata</div>
-        <div style="font-size:13px;color:#64748b">Dott.ssa Anna Maria Ferri</div>
+      <div style="text-align:center;margin-bottom:18px">
+        <div style="font-size:2.2rem">🩺</div>
+        <div style="font-size:19px;font-weight:800;margin-bottom:3px">Area Medico</div>
       </div>
       <input type="password" id="doc-pwd" placeholder="Password" onkeydown="if(event.key==='Enter')loginMedico()"/>
-      <div id="e-pwd" style="color:#dc2626;font-size:.8rem;margin-top:-10px;margin-bottom:10px;display:none">Password non corretta</div>
-      <button class="green-btn" onclick="loginMedico()">Accedi →</button>
+      <div id="e-pwd" style="color:#dc2626;font-size:.78rem;margin-top:-8px;margin-bottom:10px;display:none">Password non corretta</div>
+      <button class="btn-primary" onclick="loginMedico()">Accedi →</button>
     </div>
   </div>
 </div>
@@ -414,15 +436,15 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer}
 <!-- DASHBOARD MEDICO -->
 <div id="s-doc-dash" class="screen">
   <div class="doc-header">
-    <div class="doc-header-title">Richieste pazienti <span id="doc-count" style="background:rgba(255,255,255,.15);border-radius:100px;padding:2px 10px;font-size:.72rem;margin-left:6px"></span></div>
+    <div class="doc-header-title">Richieste <span id="doc-count" style="background:rgba(255,255,255,.15);border-radius:100px;padding:2px 10px;font-size:.7rem;margin-left:6px"></span></div>
     <button class="doc-exit" onclick="showScreen('s-home')">Esci</button>
   </div>
-  <div style="display:flex;gap:8px;padding:14px 18px 0">
-    <button onclick="loadCases('pending',this)" style="background:#1e40af;color:white;border:none;border-radius:100px;padding:7px 14px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif">In attesa</button>
-    <button onclick="loadCases('all',this)" style="background:white;color:#64748b;border:1px solid #e2e8f0;border-radius:100px;padding:7px 14px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif">Tutte</button>
+  <div style="display:flex;gap:8px;padding:12px 16px 0">
+    <button onclick="loadCases('pending',this)" style="background:#1e40af;color:white;border:none;border-radius:100px;padding:6px 14px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif">In attesa</button>
+    <button onclick="loadCases('all',this)" style="background:white;color:#64748b;border:1px solid #e2e8f0;border-radius:100px;padding:6px 14px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif">Tutte</button>
   </div>
   <div id="cases-container" style="padding-bottom:20px">
-    <div class="loader" style="margin:20px 18px">Caricamento...</div>
+    <div class="loader" style="margin:16px">Caricamento...</div>
   </div>
 </div>
 
@@ -432,30 +454,32 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer}
     <div class="doc-header-title">Valutazione richiesta</div>
     <button class="doc-exit" onclick="showScreen('s-doc-dash')">← Lista</button>
   </div>
-  <div class="detail-section">
+  <div class="detail-wrap">
     <div class="patient-block">
       <h3 id="dc-nome">—</h3>
-      <p id="dc-sub">—</p>
+      <div class="sub" id="dc-sub">—</div>
       <div id="dc-info"></div>
     </div>
     <div class="complaint-block">
-      <div class="complaint-lbl">DESCRIZIONE DEL PAZIENTE</div>
+      <div class="block-lbl">Descrizione del paziente</div>
       <div id="dc-complaint">—</div>
     </div>
-    <div id="dc-attachments-block" style="display:none;margin-bottom:12px">
-      <div class="complaint-lbl">ALLEGATI</div>
-      <div id="dc-attachments"></div>
+    <div id="dc-attachments-block" style="display:none;margin-bottom:10px">
+      <div class="complaint-block">
+        <div class="block-lbl">Allegati</div>
+        <div id="dc-attachments"></div>
+      </div>
     </div>
     <div class="ai-block">
-      <div class="ai-lbl">📋 ANALISI CLINICA — RISERVATA AL MEDICO</div>
+      <div class="block-lbl">📋 Analisi clinica — riservata al medico</div>
       <div id="dc-ai" class="ai-loading">Preparazione analisi clinica...</div>
     </div>
     <div class="reply-block">
-      <div class="reply-lbl">RISPOSTA MEDICA / PRESCRIZIONE — modifica se necessario, poi firma</div>
+      <div class="block-lbl" style="color:#374151">Risposta medica — modifica se necessario</div>
       <textarea class="reply-area" id="dc-reply" placeholder="La bozza apparirà automaticamente. Modifica se necessario prima di firmare."></textarea>
     </div>
     <button class="sign-btn" id="sign-btn" onclick="inviaRisposta()" disabled>⏳ Preparazione bozza...</button>
-    <button class="white-btn" style="margin-bottom:20px" onclick="showScreen('s-doc-dash')">← Torna alla lista</button>
+    <button class="btn-secondary" style="margin-bottom:20px;height:44px;font-size:14px" onclick="showScreen('s-doc-dash')">← Torna alla lista</button>
     <div class="sent-ok" id="dc-sent">
       <h3>✅ Risposta firmata e inviata!</h3>
       <p id="dc-sent-msg">Il paziente ha ricevuto la risposta medica.</p>
@@ -471,6 +495,13 @@ let allCases = [];
 let currentCaseId = null;
 let uploadedFiles = [];
 let prevScreen = 's-home';
+
+// Registra Service Worker
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('/sw.js').catch(()=>{});
+  });
+}
 
 window.addEventListener('load', function(){
   if(window.location.hash === '#medico') showScreen('s-doc-login');
@@ -504,8 +535,8 @@ function handleFiles(files){
 function renderFileList(){
   const list=document.getElementById("file-list");
   const area=document.getElementById("upload-area");
-  if(uploadedFiles.length===0){list.innerHTML='';area.classList.remove('has-files');return;}
-  area.classList.add('has-files');
+  if(uploadedFiles.length===0){list.innerHTML='';area.classList.remove('active');return;}
+  area.classList.add('active');
   list.innerHTML=uploadedFiles.map((f,i)=>`
     <div class="file-item">
       <span class="file-name">${f.type.startsWith('image/')?'🖼️':'📄'} ${f.name}</span>
@@ -587,8 +618,8 @@ async function submitToDoctor(){
   const email=document.getElementById("patient-email").value.trim();
   if(!nome){alert("Inserisci nome e cognome");return;}
   if(!email||!email.includes("@")){alert("Inserisci un'email valida");return;}
-  if(!document.getElementById("consenso").checked){alert("Devi accettare Termini e Privacy per procedere");return;}
-  const btn=document.querySelector('#doctor-form .green-btn');
+  if(!document.getElementById("consenso").checked){alert("Devi accettare Termini e Privacy");return;}
+  const btn=document.querySelector('#doctor-form .btn-primary');
   btn.textContent="Invio in corso...";
   btn.disabled=true;
   const ultimaRisposta=conversazione.filter(m=>m.role==="assistant").pop()?.content||"";
@@ -619,7 +650,7 @@ async function submitToDoctor(){
     uploadedFiles=[];renderFileList();
   }catch(err){
     alert("Errore nell'invio. Riprova.");
-    btn.textContent="Invia la richiesta al medico →";
+    btn.textContent="Invia la richiesta →";
     btn.disabled=false;
   }
 }
@@ -649,7 +680,7 @@ function loginMedico(){
 
 async function loadCases(filter,btn){
   const cont=document.getElementById("cases-container");
-  cont.innerHTML='<div class="loader" style="margin:20px 18px">Caricamento...</div>';
+  cont.innerHTML='<div class="loader" style="margin:16px">Caricamento...</div>';
   try{
     const res=await fetch("/api/submit-medical-request",{headers:{"Authorization":"Bearer "+DOC_PWD}});
     allCases=await res.json();
@@ -667,12 +698,12 @@ async function loadCases(filter,btn){
       return `<div class="case-card ${!isDone?'pending':''}" onclick="openCase('${c.id}')">
         <div class="case-name">${c.patient_name||'—'} ${hasFiles?'📎':''}</div>
         <div class="case-meta">${c.tipo||'consulto'} · ${new Date(c.created_at).toLocaleDateString('it-IT')} · ${c.email||''}</div>
-        <div class="case-preview">${(c.patient_text||'').slice(0,120)}...</div>
-        <div class="${isDone?'case-status-done':'case-status-pending'}">${isDone?'✅ Risposta inviata':'⏳ In attesa'}</div>
+        <div class="case-preview">${(c.patient_text||'').slice(0,110)}...</div>
+        <div class="${isDone?'case-badge-done':'case-badge-pending'}">${isDone?'✅ Risposta inviata':'⏳ In attesa'}</div>
       </div>`;
     }).join('');
   }catch(e){
-    cont.innerHTML='<div style="padding:20px;color:#dc2626">Errore: '+e.message+'</div>';
+    cont.innerHTML='<div style="padding:16px;color:#dc2626">Errore: '+e.message+'</div>';
   }
 }
 
@@ -702,9 +733,9 @@ async function openCase(id){
     document.getElementById("dc-attachments-block").style.display="block";
     document.getElementById("dc-attachments").innerHTML=c.allegati.map(a=>{
       if(a.type&&a.type.startsWith('image/')){
-        return `<div style="margin-bottom:8px"><img src="${a.data}" style="max-width:100%;border-radius:10px;border:1px solid #e2e8f0"/><div style="font-size:12px;color:#64748b;margin-top:4px">${a.name}</div></div>`;
+        return `<div style="margin-bottom:8px"><img src="${a.data}" style="max-width:100%;border-radius:8px;border:1px solid #e2e8f0"/><div style="font-size:11px;color:#64748b;margin-top:3px">${a.name}</div></div>`;
       }
-      return `<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:6px">📄 ${a.name}</div>`;
+      return `<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;font-size:12px;margin-bottom:5px">📄 ${a.name}</div>`;
     }).join('');
   }
   await generaAI(c);
@@ -760,7 +791,14 @@ async function inviaRisposta(){
 }
 
 async function startStripeCheckout(){
-  alert("Stripe non ancora configurato.\n\nConfigura la chiave Stripe per attivare i pagamenti.");
+  try{
+    const res=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({})});
+    const data=await res.json();
+    if(data.url) window.location.href=data.url;
+    else alert("Stripe non ancora configurato. Aggiungi la chiave Stripe.");
+  }catch(e){
+    alert("Stripe non ancora configurato.");
+  }
 }
 </script>
 </body>
