@@ -44,14 +44,26 @@ textarea{min-height:120px;resize:none}
 .screen{display:none}
 .screen.active{display:block}
 
-/* INFO SCREEN */
+/* UPLOAD */
+.upload-area{border:2px dashed #d1d5db;border-radius:16px;padding:20px;text-align:center;cursor:pointer;margin-bottom:14px;transition:all .2s;background:#fafafa}
+.upload-area:hover{border-color:#00995c;background:#f0fdf4}
+.upload-area.has-files{border-color:#00995c;background:#f0fdf4}
+.upload-icon{font-size:2rem;margin-bottom:8px}
+.upload-text{font-size:14px;color:#6b7280;line-height:1.5}
+.upload-text strong{color:#00995c}
+.file-list{margin-top:8px;display:flex;flex-direction:column;gap:6px}
+.file-item{display:flex;align-items:center;justify-content:space-between;background:white;border:1px solid #e5e7eb;border-radius:10px;padding:8px 12px;font-size:13px}
+.file-name{color:#374151;font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file-remove{color:#dc2626;cursor:pointer;font-weight:700;margin-left:8px;flex-shrink:0}
+
+/* INFO */
 .info-section{padding:20px 18px}
 .info-card{background:white;border-radius:20px;padding:20px;border:1px solid #e5e7eb;margin-bottom:14px}
 .info-card h3{font-size:17px;font-weight:800;color:#0f172a;margin-bottom:8px;display:flex;align-items:center;gap:8px}
 .info-card p{font-size:14px;color:#475569;line-height:1.65}
 .step-num{width:28px;height:28px;border-radius:50%;background:#00995c;color:white;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 
-/* CONTATTI SCREEN */
+/* CONTATTI */
 .contact-card{background:white;border-radius:20px;padding:20px;border:1px solid #e5e7eb;margin-bottom:14px;display:flex;align-items:center;gap:16px;cursor:pointer}
 .contact-ico{font-size:1.8rem;flex-shrink:0}
 .contact-title{font-size:15px;font-weight:700;color:#0f172a;margin-bottom:2px}
@@ -126,11 +138,11 @@ textarea{min-height:120px;resize:none}
       <div style="display:flex;flex-direction:column;gap:14px">
         <div style="display:flex;gap:14px;align-items:flex-start">
           <div class="step-num">1</div>
-          <div><div style="font-weight:700;font-size:15px;margin-bottom:3px">Descrivi il problema</div><div style="font-size:13px;color:#475569;line-height:1.5">Seleziona il servizio e descrivi la tua situazione. Ci vogliono 2 minuti.</div></div>
+          <div><div style="font-weight:700;font-size:15px;margin-bottom:3px">Descrivi il problema</div><div style="font-size:13px;color:#475569;line-height:1.5">Seleziona il servizio, descrivi la situazione e allega foto o documenti se necessario.</div></div>
         </div>
         <div style="display:flex;gap:14px;align-items:flex-start">
           <div class="step-num">2</div>
-          <div><div style="font-weight:700;font-size:15px;margin-bottom:3px">Il medico valuta</div><div style="font-size:13px;color:#475569;line-height:1.5">Il medico riceve la tua richiesta e prepara la risposta entro 24 ore.</div></div>
+          <div><div style="font-weight:700;font-size:15px;margin-bottom:3px">Il medico valuta</div><div style="font-size:13px;color:#475569;line-height:1.5">Il medico riceve la tua richiesta e la valuta clinicamente il prima possibile.</div></div>
         </div>
         <div style="display:flex;gap:14px;align-items:flex-start">
           <div class="step-num">3</div>
@@ -189,7 +201,7 @@ textarea{min-height:120px;resize:none}
         <button class="white-btn" onclick="newRequest()">Nuova richiesta</button>
       </div>
       <div id="warning" class="warning hidden">
-        Il medico valuterà la richiesta e risponderà entro 24 ore. Se appropriato, la risposta potrà includere prescrizione, certificato, richiesta esami o indicazioni cliniche.
+        Il medico valuterà la richiesta e risponderà il prima possibile. Se appropriato, la risposta potrà includere prescrizione, certificato, richiesta esami o indicazioni cliniche.
       </div>
       <div id="doctor-form" class="hidden">
         <div class="section-title">Inserisci i tuoi dati</div>
@@ -198,12 +210,22 @@ textarea{min-height:120px;resize:none}
         <input id="patient-email" type="email" placeholder="Email per ricevere la risposta *"/>
         <input id="patient-phone" placeholder="Telefono (opzionale)"/>
         <textarea id="patient-extra" placeholder="Farmaci in uso, allergie, patologie note..." style="min-height:70px"></textarea>
+
+        <!-- UPLOAD FOTO/DOCUMENTI -->
+        <div class="section-title">📎 Allega foto o documenti (opzionale)</div>
+        <div class="upload-area" id="upload-area" onclick="document.getElementById('file-input').click()">
+          <div class="upload-icon">📷</div>
+          <div class="upload-text">Tocca per allegare <strong>foto</strong> o <strong>referti</strong><br><span style="font-size:12px">Lesioni cutanee, esami, documenti medici</span></div>
+          <div class="file-list" id="file-list"></div>
+        </div>
+        <input type="file" id="file-input" multiple accept="image/*,.pdf" style="display:none" onchange="handleFiles(this.files)"/>
+
         <button class="green-btn" onclick="submitToDoctor()">Invia al medico →</button>
         <button class="white-btn" onclick="hideDoctorForm()">Annulla</button>
       </div>
       <div id="success-box" class="success hidden">
         <h3>✅ Richiesta inviata!</h3>
-        <p>Il medico ha ricevuto la tua richiesta. Riceverai una risposta entro 24 ore all'indirizzo email indicato. Se appropriato, includerà prescrizione, certificato o richiesta esami.</p>
+        <p>Il medico ha ricevuto la tua richiesta e risponderà il prima possibile all'indirizzo email indicato. Se appropriato, includerà prescrizione, certificato o richiesta esami.</p>
       </div>
     </div>
   </div>
@@ -226,32 +248,26 @@ textarea{min-height:120px;resize:none}
   </header>
   <div class="info-section">
     <div style="font-size:20px;font-weight:800;color:#0f172a;margin-bottom:16px">Come funziona MedicoOra</div>
-
     <div class="info-card">
       <h3><div class="step-num">1</div>Descrivi il problema</h3>
-      <p>Seleziona il tipo di richiesta e descrivi la tua situazione in dettaglio. Inserisci farmaci che prendi, allergie e patologie note. Ci vogliono circa 2 minuti.</p>
+      <p>Seleziona il tipo di richiesta e descrivi la tua situazione. Puoi allegare foto di lesioni cutanee, referti o altri documenti medici. Ci vogliono circa 2 minuti.</p>
     </div>
-
     <div class="info-card">
       <h3><div class="step-num">2</div>Parere immediato dell'AI</h3>
       <p>Un assistente medico AI ti fornisce subito un primo orientamento sulla tua richiesta, in modo empatico e chiaro.</p>
     </div>
-
     <div class="info-card">
       <h3><div class="step-num">3</div>Il medico valuta e risponde</h3>
-      <p>La tua richiesta viene inviata al medico che la valuta clinicamente. Entro 24 ore ricevi via email la risposta medica, che potrà includere prescrizione, richiesta esami, certificato o indicazioni cliniche.</p>
+      <p>La tua richiesta viene inviata al medico che la valuta clinicamente e risponde il prima possibile. La risposta potrà includere prescrizione, richiesta esami, certificato o indicazioni cliniche.</p>
     </div>
-
     <div class="info-card">
       <h3>💊 Cosa puoi richiedere</h3>
-      <p>Rinnovo terapia farmacologica · Richiesta esami del sangue o strumentali · Certificati medici (lavoro, sport, scuola) · Valutazione sintomi · Interpretazione referti · Visita specialistica</p>
+      <p>Rinnovo terapia farmacologica · Richiesta esami del sangue o strumentali · Certificati medici (lavoro, sport, scuola) · Valutazione sintomi · Interpretazione referti · Valutazione foto lesioni cutanee · Visita specialistica</p>
     </div>
-
     <div class="info-card">
       <h3>⚠️ Quando NON usare MedicoOra</h3>
       <p>In caso di dolore toracico, difficoltà respiratoria, perdita di coscienza, sanguinamento importante o qualsiasi emergenza: chiama il <strong>118</strong> o vai al Pronto Soccorso.</p>
     </div>
-
     <div class="info-card">
       <h3>💶 Costo del servizio</h3>
       <p>Abbonamento annuale: <strong>€60/anno</strong><br>Include consulti illimitati, prescrizioni, richieste esami e certificati quando clinicamente appropriati.</p>
@@ -276,7 +292,6 @@ textarea{min-height:120px;resize:none}
   </header>
   <div class="info-section">
     <div style="font-size:20px;font-weight:800;color:#0f172a;margin-bottom:16px">Contatti</div>
-
     <div class="contact-card" onclick="window.location.href='mailto:info@medicoora.com'">
       <div class="contact-ico">✉️</div>
       <div>
@@ -284,17 +299,14 @@ textarea{min-height:120px;resize:none}
         <div class="contact-sub">info@medicoora.com</div>
       </div>
     </div>
-
     <div class="info-card">
-      <h3>🕐 Orari di risposta</h3>
-      <p>Il medico risponde entro 24 ore dal lunedì al venerdì. Le richieste inviate nel weekend vengono processate il lunedì mattina.</p>
+      <h3>🕐 Tempi di risposta</h3>
+      <p>Il medico risponde il prima possibile, di solito entro poche ore nei giorni feriali. Le richieste inviate nel weekend vengono processate il lunedì mattina.</p>
     </div>
-
     <div class="info-card">
       <h3>🔒 Privacy e sicurezza</h3>
-      <p>I tuoi dati medici sono trattati con la massima riservatezza nel rispetto del GDPR e delle normative sulla privacy sanitaria.</p>
+      <p>I tuoi dati medici e le foto allegate sono trattati con la massima riservatezza nel rispetto del GDPR e delle normative sulla privacy sanitaria.</p>
     </div>
-
     <div style="margin-top:16px">
       <button class="green-btn" onclick="showScreen('s-richiesta')">Fai una richiesta →</button>
     </div>
@@ -357,6 +369,10 @@ textarea{min-height:120px;resize:none}
       <div class="complaint-lbl">DESCRIZIONE DEL PAZIENTE</div>
       <div id="dc-complaint">—</div>
     </div>
+    <div id="dc-attachments-block" style="display:none;margin-bottom:12px">
+      <div class="complaint-lbl" style="font-size:.68rem;font-weight:700;color:#00995c;letter-spacing:.06em;margin-bottom:8px">ALLEGATI</div>
+      <div id="dc-attachments"></div>
+    </div>
     <div class="ai-block">
       <div class="ai-lbl">🤖 ANALISI AI <span class="ai-badge">SOLO PER TE</span></div>
       <div class="ai-text" id="dc-ai">Preparazione in corso...</div>
@@ -380,6 +396,7 @@ let conversazione = [];
 let tipoRichiesta = '';
 let allCases = [];
 let currentCaseId = null;
+let uploadedFiles = [];
 
 window.addEventListener('load', function(){
   if(window.location.hash === '#medico') showScreen('s-doc-login');
@@ -406,6 +423,48 @@ function stripMarkdown(text){
     .trim();
 }
 
+// ─── UPLOAD FILE ───
+function handleFiles(files){
+  for(const f of files){
+    if(uploadedFiles.length >= 5){ alert("Massimo 5 allegati"); break; }
+    if(f.size > 10*1024*1024){ alert(f.name+" è troppo grande (max 10MB)"); continue; }
+    uploadedFiles.push(f);
+  }
+  renderFileList();
+}
+
+function renderFileList(){
+  const list = document.getElementById("file-list");
+  const area = document.getElementById("upload-area");
+  if(uploadedFiles.length === 0){
+    list.innerHTML = '';
+    area.classList.remove('has-files');
+    return;
+  }
+  area.classList.add('has-files');
+  list.innerHTML = uploadedFiles.map((f,i)=>`
+    <div class="file-item">
+      <span class="file-name">${f.type.startsWith('image/')? '🖼️' : '📄'} ${f.name}</span>
+      <span class="file-remove" onclick="removeFile(${i})">✕</span>
+    </div>
+  `).join('');
+}
+
+function removeFile(i){
+  uploadedFiles.splice(i,1);
+  renderFileList();
+}
+
+function toBase64(file){
+  return new Promise((resolve,reject)=>{
+    const r = new FileReader();
+    r.onload = ()=>resolve(r.result);
+    r.onerror = reject;
+    r.readAsDataURL(file);
+  });
+}
+
+// ─── AI ───
 async function sendRequest(){
   const type = document.getElementById("requestType").value;
   const text = document.getElementById("problem").value.trim();
@@ -469,17 +528,51 @@ async function submitToDoctor(){
   const email = document.getElementById("patient-email").value.trim();
   if(!nome){alert("Inserisci nome e cognome");return;}
   if(!email||!email.includes("@")){alert("Inserisci un'email valida");return;}
+
+  const btn = document.querySelector('#doctor-form .green-btn');
+  btn.textContent = "Invio in corso...";
+  btn.disabled = true;
+
   const ultimaRisposta = conversazione.filter(m=>m.role==="assistant").pop()?.content||"";
+
+  // Converti file in base64
+  let allegati = [];
+  for(const f of uploadedFiles){
+    try{
+      const b64 = await toBase64(f);
+      allegati.push({name:f.name, type:f.type, data:b64});
+    }catch(e){ console.error(e); }
+  }
+
   try{
-    const res = await fetch("/api/submit-medical-request",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({tipo:tipoRichiesta,patientText:document.getElementById("problem").value,patientName:nome,dateOfBirth:document.getElementById("patient-dob").value,email:email,phone:document.getElementById("patient-phone").value,clinicalData:document.getElementById("patient-extra").value,aiResponse:ultimaRisposta,conversazione:conversazione.map(m=>m.role+": "+m.content).join("\n\n")})});
+    const res = await fetch("/api/submit-medical-request",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        tipo:tipoRichiesta,
+        patientText:document.getElementById("problem").value,
+        patientName:nome,
+        dateOfBirth:document.getElementById("patient-dob").value,
+        email:email,
+        phone:document.getElementById("patient-phone").value,
+        clinicalData:document.getElementById("patient-extra").value,
+        aiResponse:ultimaRisposta,
+        conversazione:conversazione.map(m=>m.role+": "+m.content).join("\n\n"),
+        allegati:allegati
+      })
+    });
     if(!res.ok) throw new Error("Errore server");
     document.getElementById("doctor-form").classList.add("hidden");
     document.getElementById("rx-section").classList.add("hidden");
     document.getElementById("warning").classList.add("hidden");
     document.getElementById("success-box").classList.remove("hidden");
     document.getElementById("success-box").scrollIntoView({behavior:"smooth"});
+    uploadedFiles = [];
+    renderFileList();
   }catch(err){
     alert("Errore: "+err.message);
+    btn.textContent = "Invia al medico →";
+    btn.disabled = false;
   }
 }
 
@@ -487,11 +580,14 @@ function newRequest(){
   document.getElementById("problem").value="";
   document.getElementById("requestType").value="";
   document.getElementById("followup").value="";
+  uploadedFiles=[];
+  renderFileList();
   ["response","rx-section","warning","doctor-form","success-box"].forEach(id=>document.getElementById(id).classList.add("hidden"));
   conversazione=[];
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
+// ─── MEDICO ───
 function loginMedico(){
   const pwd = document.getElementById("doc-pwd").value;
   if(pwd===DOC_PWD){
@@ -519,8 +615,9 @@ async function loadCases(filter, btn){
     }
     cont.innerHTML = filtered.map(c=>{
       const isDone = !!c.risposta_medico;
+      const hasFiles = c.allegati && c.allegati.length > 0;
       return `<div class="case-card ${!isDone?'pending':''}" onclick="openCase('${c.id}')">
-        <div class="case-name">${c.patient_name||'—'}</div>
+        <div class="case-name">${c.patient_name||'—'} ${hasFiles?'📎':''}</div>
         <div class="case-meta">${c.tipo||'consulto'} · ${new Date(c.created_at).toLocaleDateString('it-IT')} · ${c.email||''}</div>
         <div class="case-preview">${(c.patient_text||'').slice(0,120)}...</div>
         <div class="${isDone?'case-status-done':'case-status-pending'}">${isDone?'✅ Risposto':'⏳ In attesa'}</div>
@@ -538,6 +635,7 @@ async function openCase(id){
   document.getElementById("dc-ai").textContent="Preparazione analisi AI...";
   document.getElementById("sign-btn").disabled=false;
   document.getElementById("sign-btn").textContent="✅ Firma e invia al paziente";
+  document.getElementById("dc-attachments-block").style.display="none";
   showScreen('s-doc-case');
   const c = allCases.find(x=>x.id==id);
   if(!c) return;
@@ -551,6 +649,19 @@ async function openCase(id){
   let testo = c.patient_text||'—';
   if(c.clinical_data) testo+='\n\nDati clinici: '+c.clinical_data;
   document.getElementById("dc-complaint").textContent=testo;
+
+  // Mostra allegati se presenti
+  if(c.allegati && c.allegati.length > 0){
+    document.getElementById("dc-attachments-block").style.display="block";
+    document.getElementById("dc-attachments").innerHTML = c.allegati.map(a=>{
+      if(a.type && a.type.startsWith('image/')){
+        return `<div style="margin-bottom:8px"><img src="${a.data}" style="max-width:100%;border-radius:10px;border:1px solid #e5e7eb"/><div style="font-size:12px;color:#6b7280;margin-top:4px">${a.name}</div></div>`;
+      }else{
+        return `<div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:6px">📄 ${a.name}</div>`;
+      }
+    }).join('');
+  }
+
   generaAI(c);
 }
 
@@ -577,7 +688,7 @@ async function inviaRisposta(){
   if(!txt){alert("Scrivi una risposta prima di inviare.");return;}
   const btn = document.getElementById("sign-btn");
   btn.disabled=true;
-  btn.textContent="Salvataggio in corso...";
+  btn.textContent="Invio in corso...";
   try{
     const res = await fetch("/api/submit-medical-request",{
       method:"PUT",
