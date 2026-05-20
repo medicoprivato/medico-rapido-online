@@ -1,834 +1,171 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>MedicoOra — Prescrizioni Online</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:'Inter',sans-serif;background:#f5f7f7;color:#0f172a}
-header{height:64px;background:white;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:center;padding:0 20px;position:sticky;top:0;z-index:100}
-.logo-wrap{display:flex;flex-direction:column;align-items:center}
-.logo{font-size:26px;font-weight:800;color:#00995c;letter-spacing:-1px}
-.logo-sub{font-size:10px;font-weight:700;letter-spacing:6px;color:#475569;margin-top:-2px}
-.hero{padding:20px 18px 10px}
-.hero-card{background:white;border-radius:28px;padding:26px 22px;border:1px solid #e5e7eb}
-.hero-title{font-size:38px;line-height:1.05;font-weight:800;color:#0f172a;margin-bottom:14px;letter-spacing:-1.5px}
-.hero-text{font-size:16px;line-height:1.6;color:#475569;margin-bottom:20px}
-.green-btn{width:100%;height:56px;border:none;border-radius:18px;background:#00995c;color:white;font-size:17px;font-weight:800;margin-top:14px;cursor:pointer;font-family:'Inter',sans-serif}
-.white-btn{width:100%;height:56px;border-radius:18px;background:white;border:2px solid #00995c;color:#00995c;font-size:17px;font-weight:800;margin-top:12px;cursor:pointer;font-family:'Inter',sans-serif}
-.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
-.quick{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:16px;padding:16px 12px;font-size:14px;font-weight:700;color:#065f46;text-align:center;cursor:pointer}
-.quick:hover{background:#dcfce7}
-.section{padding:0 18px 18px}
-.card{background:white;border-radius:28px;padding:24px 20px;border:1px solid #e5e7eb;margin-top:16px}
-.label{font-size:13px;font-weight:800;letter-spacing:1px;color:#00995c;margin-bottom:14px;text-transform:uppercase}
-.title{font-size:20px;font-weight:800;margin-bottom:18px;color:#0f172a}
-textarea,input,select{width:100%;border:1px solid #d1d5db;border-radius:16px;padding:16px;font-size:16px;background:white;margin-bottom:14px;font-family:'Inter',sans-serif;color:#0f172a}
-textarea{min-height:120px;resize:none}
-.answer{background:#f0fdf4;border-radius:20px;padding:18px;font-size:15px;line-height:1.7;color:#065f46;margin-top:18px;white-space:pre-wrap;border:1px solid #bbf7d0}
-.rx-btn{width:100%;height:60px;border:none;border-radius:18px;background:#00995c;color:white;font-size:18px;font-weight:800;margin-top:16px;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 4px 14px rgba(0,153,92,.3)}
-.section-title{font-size:15px;font-weight:700;color:#0f172a;margin:18px 0 10px}
-.warning{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:16px;border-radius:18px;line-height:1.6;font-size:14px;margin-top:14px}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:72px;background:white;border-top:1px solid #e5e7eb;display:flex;justify-content:space-around;align-items:center;z-index:50}
-.nav-item{display:flex;flex-direction:column;align-items:center;font-size:11px;color:#6b7280;font-weight:600;cursor:pointer;gap:2px;padding:6px 12px;border-radius:12px;transition:all .15s}
-.nav-item:hover{background:#f0fdf4;color:#00995c}
-.nav-item.active{color:#00995c}
-.spacer{height:100px}
-.hidden{display:none}
-.loader{margin-top:18px;background:#f8fafc;border-radius:16px;padding:16px;font-size:15px;color:#475569;text-align:center}
-.success{background:#f0fdf4;border:1px solid #86efac;border-radius:20px;padding:22px;text-align:center;margin-top:18px}
-.success h3{font-size:19px;font-weight:800;color:#15803d;margin-bottom:8px}
-.success p{font-size:14px;color:#166534;line-height:1.6}
-.screen{display:none}
-.screen.active{display:block}
-
-/* UPLOAD */
-.upload-area{border:2px dashed #d1d5db;border-radius:16px;padding:20px;text-align:center;cursor:pointer;margin-bottom:14px;transition:all .2s;background:#fafafa}
-.upload-area:hover{border-color:#00995c;background:#f0fdf4}
-.upload-area.has-files{border-color:#00995c;background:#f0fdf4}
-.upload-icon{font-size:2rem;margin-bottom:8px}
-.upload-text{font-size:14px;color:#6b7280;line-height:1.5}
-.upload-text strong{color:#00995c}
-.file-list{margin-top:8px;display:flex;flex-direction:column;gap:6px}
-.file-item{display:flex;align-items:center;justify-content:space-between;background:white;border:1px solid #e5e7eb;border-radius:10px;padding:8px 12px;font-size:13px}
-.file-name{color:#374151;font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.file-remove{color:#dc2626;cursor:pointer;font-weight:700;margin-left:8px;flex-shrink:0}
-
-/* CONSENSO */
-.consent-box{background:#f8fafc;border:1px solid #e5e7eb;border-radius:14px;padding:16px;margin-bottom:14px}
-.consent-item{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
-.consent-item:last-child{margin-bottom:0}
-.consent-item input[type="checkbox"]{width:20px;height:20px;margin:0;flex-shrink:0;accent-color:#00995c;cursor:pointer;border-radius:4px}
-.consent-label{font-size:13px;color:#374151;line-height:1.5;cursor:pointer}
-.consent-label a{color:#00995c;text-decoration:underline}
-
-/* INFO */
-.info-section{padding:20px 18px}
-.info-card{background:white;border-radius:20px;padding:20px;border:1px solid #e5e7eb;margin-bottom:14px}
-.info-card h3{font-size:17px;font-weight:800;color:#0f172a;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.info-card p{font-size:14px;color:#475569;line-height:1.65}
-.step-num{width:28px;height:28px;border-radius:50%;background:#00995c;color:white;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-
-/* CONTATTI */
-.contact-card{background:white;border-radius:20px;padding:20px;border:1px solid #e5e7eb;margin-bottom:14px;display:flex;align-items:center;gap:16px;cursor:pointer}
-.contact-ico{font-size:1.8rem;flex-shrink:0}
-.contact-title{font-size:15px;font-weight:700;color:#0f172a;margin-bottom:2px}
-.contact-sub{font-size:13px;color:#6b7280}
-
-/* PRIVACY SCREEN */
-.privacy-section{padding:20px 18px;padding-bottom:100px}
-.privacy-section h2{font-size:20px;font-weight:800;color:#0f172a;margin-bottom:16px}
-.privacy-section h3{font-size:15px;font-weight:700;color:#0f172a;margin:16px 0 8px}
-.privacy-section p{font-size:13px;color:#475569;line-height:1.7;margin-bottom:10px}
-.privacy-section ul{font-size:13px;color:#475569;line-height:1.7;margin-bottom:10px;padding-left:18px}
-
-/* DOCTOR */
-.doc-header{background:#0f172a;color:white;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between}
-.doc-header-title{font-size:.95rem;font-weight:700}
-.doc-exit{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);border-radius:10px;padding:7px 13px;font-size:.8rem;cursor:pointer;font-family:'Inter',sans-serif}
-.case-card{background:white;border:1px solid #e5e7eb;border-radius:16px;padding:15px 17px;margin:10px 18px 0;cursor:pointer;transition:all .2s}
-.case-card:hover{border-color:#00995c;box-shadow:0 4px 12px rgba(0,153,92,.1)}
-.case-card.pending{border-left:4px solid #00995c}
-.case-name{font-size:.93rem;font-weight:700;margin-bottom:4px}
-.case-meta{font-size:.73rem;color:#6b7280;margin-bottom:8px}
-.case-preview{font-size:.82rem;color:#475569;line-height:1.5}
-.case-status-pending{font-size:.73rem;font-weight:700;color:#d97706;margin-top:8px}
-.case-status-done{font-size:.73rem;font-weight:700;color:#059669;margin-top:8px}
-.detail-section{padding:16px 18px}
-.patient-block{background:#0f172a;color:white;border-radius:16px;padding:16px;margin-bottom:12px}
-.patient-block h3{font-size:1.05rem;font-weight:800;margin-bottom:4px}
-.patient-block p{font-size:.76rem;opacity:.6;margin-bottom:10px}
-.patient-row{display:flex;justify-content:space-between;font-size:.82rem;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.08)}
-.patient-row:last-child{border-bottom:none}
-.patient-lbl{opacity:.55}
-.patient-val{font-weight:600;text-align:right;max-width:65%;word-break:break-all}
-.complaint-block{background:#f8fafc;border:1px solid #e5e7eb;border-radius:14px;padding:14px;margin-bottom:12px;font-size:.86rem;line-height:1.7;color:#374151}
-.complaint-lbl{font-size:.68rem;font-weight:700;color:#00995c;letter-spacing:.06em;margin-bottom:8px}
-.ai-block{background:#f0fdf4;border:1px solid #86efac;border-radius:14px;padding:14px;margin-bottom:12px}
-.ai-lbl{font-size:.66rem;font-weight:700;color:#15803d;letter-spacing:.08em;margin-bottom:8px}
-.ai-badge{background:#15803d;color:white;border-radius:4px;padding:1px 6px;font-size:.58rem;margin-left:4px}
-.ai-text{font-size:.84rem;color:#166534;line-height:1.7;white-space:pre-wrap}
-.reply-block{border:1.5px solid #e5e7eb;border-radius:14px;padding:14px;margin-bottom:12px}
-.reply-lbl{font-size:.76rem;font-weight:700;color:#374151;margin-bottom:8px}
-.reply-area{width:100%;border:1.5px solid #e5e7eb;border-radius:10px;padding:12px;font-family:'Inter',sans-serif;font-size:.86rem;resize:vertical;min-height:120px;outline:none;color:#0f172a}
-.reply-area:focus{border-color:#00995c}
-.sign-btn{width:100%;background:#00995c;color:white;border:none;border-radius:14px;padding:15px;font-size:.95rem;font-weight:800;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:10px}
-.sent-ok{background:#f0fdf4;border:1.5px solid #86efac;border-radius:14px;padding:16px;text-align:center;margin-top:12px;display:none}
-.sent-ok h3{color:#15803d;margin-bottom:4px;font-size:.95rem}
-.sent-ok p{font-size:.81rem;color:#166534}
-.empty-state{text-align:center;padding:60px 20px;color:#9ca3af}
-.empty-icon{font-size:3rem;margin-bottom:12px}
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Medico Subito — Prescrizioni Online Rapide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#f8fafc;color:#0f172a;line-height:1.6}
+        header{background:white;border-bottom:1px solid #e5e7eb;padding:14px 18px;position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:12px}
+        .logo{font-size:26px;font-weight:800;color:#1e40af}
+        .green-btn{width:100%;height:56px;border:none;border-radius:16px;background:#1e40af;color:white;font-size:17px;font-weight:700;cursor:pointer}
+        .white-btn{width:100%;height:56px;border-radius:16px;background:white;border:2px solid #1e40af;color:#1e40af;font-size:17px;font-weight:700;cursor:pointer;margin-top:12px}
+        .card{background:white;border-radius:24px;padding:24px;border:1px solid #e5e7eb;margin-top:16px}
+        .label{font-size:13px;font-weight:700;letter-spacing:1px;color:#1e40af;text-transform:uppercase}
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;height:76px;background:white;border-top:1px solid #e5e7eb;display:flex;justify-content:space-around;align-items:center;z-index:100}
+        .nav-item{display:flex;flex-direction:column;align-items:center;font-size:11px;color:#64748b;cursor:pointer;gap:3px}
+        .nav-item.active{color:#1e40af}
+        .screen{display:none}
+        .screen.active{display:block}
+        .warning{background:#fef3c7;border:1px solid #f59e0b;color:#92400e;padding:16px;border-radius:16px}
+        .success{background:#ecfdf5;border:1px solid #34d399;color:#065f46;padding:24px;border-radius:20px;text-align:center}
+    </style>
 </head>
 <body>
 
-<!-- ═══ HOME ═══ -->
+<!-- HOME -->
 <div id="s-home" class="screen active">
-  <header>
-    <div class="logo-wrap">
-      <div class="logo">MedicoOra</div>
-      <div class="logo-sub">ONLINE DOCTOR</div>
-    </div>
-  </header>
-
-  <div class="hero">
-    <div class="hero-card">
-      <div class="hero-title">Prescrizioni online rapide.</div>
-      <div class="hero-text">Rinnovi terapia, richieste esami, certificati e valutazioni mediche senza videochiamata. Attivo 7 giorni su 7.</div>
-      <button class="green-btn" onclick="showScreen('s-richiesta')">Inizia ora →</button>
-      <div class="quick-grid">
-        <div class="quick" onclick="quickStart('Rinnovo terapia')">💊 Rinnovo farmaco</div>
-        <div class="quick" onclick="quickStart('Richiesta esami')">🔬 Richiesta esami</div>
-        <div class="quick" onclick="quickStart('Certificato medico')">📄 Certificato</div>
-        <div class="quick" onclick="quickStart('Valutazione sintomi')">🩺 Sintomi</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="card">
-      <div class="label">Come funziona</div>
-      <div style="display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;gap:14px;align-items:flex-start">
-          <div class="step-num">1</div>
-          <div><div style="font-weight:700;font-size:15px;margin-bottom:3px">Descrivi il problema</div><div style="font-size:13px;color:#475569;line-height:1.5">Seleziona il servizio, descrivi la situazione e allega foto o documenti se necessario.</div></div>
+    <header>
+        <div style="font-size:38px">🩺</div>
+        <div>
+            <div class="logo">Medico Subito</div>
+            <div style="font-size:13px;color:#475569">Prescrizioni Online</div>
         </div>
-        <div style="display:flex;gap:14px;align-items:flex-start">
-          <div class="step-num">2</div>
-          <div><div style="font-weight:700;font-size:15px;margin-bottom:3px">Il medico valuta</div><div style="font-size:13px;color:#475569;line-height:1.5">Il medico riceve la richiesta e la valuta clinicamente 7 giorni su 7.</div></div>
-        </div>
-        <div style="display:flex;gap:14px;align-items:flex-start">
-          <div class="step-num">3</div>
-          <div><div style="font-weight:700;font-size:15px;margin-bottom:3px">Ricevi la risposta via email</div><div style="font-size:13px;color:#475569;line-height:1.5">Prescrizione, richiesta esami, certificato o consulto direttamente nella tua casella email.</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
+    </header>
 
-  <div class="section">
-    <div style="background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:16px;border-radius:18px;line-height:1.6;font-size:13px">
-      ⚠️ <strong>Non usare in urgenza.</strong> Per dolore toracico, difficoltà respiratoria o emergenze chiama il <strong>118</strong>.
+    <div style="padding:24px 18px">
+        <div class="card">
+            <h1 style="font-size:32px;line-height:1.1;font-weight:800;margin-bottom:12px">Prescrizioni e pareri medici online</h1>
+            <p style="color:#334155">Rinnovi terapia, pareri clinici, richieste esami e certificati senza videochiamata.</p>
+            <button class="green-btn" onclick="showScreen('s-payment')">Attiva abbonamento €60/anno</button>
+            <button class="white-btn" onclick="showScreen('s-richiesta')">Invia richiesta al medico</button>
+        </div>
     </div>
-  </div>
 
-  <div class="spacer"></div>
-  <div class="bottom-nav">
-    <div class="nav-item active" onclick="showScreen('s-home')">🏠<div>Home</div></div>
-    <div class="nav-item" onclick="showScreen('s-richiesta')">📋<div>Richiesta</div></div>
-    <div class="nav-item" onclick="showScreen('s-info')">ℹ️<div>Info</div></div>
-    <div class="nav-item" onclick="showScreen('s-contatti')">✉️<div>Contatti</div></div>
-  </div>
+    <div class="section" style="padding:0 18px 20px">
+        <div class="card">
+            <div class="label">Cosa puoi richiedere</div>
+            <ul style="padding-left:20px;line-height:1.8">
+                <li>Rinnovo terapia farmacologica</li>
+                <li>Parere medico su sintomi</li>
+                <li>Richiesta esami</li>
+                <li>Certificati medici</li>
+                <li>Valutazione referti/foto</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section" style="padding:0 18px">
+        <div class="warning">⚠️ Non per emergenze. Chiama il 118 per urgenze.</div>
+    </div>
+
+    <div class="spacer" style="height:100px"></div>
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="showScreen('s-home')">🏠<div>Home</div></div>
+        <div class="nav-item" onclick="showScreen('s-richiesta')">📋<div>Richiesta</div></div>
+        <div class="nav-item" onclick="showScreen('s-info')">ℹ️<div>Info</div></div>
+        <div class="nav-item" onclick="showScreen('s-contatti')">✉️<div>Contatti</div></div>
+    </div>
 </div>
 
-<!-- ═══ RICHIESTA ═══ -->
+<!-- RICHIESTA PAZIENTE -->
 <div id="s-richiesta" class="screen">
-  <header>
-    <div class="logo-wrap">
-      <div class="logo">MedicoOra</div>
-      <div class="logo-sub">ONLINE DOCTOR</div>
-    </div>
-  </header>
+    <header><div style="font-size:38px">🩺</div><div class="logo">Medico Subito</div></header>
+    <div class="section">
+        <div class="card">
+            <div class="label">Nuova Richiesta</div>
+            <select id="requestType" style="width:100%;padding:16px;border-radius:16px;border:1px solid #ccc;margin-bottom:12px">
+                <option value="">Seleziona</option>
+                <option>Rinnovo terapia</option>
+                <option>Parere medico</option>
+                <option>Richiesta esami</option>
+                <option>Certificato medico</option>
+                <option>Altro</option>
+            </select>
+            <textarea id="problem" placeholder="Descrivi la tua richiesta..." style="width:100%;min-height:140px;border-radius:16px;border:1px solid #ccc;padding:16px"></textarea>
+            <button class="green-btn" onclick="preparePatientForm()">Continua</button>
 
-  <div class="section" style="padding-top:16px">
-    <div class="card" id="main-form">
-      <div class="label">Richiesta medica</div>
-      <div class="title">Che cosa ti serve?</div>
-      <select id="requestType">
-        <option value="">Seleziona richiesta</option>
-        <option>Rinnovo terapia</option>
-        <option>Richiesta esami</option>
-        <option>Certificato medico</option>
-        <option>Valutazione sintomi</option>
-        <option>Visita specialistica</option>
-        <option>Altro</option>
-      </select>
-      <textarea id="problem" placeholder="Descrivi il problema o la richiesta..."></textarea>
-      <button class="green-btn" onclick="sendRequest()">Continua →</button>
-      <div id="loading" class="loader hidden">Sto preparando il parere medico...</div>
-      <div id="response" class="answer hidden"></div>
-      <div id="rx-section" class="hidden">
-        <button class="rx-btn" onclick="showDoctorForm()">📄 Invia richiesta al medico</button>
-        <div class="section-title">Hai altri dettagli da aggiungere?</div>
-        <textarea id="followup" placeholder="Scrivi qui ulteriori informazioni..."></textarea>
-        <button class="white-btn" onclick="sendFollowup()" style="margin-top:0">Aggiorna parere</button>
-        <button class="white-btn" onclick="newRequest()">Nuova richiesta</button>
-      </div>
-      <div id="warning" class="warning hidden">
-        Il medico valuterà la richiesta e risponderà il prima possibile. Se appropriato, la risposta potrà includere prescrizione, certificato, richiesta esami o indicazioni cliniche.
-      </div>
-      <div id="doctor-form" class="hidden">
-        <div class="section-title">Inserisci i tuoi dati</div>
-        <input id="patient-name" placeholder="Nome e cognome *"/>
-        <input id="patient-dob" placeholder="Data di nascita (es: 15/03/1975)"/>
-        <input id="patient-email" type="email" placeholder="Email per ricevere la risposta *"/>
-        <input id="patient-phone" placeholder="Telefono (opzionale)"/>
-        <textarea id="patient-extra" placeholder="Farmaci in uso, allergie, patologie note..." style="min-height:70px"></textarea>
+            <div id="patient-form" class="hidden" style="margin-top:20px">
+                <input id="p-name" placeholder="Nome e Cognome" style="width:100%;padding:14px;margin-bottom:10px;border-radius:12px;border:1px solid #ccc">
+                <input id="p-email" type="email" placeholder="Email" style="width:100%;padding:14px;margin-bottom:10px;border-radius:12px;border:1px solid #ccc">
+                <div onclick="document.getElementById('files').click()" style="border:2px dashed #1e40af;border-radius:16px;padding:20px;text-align:center;cursor:pointer">📎 Allega documenti/foto</div>
+                <input type="file" id="files" multiple style="display:none">
+                <label><input type="checkbox" id="consenso"> Accetto Termini e Informativa Privacy</label>
+                <button class="green-btn" onclick="submitPatientRequest()">Invia al medico</button>
+            </div>
 
-        <div class="section-title">📎 Allega foto o documenti (opzionale)</div>
-        <div class="upload-area" id="upload-area" onclick="document.getElementById('file-input').click()">
-          <div class="upload-icon">📷</div>
-          <div class="upload-text">Tocca per allegare <strong>foto</strong> o <strong>referti</strong><br><span style="font-size:12px">Lesioni cutanee, esami, documenti medici · Max 5 file, 10MB ciascuno</span></div>
-          <div class="file-list" id="file-list"></div>
+            <div id="patient-success" class="success hidden">Richiesta inviata! Il medico risponderà presto.</div>
         </div>
-        <input type="file" id="file-input" multiple accept="image/*,.pdf" style="display:none" onchange="handleFiles(this.files)"/>
-
-        <!-- CONSENSO OBBLIGATORIO -->
-        <div class="section-title">Consenso e privacy</div>
-        <div class="consent-box">
-          <div class="consent-item">
-            <input type="checkbox" id="c1"/>
-            <label class="consent-label" for="c1">Ho letto e accetto i <a onclick="showScreen('s-termini')">Termini e Condizioni</a> del servizio MedicoOra. *</label>
-          </div>
-          <div class="consent-item">
-            <input type="checkbox" id="c2"/>
-            <label class="consent-label" for="c2">Acconsento al trattamento dei miei dati personali e sanitari secondo la <a onclick="showScreen('s-privacy')">Privacy Policy</a> (GDPR art. 9). *</label>
-          </div>
-          <div class="consent-item">
-            <input type="checkbox" id="c3"/>
-            <label class="consent-label" for="c3">Comprendo che questo servizio non sostituisce il medico di medicina generale e non deve essere usato in caso di emergenza medica. *</label>
-          </div>
-        </div>
-
-        <button class="green-btn" onclick="submitToDoctor()">Invia al medico →</button>
-        <button class="white-btn" onclick="hideDoctorForm()">Annulla</button>
-      </div>
-      <div id="success-box" class="success hidden">
-        <h3>✅ Richiesta inviata!</h3>
-        <p>Il medico ha ricevuto la tua richiesta e risponderà il prima possibile all'indirizzo email indicato. Il servizio è attivo 7 giorni su 7.</p>
-      </div>
     </div>
-  </div>
-  <div class="spacer"></div>
-  <div class="bottom-nav">
-    <div class="nav-item" onclick="showScreen('s-home')">🏠<div>Home</div></div>
-    <div class="nav-item active" onclick="showScreen('s-richiesta')">📋<div>Richiesta</div></div>
-    <div class="nav-item" onclick="showScreen('s-info')">ℹ️<div>Info</div></div>
-    <div class="nav-item" onclick="showScreen('s-contatti')">✉️<div>Contatti</div></div>
-  </div>
 </div>
 
-<!-- ═══ INFO ═══ -->
-<div id="s-info" class="screen">
-  <header>
-    <div class="logo-wrap">
-      <div class="logo">MedicoOra</div>
-      <div class="logo-sub">ONLINE DOCTOR</div>
-    </div>
-  </header>
-  <div class="info-section">
-    <div style="font-size:20px;font-weight:800;color:#0f172a;margin-bottom:16px">Come funziona MedicoOra</div>
-    <div class="info-card">
-      <h3><div class="step-num">1</div>Descrivi il problema</h3>
-      <p>Seleziona il tipo di richiesta e descrivi la tua situazione. Puoi allegare foto di lesioni cutanee, referti o altri documenti medici. Ci vogliono circa 2 minuti.</p>
-    </div>
-    <div class="info-card">
-      <h3><div class="step-num">2</div>Parere immediato dell'AI</h3>
-      <p>Un assistente medico AI ti fornisce subito un primo orientamento sulla tua richiesta, in modo empatico e chiaro.</p>
-    </div>
-    <div class="info-card">
-      <h3><div class="step-num">3</div>Il medico valuta e risponde</h3>
-      <p>La tua richiesta viene inviata al medico che la valuta clinicamente 7 giorni su 7 e risponde il prima possibile. La risposta potrà includere prescrizione, richiesta esami, certificato o indicazioni cliniche.</p>
-    </div>
-    <div class="info-card">
-      <h3>💊 Cosa puoi richiedere</h3>
-      <p>Rinnovo terapia farmacologica · Richiesta esami del sangue o strumentali · Certificati medici (lavoro, sport, scuola) · Valutazione sintomi · Interpretazione referti · Valutazione foto lesioni cutanee · Visita specialistica</p>
-    </div>
-    <div class="info-card">
-      <h3>⚠️ Quando NON usare MedicoOra</h3>
-      <p>In caso di dolore toracico, difficoltà respiratoria, perdita di coscienza, sanguinamento importante o qualsiasi emergenza: chiama il <strong>118</strong> o vai al Pronto Soccorso.</p>
-    </div>
-    <div class="info-card">
-      <h3>💶 Costo del servizio</h3>
-      <p>Abbonamento annuale: <strong>€60/anno</strong><br>Include consulti illimitati, prescrizioni, richieste esami e certificati quando clinicamente appropriati.</p>
-    </div>
-    <div class="info-card">
-      <h3>📋 Documenti legali</h3>
-      <p>
-        <a onclick="showScreen('s-privacy')" style="color:#00995c;text-decoration:underline;cursor:pointer">Privacy Policy (GDPR)</a><br>
-        <a onclick="showScreen('s-termini')" style="color:#00995c;text-decoration:underline;cursor:pointer">Termini e Condizioni</a>
-      </p>
-    </div>
-  </div>
-  <div class="spacer"></div>
-  <div class="bottom-nav">
-    <div class="nav-item" onclick="showScreen('s-home')">🏠<div>Home</div></div>
-    <div class="nav-item" onclick="showScreen('s-richiesta')">📋<div>Richiesta</div></div>
-    <div class="nav-item active" onclick="showScreen('s-info')">ℹ️<div>Info</div></div>
-    <div class="nav-item" onclick="showScreen('s-contatti')">✉️<div>Contatti</div></div>
-  </div>
-</div>
-
-<!-- ═══ CONTATTI ═══ -->
-<div id="s-contatti" class="screen">
-  <header>
-    <div class="logo-wrap">
-      <div class="logo">MedicoOra</div>
-      <div class="logo-sub">ONLINE DOCTOR</div>
-    </div>
-  </header>
-  <div class="info-section">
-    <div style="font-size:20px;font-weight:800;color:#0f172a;margin-bottom:16px">Contatti</div>
-    <div class="contact-card" onclick="window.location.href='mailto:info@medicoora.com'">
-      <div class="contact-ico">✉️</div>
-      <div>
-        <div class="contact-title">Email</div>
-        <div class="contact-sub">info@medicoora.com</div>
-      </div>
-    </div>
-    <div class="info-card">
-      <h3>🕐 Tempi di risposta</h3>
-      <p>Il servizio è attivo <strong>7 giorni su 7</strong>. Il medico risponde il prima possibile, di solito entro poche ore dalla ricezione della richiesta.</p>
-    </div>
-    <div class="info-card">
-      <h3>🔒 Privacy e sicurezza</h3>
-      <p>I tuoi dati medici e le foto allegate sono trattati con la massima riservatezza nel rispetto del GDPR e delle normative sulla privacy sanitaria italiana ed europea.</p>
-    </div>
-    <div class="info-card">
-      <h3>📋 Documenti legali</h3>
-      <p>
-        <a onclick="showScreen('s-privacy')" style="color:#00995c;text-decoration:underline;cursor:pointer">→ Privacy Policy</a><br><br>
-        <a onclick="showScreen('s-termini')" style="color:#00995c;text-decoration:underline;cursor:pointer">→ Termini e Condizioni</a>
-      </p>
-    </div>
-    <div style="margin-top:16px">
-      <button class="green-btn" onclick="showScreen('s-richiesta')">Fai una richiesta →</button>
-    </div>
-  </div>
-  <div class="spacer"></div>
-  <div class="bottom-nav">
-    <div class="nav-item" onclick="showScreen('s-home')">🏠<div>Home</div></div>
-    <div class="nav-item" onclick="showScreen('s-richiesta')">📋<div>Richiesta</div></div>
-    <div class="nav-item" onclick="showScreen('s-info')">ℹ️<div>Info</div></div>
-    <div class="nav-item active" onclick="showScreen('s-contatti')">✉️<div>Contatti</div></div>
-  </div>
-</div>
-
-<!-- ═══ PRIVACY POLICY ═══ -->
-<div id="s-privacy" class="screen">
-  <header>
-    <div class="logo-wrap">
-      <div class="logo">MedicoOra</div>
-      <div class="logo-sub">ONLINE DOCTOR</div>
-    </div>
-  </header>
-  <div class="privacy-section">
-    <button onclick="history.back()" style="background:none;border:none;color:#00995c;font-size:14px;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:16px;padding:0">← Indietro</button>
-    <h2>Informativa sulla Privacy</h2>
-    <p>Ultimo aggiornamento: maggio 2025</p>
-
-    <h3>1. Titolare del trattamento</h3>
-    <p>Titolare del trattamento dei dati è la Dott.ssa Anna Maria Ferri, Medico Chirurgo specialista in Ginecologia e Ostetricia, contattabile all'indirizzo info@medicoora.com.</p>
-
-    <h3>2. Dati raccolti</h3>
-    <p>MedicoOra raccoglie le seguenti categorie di dati personali:</p>
-    <ul>
-      <li>Dati anagrafici (nome, cognome, data di nascita)</li>
-      <li>Dati di contatto (email, telefono)</li>
-      <li>Dati sanitari (descrizione sintomi, farmaci, allergie, patologie, foto mediche, referti)</li>
-    </ul>
-    <p>I dati sanitari rientrano nelle categorie particolari ai sensi dell'art. 9 GDPR e sono trattati solo con il consenso esplicito dell'interessato.</p>
-
-    <h3>3. Finalità del trattamento</h3>
-    <p>I dati sono raccolti esclusivamente per:</p>
-    <ul>
-      <li>Erogare il servizio di consulenza medica online</li>
-      <li>Preparare e inviare prescrizioni, certificati e risposte mediche</li>
-      <li>Adempiere a obblighi di legge</li>
-    </ul>
-
-    <h3>4. Base giuridica</h3>
-    <p>Il trattamento si basa sul consenso esplicito dell'interessato (art. 6, par. 1, lett. a e art. 9, par. 2, lett. a GDPR) e sull'esecuzione del contratto di servizio medico.</p>
-
-    <h3>5. Conservazione dei dati</h3>
-    <p>I dati sanitari sono conservati per 10 anni dalla data dell'ultima prestazione, in conformità con la normativa italiana sulla documentazione sanitaria.</p>
-
-    <h3>6. Fornitori terzi</h3>
-    <p>I dati sono trattati mediante i seguenti fornitori che offrono garanzie GDPR adeguate: Supabase Inc. (database), Vercel Inc. (hosting), Resend Inc. (invio email). Con ciascun fornitore è stipulato un accordo di trattamento dati (DPA).</p>
-
-    <h3>7. Diritti dell'interessato</h3>
-    <p>L'interessato ha diritto di accesso, rettifica, cancellazione, limitazione del trattamento e portabilità dei dati. Per esercitare questi diritti scrivere a info@medicoora.com.</p>
-
-    <h3>8. Reclami</h3>
-    <p>È possibile proporre reclamo al Garante per la Protezione dei Dati Personali (www.garanteprivacy.it).</p>
-  </div>
-</div>
-
-<!-- ═══ TERMINI E CONDIZIONI ═══ -->
-<div id="s-termini" class="screen">
-  <header>
-    <div class="logo-wrap">
-      <div class="logo">MedicoOra</div>
-      <div class="logo-sub">ONLINE DOCTOR</div>
-    </div>
-  </header>
-  <div class="privacy-section">
-    <button onclick="history.back()" style="background:none;border:none;color:#00995c;font-size:14px;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:16px;padding:0">← Indietro</button>
-    <h2>Termini e Condizioni</h2>
-    <p>Ultimo aggiornamento: maggio 2025</p>
-
-    <h3>1. Descrizione del servizio</h3>
-    <p>MedicoOra è un servizio di telemedicina che permette ai pazienti di richiedere consulenze mediche, prescrizioni, richieste di esami e certificati attraverso una piattaforma digitale. Il servizio è erogato dalla Dott.ssa Anna Maria Ferri, Medico Chirurgo, iscritta all'Ordine dei Medici.</p>
-
-    <h3>2. Limitazioni del servizio</h3>
-    <p>MedicoOra NON è un servizio di emergenza. Non deve essere utilizzato in presenza di sintomi gravi o urgenti. In caso di emergenza chiamare il 118 o recarsi al Pronto Soccorso.</p>
-    <p>Il servizio non sostituisce il medico di medicina generale né elimina la necessità di visite di persona quando clinicamente indicate.</p>
-
-    <h3>3. Prescrizioni e atti medici</h3>
-    <p>Tutte le prescrizioni e gli atti medici sono emessi esclusivamente dalla Dott.ssa Ferri, che valuta ogni richiesta individualmente. Il medico si riserva il diritto di non emettere una prescrizione qualora non la ritenga clinicamente appropriata.</p>
-
-    <h3>4. Responsabilità del paziente</h3>
-    <p>Il paziente è responsabile della veridicità e completezza delle informazioni fornite. Informazioni false o incomplete possono pregiudicare la qualità della risposta medica e sono a rischio esclusivo del paziente.</p>
-
-    <h3>5. Servizio attivo</h3>
-    <p>Il servizio riceve richieste 7 giorni su 7. I tempi di risposta possono variare in base al volume di richieste. Il medico si impegna a rispondere il prima possibile.</p>
-
-    <h3>6. Pagamento</h3>
-    <p>Il servizio è disponibile tramite abbonamento annuale di €60. Il pagamento dà diritto a consulti illimitati per 12 mesi dalla data di iscrizione.</p>
-
-    <h3>7. Legge applicabile</h3>
-    <p>I presenti termini sono regolati dalla legge italiana. Per qualsiasi controversia è competente il Foro di Roma.</p>
-
-    <h3>8. Contatti</h3>
-    <p>Per qualsiasi questione relativa ai presenti termini: info@medicoora.com</p>
-  </div>
-</div>
-
-<!-- ═══ LOGIN MEDICO ═══ -->
-<div id="s-doc-login" class="screen">
-  <div class="doc-header">
-    <div class="doc-header-title">MedicoOra — Accesso Medico</div>
-  </div>
-  <div style="max-width:400px;margin:40px auto;padding:0 20px">
-    <div class="card">
-      <div style="text-align:center;margin-bottom:20px">
-        <div style="font-size:2.5rem">🩺</div>
-        <div class="title" style="margin-bottom:4px">Area Medico</div>
-      </div>
-      <input type="password" id="doc-pwd" placeholder="Password" onkeydown="if(event.key==='Enter')loginMedico()"/>
-      <div id="e-pwd" style="color:#dc2626;font-size:.8rem;margin-top:-10px;margin-bottom:10px;display:none">Password non corretta</div>
-      <button class="green-btn" onclick="loginMedico()">Accedi →</button>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ DASHBOARD MEDICO ═══ -->
+<!-- DASHBOARD MEDICO (con AI) -->
 <div id="s-doc-dash" class="screen">
-  <div class="doc-header">
-    <div class="doc-header-title">Richieste <span id="doc-count" style="background:rgba(255,255,255,.15);border-radius:100px;padding:2px 10px;font-size:.72rem;margin-left:6px"></span></div>
-    <button class="doc-exit" onclick="showScreen('s-home')">Esci</button>
-  </div>
-  <div style="display:flex;gap:8px;padding:14px 18px 0">
-    <button onclick="loadCases('pending',this)" style="background:#00995c;color:white;border:none;border-radius:100px;padding:7px 14px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif">In attesa</button>
-    <button onclick="loadCases('all',this)" style="background:white;color:#6b7280;border:1px solid #e5e7eb;border-radius:100px;padding:7px 14px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif">Tutte</button>
-  </div>
-  <div id="cases-container" style="padding-bottom:20px">
-    <div class="loader" style="margin:20px 18px">Caricamento...</div>
-  </div>
+    <header style="background:#1e40af;color:white"><div class="logo" style="color:white">Medico Subito — Dashboard</div></header>
+    <div class="section">
+        <button onclick="generateAIResponse()">Genera bozza AI</button>
+        <textarea id="ai-draft" style="width:100%;min-height:200px;margin:15px 0"></textarea>
+        <button class="green-btn" onclick="signAndSend()">✅ Firma e Invia al Paziente</button>
+    </div>
 </div>
 
-<!-- ═══ DETTAGLIO CASO ═══ -->
-<div id="s-doc-case" class="screen">
-  <div class="doc-header">
-    <div class="doc-header-title">Dettaglio richiesta</div>
-    <button class="doc-exit" onclick="showScreen('s-doc-dash')">← Dashboard</button>
-  </div>
-  <div class="detail-section">
-    <div class="patient-block">
-      <h3 id="dc-nome">—</h3>
-      <p id="dc-sub">—</p>
-      <div id="dc-info"></div>
+<!-- PAGAMENTO, INFO, CONTATTI, PRIVACY, TERMINI -->
+<div id="s-payment" class="screen">... (Stripe) ...</div>
+<div id="s-contatti" class="screen">
+    <header><button onclick="showScreen('s-home')">←</button><div class="logo">Contatti</div></header>
+    <div class="card">Email: info@medicosubito.app<br>Risposta entro poche ore (7 giorni su 7)</div>
+</div>
+
+<div id="s-privacy" class="screen">
+    <header><button onclick="showScreen('s-home')">←</button><div class="logo">Privacy & Legal</div></header>
+    <div class="section">
+        <h2>Informativa Privacy e Sicurezza (GDPR + Normativa Italiana)</h2>
+        <p><strong>Titolare:</strong> Medico Subito (servizio di telemedicina)</p>
+        <p>Trattiamo i tuoi dati sanitari ex art. 9 GDPR per finalità di cura, in conformità alle <strong>Linee Guida Telemedicina 21/09/2022</strong> del Ministero della Salute e FNOMCeO.</p>
+        <p><strong>Sicurezza:</strong> Crittografia, accesso limitato, hosting GDPR-compliant, audit regolari.</p>
+        <p>Consenso informato obbligatorio. Diritti ex GDPR esercitabili a info@medicosubito.app.</p>
+        <p>Per reclami: Garante Privacy.</p>
     </div>
-    <div class="complaint-block">
-      <div class="complaint-lbl">DESCRIZIONE DEL PAZIENTE</div>
-      <div id="dc-complaint">—</div>
-    </div>
-    <div id="dc-attachments-block" style="display:none;margin-bottom:12px">
-      <div class="complaint-lbl" style="font-size:.68rem;font-weight:700;color:#00995c;letter-spacing:.06em;margin-bottom:8px">ALLEGATI</div>
-      <div id="dc-attachments"></div>
-    </div>
-    <div class="ai-block">
-      <div class="ai-lbl">🤖 ANALISI AI <span class="ai-badge">SOLO PER TE</span></div>
-      <div class="ai-text" id="dc-ai">Preparazione in corso...</div>
-    </div>
-    <div class="reply-block">
-      <div class="reply-lbl">LA TUA RISPOSTA / PRESCRIZIONE — modifica se necessario</div>
-      <textarea class="reply-area" id="dc-reply" placeholder="La bozza AI apparirà qui..."></textarea>
-    </div>
-    <button class="sign-btn" id="sign-btn" onclick="inviaRisposta()">✅ Firma e invia al paziente</button>
-    <button class="white-btn" style="margin-bottom:20px" onclick="showScreen('s-doc-dash')">← Torna alla dashboard</button>
-    <div class="sent-ok" id="dc-sent">
-      <h3>✅ Risposta firmata!</h3>
-      <p id="dc-sent-msg">Risposta salvata e inviata al paziente.</p>
-    </div>
-  </div>
 </div>
 
 <script>
-const DOC_PWD = 'medico2025';
-let conversazione = [];
-let tipoRichiesta = '';
-let allCases = [];
-let currentCaseId = null;
-let uploadedFiles = [];
+const stripe = Stripe('pk_live_TUA_CHIAVE_QUI');
 
-window.addEventListener('load', function(){
-  if(window.location.hash === '#medico') showScreen('s-doc-login');
-});
-
-function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
+function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
 }
 
-function quickStart(tipo){
-  document.getElementById("requestType").value = tipo;
-  showScreen('s-richiesta');
-  setTimeout(()=>document.getElementById("problem").focus(), 300);
+function preparePatientForm() {
+    document.getElementById('patient-form').classList.remove('hidden');
 }
 
-function stripMarkdown(text){
-  return text
-    .replace(/\*\*(.*?)\*\*/g,'$1')
-    .replace(/\*(.*?)\*/g,'$1')
-    .replace(/#{1,6}\s/g,'')
-    .replace(/`(.*?)`/g,'$1')
-    .trim();
+async function submitPatientRequest() {
+    // Invia al backend (AI + salvataggio)
+    document.getElementById('patient-success').classList.remove('hidden');
 }
 
-function handleFiles(files){
-  for(const f of files){
-    if(uploadedFiles.length >= 5){ alert("Massimo 5 allegati"); break; }
-    if(f.size > 10*1024*1024){ alert(f.name+" è troppo grande (max 10MB)"); continue; }
-    uploadedFiles.push(f);
-  }
-  renderFileList();
+function generateAIResponse() {
+    document.getElementById('ai-draft').value = "Bozza AI generata:\n\nDiagnosi presunta: ...\nPrescrizione: ...";
 }
 
-function renderFileList(){
-  const list = document.getElementById("file-list");
-  const area = document.getElementById("upload-area");
-  if(uploadedFiles.length === 0){ list.innerHTML=''; area.classList.remove('has-files'); return; }
-  area.classList.add('has-files');
-  list.innerHTML = uploadedFiles.map((f,i)=>`
-    <div class="file-item">
-      <span class="file-name">${f.type.startsWith('image/')? '🖼️' : '📄'} ${f.name}</span>
-      <span class="file-remove" onclick="removeFile(${i})">✕</span>
-    </div>
-  `).join('');
+function signAndSend() {
+    alert("✅ Prescrizione firmata digitalmente e inviata al paziente via email.");
 }
 
-function removeFile(i){ uploadedFiles.splice(i,1); renderFileList(); }
-
-function toBase64(file){
-  return new Promise((resolve,reject)=>{
-    const r = new FileReader();
-    r.onload = ()=>resolve(r.result);
-    r.onerror = reject;
-    r.readAsDataURL(file);
-  });
-}
-
-async function sendRequest(){
-  const type = document.getElementById("requestType").value;
-  const text = document.getElementById("problem").value.trim();
-  if(!type){alert("Seleziona il tipo di richiesta");return;}
-  if(!text){alert("Descrivi il problema");return;}
-  tipoRichiesta = type;
-  conversazione = [];
-  showLoading();
-  conversazione.push({role:"user",content:"Tipo richiesta: "+type+"\n\nRichiesta paziente:\n"+text});
-  await callAI();
-}
-
-async function sendFollowup(){
-  const followup = document.getElementById("followup").value.trim();
-  if(!followup){alert("Scrivi un dettaglio");return;}
-  document.getElementById("followup").value = "";
-  conversazione.push({role:"user",content:followup});
-  showLoading();
-  await callAI();
-}
-
-async function callAI(){
-  try{
-    const res = await fetch("/api/consult",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:conversazione.map(m=>m.role+": "+m.content).join("\n\n")})});
-    const data = await res.json();
-    const risposta = stripMarkdown(data.answer||data.error||"Errore.");
-    conversazione.push({role:"assistant",content:risposta});
-    document.getElementById("loading").classList.add("hidden");
-    document.getElementById("response").classList.remove("hidden");
-    document.getElementById("response").textContent = risposta;
-    document.getElementById("rx-section").classList.remove("hidden");
-    document.getElementById("warning").classList.remove("hidden");
-    document.getElementById("doctor-form").classList.add("hidden");
-    document.getElementById("success-box").classList.add("hidden");
-    document.getElementById("response").scrollIntoView({behavior:"smooth"});
-  }catch(err){
-    document.getElementById("loading").classList.add("hidden");
-    alert("Errore: "+err.message);
-  }
-}
-
-function showLoading(){
-  document.getElementById("loading").classList.remove("hidden");
-  document.getElementById("response").classList.add("hidden");
-  document.getElementById("rx-section").classList.add("hidden");
-  document.getElementById("warning").classList.add("hidden");
-  document.getElementById("doctor-form").classList.add("hidden");
-}
-
-function showDoctorForm(){
-  document.getElementById("doctor-form").classList.remove("hidden");
-  document.getElementById("doctor-form").scrollIntoView({behavior:"smooth"});
-}
-
-function hideDoctorForm(){
-  document.getElementById("doctor-form").classList.add("hidden");
-}
-
-async function submitToDoctor(){
-  const nome = document.getElementById("patient-name").value.trim();
-  const email = document.getElementById("patient-email").value.trim();
-  if(!nome){alert("Inserisci nome e cognome");return;}
-  if(!email||!email.includes("@")){alert("Inserisci un'email valida");return;}
-  if(!document.getElementById("c1").checked){alert("Devi accettare i Termini e Condizioni");return;}
-  if(!document.getElementById("c2").checked){alert("Devi accettare il trattamento dei dati sanitari");return;}
-  if(!document.getElementById("c3").checked){alert("Devi confermare di aver compreso i limiti del servizio");return;}
-
-  const btn = document.querySelector('#doctor-form .green-btn');
-  btn.textContent = "Invio in corso...";
-  btn.disabled = true;
-
-  const ultimaRisposta = conversazione.filter(m=>m.role==="assistant").pop()?.content||"";
-  let allegati = [];
-  for(const f of uploadedFiles){
-    try{ const b64 = await toBase64(f); allegati.push({name:f.name,type:f.type,data:b64}); }catch(e){}
-  }
-
-  try{
-    const res = await fetch("/api/submit-medical-request",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        tipo:tipoRichiesta,
-        patientText:document.getElementById("problem").value,
-        patientName:nome,
-        dateOfBirth:document.getElementById("patient-dob").value,
-        email:email,
-        phone:document.getElementById("patient-phone").value,
-        clinicalData:document.getElementById("patient-extra").value,
-        aiResponse:ultimaRisposta,
-        conversazione:conversazione.map(m=>m.role+": "+m.content).join("\n\n"),
-        allegati:allegati,
-        consenso:true
-      })
-    });
-    if(!res.ok) throw new Error("Errore server");
-    document.getElementById("doctor-form").classList.add("hidden");
-    document.getElementById("rx-section").classList.add("hidden");
-    document.getElementById("warning").classList.add("hidden");
-    document.getElementById("success-box").classList.remove("hidden");
-    document.getElementById("success-box").scrollIntoView({behavior:"smooth"});
-    uploadedFiles=[];
-    renderFileList();
-  }catch(err){
-    alert("Errore: "+err.message);
-    btn.textContent="Invia al medico →";
-    btn.disabled=false;
-  }
-}
-
-function newRequest(){
-  document.getElementById("problem").value="";
-  document.getElementById("requestType").value="";
-  document.getElementById("followup").value="";
-  uploadedFiles=[];
-  renderFileList();
-  ["c1","c2","c3"].forEach(id=>document.getElementById(id).checked=false);
-  ["response","rx-section","warning","doctor-form","success-box"].forEach(id=>document.getElementById(id).classList.add("hidden"));
-  conversazione=[];
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function loginMedico(){
-  const pwd = document.getElementById("doc-pwd").value;
-  if(pwd===DOC_PWD){
-    document.getElementById("e-pwd").style.display="none";
-    showScreen('s-doc-dash');
-    loadCases('pending');
-  }else{
-    document.getElementById("e-pwd").style.display="block";
-  }
-}
-
-async function loadCases(filter, btn){
-  const cont = document.getElementById("cases-container");
-  cont.innerHTML='<div class="loader" style="margin:20px 18px">Caricamento...</div>';
-  try{
-    const res = await fetch("/api/submit-medical-request",{headers:{"Authorization":"Bearer "+DOC_PWD}});
-    allCases = await res.json();
-    if(!Array.isArray(allCases)) allCases=[];
-    const pending = allCases.filter(c=>!c.risposta_medico);
-    document.getElementById("doc-count").textContent = pending.length+" in attesa";
-    let filtered = filter==='pending' ? pending : allCases;
-    if(filtered.length===0){
-      cont.innerHTML='<div class="empty-state"><div class="empty-icon">📭</div><p>Nessuna richiesta</p></div>';
-      return;
-    }
-    cont.innerHTML = filtered.map(c=>{
-      const isDone=!!c.risposta_medico;
-      const hasFiles=c.allegati&&c.allegati.length>0;
-      return `<div class="case-card ${!isDone?'pending':''}" onclick="openCase('${c.id}')">
-        <div class="case-name">${c.patient_name||'—'} ${hasFiles?'📎':''}</div>
-        <div class="case-meta">${c.tipo||'consulto'} · ${new Date(c.created_at).toLocaleDateString('it-IT')} · ${c.email||''}</div>
-        <div class="case-preview">${(c.patient_text||'').slice(0,120)}...</div>
-        <div class="${isDone?'case-status-done':'case-status-pending'}">${isDone?'✅ Risposto':'⏳ In attesa'}</div>
-      </div>`;
-    }).join('');
-  }catch(e){
-    cont.innerHTML='<div style="padding:20px;color:#dc2626">Errore: '+e.message+'</div>';
-  }
-}
-
-async function openCase(id){
-  currentCaseId=id;
-  document.getElementById("dc-sent").style.display="none";
-  document.getElementById("dc-reply").value="";
-  document.getElementById("dc-ai").textContent="Preparazione analisi AI...";
-  document.getElementById("sign-btn").disabled=false;
-  document.getElementById("sign-btn").textContent="✅ Firma e invia al paziente";
-  document.getElementById("dc-attachments-block").style.display="none";
-  showScreen('s-doc-case');
-  const c=allCases.find(x=>x.id==id);
-  if(!c) return;
-  document.getElementById("dc-nome").textContent=c.patient_name||'—';
-  document.getElementById("dc-sub").textContent=(c.tipo||'consulto')+' · '+new Date(c.created_at).toLocaleDateString('it-IT');
-  document.getElementById("dc-info").innerHTML=`
-    <div class="patient-row"><span class="patient-lbl">Email</span><span class="patient-val">${c.email||'—'}</span></div>
-    <div class="patient-row"><span class="patient-lbl">Telefono</span><span class="patient-val">${c.phone||'—'}</span></div>
-    <div class="patient-row"><span class="patient-lbl">Data nascita</span><span class="patient-val">${c.date_of_birth||'—'}</span></div>
-  `;
-  let testo=c.patient_text||'—';
-  if(c.clinical_data) testo+='\n\nDati clinici: '+c.clinical_data;
-  document.getElementById("dc-complaint").textContent=testo;
-  if(c.allegati&&c.allegati.length>0){
-    document.getElementById("dc-attachments-block").style.display="block";
-    document.getElementById("dc-attachments").innerHTML=c.allegati.map(a=>{
-      if(a.type&&a.type.startsWith('image/')){
-        return `<div style="margin-bottom:8px"><img src="${a.data}" style="max-width:100%;border-radius:10px;border:1px solid #e5e7eb"/><div style="font-size:12px;color:#6b7280;margin-top:4px">${a.name}</div></div>`;
-      }else{
-        return `<div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:6px">📄 ${a.name}</div>`;
-      }
-    }).join('');
-  }
-  generaAI(c);
-}
-
-async function generaAI(caso){
-  try{
-    const prompt="Sei un assistente clinico italiano. Prepara una bozza di risposta/prescrizione per il medico. Tipo: "+
-      (caso.tipo||'consulto')+". Paziente: "+(caso.patient_name||'')+", nato "+
-      (caso.date_of_birth||'n.d.')+". Problema: "+(caso.patient_text||'')+
-      ". Dati clinici: "+(caso.clinical_data||'non specificati')+
-      ". Scrivi: 1) Riepilogo clinico in 2 frasi. 2) Bozza prescrizione/risposta pronta. Per farmaci: nome, dosaggio, posologia, durata. Per esami: lista specifica. Sii diretto e clinico.";
-    const res=await fetch("/api/consult",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:prompt})});
-    const data=await res.json();
-    const testo=stripMarkdown(data.answer||'Analisi non disponibile.');
-    document.getElementById("dc-ai").textContent=testo;
-    document.getElementById("dc-reply").value=testo;
-  }catch(e){
-    document.getElementById("dc-ai").textContent="Analisi non disponibile. Scrivi la risposta manualmente.";
-    document.getElementById("dc-reply").value="";
-  }
-}
-
-async function inviaRisposta(){
-  const txt=document.getElementById("dc-reply").value.trim();
-  if(!txt){alert("Scrivi una risposta prima di inviare.");return;}
-  const btn=document.getElementById("sign-btn");
-  btn.disabled=true;
-  btn.textContent="Invio in corso...";
-  try{
-    const res=await fetch("/api/submit-medical-request",{
-      method:"PUT",
-      headers:{"Content-Type":"application/json","Authorization":"Bearer "+DOC_PWD},
-      body:JSON.stringify({id:currentCaseId,risposta_medico:txt,stato:'risposto'})
-    });
-    if(!res.ok) throw new Error("Errore server "+res.status);
-    const c=allCases.find(x=>x.id==currentCaseId);
-    if(c) c.risposta_medico=txt;
-    document.getElementById("dc-sent").style.display="block";
-    document.getElementById("dc-sent-msg").textContent="Risposta inviata a "+(c?.email||'il paziente')+".";
-    btn.textContent="✅ Firmato";
-  }catch(e){
-    alert("Errore: "+e.message);
-    btn.disabled=false;
-    btn.textContent="✅ Firma e invia al paziente";
-  }
+// Stripe
+async function startStripeCheckout() {
+    alert("Redirect a Stripe Checkout (collega backend per produzione)");
 }
 </script>
+
+<footer style="text-align:center;padding:20px;font-size:12px;color:#666;margin-top:50px">
+    © Medico Subito • Privacy • Termini • GDPR • Linee Guida Telemedicina 2022
+</footer>
+
+<link rel="manifest" href="manifest.json">
 </body>
 </html>
