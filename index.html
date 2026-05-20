@@ -8,106 +8,163 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{font-family:'Inter',sans-serif;background:#f5f7f7;color:#0f172a}
-header{height:78px;background:white;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:100}
-.menu{font-size:34px;font-weight:700;color:#1f2937}
+header{height:64px;background:white;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:center;padding:0 20px;position:sticky;top:0;z-index:100}
 .logo-wrap{display:flex;flex-direction:column;align-items:center}
-.logo{font-size:30px;font-weight:800;color:#00995c;letter-spacing:-1px}
-.logo-sub{font-size:11px;font-weight:700;letter-spacing:6px;color:#475569;margin-top:-2px}
-.hero{padding:26px 18px 10px}
+.logo{font-size:26px;font-weight:800;color:#00995c;letter-spacing:-1px}
+.logo-sub{font-size:10px;font-weight:700;letter-spacing:6px;color:#475569;margin-top:-2px}
+.hero{padding:20px 18px 10px}
 .hero-card{background:white;border-radius:28px;padding:26px 22px;border:1px solid #e5e7eb}
-.hero-title{font-size:42px;line-height:1.02;font-weight:800;color:#0f172a;margin-bottom:16px;letter-spacing:-2px}
-.hero-text{font-size:17px;line-height:1.6;color:#475569;margin-bottom:24px}
-.green-btn{width:100%;height:58px;border:none;border-radius:18px;background:#00995c;color:white;font-size:18px;font-weight:800;margin-top:14px;cursor:pointer;font-family:'Inter',sans-serif}
-.white-btn{width:100%;height:58px;border-radius:18px;background:white;border:2px solid #00995c;color:#00995c;font-size:18px;font-weight:800;margin-top:14px;cursor:pointer;font-family:'Inter',sans-serif}
-.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
-.quick{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:18px;padding:18px 14px;font-size:15px;font-weight:700;color:#065f46;text-align:center;cursor:pointer}
+.hero-title{font-size:38px;line-height:1.05;font-weight:800;color:#0f172a;margin-bottom:14px;letter-spacing:-1.5px}
+.hero-text{font-size:16px;line-height:1.6;color:#475569;margin-bottom:20px}
+.green-btn{width:100%;height:56px;border:none;border-radius:18px;background:#00995c;color:white;font-size:17px;font-weight:800;margin-top:14px;cursor:pointer;font-family:'Inter',sans-serif}
+.white-btn{width:100%;height:56px;border-radius:18px;background:white;border:2px solid #00995c;color:#00995c;font-size:17px;font-weight:800;margin-top:12px;cursor:pointer;font-family:'Inter',sans-serif}
+.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.quick{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:16px;padding:16px 12px;font-size:14px;font-weight:700;color:#065f46;text-align:center;cursor:pointer}
 .quick:hover{background:#dcfce7}
 .section{padding:0 18px 18px}
 .card{background:white;border-radius:28px;padding:24px 20px;border:1px solid #e5e7eb;margin-top:16px}
 .label{font-size:13px;font-weight:800;letter-spacing:1px;color:#00995c;margin-bottom:14px;text-transform:uppercase}
 .title{font-size:20px;font-weight:800;margin-bottom:18px;color:#0f172a}
-textarea,input,select{width:100%;border:1px solid #d1d5db;border-radius:18px;padding:18px;font-size:17px;background:white;margin-bottom:14px;font-family:'Inter',sans-serif;color:#0f172a}
+textarea,input,select{width:100%;border:1px solid #d1d5db;border-radius:16px;padding:16px;font-size:16px;background:white;margin-bottom:14px;font-family:'Inter',sans-serif;color:#0f172a}
 textarea{min-height:120px;resize:none}
-.answer{background:#f0fdf4;border-radius:22px;padding:20px;font-size:16px;line-height:1.7;color:#065f46;margin-top:18px;white-space:pre-wrap;border:1px solid #bbf7d0}
-.rx-btn{width:100%;height:64px;border:none;border-radius:18px;background:#00995c;color:white;font-size:19px;font-weight:800;margin-top:16px;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 4px 14px rgba(0,153,92,.3)}
-.section-title{font-size:16px;font-weight:700;color:#0f172a;margin:18px 0 10px}
-.warning{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:18px;border-radius:20px;line-height:1.6;font-size:15px;margin-top:14px}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:82px;background:white;border-top:1px solid #e5e7eb;display:flex;justify-content:space-around;align-items:center;z-index:50}
-.nav-item{display:flex;flex-direction:column;align-items:center;font-size:13px;color:#6b7280;font-weight:600;cursor:pointer}
+.answer{background:#f0fdf4;border-radius:20px;padding:18px;font-size:15px;line-height:1.7;color:#065f46;margin-top:18px;white-space:pre-wrap;border:1px solid #bbf7d0}
+.rx-btn{width:100%;height:60px;border:none;border-radius:18px;background:#00995c;color:white;font-size:18px;font-weight:800;margin-top:16px;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 4px 14px rgba(0,153,92,.3)}
+.section-title{font-size:15px;font-weight:700;color:#0f172a;margin:18px 0 10px}
+.warning{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:16px;border-radius:18px;line-height:1.6;font-size:14px;margin-top:14px}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:72px;background:white;border-top:1px solid #e5e7eb;display:flex;justify-content:space-around;align-items:center;z-index:50}
+.nav-item{display:flex;flex-direction:column;align-items:center;font-size:11px;color:#6b7280;font-weight:600;cursor:pointer;gap:2px;padding:6px 12px;border-radius:12px;transition:all .15s}
+.nav-item:hover{background:#f0fdf4;color:#00995c}
 .nav-item.active{color:#00995c}
-.spacer{height:120px}
+.spacer{height:100px}
 .hidden{display:none}
-.loader{margin-top:18px;background:#f8fafc;border-radius:18px;padding:18px;font-size:16px;color:#475569;text-align:center}
-.success{background:#f0fdf4;border:1px solid #86efac;border-radius:22px;padding:24px;text-align:center;margin-top:18px}
-.success h3{font-size:20px;font-weight:800;color:#15803d;margin-bottom:8px}
-.success p{font-size:15px;color:#166534;line-height:1.6}
+.loader{margin-top:18px;background:#f8fafc;border-radius:16px;padding:16px;font-size:15px;color:#475569;text-align:center}
+.success{background:#f0fdf4;border:1px solid #86efac;border-radius:20px;padding:22px;text-align:center;margin-top:18px}
+.success h3{font-size:19px;font-weight:800;color:#15803d;margin-bottom:8px}
+.success p{font-size:14px;color:#166534;line-height:1.6}
 .screen{display:none}
 .screen.active{display:block}
-.doc-header{background:#0f172a;color:white;padding:0 20px;height:64px;display:flex;align-items:center;justify-content:space-between}
-.doc-header-title{font-size:1rem;font-weight:700}
-.doc-exit{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);border-radius:10px;padding:8px 14px;font-size:.82rem;cursor:pointer;font-family:'Inter',sans-serif}
-.case-card{background:white;border:1px solid #e5e7eb;border-radius:18px;padding:16px 18px;margin:12px 18px 0;cursor:pointer;transition:all .2s}
+
+/* INFO SCREEN */
+.info-section{padding:20px 18px}
+.info-card{background:white;border-radius:20px;padding:20px;border:1px solid #e5e7eb;margin-bottom:14px}
+.info-card h3{font-size:17px;font-weight:800;color:#0f172a;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.info-card p{font-size:14px;color:#475569;line-height:1.65}
+.step-num{width:28px;height:28px;border-radius:50%;background:#00995c;color:white;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* CONTATTI SCREEN */
+.contact-card{background:white;border-radius:20px;padding:20px;border:1px solid #e5e7eb;margin-bottom:14px;display:flex;align-items:center;gap:16px;cursor:pointer}
+.contact-ico{font-size:1.8rem;flex-shrink:0}
+.contact-title{font-size:15px;font-weight:700;color:#0f172a;margin-bottom:2px}
+.contact-sub{font-size:13px;color:#6b7280}
+
+/* DOCTOR */
+.doc-header{background:#0f172a;color:white;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.doc-header-title{font-size:.95rem;font-weight:700}
+.doc-exit{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);border-radius:10px;padding:7px 13px;font-size:.8rem;cursor:pointer;font-family:'Inter',sans-serif}
+.case-card{background:white;border:1px solid #e5e7eb;border-radius:16px;padding:15px 17px;margin:10px 18px 0;cursor:pointer;transition:all .2s}
 .case-card:hover{border-color:#00995c;box-shadow:0 4px 12px rgba(0,153,92,.1)}
 .case-card.pending{border-left:4px solid #00995c}
-.case-name{font-size:.95rem;font-weight:700;margin-bottom:4px}
-.case-meta{font-size:.75rem;color:#6b7280;margin-bottom:8px}
-.case-preview{font-size:.83rem;color:#475569;line-height:1.5}
-.case-status-pending{font-size:.75rem;font-weight:700;color:#d97706;margin-top:8px}
-.case-status-done{font-size:.75rem;font-weight:700;color:#059669;margin-top:8px}
+.case-name{font-size:.93rem;font-weight:700;margin-bottom:4px}
+.case-meta{font-size:.73rem;color:#6b7280;margin-bottom:8px}
+.case-preview{font-size:.82rem;color:#475569;line-height:1.5}
+.case-status-pending{font-size:.73rem;font-weight:700;color:#d97706;margin-top:8px}
+.case-status-done{font-size:.73rem;font-weight:700;color:#059669;margin-top:8px}
 .detail-section{padding:16px 18px}
-.patient-block{background:#0f172a;color:white;border-radius:18px;padding:18px;margin-bottom:14px}
-.patient-block h3{font-size:1.1rem;font-weight:800;margin-bottom:4px}
-.patient-block p{font-size:.78rem;opacity:.6;margin-bottom:12px}
-.patient-row{display:flex;justify-content:space-between;font-size:.83rem;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.patient-block{background:#0f172a;color:white;border-radius:16px;padding:16px;margin-bottom:12px}
+.patient-block h3{font-size:1.05rem;font-weight:800;margin-bottom:4px}
+.patient-block p{font-size:.76rem;opacity:.6;margin-bottom:10px}
+.patient-row{display:flex;justify-content:space-between;font-size:.82rem;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.08)}
 .patient-row:last-child{border-bottom:none}
 .patient-lbl{opacity:.55}
 .patient-val{font-weight:600;text-align:right;max-width:65%;word-break:break-all}
-.complaint-block{background:#f8fafc;border:1px solid #e5e7eb;border-radius:16px;padding:16px;margin-bottom:14px;font-size:.88rem;line-height:1.7;color:#374151}
-.complaint-lbl{font-size:.7rem;font-weight:700;color:#00995c;letter-spacing:.06em;margin-bottom:8px}
-.ai-block{background:#f0fdf4;border:1px solid #86efac;border-radius:16px;padding:16px;margin-bottom:14px}
-.ai-lbl{font-size:.68rem;font-weight:700;color:#15803d;letter-spacing:.08em;margin-bottom:8px}
-.ai-badge{background:#15803d;color:white;border-radius:4px;padding:1px 6px;font-size:.6rem;margin-left:4px}
-.ai-text{font-size:.85rem;color:#166534;line-height:1.7;white-space:pre-wrap}
-.reply-block{border:1.5px solid #e5e7eb;border-radius:16px;padding:16px;margin-bottom:14px}
-.reply-lbl{font-size:.78rem;font-weight:700;color:#374151;margin-bottom:10px}
-.reply-area{width:100%;border:1.5px solid #e5e7eb;border-radius:10px;padding:12px;font-family:'Inter',sans-serif;font-size:.88rem;resize:vertical;min-height:120px;outline:none;color:#0f172a}
+.complaint-block{background:#f8fafc;border:1px solid #e5e7eb;border-radius:14px;padding:14px;margin-bottom:12px;font-size:.86rem;line-height:1.7;color:#374151}
+.complaint-lbl{font-size:.68rem;font-weight:700;color:#00995c;letter-spacing:.06em;margin-bottom:8px}
+.ai-block{background:#f0fdf4;border:1px solid #86efac;border-radius:14px;padding:14px;margin-bottom:12px}
+.ai-lbl{font-size:.66rem;font-weight:700;color:#15803d;letter-spacing:.08em;margin-bottom:8px}
+.ai-badge{background:#15803d;color:white;border-radius:4px;padding:1px 6px;font-size:.58rem;margin-left:4px}
+.ai-text{font-size:.84rem;color:#166534;line-height:1.7;white-space:pre-wrap}
+.reply-block{border:1.5px solid #e5e7eb;border-radius:14px;padding:14px;margin-bottom:12px}
+.reply-lbl{font-size:.76rem;font-weight:700;color:#374151;margin-bottom:8px}
+.reply-area{width:100%;border:1.5px solid #e5e7eb;border-radius:10px;padding:12px;font-family:'Inter',sans-serif;font-size:.86rem;resize:vertical;min-height:120px;outline:none;color:#0f172a}
 .reply-area:focus{border-color:#00995c}
-.sign-btn{width:100%;background:#00995c;color:white;border:none;border-radius:14px;padding:16px;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:10px}
-.sent-ok{background:#f0fdf4;border:1.5px solid #86efac;border-radius:14px;padding:18px;text-align:center;margin-top:14px;display:none}
-.sent-ok h3{color:#15803d;margin-bottom:4px;font-size:1rem}
-.sent-ok p{font-size:.83rem;color:#166534}
+.sign-btn{width:100%;background:#00995c;color:white;border:none;border-radius:14px;padding:15px;font-size:.95rem;font-weight:800;cursor:pointer;font-family:'Inter',sans-serif;margin-bottom:10px}
+.sent-ok{background:#f0fdf4;border:1.5px solid #86efac;border-radius:14px;padding:16px;text-align:center;margin-top:12px;display:none}
+.sent-ok h3{color:#15803d;margin-bottom:4px;font-size:.95rem}
+.sent-ok p{font-size:.81rem;color:#166534}
 .empty-state{text-align:center;padding:60px 20px;color:#9ca3af}
 .empty-icon{font-size:3rem;margin-bottom:12px}
 </style>
 </head>
 <body>
 
-<!-- PAZIENTE -->
-<div id="s-paziente" class="screen active">
+<!-- ═══ HOME ═══ -->
+<div id="s-home" class="screen active">
   <header>
-    <div class="menu">☰</div>
     <div class="logo-wrap">
       <div class="logo">MedicoOra</div>
       <div class="logo-sub">ONLINE DOCTOR</div>
     </div>
-    <div style="width:60px"></div>
   </header>
 
   <div class="hero">
     <div class="hero-card">
       <div class="hero-title">Prescrizioni online rapide.</div>
-      <div class="hero-text">Richiedi rinnovi terapia, impegnative, richieste esami, certificati e valutazioni mediche senza videochiamata.</div>
-      <button class="green-btn" onclick="scrollToForm()">Inizia ora</button>
+      <div class="hero-text">Rinnovi terapia, richieste esami, certificati e valutazioni mediche senza videochiamata.</div>
+      <button class="green-btn" onclick="showScreen('s-richiesta')">Inizia ora →</button>
       <div class="quick-grid">
         <div class="quick" onclick="quickStart('Rinnovo terapia')">💊 Rinnovo farmaco</div>
         <div class="quick" onclick="quickStart('Richiesta esami')">🔬 Richiesta esami</div>
         <div class="quick" onclick="quickStart('Certificato medico')">📄 Certificato</div>
-        <div class="quick" onclick="quickStart('Valutazione sintomi')">🩺 Valutazione sintomi</div>
+        <div class="quick" onclick="quickStart('Valutazione sintomi')">🩺 Sintomi</div>
       </div>
     </div>
   </div>
 
   <div class="section">
+    <div class="card">
+      <div class="label">Come funziona</div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div class="step-num">1</div>
+          <div><div style="font-weight:700;font-size:15px;margin-bottom:3px">Descrivi il problema</div><div style="font-size:13px;color:#475569;line-height:1.5">Seleziona il servizio e descrivi la tua situazione. Ci vogliono 2 minuti.</div></div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div class="step-num">2</div>
+          <div><div style="font-weight:700;font-size:15px;margin-bottom:3px">Il medico valuta</div><div style="font-size:13px;color:#475569;line-height:1.5">Il medico riceve la tua richiesta e prepara la risposta entro 24 ore.</div></div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div class="step-num">3</div>
+          <div><div style="font-weight:700;font-size:15px;margin-bottom:3px">Ricevi la risposta via email</div><div style="font-size:13px;color:#475569;line-height:1.5">Prescrizione, richiesta esami, certificato o consulto direttamente nella tua casella email.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div style="background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:16px;border-radius:18px;line-height:1.6;font-size:13px">
+      ⚠️ <strong>Non usare in urgenza.</strong> Per dolore toracico, difficoltà respiratoria o emergenze chiama il <strong>118</strong>.
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+  <div class="bottom-nav">
+    <div class="nav-item active" onclick="showScreen('s-home')">🏠<div>Home</div></div>
+    <div class="nav-item" onclick="showScreen('s-richiesta')">📋<div>Richiesta</div></div>
+    <div class="nav-item" onclick="showScreen('s-info')">ℹ️<div>Info</div></div>
+    <div class="nav-item" onclick="showScreen('s-contatti')">✉️<div>Contatti</div></div>
+  </div>
+</div>
+
+<!-- ═══ RICHIESTA ═══ -->
+<div id="s-richiesta" class="screen">
+  <header>
+    <div class="logo-wrap">
+      <div class="logo">MedicoOra</div>
+      <div class="logo-sub">ONLINE DOCTOR</div>
+    </div>
+  </header>
+
+  <div class="section" style="padding-top:16px">
     <div class="card" id="main-form">
       <div class="label">Richiesta medica</div>
       <div class="title">Che cosa ti serve?</div>
@@ -121,7 +178,7 @@ textarea{min-height:120px;resize:none}
         <option>Altro</option>
       </select>
       <textarea id="problem" placeholder="Descrivi il problema o la richiesta..."></textarea>
-      <button class="green-btn" onclick="sendRequest()">Continua</button>
+      <button class="green-btn" onclick="sendRequest()">Continua →</button>
       <div id="loading" class="loader hidden">Sto preparando il parere medico...</div>
       <div id="response" class="answer hidden"></div>
       <div id="rx-section" class="hidden">
@@ -146,20 +203,112 @@ textarea{min-height:120px;resize:none}
       </div>
       <div id="success-box" class="success hidden">
         <h3>✅ Richiesta inviata!</h3>
-        <p>Il medico ha ricevuto la tua richiesta. Riceverai una risposta medica entro 24 ore all'indirizzo email indicato. Se appropriato, potrà includere prescrizione, certificato o richiesta esami.</p>
+        <p>Il medico ha ricevuto la tua richiesta. Riceverai una risposta entro 24 ore all'indirizzo email indicato. Se appropriato, includerà prescrizione, certificato o richiesta esami.</p>
       </div>
     </div>
   </div>
   <div class="spacer"></div>
   <div class="bottom-nav">
-    <div class="nav-item active">🏠<div>Home</div></div>
-    <div class="nav-item">📄<div>Richieste</div></div>
-    <div class="nav-item">ℹ️<div>Info</div></div>
-    <div class="nav-item">❓<div>Aiuto</div></div>
+    <div class="nav-item" onclick="showScreen('s-home')">🏠<div>Home</div></div>
+    <div class="nav-item active" onclick="showScreen('s-richiesta')">📋<div>Richiesta</div></div>
+    <div class="nav-item" onclick="showScreen('s-info')">ℹ️<div>Info</div></div>
+    <div class="nav-item" onclick="showScreen('s-contatti')">✉️<div>Contatti</div></div>
   </div>
 </div>
 
-<!-- LOGIN MEDICO -->
+<!-- ═══ INFO ═══ -->
+<div id="s-info" class="screen">
+  <header>
+    <div class="logo-wrap">
+      <div class="logo">MedicoOra</div>
+      <div class="logo-sub">ONLINE DOCTOR</div>
+    </div>
+  </header>
+  <div class="info-section">
+    <div style="font-size:20px;font-weight:800;color:#0f172a;margin-bottom:16px">Come funziona MedicoOra</div>
+
+    <div class="info-card">
+      <h3><div class="step-num">1</div>Descrivi il problema</h3>
+      <p>Seleziona il tipo di richiesta e descrivi la tua situazione in dettaglio. Inserisci farmaci che prendi, allergie e patologie note. Ci vogliono circa 2 minuti.</p>
+    </div>
+
+    <div class="info-card">
+      <h3><div class="step-num">2</div>Parere immediato dell'AI</h3>
+      <p>Un assistente medico AI ti fornisce subito un primo orientamento sulla tua richiesta, in modo empatico e chiaro.</p>
+    </div>
+
+    <div class="info-card">
+      <h3><div class="step-num">3</div>Il medico valuta e risponde</h3>
+      <p>La tua richiesta viene inviata al medico che la valuta clinicamente. Entro 24 ore ricevi via email la risposta medica, che potrà includere prescrizione, richiesta esami, certificato o indicazioni cliniche.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>💊 Cosa puoi richiedere</h3>
+      <p>Rinnovo terapia farmacologica · Richiesta esami del sangue o strumentali · Certificati medici (lavoro, sport, scuola) · Valutazione sintomi · Interpretazione referti · Visita specialistica</p>
+    </div>
+
+    <div class="info-card">
+      <h3>⚠️ Quando NON usare MedicoOra</h3>
+      <p>In caso di dolore toracico, difficoltà respiratoria, perdita di coscienza, sanguinamento importante o qualsiasi emergenza: chiama il <strong>118</strong> o vai al Pronto Soccorso.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>💶 Costo del servizio</h3>
+      <p>Abbonamento annuale: <strong>€60/anno</strong><br>Include consulti illimitati, prescrizioni, richieste esami e certificati quando clinicamente appropriati.</p>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="showScreen('s-home')">🏠<div>Home</div></div>
+    <div class="nav-item" onclick="showScreen('s-richiesta')">📋<div>Richiesta</div></div>
+    <div class="nav-item active" onclick="showScreen('s-info')">ℹ️<div>Info</div></div>
+    <div class="nav-item" onclick="showScreen('s-contatti')">✉️<div>Contatti</div></div>
+  </div>
+</div>
+
+<!-- ═══ CONTATTI ═══ -->
+<div id="s-contatti" class="screen">
+  <header>
+    <div class="logo-wrap">
+      <div class="logo">MedicoOra</div>
+      <div class="logo-sub">ONLINE DOCTOR</div>
+    </div>
+  </header>
+  <div class="info-section">
+    <div style="font-size:20px;font-weight:800;color:#0f172a;margin-bottom:16px">Contatti</div>
+
+    <div class="contact-card" onclick="window.location.href='mailto:info@medicoora.com'">
+      <div class="contact-ico">✉️</div>
+      <div>
+        <div class="contact-title">Email</div>
+        <div class="contact-sub">info@medicoora.com</div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h3>🕐 Orari di risposta</h3>
+      <p>Il medico risponde entro 24 ore dal lunedì al venerdì. Le richieste inviate nel weekend vengono processate il lunedì mattina.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>🔒 Privacy e sicurezza</h3>
+      <p>I tuoi dati medici sono trattati con la massima riservatezza nel rispetto del GDPR e delle normative sulla privacy sanitaria.</p>
+    </div>
+
+    <div style="margin-top:16px">
+      <button class="green-btn" onclick="showScreen('s-richiesta')">Fai una richiesta →</button>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="showScreen('s-home')">🏠<div>Home</div></div>
+    <div class="nav-item" onclick="showScreen('s-richiesta')">📋<div>Richiesta</div></div>
+    <div class="nav-item" onclick="showScreen('s-info')">ℹ️<div>Info</div></div>
+    <div class="nav-item active" onclick="showScreen('s-contatti')">✉️<div>Contatti</div></div>
+  </div>
+</div>
+
+<!-- ═══ LOGIN MEDICO ═══ -->
 <div id="s-doc-login" class="screen">
   <div class="doc-header">
     <div class="doc-header-title">MedicoOra — Accesso Medico</div>
@@ -177,22 +326,22 @@ textarea{min-height:120px;resize:none}
   </div>
 </div>
 
-<!-- DASHBOARD MEDICO -->
+<!-- ═══ DASHBOARD MEDICO ═══ -->
 <div id="s-doc-dash" class="screen">
   <div class="doc-header">
     <div class="doc-header-title">Richieste <span id="doc-count" style="background:rgba(255,255,255,.15);border-radius:100px;padding:2px 10px;font-size:.72rem;margin-left:6px"></span></div>
-    <button class="doc-exit" onclick="showScreen('s-paziente')">Esci</button>
+    <button class="doc-exit" onclick="showScreen('s-home')">Esci</button>
   </div>
-  <div style="display:flex;gap:8px;padding:16px 18px 0">
-    <button onclick="loadCases('pending',this)" id="tab-pending" style="background:#00995c;color:white;border:none;border-radius:100px;padding:8px 16px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif">In attesa</button>
-    <button onclick="loadCases('all',this)" id="tab-all" style="background:white;color:#6b7280;border:1px solid #e5e7eb;border-radius:100px;padding:8px 16px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif">Tutte</button>
+  <div style="display:flex;gap:8px;padding:14px 18px 0">
+    <button onclick="loadCases('pending',this)" style="background:#00995c;color:white;border:none;border-radius:100px;padding:7px 14px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif">In attesa</button>
+    <button onclick="loadCases('all',this)" style="background:white;color:#6b7280;border:1px solid #e5e7eb;border-radius:100px;padding:7px 14px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif">Tutte</button>
   </div>
   <div id="cases-container" style="padding-bottom:20px">
     <div class="loader" style="margin:20px 18px">Caricamento...</div>
   </div>
 </div>
 
-<!-- DETTAGLIO CASO -->
+<!-- ═══ DETTAGLIO CASO ═══ -->
 <div id="s-doc-case" class="screen">
   <div class="doc-header">
     <div class="doc-header-title">Dettaglio richiesta</div>
@@ -220,7 +369,7 @@ textarea{min-height:120px;resize:none}
     <button class="white-btn" style="margin-bottom:20px" onclick="showScreen('s-doc-dash')">← Torna alla dashboard</button>
     <div class="sent-ok" id="dc-sent">
       <h3>✅ Risposta firmata!</h3>
-      <p id="dc-sent-msg">Risposta salvata. Quando configurerai le email, il paziente la riceverà automaticamente.</p>
+      <p id="dc-sent-msg">Risposta salvata e inviata al paziente.</p>
     </div>
   </div>
 </div>
@@ -232,7 +381,6 @@ let tipoRichiesta = '';
 let allCases = [];
 let currentCaseId = null;
 
-// Accesso segreto via hash
 window.addEventListener('load', function(){
   if(window.location.hash === '#medico') showScreen('s-doc-login');
 });
@@ -243,14 +391,10 @@ function showScreen(id){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function scrollToForm(){
-  document.getElementById("main-form").scrollIntoView({behavior:"smooth"});
-}
-
 function quickStart(tipo){
   document.getElementById("requestType").value = tipo;
-  document.getElementById("main-form").scrollIntoView({behavior:"smooth"});
-  document.getElementById("problem").focus();
+  showScreen('s-richiesta');
+  setTimeout(()=>document.getElementById("problem").focus(), 300);
 }
 
 function stripMarkdown(text){
@@ -417,7 +561,6 @@ async function generaAI(caso){
       (caso.date_of_birth||'n.d.')+". Problema: "+(caso.patient_text||'')+
       ". Dati clinici: "+(caso.clinical_data||'non specificati')+
       ". Scrivi: 1) Riepilogo clinico in 2 frasi. 2) Bozza prescrizione/risposta pronta. Per farmaci: nome, dosaggio, posologia, durata. Per esami: lista specifica. Sii diretto e clinico.";
-
     const res = await fetch("/api/consult",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:prompt})});
     const data = await res.json();
     const testo = stripMarkdown(data.answer||'Analisi non disponibile.');
@@ -445,7 +588,7 @@ async function inviaRisposta(){
     const c = allCases.find(x=>x.id==currentCaseId);
     if(c) c.risposta_medico=txt;
     document.getElementById("dc-sent").style.display="block";
-    document.getElementById("dc-sent-msg").textContent="Risposta salvata per "+(c?.patient_name||'il paziente')+" ("+c?.email+"). Configurando Resend, verrà inviata automaticamente via email.";
+    document.getElementById("dc-sent-msg").textContent="Risposta inviata a "+(c?.email||'il paziente')+".";
     btn.textContent="✅ Firmato";
   }catch(e){
     alert("Errore: "+e.message);
