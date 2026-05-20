@@ -42,15 +42,15 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#1e40af;box-sh
 .success-box{background:#f0fdf4;border:1px solid #86efac;border-radius:16px;padding:22px;text-align:center;margin-top:16px}
 .success-box h3{font-size:18px;font-weight:800;color:#15803d;margin-bottom:6px}
 .success-box p{font-size:13px;color:#166534;line-height:1.6}
-.upload-zone{border:2px dashed #cbd5e1;border-radius:12px;padding:18px;text-align:center;cursor:pointer;margin-bottom:12px;transition:all .2s;background:#f8fafc}
+.upload-zone{border:2px dashed #cbd5e1;border-radius:12px;padding:18px;text-align:center;cursor:pointer;margin-bottom:12px;transition:all .2s;background:#f8fafc;position:relative;z-index:1;}
 .upload-zone:hover,.upload-zone.active{border-color:#1e40af;background:#eff6ff}
 .file-list{margin-top:8px;display:flex;flex-direction:column;gap:5px}
 .file-item{display:flex;align-items:center;justify-content:space-between;background:white;border:1px solid #e2e8f0;border-radius:8px;padding:7px 11px;font-size:12px}
 .file-name{color:#374151;font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .file-remove{color:#dc2626;cursor:pointer;font-weight:700;margin-left:8px}
-.consent-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:14px;margin-bottom:12px}
+.consent-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:14px;margin-bottom:12px;position:relative;z-index:5;}
 .consent-row{display:flex;align-items:flex-start;gap:10px}
-.consent-row input[type="checkbox"]{width:18px;height:18px;margin:0;flex-shrink:0;accent-color:#1e40af;cursor:pointer;margin-top:2px}
+.consent-row input[type="checkbox"]{width:22px;height:22px;min-width:22px;margin:0;flex-shrink:0;accent-color:#1e40af;cursor:pointer;margin-top:1px;position:relative;z-index:10;pointer-events:all;}
 .consent-row label{font-size:12.5px;color:#374151;line-height:1.6;cursor:pointer}
 .consent-row a{color:#1e40af;text-decoration:underline;cursor:pointer}
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;height:68px;background:white;border-top:1px solid #e2e8f0;display:flex;justify-content:space-around;align-items:center;z-index:50;box-shadow:0 -1px 6px rgba(0,0,0,.06)}
@@ -110,38 +110,46 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
 
 <!-- HOME -->
 <div id="s-home" class="screen active">
-  <header>
-    <div style="font-size:30px">🩺</div>
-    <div>
-      <div class="logo">Medico Subito</div>
-      <div class="logo-sub">Consulti medici certificati online</div>
+  <header style="gap:4px;height:72px">
+    <div style="font-size:64px;line-height:1">🩺</div>
+    <div style="display:flex;flex-direction:column;justify-content:center">
+      <div class="logo" style="font-size:30px;line-height:1.1;letter-spacing:-1px">Medico Subito</div>
     </div>
   </header>
 
   <div style="padding:16px 16px 0">
     <div class="card" style="padding:22px">
-      <div style="font-size:13px;font-weight:700;background:#1e40af;color:white;border-radius:8px;padding:6px 12px;display:inline-block;margin-bottom:10px">Prescrizioni e pareri medici online</div>
-      <h1 style="font-size:27px;line-height:1.15;font-weight:800;margin-bottom:10px;letter-spacing:-0.5px;color:#1e40af">Il tuo medico online,<br>sempre disponibile.</h1>
-      <p style="font-size:14px;color:#475569;line-height:1.65">Prescrizioni, richieste esami, certificati e valutazioni mediche. Risposta medica firmata, <strong>7 giorni su 7</strong>.</p>
-      <div class="trust-grid">
-        <div class="trust-item">✅ Medici certificati</div>
-        <div class="trust-item">🔒 GDPR compliant</div>
-        <div class="trust-item">📋 Risposta firmata</div>
-        <div class="trust-item">⚡ 7 giorni su 7</div>
-      </div>
-      <button class="btn-primary" onclick="showScreen('s-payment')">Attiva abbonamento — €60/anno</button>
-      <button class="btn-secondary" onclick="showScreen('s-richiesta')">Invia richiesta al medico</button>
+      <div style="font-size:20px;font-weight:900;background:#1e40af;color:#faff00;border-radius:12px;padding:12px 18px;display:block;margin-bottom:16px;letter-spacing:-0.3px;text-shadow:0 1px 3px rgba(0,0,0,.2);text-align:center;line-height:1.3">Prescrizioni e consulti<br>medici certificati online</div>
+      <h1 style="font-size:30px;line-height:1.1;font-weight:800;margin-bottom:12px;letter-spacing:-0.5px;color:#1e40af;width:100%;display:block">Il tuo medico online,<br>sempre disponibile.</h1>
+      <p style="font-size:17px;color:#0f172a;line-height:1.6;font-weight:700">Prescrizioni, richieste esami, certificati e valutazioni mediche. Risposta medica firmata, 7 giorni su 7.</p>
+
+      <button class="btn-primary" onclick="showScreen('s-payment')">Attiva abbonamento — €60/anno per i primi 10.000 iscritti</button>
+      <button class="btn-secondary" onclick="showScreen('s-richiesta')" style="background:#1e40af;border-color:#1e40af;color:#faff00;font-size:20px;font-weight:900;height:60px">Invia richiesta al medico</button>
     </div>
   </div>
 
   <div class="section">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px">
-      <div onclick="quickStart('Rinnovo terapia')" style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:14px;font-size:13px;font-weight:700;color:#1e3a8a;text-align:center;cursor:pointer">💊<br>Rinnovo farmaco</div>
-      <div onclick="quickStart('Richiesta esami')" style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:14px;font-size:13px;font-weight:700;color:#1e3a8a;text-align:center;cursor:pointer">🔬<br>Richiesta esami</div>
-      <div onclick="quickStart('Certificato medico')" style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:14px;font-size:13px;font-weight:700;color:#1e3a8a;text-align:center;cursor:pointer">📄<br>Certificato</div>
-      <div onclick="quickStart('Valutazione sintomi')" style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:14px;font-size:13px;font-weight:700;color:#1e3a8a;text-align:center;cursor:pointer">🩺<br>Valutazione</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:2px">
+      <div onclick="quickStart('Rinnovo terapia')" style="background:linear-gradient(135deg,#1e3a8a,#3b82f6);border-radius:16px;padding:20px 14px;text-align:center;cursor:pointer;color:white;box-shadow:0 4px 12px rgba(30,64,175,.3);active:opacity:.85">
+        <div style="font-size:3rem;margin-bottom:8px">💊</div>
+        <div style="font-size:19px;font-weight:900;line-height:1.2">Rinnovo<br>farmaco</div>
+      </div>
+      <div onclick="quickStart('Richiesta esami')" style="background:linear-gradient(135deg,#065f46,#059669);border-radius:16px;padding:20px 14px;text-align:center;cursor:pointer;color:white;box-shadow:0 4px 12px rgba(5,150,105,.3)">
+        <div style="font-size:3rem;margin-bottom:8px">🔬</div>
+        <div style="font-size:19px;font-weight:900;line-height:1.2">Richiesta<br>esami</div>
+      </div>
+      <div onclick="quickStart('Certificato medico')" style="background:linear-gradient(135deg,#7c3aed,#a78bfa);border-radius:16px;padding:20px 14px;text-align:center;cursor:pointer;color:white;box-shadow:0 4px 12px rgba(124,58,237,.3)">
+        <div style="font-size:3rem;margin-bottom:8px">📄</div>
+        <div style="font-size:19px;font-weight:900;line-height:1.2">Certificato<br>medico</div>
+      </div>
+      <div onclick="quickStart('Valutazione sintomi')" style="background:linear-gradient(135deg,#be185d,#ec4899);border-radius:16px;padding:20px 14px;text-align:center;cursor:pointer;color:white;box-shadow:0 4px 12px rgba(190,24,93,.3)">
+        <div style="font-size:3rem;margin-bottom:8px">🩺</div>
+        <div style="font-size:19px;font-weight:900;line-height:1.2">Consulto<br>medico</div>
+      </div>
     </div>
   </div>
+
+
 
   <div class="section">
     <div class="card">
@@ -179,7 +187,7 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
   <div class="bottom-nav">
     <div class="nav-item active" onclick="showScreen('s-home')">🏠<div>Home</div></div>
     <div class="nav-item" onclick="showScreen('s-richiesta')">📋<div>Richiesta</div></div>
-    <div class="nav-item" onclick="showScreen('s-info')">ℹ️<div>Info</div></div>
+    <div class="nav-item" onclick="showScreen('s-payment')">💳<div>Abbonati</div></div>
     <div class="nav-item" onclick="showScreen('s-contatti')">✉️<div>Contatti</div></div>
   </div>
 </div>
@@ -194,6 +202,7 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
     <div class="card" style="text-align:center;padding:28px 20px">
       <div style="font-size:2.5rem;margin-bottom:10px">💳</div>
       <div style="font-size:42px;font-weight:800;color:#1e40af;letter-spacing:-1px">€60<span style="font-size:18px;color:#64748b;font-weight:500">/anno</span></div>
+      <div style="background:#fef3c7;border:1px solid #fbbf24;color:#92400e;border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;margin-top:8px">🔥 Offerta lancio — Solo per i primi 10.000 iscritti</div>
       <div style="color:#1e40af;font-weight:700;margin:6px 0 4px;font-size:15px">Consulti illimitati · 7 giorni su 7</div>
       <div style="font-size:12.5px;color:#64748b;margin-bottom:20px">Accesso completo per 12 mesi</div>
       <div style="margin-bottom:12px">
