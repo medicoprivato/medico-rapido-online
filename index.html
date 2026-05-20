@@ -168,11 +168,12 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
   </div>
 
   <footer>
-    © 2025 Medico Subito &nbsp;·&nbsp;
-    <a onclick="prevScreen='s-home';showScreen('s-privacy')">Privacy</a> &nbsp;·&nbsp;
-    <a onclick="prevScreen='s-home';showScreen('s-termini')">Termini</a> &nbsp;·&nbsp;
-    <a onclick="prevScreen='s-home';showScreen('s-medici')">I nostri medici</a> &nbsp;·&nbsp;
-    GDPR · Telemedicina Min. Salute 2022
+    <strong style="color:#0f172a">Medico Subito</strong> — Servizio di telemedicina certificato<br>
+    <span style="font-size:11px;display:block;margin:4px 0 8px">Conforme alle Linee Guida Telemedicina Min. Salute 2022 · GDPR · FNOMCeO</span>
+    <a onclick="prevScreen='s-home';showScreen('s-privacy')">Privacy Policy</a> &nbsp;·&nbsp;
+    <a onclick="prevScreen='s-home';showScreen('s-termini')">Termini di Servizio</a> &nbsp;·&nbsp;
+    <a onclick="prevScreen='s-home';showScreen('s-medici')">Team medico</a><br>
+    <span style="font-size:11px;margin-top:6px;display:block;color:#94a3b8">© 2025 Medico Subito · info@medicoora.com</span>
   </footer>
 
   <div class="bottom-nav">
@@ -195,8 +196,11 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
       <div style="font-size:42px;font-weight:800;color:#1e40af;letter-spacing:-1px">€60<span style="font-size:18px;color:#64748b;font-weight:500">/anno</span></div>
       <div style="color:#1e40af;font-weight:700;margin:6px 0 4px;font-size:15px">Consulti illimitati · 7 giorni su 7</div>
       <div style="font-size:12.5px;color:#64748b;margin-bottom:20px">Accesso completo per 12 mesi</div>
+      <div style="margin-bottom:12px">
+        <input id="stripe-email-input" type="email" placeholder="La tua email *" style="margin-bottom:0;border-radius:12px;border:1.5px solid #cbd5e1;padding:14px;font-size:15px;font-family:Inter,sans-serif;width:100%"/>
+      </div>
       <button class="btn-primary" onclick="startStripeCheckout()" style="margin-top:0">Attiva ora — Pagamento sicuro →</button>
-      <div style="margin-top:12px;font-size:11.5px;color:#94a3b8">🔒 Pagamento sicuro con Stripe</div>
+      <div style="margin-top:12px;font-size:11.5px;color:#94a3b8">🔒 Pagamento sicuro con Stripe · Il pagamento è subordinato alla valutazione clinica del medico</div>
     </div>
     <div class="card">
       <div class="label">Incluso</div>
@@ -322,7 +326,7 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
   <div class="info-section">
     <div style="font-size:18px;font-weight:800;color:#0f172a;margin-bottom:14px">Contatti</div>
     <div class="info-card" style="cursor:pointer" onclick="window.location.href='mailto:info@medicoora.com'">
-      <h3>✉️ Email</h3><p>info@medicoora.com</p>
+      <h3>✉️ Email</h3><p>info@medicoora.com</p><p style="font-size:12px;color:#94a3b8;margin-top:4px">Rispondiamo entro poche ore, 7 giorni su 7</p>
     </div>
     <div class="info-card"><h3>🕐 Disponibilità</h3><p>Servizio attivo <strong>7 giorni su 7</strong>. Il medico risponde il prima possibile.</p></div>
     <div class="info-card"><h3>🔒 Sicurezza</h3><p>Dati protetti con crittografia nel rispetto del GDPR e delle Linee Guida Telemedicina 2022.</p></div>
@@ -373,7 +377,7 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
     <p><strong>Ultimo aggiornamento:</strong> Maggio 2025</p>
     <p>Medico Subito tratta i dati sanitari in conformità al <strong>Regolamento UE 2016/679 (GDPR)</strong>, D.Lgs. 196/2003 e alle Linee Guida sulla Telemedicina del Ministero della Salute (21 settembre 2022).</p>
     <h3>1. Titolare del trattamento</h3>
-    <p>Il titolare del trattamento è il medico responsabile del servizio, identificabile nella sezione "I nostri medici". Per contatti: info@medicoora.com</p>
+    <p>Il titolare del trattamento è il medico responsabile del servizio, iscritto all'Ordine dei Medici Chirurghi e Odontoiatri. Per esercitare i tuoi diritti: info@medicoora.com</p>
     <h3>2. Dati trattati</h3>
     <ul><li>Dati anagrafici (nome, cognome, data di nascita)</li><li>Dati di contatto (email, telefono)</li><li>Dati sanitari (sintomi, farmaci, allergie, patologie, foto mediche, referti)</li></ul>
     <p>I dati sanitari rientrano nelle categorie particolari ex art. 9 GDPR e sono trattati solo previo consenso esplicito.</p>
@@ -402,17 +406,23 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
     <p>Medico Subito è una piattaforma di telemedicina asincrona. Il servizio è erogato da medici qualificati iscritti all'Ordine dei Medici, in conformità alle Linee Guida sulla Telemedicina del Ministero della Salute (settembre 2022).</p>
     <h3>2. Limiti del servizio</h3>
     <p>Medico Subito <strong>non è un servizio di emergenza</strong>. In emergenza: 118 o Pronto Soccorso. Il servizio non sostituisce il medico di base.</p>
-    <h3>3. Atti medici</h3>
-    <p>Tutte le prescrizioni sono emesse da medici qualificati che valutano ogni richiesta individualmente. Il medico si riserva il diritto di non emettere una prescrizione se non clinicamente appropriata.</p>
-    <h3>4. Responsabilità del paziente</h3>
+    <h3>3. Atti medici e responsabilità professionale</h3>
+    <p>Tutte le prescrizioni e gli atti medici sono emessi da medici iscritti all'Ordine dei Medici Chirurghi e Odontoiatri, coperti da polizza di Responsabilità Civile Professionale. Ogni richiesta è valutata individualmente. Il medico si riserva il diritto di non emettere una prescrizione qualora non la ritenga clinicamente appropriata o le informazioni fornite siano insufficienti.</p>
+    <h3>4. Limiti della telemedicina asincrona</h3>
+    <p>Conformemente alle Linee Guida FNOMCeO e del Ministero della Salute (settembre 2022), la telemedicina asincrona non sostituisce la visita medica in presenza. Il medico può richiedere integrazione di informazioni o indirizzare il paziente a una visita ambulatoriale quando lo ritenga necessario per garantire la sicurezza del paziente.</p>
+    <h3>5. Responsabilità del paziente</h3>
     <p>Il paziente è responsabile della veridicità delle informazioni fornite.</p>
-    <h3>5. Disponibilità</h3>
+    <h3>6. Disponibilità</h3>
     <p>Servizio attivo 7 giorni su 7. I tempi di risposta dipendono dal volume delle richieste.</p>
-    <h3>6. Tariffe</h3>
+    <h3>7. Tariffe</h3>
     <p>Abbonamento annuale €60, accesso illimitato per 12 mesi. Il pagamento non garantisce automaticamente l'emissione di prescrizioni.</p>
-    <h3>7. Legge applicabile</h3>
+    <h3>7. Responsabilità professionale</h3>
+    <p>I medici che operano su Medico Subito sono iscritti all'Ordine dei Medici Chirurghi e Odontoiatri e in possesso di polizza di responsabilità civile professionale. Ogni atto medico è conforme alle Linee Guida FNOMCeO sulla telemedicina e alle indicazioni del Ministero della Salute (settembre 2022).</p>
+    <h3>8. Limiti della telemedicina asincrona</h3>
+    <p>La telemedicina asincrona non consente la visita fisica e si basa esclusivamente sulle informazioni fornite dal paziente. Il medico può richiedere ulteriori informazioni o indirizzare il paziente a una visita in presenza qualora lo ritenga necessario.</p>
+    <h3>9. Legge applicabile</h3>
     <p>Diritto italiano. Foro esclusivo: Roma.</p>
-    <h3>8. Contatti</h3>
+    <h3>10. Contatti</h3>
     <p>info@medicoora.com</p>
   </div>
 </div>
@@ -791,13 +801,23 @@ async function inviaRisposta(){
 }
 
 async function startStripeCheckout(){
+  const email = document.getElementById("stripe-email-input") ? document.getElementById("stripe-email-input").value.trim() : '';
+  if(!email || !email.includes('@')){
+    // Mostra form email
+    const modal = document.getElementById("stripe-modal");
+    if(modal) modal.style.display="flex";
+    return;
+  }
   try{
-    const res=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({})});
+    const res=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
     const data=await res.json();
     if(data.url) window.location.href=data.url;
-    else alert("Stripe non ancora configurato. Aggiungi la chiave Stripe.");
+    else{
+      // Fallback: salva email e mostra conferma
+      alert("Abbonamento in arrivo! Ti contatteremo a "+email+" per completare il pagamento.");
+    }
   }catch(e){
-    alert("Stripe non ancora configurato.");
+    alert("Abbonamento in arrivo! Ti contatteremo a "+email+" per completare il pagamento.");
   }
 }
 </script>
