@@ -110,6 +110,41 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
 </head>
 <body>
 
+<!-- LOGIN PAZIENTE -->
+<div id="s-paziente-login" class="screen">
+  <header style="justify-content:center">
+    <div style="font-size:32px">🩺</div>
+    <div style="margin-left:8px"><div class="logo">Medico Subito</div></div>
+  </header>
+  <div style="max-width:400px;margin:24px auto;padding:0 16px">
+    <div class="card">
+      <div style="text-align:center;margin-bottom:20px">
+        <div style="font-size:2rem;margin-bottom:6px">👤</div>
+        <div style="font-size:18px;font-weight:800;margin-bottom:4px">Accedi o registrati</div>
+        <div style="font-size:13px;color:#64748b">Crea il tuo account paziente gratuito</div>
+      </div>
+      <div id="paz-login-form">
+        <input id="paz-email" type="email" placeholder="Email *"/>
+        <input id="paz-password" type="password" placeholder="Password *"/>
+        <div id="paz-login-err" style="color:#dc2626;font-size:12px;margin-top:-8px;margin-bottom:10px;display:none"></div>
+        <button class="btn-primary" onclick="loginPaziente()">Accedi →</button>
+        <button class="btn-secondary" onclick="showPazReg()" style="height:44px;font-size:14px;margin-top:8px">Crea account →</button>
+        <button onclick="showScreen('s-home')" style="width:100%;background:none;border:none;color:#64748b;font-size:13px;margin-top:10px;cursor:pointer;font-family:Inter,sans-serif">Continua senza account</button>
+      </div>
+      <div id="paz-reg-form" style="display:none">
+        <div style="font-size:15px;font-weight:700;margin-bottom:12px">Crea account paziente</div>
+        <input id="reg-nome" placeholder="Nome e cognome *"/>
+        <input id="reg-email" type="email" placeholder="Email *"/>
+        <input id="reg-password" type="password" placeholder="Password (min. 8 caratteri) *"/>
+        <input id="reg-cf" placeholder="Codice fiscale *" style="text-transform:uppercase"/>
+        <div id="paz-reg-err" style="color:#dc2626;font-size:12px;margin-top:-8px;margin-bottom:10px;display:none"></div>
+        <button class="btn-primary" onclick="registraPaziente()">Registrati →</button>
+        <button class="btn-secondary" onclick="showPazLogin()" style="height:44px;font-size:14px;margin-top:8px">Ho già un account</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- HOME -->
 <div id="s-home" class="screen active">
   <header style="height:90px;flex-direction:column;justify-content:center;align-items:center;gap:0">
@@ -125,6 +160,7 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
 
       <button class="btn-primary" onclick="showScreen('s-payment')">Attiva abbonamento — €60/anno per i primi 10.000 iscritti</button>
       <button class="btn-secondary" onclick="showScreen('s-richiesta')" style="background:#1e40af;border-color:#1e40af;color:#faff00;font-size:20px;font-weight:900;height:60px;margin-top:12px">Invia richiesta al medico</button>
+      <button onclick="showScreen('s-paziente-login')" style="width:100%;background:none;border:none;color:#1e40af;font-size:13px;font-weight:600;margin-top:10px;cursor:pointer;font-family:Inter,sans-serif;text-decoration:underline">👤 Accedi alla tua area paziente</button>
     </div>
   </div>
 
@@ -293,18 +329,73 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
         <input type="file" id="file-input" multiple accept="image/*,.pdf" style="display:none" onchange="handleFiles(this.files)"/>
         <div class="section-title">I tuoi dati</div>
         <input id="patient-name" placeholder="Nome e cognome *"/>
-        <input id="patient-dob" placeholder="Data di nascita (es: 15/03/1975)"/>
+        <input id="patient-cf" placeholder="Codice fiscale *" style="text-transform:uppercase"/>
+        <input id="patient-dob" placeholder="Data di nascita (es: 15/03/1975) *"/>
         <input id="patient-email" type="email" placeholder="Email per ricevere la risposta *"/>
         <input id="patient-phone" placeholder="Telefono (opzionale)"/>
-        <textarea id="patient-extra" placeholder="Farmaci in uso, allergie, patologie croniche..." style="min-height:65px"></textarea>
+        
+        <div class="section-title">🏥 Dati sanitari</div>
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:14px;margin-bottom:12px">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">
+            <div>
+              <div style="font-size:11px;color:#64748b;font-weight:600;margin-bottom:4px">Altezza (cm)</div>
+              <input id="p-altezza" placeholder="es. 170" style="margin-bottom:0;padding:10px;font-size:14px"/>
+            </div>
+            <div>
+              <div style="font-size:11px;color:#64748b;font-weight:600;margin-bottom:4px">Peso (kg)</div>
+              <input id="p-peso" placeholder="es. 70" style="margin-bottom:0;padding:10px;font-size:14px"/>
+            </div>
+            <div>
+              <div style="font-size:11px;color:#64748b;font-weight:600;margin-bottom:4px">Gruppo sangue</div>
+              <select id="p-sangue" style="margin-bottom:0;padding:10px;font-size:14px">
+                <option value="">—</option>
+                <option>A+</option><option>A-</option>
+                <option>B+</option><option>B-</option>
+                <option>0+</option><option>0-</option>
+                <option>AB+</option><option>AB-</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="font-size:13px;font-weight:600;color:#374151">Allergie a farmaci o alimenti?</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <button type="button" id="allergie-no" onclick="toggleSanitario('allergie',false)" style="padding:10px;border-radius:10px;border:1.5px solid #e2e8f0;background:white;font-size:14px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;color:#64748b">No</button>
+              <button type="button" id="allergie-si" onclick="toggleSanitario('allergie',true)" style="padding:10px;border-radius:10px;border:1.5px solid #e2e8f0;background:white;font-size:14px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;color:#64748b">Sì</button>
+            </div>
+            <textarea id="allergie-detail" placeholder="Specifica allergie..." style="display:none;min-height:60px;margin-bottom:0"></textarea>
+            
+            <div style="font-size:13px;font-weight:600;color:#374151">Farmaci abituali?</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <button type="button" id="farmaci-no" onclick="toggleSanitario('farmaci',false)" style="padding:10px;border-radius:10px;border:1.5px solid #e2e8f0;background:white;font-size:14px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;color:#64748b">No</button>
+              <button type="button" id="farmaci-si" onclick="toggleSanitario('farmaci',true)" style="padding:10px;border-radius:10px;border:1.5px solid #e2e8f0;background:white;font-size:14px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;color:#64748b">Sì</button>
+            </div>
+            <textarea id="farmaci-detail" placeholder="Elenca i farmaci..." style="display:none;min-height:60px;margin-bottom:0"></textarea>
+            
+            <div style="font-size:13px;font-weight:600;color:#374151">Patologie importanti?</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <button type="button" id="patologie-no" onclick="toggleSanitario('patologie',false)" style="padding:10px;border-radius:10px;border:1.5px solid #e2e8f0;background:white;font-size:14px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;color:#64748b">No</button>
+              <button type="button" id="patologie-si" onclick="toggleSanitario('patologie',true)" style="padding:10px;border-radius:10px;border:1.5px solid #e2e8f0;background:white;font-size:14px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;color:#64748b">Sì</button>
+            </div>
+            <textarea id="patologie-detail" placeholder="Specifica patologie..." style="display:none;min-height:60px;margin-bottom:0"></textarea>
+          </div>
+        </div>
         <div class="section-title">Consenso informato</div>
         <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px">
-          <div style="font-size:13px;color:#374151;line-height:1.7;margin-bottom:14px">
-            Ho letto e accetto i <a onclick="prevScreen='s-richiesta';showScreen('s-termini')" style="color:#1e40af;text-decoration:underline;cursor:pointer">Termini</a> e l'<a onclick="prevScreen='s-richiesta';showScreen('s-privacy')" style="color:#1e40af;text-decoration:underline;cursor:pointer">Informativa Privacy</a> (GDPR art. 9). Comprendo che questo servizio non sostituisce il medico di base e non va usato in emergenza.
+            <div style="margin-bottom:14px">
+            <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:6px">1. Trattamento dati sanitari (GDPR art. 9) *</div>
+            <div style="font-size:12.5px;color:#374151;line-height:1.6;margin-bottom:10px">Acconsento al trattamento dei miei dati sanitari per l'erogazione del servizio medico, come da <a onclick="prevScreen='s-richiesta';showScreen('s-privacy')" style="color:#1e40af;text-decoration:underline;cursor:pointer">Informativa Privacy</a> e <a onclick="prevScreen='s-richiesta';showScreen('s-termini')" style="color:#1e40af;text-decoration:underline;cursor:pointer">Termini di Servizio</a>. Comprendo che questo servizio non sostituisce il medico di base e non va usato in emergenza.</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <button type="button" id="consenso-no" onclick="setConsenso(false)" style="padding:12px;border-radius:10px;border:2px solid #e2e8f0;background:white;font-size:14px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;color:#64748b">✗ Non accetto</button>
+              <button type="button" id="consenso-si" onclick="setConsenso(true)" style="padding:12px;border-radius:10px;border:2px solid #e2e8f0;background:white;font-size:14px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;color:#64748b">✓ Accetto</button>
+            </div>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-            <button type="button" id="consenso-no" onclick="setConsenso(false)" style="padding:14px;border-radius:12px;border:2px solid #e2e8f0;background:white;font-size:15px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;color:#64748b">✗ Non accetto</button>
-            <button type="button" id="consenso-si" onclick="setConsenso(true)" style="padding:14px;border-radius:12px;border:2px solid #e2e8f0;background:white;font-size:15px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;color:#64748b">✓ Accetto</button>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:6px">2. Archivio digitale referti (opzionale)</div>
+            <div style="font-size:12.5px;color:#374151;line-height:1.6;margin-bottom:10px">Acconsento alla conservazione digitale dei miei referti e risposte mediche nella piattaforma Medico Subito per consultazione futura.</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <button type="button" id="archivio-no" onclick="setArchivio(false)" style="padding:12px;border-radius:10px;border:2px solid #e2e8f0;background:white;font-size:14px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;color:#64748b">No</button>
+              <button type="button" id="archivio-si" onclick="setArchivio(true)" style="padding:12px;border-radius:10px;border:2px solid #e2e8f0;background:white;font-size:14px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;color:#64748b">Sì</button>
+            </div>
           </div>
         </div>
         <button class="btn-primary" onclick="submitToDoctor()">Invia la richiesta →</button>
@@ -400,8 +491,9 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
       <div style="font-size:17px;font-weight:800;margin-bottom:3px">Dott.ssa Anna Maria Ferri</div>
       <div style="font-size:12px;opacity:.8;margin-bottom:14px">Medico Chirurgo · Specialista in Ginecologia e Ostetricia<br>Master in Management delle Strutture Sanitarie</div>
       <div style="display:flex;flex-wrap:wrap;gap:6px">
-        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:600">🏥 Iscritta all'Ordine dei Medici</span>
+        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:600">🏥 Ordine Medici Chirurghi di Frosinone · N. 3363</span>
         <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:600">🇮🇹 Abilitata in Italia</span>
+        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:600">🔏 RC Professionale attiva</span>
       </div>
     </div>
     <div class="info-card">
@@ -462,6 +554,89 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
     <p>Diritto italiano. Foro esclusivo: Roma.</p>
     <h3>9. Contatti</h3>
     <p>info@medicoora.com</p>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div id="s-faq" class="screen">
+  <header>
+    <button class="btn-ghost" onclick="showScreen(prevScreen||'s-home')" style="font-size:20px">←</button>
+    <div style="margin-left:8px"><div class="logo">Domande frequenti</div></div>
+  </header>
+  <div class="info-section">
+    <div style="font-size:18px;font-weight:800;color:#0f172a;margin-bottom:14px">FAQ</div>
+    <div class="info-card" onclick="toggleFaq(this)" style="cursor:pointer">
+      <h3 style="justify-content:space-between">Come funziona il servizio? <span>▾</span></h3>
+      <p style="display:none;margin-top:8px">Descrivi la tua situazione medica, allega documenti se necessario e invia la richiesta. Il medico la valuta e ti risponde via email con prescrizione, richiesta esami o indicazioni cliniche, quando clinicamente appropriato.</p>
+    </div>
+    <div class="info-card" onclick="toggleFaq(this)" style="cursor:pointer">
+      <h3 style="justify-content:space-between">Quanto costa? <span>▾</span></h3>
+      <p style="display:none;margin-top:8px">€60/anno per i primi 10.000 iscritti. Accesso per 12 mesi all'invio di richieste mediche illimitate.</p>
+    </div>
+    <div class="info-card" onclick="toggleFaq(this)" style="cursor:pointer">
+      <h3 style="justify-content:space-between">Entro quanto risponde il medico? <span>▾</span></h3>
+      <p style="display:none;margin-top:8px">Il medico risponde il prima possibile, 7 giorni su 7 inclusi sabato, domenica e festivi. I tempi dipendono dal volume delle richieste ricevute.</p>
+    </div>
+    <div class="info-card" onclick="toggleFaq(this)" style="cursor:pointer">
+      <h3 style="justify-content:space-between">Posso allegare referti o foto? <span>▾</span></h3>
+      <p style="display:none;margin-top:8px">Sì. Puoi allegare fino a 5 file (foto o PDF) di massimo 10MB ciascuno: referti, esami del sangue, foto di lesioni cutanee o qualsiasi documento clinico utile.</p>
+    </div>
+    <div class="info-card" onclick="toggleFaq(this)" style="cursor:pointer">
+      <h3 style="justify-content:space-between">Le prescrizioni sono sempre garantite? <span>▾</span></h3>
+      <p style="display:none;margin-top:8px">No. Le prescrizioni, i certificati e le richieste esami vengono emessi solo se clinicamente appropriati, a giudizio del medico. Il medico può richiedere ulteriori informazioni o indirizzare a una visita in presenza.</p>
+    </div>
+    <div class="info-card" onclick="toggleFaq(this)" style="cursor:pointer">
+      <h3 style="justify-content:space-between">I miei dati sono al sicuro? <span>▾</span></h3>
+      <p style="display:none;margin-top:8px">Sì. Tutti i dati sanitari sono crittografati in transito e a riposo, trattati nel rispetto del GDPR (Reg. UE 2016/679) e delle normative italiane sulla documentazione sanitaria.</p>
+    </div>
+    <div class="info-card" onclick="toggleFaq(this)" style="cursor:pointer">
+      <h3 style="justify-content:space-between">Questo servizio sostituisce il mio medico di base? <span>▾</span></h3>
+      <p style="display:none;margin-top:8px">No. Medico Subito è un servizio di telemedicina asincrona che integra — ma non sostituisce — il medico di base e le visite ambulatoriali.</p>
+    </div>
+    <div class="info-card" onclick="toggleFaq(this)" style="cursor:pointer">
+      <h3 style="justify-content:space-between">Cosa faccio in caso di emergenza? <span>▾</span></h3>
+      <p style="display:none;margin-top:8px">Chiama immediatamente il 118 o recati al Pronto Soccorso. Questo servizio non è adatto a gestire emergenze mediche.</p>
+    </div>
+  </div>
+</div>
+
+<!-- AREA PAZIENTE -->
+<div id="s-paziente-area" class="screen">
+  <header style="justify-content:space-between">
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="font-size:26px">🩺</div>
+      <div class="logo">Area Paziente</div>
+    </div>
+    <button onclick="logoutPaziente()" style="background:none;border:1px solid #e2e8f0;border-radius:8px;padding:6px 12px;font-size:12px;color:#64748b;cursor:pointer;font-family:Inter,sans-serif">Esci</button>
+  </header>
+  <div class="info-section">
+    <div id="paz-benvenuto" style="background:linear-gradient(135deg,#1e3a8a,#1e40af);border-radius:16px;padding:18px;color:white;margin-bottom:14px">
+      <div style="font-size:11px;opacity:.65;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">Benvenuto</div>
+      <div id="paz-nome-display" style="font-size:18px;font-weight:800"></div>
+      <div id="paz-email-display" style="font-size:12px;opacity:.7;margin-top:2px"></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+      <div onclick="showScreen('s-richiesta')" style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:16px;text-align:center;cursor:pointer">
+        <div style="font-size:2rem;margin-bottom:6px">📋</div>
+        <div style="font-size:13px;font-weight:700;color:#1e3a8a">Nuova richiesta</div>
+      </div>
+      <div onclick="caricaStoricoPaziente()" style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:16px;text-align:center;cursor:pointer">
+        <div style="font-size:2rem;margin-bottom:6px">📁</div>
+        <div style="font-size:13px;font-weight:700;color:#1e3a8a">Le mie richieste</div>
+      </div>
+    </div>
+
+    <div class="label">Storico richieste</div>
+    <div id="paz-storico">
+      <div class="loader">Caricamento storico...</div>
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item active" onclick="showScreen('s-paziente-area')">🏠<div>Home</div></div>
+    <div class="nav-item" onclick="showScreen('s-richiesta')">📋<div>Richiesta</div></div>
+    <div class="nav-item" onclick="prevScreen='s-paziente-area';showScreen('s-faq')">❓<div>FAQ</div></div>
+    <div class="nav-item" onclick="showScreen('s-contatti')">✉️<div>Contatti</div></div>
   </div>
 </div>
 
@@ -536,7 +711,125 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
 </div>
 
 <script>
-const DOC_PWD = 'medico2025'; // TODO: sostituire con autenticazione server-side prima del lancio pubblico
+const DOC_PWD = 'medico2025';
+
+// ── AUTENTICAZIONE PAZIENTE (Supabase) ──────────────────────
+const SUPA_URL = 'https://dxfvdqtgsgnrjahlabga.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4ZnZkcXRnc2ducmphaGxhYmdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyNzY3OTIsImV4cCI6MjA5Mzg1Mjc5Mn0.N0zHBgOGoBl_r9YKDpZ8hxQkXmEwPqRvS5uWlTnIcFo';
+
+let pazienteCorrente = null;
+
+function showPazLogin(){
+  document.getElementById('paz-login-form').style.display='block';
+  document.getElementById('paz-reg-form').style.display='none';
+}
+function showPazReg(){
+  document.getElementById('paz-login-form').style.display='none';
+  document.getElementById('paz-reg-form').style.display='block';
+}
+
+async function loginPaziente(){
+  const email = document.getElementById('paz-email').value.trim();
+  const pwd = document.getElementById('paz-password').value;
+  const err = document.getElementById('paz-login-err');
+  if(!email||!pwd){err.textContent='Inserisci email e password';err.style.display='block';return;}
+  try{
+    const res = await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
+      body:JSON.stringify({email,password:pwd})
+    });
+    const data = await res.json();
+    if(data.error||data.error_description){
+      err.textContent='Email o password non corretti';err.style.display='block';return;
+    }
+    pazienteCorrente = {email, nome:data.user?.user_metadata?.nome||email, token:data.access_token, id:data.user?.id};
+    localStorage.setItem('paziente', JSON.stringify(pazienteCorrente));
+    entraNellAreaPaziente();
+  }catch(e){
+    err.textContent='Errore di connessione. Riprova.';err.style.display='block';
+  }
+}
+
+async function registraPaziente(){
+  const nome = document.getElementById('reg-nome').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const pwd = document.getElementById('reg-password').value;
+  const cf = document.getElementById('reg-cf').value.trim().toUpperCase();
+  const err = document.getElementById('paz-reg-err');
+  if(!nome||!email||!pwd||!cf){err.textContent='Compila tutti i campi obbligatori';err.style.display='block';return;}
+  if(pwd.length<8){err.textContent='La password deve avere almeno 8 caratteri';err.style.display='block';return;}
+  try{
+    const res = await fetch(SUPA_URL+'/auth/v1/signup',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
+      body:JSON.stringify({email,password:pwd,data:{nome,codice_fiscale:cf}})
+    });
+    const data = await res.json();
+    if(data.error){err.textContent=data.error;err.style.display='block';return;}
+    pazienteCorrente = {email, nome, id:data.user?.id};
+    localStorage.setItem('paziente', JSON.stringify(pazienteCorrente));
+    alert('Account creato! Controlla la tua email per confermare la registrazione, poi accedi.');
+    showPazLogin();
+  }catch(e){
+    err.textContent='Errore di connessione. Riprova.';err.style.display='block';
+  }
+}
+
+function entraNellAreaPaziente(){
+  if(!pazienteCorrente) return;
+  document.getElementById('paz-nome-display').textContent = pazienteCorrente.nome||pazienteCorrente.email;
+  document.getElementById('paz-email-display').textContent = pazienteCorrente.email;
+  showScreen('s-paziente-area');
+  caricaStoricoPaziente();
+}
+
+async function caricaStoricoPaziente(){
+  const cont = document.getElementById('paz-storico');
+  if(!pazienteCorrente){cont.innerHTML='<div style="text-align:center;color:#94a3b8;padding:20px">Accedi per vedere lo storico</div>';return;}
+  cont.innerHTML='<div class="loader">Caricamento...</div>';
+  try{
+    const res = await fetch('/api/submit-medical-request?email='+encodeURIComponent(pazienteCorrente.email),{
+      headers:{'Authorization':'Bearer '+DOC_PWD}
+    });
+    const data = await res.json();
+    if(!Array.isArray(data)||data.length===0){
+      cont.innerHTML='<div style="text-align:center;color:#94a3b8;padding:20px;font-size:13px">Nessuna richiesta ancora inviata</div>';
+      return;
+    }
+    cont.innerHTML = data.map(c=>`
+      <div class="info-card" style="margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <div style="font-size:13px;font-weight:700;color:#0f172a">${c.tipo||'Consulto'}</div>
+          <div style="font-size:11px;color:#64748b">${new Date(c.created_at).toLocaleDateString('it-IT')}</div>
+        </div>
+        <div style="font-size:12px;color:#475569;margin-bottom:8px">${(c.patient_text||'').slice(0,100)}...</div>
+        ${c.risposta_medico
+          ? '<div style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px;font-size:12px;color:#15803d;font-weight:600">✅ Risposta ricevuta</div>'
+          : '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px;font-size:12px;color:#92400e;font-weight:600">⏳ In attesa di risposta</div>'
+        }
+      </div>`).join('');
+  }catch(e){
+    cont.innerHTML='<div style="color:#dc2626;font-size:13px;padding:10px">Errore nel caricamento storico.</div>';
+  }
+}
+
+function logoutPaziente(){
+  pazienteCorrente = null;
+  localStorage.removeItem('paziente');
+  showScreen('s-home');
+}
+
+// Controlla se paziente già loggato al caricamento
+window.addEventListener('load', function(){
+  const saved = localStorage.getItem('paziente');
+  if(saved){
+    try{pazienteCorrente = JSON.parse(saved);}catch(e){}
+  }
+  if(window.location.hash === '#medico') showScreen('s-doc-login');
+  if(window.location.hash === '#area') entraNellAreaPaziente();
+});
+ // IMPORTANTE: spostare in variabile d'ambiente Vercel prima del lancio
 let conversazione = [];
 let tipoRichiesta = '';
 let allCases = [];
@@ -551,9 +844,7 @@ if('serviceWorker' in navigator){
   });
 }
 
-window.addEventListener('load', function(){
-  if(window.location.hash === '#medico') showScreen('s-doc-login');
-});
+
 
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -668,8 +959,10 @@ async function submitToDoctor(){
   const nome=document.getElementById("patient-name").value.trim();
   const email=document.getElementById("patient-email").value.trim();
   if(!nome){alert("Inserisci nome e cognome");return;}
+  const cf = document.getElementById("patient-cf")?document.getElementById("patient-cf").value.trim():'';
+  if(!cf){alert("Inserisci il codice fiscale");return;}
   if(!email||!email.includes("@")){alert("Inserisci un'email valida");return;}
-  if(!consensoAccettato){alert("Devi accettare Termini e Privacy per procedere");return;}
+  if(!consensoAccettato){alert("Devi accettare il consenso al trattamento dati sanitari per procedere");return;}
   
   const btn=document.querySelector('#doctor-form .btn-primary');
   btn.textContent="Invio in corso...";
@@ -684,14 +977,24 @@ async function submitToDoctor(){
       tipo:tipoRichiesta,
       patientText:document.getElementById("problem").value,
       patientName:nome,
+      codiceFiscale:document.getElementById("patient-cf")?document.getElementById("patient-cf").value:'',
       dateOfBirth:document.getElementById("patient-dob").value,
       email,
       phone:document.getElementById("patient-phone").value,
-      clinicalData:document.getElementById("patient-extra").value,
+      clinicalData:[
+        document.getElementById("patient-extra")?document.getElementById("patient-extra").value:'',
+        document.getElementById("allergie-detail")&&document.getElementById("allergie-detail").style.display!=='none'?'Allergie: '+document.getElementById("allergie-detail").value:'',
+        document.getElementById("farmaci-detail")&&document.getElementById("farmaci-detail").style.display!=='none'?'Farmaci: '+document.getElementById("farmaci-detail").value:'',
+        document.getElementById("patologie-detail")&&document.getElementById("patologie-detail").style.display!=='none'?'Patologie: '+document.getElementById("patologie-detail").value:'',
+        document.getElementById("p-altezza")&&document.getElementById("p-altezza").value?'Altezza: '+document.getElementById("p-altezza").value+'cm':'',
+        document.getElementById("p-peso")&&document.getElementById("p-peso").value?'Peso: '+document.getElementById("p-peso").value+'kg':'',
+        document.getElementById("p-sangue")&&document.getElementById("p-sangue").value?'Gruppo sangue: '+document.getElementById("p-sangue").value:'',
+      ].filter(Boolean).join(' | '),
       aiResponse:ultimaRisposta,
       conversazione:conversazione.map(m=>m.role+": "+m.content).join("\n\n"),
       allegati,
-      consenso:true
+      consenso:true,
+      archivioReferti:archivioAccettato
     })});
     if(!res.ok) throw new Error("Errore server");
     document.getElementById("doctor-form").classList.add("hidden");
@@ -720,6 +1023,48 @@ function newRequest(){
 }
 
 let consensoAccettato = false;
+let archivioAccettato = false;
+
+function toggleFaq(el){
+  const p = el.querySelector('p');
+  const arrow = el.querySelector('span');
+  if(p.style.display==='none'||p.style.display===''){
+    p.style.display='block';
+    arrow.textContent='▴';
+  } else {
+    p.style.display='none';
+    arrow.textContent='▾';
+  }
+}
+
+function toggleSanitario(campo, val){
+  const si = document.getElementById(campo+'-si');
+  const no = document.getElementById(campo+'-no');
+  const detail = document.getElementById(campo+'-detail');
+  if(val){
+    si.style.background='#1e40af';si.style.color='white';si.style.borderColor='#1e40af';
+    no.style.background='white';no.style.color='#64748b';no.style.borderColor='#e2e8f0';
+    if(detail) detail.style.display='block';
+  } else {
+    no.style.background='#e2e8f0';no.style.color='#374151';no.style.borderColor='#e2e8f0';
+    si.style.background='white';si.style.color='#64748b';si.style.borderColor='#e2e8f0';
+    if(detail) detail.style.display='none';
+  }
+}
+
+function setArchivio(val){
+  archivioAccettato = val;
+  const si = document.getElementById('archivio-si');
+  const no = document.getElementById('archivio-no');
+  if(val){
+    si.style.background='#1e40af';si.style.color='white';si.style.borderColor='#1e40af';
+    no.style.background='white';no.style.color='#64748b';no.style.borderColor='#e2e8f0';
+  } else {
+    no.style.background='#e2e8f0';no.style.color='#374151';no.style.borderColor='#e2e8f0';
+    si.style.background='white';si.style.color='#64748b';si.style.borderColor='#e2e8f0';
+  }
+}
+
 function setConsenso(val){
   consensoAccettato = val;
   const si = document.getElementById('consenso-si');
