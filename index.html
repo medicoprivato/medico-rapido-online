@@ -228,9 +228,13 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
 
 <!-- RICHIESTA -->
 <div id="s-richiesta" class="screen">
-  <header>
-    <div style="font-size:30px">🩺</div>
-    <div><div class="logo" onclick="showScreen('s-richiesta')" style="cursor:pointer">Medico Subito</div></div>
+  <header style="justify-content:space-between">
+    <button onclick="showScreen('s-home')" style="background:#1e40af;border:none;color:white;font-size:15px;font-weight:800;cursor:pointer;padding:10px 16px;border-radius:12px;font-family:Inter,sans-serif">← Home</button>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="font-size:26px">🩺</div>
+      <div class="logo">Medico Subito</div>
+    </div>
+    <div style="width:80px"></div>
   </header>
   <div class="section" style="padding-top:14px">
     <div class="card" id="main-form">
