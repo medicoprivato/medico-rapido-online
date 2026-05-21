@@ -12,7 +12,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
 <link rel="apple-touch-icon" href="/icon-192.png">
-<meta name="description" content="Prescrizioni, richieste esami e certificati medici online. Risposta medica certificata 7 giorni su 7.">
+<meta name="description" content="Prescrizioni, richieste esami e certificati medici online. Risposta medica firmata da professionisti abilitati.">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -48,9 +48,9 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#1e40af;box-sh
 .file-item{display:flex;align-items:center;justify-content:space-between;background:white;border:1px solid #e2e8f0;border-radius:8px;padding:7px 11px;font-size:12px}
 .file-name{color:#374151;font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .file-remove{color:#dc2626;cursor:pointer;font-weight:700;margin-left:8px}
-.consent-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:14px;margin-bottom:12px;position:relative;z-index:5;}
+.consent-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin-bottom:12px;position:relative;z-index:50;}
 .consent-row{display:flex;align-items:flex-start;gap:10px}
-.consent-row input[type="checkbox"]{width:22px;height:22px;min-width:22px;margin:0;flex-shrink:0;accent-color:#1e40af;cursor:pointer;margin-top:1px;position:relative;z-index:10;pointer-events:all;}
+.consent-row input[type="checkbox"]{width:26px;height:26px;min-width:26px;margin:0;flex-shrink:0;accent-color:#1e40af;cursor:pointer;margin-top:1px;position:relative;z-index:50;pointer-events:all !important;}
 .consent-row label{font-size:12.5px;color:#374151;line-height:1.6;cursor:pointer}
 .consent-row a{color:#1e40af;text-decoration:underline;cursor:pointer}
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;height:68px;background:white;border-top:1px solid #e2e8f0;display:flex;justify-content:space-around;align-items:center;z-index:50;box-shadow:0 -1px 6px rgba(0,0,0,.06)}
@@ -112,7 +112,7 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
 <div id="s-home" class="screen active">
   <header style="height:90px;flex-direction:column;justify-content:center;align-items:center;gap:0">
     <div style="font-size:52px;line-height:1;margin-bottom:2px">🩺</div>
-    <div class="logo" style="font-size:28px;line-height:1;letter-spacing:-1px">Medico Subito</div>
+    <div class="logo" style="font-size:28px;line-height:1;letter-spacing:-1px;cursor:pointer" onclick="showScreen('s-richiesta')">Medico Subito</div>
   </header>
 
   <div style="padding:16px 16px 0">
@@ -122,7 +122,7 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
       <p style="font-size:17px;color:#0f172a;line-height:1.6;font-weight:700">Prescrizioni, richieste esami, certificati e valutazioni mediche. Risposta medica firmata, 7 giorni su 7.</p>
 
       <button class="btn-primary" onclick="showScreen('s-payment')">Attiva abbonamento — €60/anno per i primi 10.000 iscritti</button>
-      <button class="btn-secondary" onclick="showScreen('s-richiesta')" style="background:#1e40af;border-color:#1e40af;color:#faff00;font-size:20px;font-weight:900;height:60px">Invia richiesta al medico</button>
+      <button class="btn-secondary" onclick="showScreen('s-richiesta')" style="background:#1e40af;border-color:#1e40af;color:#faff00;font-size:20px;font-weight:900;height:60px;margin-top:12px">Invia richiesta al medico</button>
     </div>
   </div>
 
@@ -179,7 +179,7 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
     <a onclick="prevScreen='s-home';showScreen('s-privacy')">Privacy Policy</a> &nbsp;·&nbsp;
     <a onclick="prevScreen='s-home';showScreen('s-termini')">Termini di Servizio</a> &nbsp;·&nbsp;
     <a onclick="prevScreen='s-home';showScreen('s-medici')">Team medico</a><br>
-    <span style="font-size:11px;margin-top:6px;display:block;color:#94a3b8">© 2025 Medico Subito · info@medicoora.com</span>
+    <span style="font-size:11px;margin-top:6px;display:block;color:#94a3b8">© 2026 Medico Subito · info@medicoora.com</span>
   </footer>
 
   <div class="bottom-nav">
@@ -201,18 +201,18 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
       <div style="font-size:2.5rem;margin-bottom:10px">💳</div>
       <div style="font-size:42px;font-weight:800;color:#1e40af;letter-spacing:-1px">€60<span style="font-size:18px;color:#64748b;font-weight:500">/anno</span></div>
       <div style="background:#fef3c7;border:1px solid #fbbf24;color:#92400e;border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:700;margin-top:8px">🔥 Offerta lancio — Solo per i primi 10.000 iscritti</div>
-      <div style="color:#1e40af;font-weight:700;margin:6px 0 4px;font-size:15px">Consulti illimitati · 7 giorni su 7</div>
+      <div style="color:#1e40af;font-weight:700;margin:6px 0 4px;font-size:15px">Accesso illimitato · 7 giorni su 7</div>
       <div style="font-size:12.5px;color:#64748b;margin-bottom:20px">Accesso completo per 12 mesi</div>
       <div style="margin-bottom:12px">
         <input id="stripe-email-input" type="email" placeholder="La tua email *" style="margin-bottom:0;border-radius:12px;border:1.5px solid #cbd5e1;padding:14px;font-size:15px;font-family:Inter,sans-serif;width:100%"/>
       </div>
       <button class="btn-primary" onclick="startStripeCheckout()" style="margin-top:0">Attiva ora — Pagamento sicuro →</button>
-      <div style="margin-top:12px;font-size:11.5px;color:#94a3b8">🔒 Pagamento sicuro con Stripe · Il pagamento è subordinato alla valutazione clinica del medico</div>
+      <div style="margin-top:12px;font-size:11px;color:#94a3b8;line-height:1.5">🔒 Pagamento sicuro con Stripe<br>Le prestazioni cliniche sono erogate a discrezione del medico, previa valutazione individuale della richiesta.</div>
     </div>
     <div class="card">
       <div class="label">Incluso</div>
       <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
-        <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#374151"><span style="color:#1e40af">✓</span>Consulti medici illimitati</div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#374151"><span style="color:#1e40af">✓</span>Richieste mediche illimitate</div>
         <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#374151"><span style="color:#1e40af">✓</span>Prescrizioni farmacologiche</div>
         <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#374151"><span style="color:#1e40af">✓</span>Richieste esami (sangue, ecografie, RMN)</div>
         <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#374151"><span style="color:#1e40af">✓</span>Certificati medici</div>
@@ -228,11 +228,36 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
 <div id="s-richiesta" class="screen">
   <header>
     <div style="font-size:30px">🩺</div>
-    <div><div class="logo">Medico Subito</div></div>
+    <div><div class="logo" onclick="showScreen('s-richiesta')" style="cursor:pointer">Medico Subito</div></div>
   </header>
   <div class="section" style="padding-top:14px">
     <div class="card" id="main-form">
       <div class="label">Nuova richiesta medica</div>
+      
+      <!-- TRIAGE OBBLIGATORIO -->
+      <div style="background:#fef2f2;border:2px solid #fca5a5;border-radius:14px;padding:16px;margin-bottom:16px">
+        <div style="font-size:15px;font-weight:800;color:#991b1b;margin-bottom:10px">⚠️ Prima di procedere, rispondi:</div>
+        <div style="font-size:14px;font-weight:700;color:#7f1d1d;margin-bottom:12px">Hai uno di questi sintomi <strong>adesso</strong>?</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+          <label style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#374151;cursor:pointer"><input type="checkbox" class="triage-check" style="width:18px;height:18px;accent-color:#dc2626"> Dolore toracico o al petto</label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#374151;cursor:pointer"><input type="checkbox" class="triage-check" style="width:18px;height:18px;accent-color:#dc2626"> Difficoltà respiratoria o mancanza di fiato</label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#374151;cursor:pointer"><input type="checkbox" class="triage-check" style="width:18px;height:18px;accent-color:#dc2626"> Perdita di coscienza o svenimento</label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#374151;cursor:pointer"><input type="checkbox" class="triage-check" style="width:18px;height:18px;accent-color:#dc2626"> Deficit neurologici (paralisi, confusione, disturbi visivi)</label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#374151;cursor:pointer"><input type="checkbox" class="triage-check" style="width:18px;height:18px;accent-color:#dc2626"> Sanguinamento importante</label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#374151;cursor:pointer"><input type="checkbox" class="triage-check" style="width:18px;height:18px;accent-color:#dc2626"> Dolore addominale severo</label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#374151;cursor:pointer"><input type="checkbox" class="triage-check" style="width:18px;height:18px;accent-color:#dc2626"> Gravidanza con sintomi acuti</label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#374151;cursor:pointer"><input type="checkbox" class="triage-check" style="width:18px;height:18px;accent-color:#dc2626"> Pensieri di farsi del male</label>
+        </div>
+        <div id="triage-alert" style="display:none;background:#dc2626;color:white;border-radius:10px;padding:14px;text-align:center;font-weight:700;font-size:15px">
+          🚨 Chiama subito il <strong>118</strong> o vai al Pronto Soccorso.<br>
+          <span style="font-size:13px;font-weight:400;opacity:.9">Questo servizio non è adatto alle emergenze.</span>
+        </div>
+        <div id="triage-ok" style="display:none;background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:10px;text-align:center;font-size:13px;color:#15803d;font-weight:600">
+          ✅ Puoi procedere con la richiesta
+        </div>
+        <div style="font-size:12px;color:#64748b;margin-top:10px;text-align:center">Se hai selezionato uno o più sintomi sopra, usa il 118.</div>
+      </div>
+
       <select id="requestType">
         <option value="">Seleziona il tipo di richiesta</option>
         <option>Rinnovo terapia</option>
@@ -260,19 +285,19 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
       </div>
       <div id="warning" style="display:none" class="warning-box">La tua richiesta sarà valutata dal medico. Se clinicamente appropriato, la risposta potrà includere prescrizione, certificato o richiesta esami.</div>
       <div id="doctor-form" class="hidden">
+        <div class="section-title">📎 Documenti allegati (opzionale)</div>
+        <div class="upload-zone" id="upload-area" onclick="document.getElementById('file-input').click()">
+          <div style="font-size:2rem;margin-bottom:6px">📷</div>
+          <div style="font-size:14px;color:#64748b;line-height:1.5">Allega <strong style="color:#1e40af">foto</strong> o <strong style="color:#1e40af">documenti medici</strong><br><span style="font-size:12px">Referti, esami, foto di lesioni · Max 5 file, 10MB</span></div>
+          <div class="file-list" id="file-list"></div>
+        </div>
+        <input type="file" id="file-input" multiple accept="image/*,.pdf" style="display:none" onchange="handleFiles(this.files)"/>
         <div class="section-title">I tuoi dati</div>
         <input id="patient-name" placeholder="Nome e cognome *"/>
         <input id="patient-dob" placeholder="Data di nascita (es: 15/03/1975)"/>
         <input id="patient-email" type="email" placeholder="Email per ricevere la risposta *"/>
         <input id="patient-phone" placeholder="Telefono (opzionale)"/>
         <textarea id="patient-extra" placeholder="Farmaci in uso, allergie, patologie croniche..." style="min-height:65px"></textarea>
-        <div class="section-title">📎 Documenti allegati (opzionale)</div>
-        <div class="upload-zone" id="upload-area" onclick="document.getElementById('file-input').click()">
-          <div style="font-size:1.8rem;margin-bottom:6px">📷</div>
-          <div style="font-size:13px;color:#64748b;line-height:1.5">Allega <strong style="color:#1e40af">foto</strong> o <strong style="color:#1e40af">documenti medici</strong><br><span style="font-size:11.5px">Referti, esami, foto di lesioni · Max 5 file, 10MB</span></div>
-          <div class="file-list" id="file-list"></div>
-        </div>
-        <input type="file" id="file-input" multiple accept="image/*,.pdf" style="display:none" onchange="handleFiles(this.files)"/>
         <div class="section-title">Consenso informato</div>
         <div class="consent-box">
           <div class="consent-row">
@@ -284,8 +309,16 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
         <button class="btn-secondary" onclick="hideDoctorForm()">Annulla</button>
       </div>
       <div id="success-box" class="success-box hidden">
-        <h3>✅ Richiesta inviata</h3>
-        <p>Il medico ha ricevuto la tua richiesta. Riceverai la risposta all'indirizzo email indicato. Servizio attivo 7 giorni su 7.</p>
+        <h3>✅ Richiesta inviata!</h3>
+        <p style="margin-bottom:14px">Il medico ha ricevuto la tua richiesta. Riceverai la risposta all'indirizzo email indicato. Servizio attivo 7 giorni su 7.</p>
+        <div style="background:#1e40af;border-radius:14px;padding:18px;margin-top:8px;text-align:center">
+          <div style="color:#faff00;font-size:17px;font-weight:900;margin-bottom:6px">Attiva l'abbonamento annuale</div>
+          <div style="color:white;font-size:13px;margin-bottom:4px;opacity:.9">€60/anno — Accesso illimitato · 7 giorni su 7</div>
+          <div style="color:#fde68a;font-size:12px;margin-bottom:14px">🔥 Offerta lancio — Solo per i primi 10.000 iscritti</div>
+          <input id="stripe-email-success" type="email" placeholder="La tua email per l'abbonamento" style="width:100%;border-radius:10px;border:none;padding:12px;font-size:14px;margin-bottom:10px;font-family:Inter,sans-serif"/>
+          <button onclick="startStripeFromSuccess()" style="width:100%;background:#faff00;color:#1e3a8a;border:none;border-radius:10px;padding:13px;font-size:16px;font-weight:900;cursor:pointer;font-family:Inter,sans-serif">Attiva ora →</button>
+          <div style="color:rgba(255,255,255,.6);font-size:11px;margin-top:8px">🔒 Pagamento sicuro con Stripe</div>
+        </div>
       </div>
     </div>
   </div>
@@ -304,15 +337,15 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
 
 <!-- INFO -->
 <div id="s-info" class="screen">
-  <header><div style="font-size:30px">🩺</div><div><div class="logo">Medico Subito</div></div></header>
+  <header><div style="font-size:30px">🩺</div><div><div class="logo" onclick="showScreen('s-richiesta')" style="cursor:pointer">Medico Subito</div></div></header>
   <div class="info-section">
     <div style="font-size:18px;font-weight:800;color:#0f172a;margin-bottom:14px">Il servizio</div>
     <div class="info-card"><h3><div class="step-circle">1</div>Descrivi la tua situazione</h3><p>Compila il modulo con la tua richiesta. Puoi allegare foto, referti o altri documenti clinici.</p></div>
     <div class="info-card"><h3><div class="step-circle">2</div>Valutazione medica professionale</h3><p>Un medico qualificato esamina personalmente ogni richiesta. Ogni risposta è firmata e basata sulla situazione specifica del paziente.</p></div>
-    <div class="info-card"><h3><div class="step-circle">3</div>Risposta certificata via email</h3><p>Prescrizione farmacologica, richiesta esami, certificato medico o indicazioni cliniche firmate.</p></div>
+    <div class="info-card"><h3><div class="step-circle">3</div>Risposta firmata via email</h3><p>Prescrizione, richiesta esami, certificato o indicazioni cliniche — firmate dal medico responsabile.</p></div>
     <div class="info-card"><h3>💊 Prestazioni disponibili</h3><p>Rinnovo terapia · Esami (sangue, ecografia, RMN, TAC) · Certificati medici · Valutazione sintomi · Interpretazione referti · Valutazione lesioni cutanee · Visita specialistica</p></div>
     <div class="info-card"><h3>⚠️ Quando NON utilizzare</h3><p>Dolore toracico, difficoltà respiratoria, perdita di coscienza, sanguinamento: <strong>118</strong> o Pronto Soccorso.</p></div>
-    <div class="info-card"><h3>💶 Tariffe</h3><p><strong>€60/anno</strong> — Consulti, prescrizioni, esami e certificati illimitati per 12 mesi.</p></div>
+    <div class="info-card"><h3>💶 Tariffe</h3><p><strong>€60/anno</strong> — Accesso per 12 mesi all'invio di richieste mediche, sempre soggette a valutazione clinica individuale. Prescrizioni, certificati e richieste esami vengono emessi solo quando appropriati e consentiti dalla normativa.</p></div>
     <div class="info-card"><h3>📋 Documenti legali</h3><p>
       <a onclick="prevScreen='s-info';showScreen('s-privacy')" style="color:#1e40af;text-decoration:underline;cursor:pointer">Informativa Privacy (GDPR)</a><br>
       <a onclick="prevScreen='s-info';showScreen('s-termini')" style="color:#1e40af;text-decoration:underline;cursor:pointer">Termini e Condizioni</a><br>
@@ -329,7 +362,7 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
 
 <!-- CONTATTI -->
 <div id="s-contatti" class="screen">
-  <header><div style="font-size:30px">🩺</div><div><div class="logo">Medico Subito</div></div></header>
+  <header><div style="font-size:30px">🩺</div><div><div class="logo" onclick="showScreen('s-richiesta')" style="cursor:pointer">Medico Subito</div></div></header>
   <div class="info-section">
     <div style="font-size:18px;font-weight:800;color:#0f172a;margin-bottom:14px">Contatti</div>
     <div class="info-card" style="cursor:pointer" onclick="window.location.href='mailto:info@medicoora.com'">
@@ -381,7 +414,7 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
   <header><button class="btn-ghost" onclick="showScreen(prevScreen||'s-home')" style="font-size:20px">←</button><div style="margin-left:8px"><div class="logo">Privacy Policy</div></div></header>
   <div class="legal-section">
     <h2>Informativa sulla Privacy</h2>
-    <p><strong>Ultimo aggiornamento:</strong> Maggio 2025</p>
+    <p><strong>Ultimo aggiornamento:</strong> 2026</p>
     <p>Medico Subito tratta i dati sanitari in conformità al <strong>Regolamento UE 2016/679 (GDPR)</strong>, D.Lgs. 196/2003 e alle Linee Guida sulla Telemedicina del Ministero della Salute (21 settembre 2022).</p>
     <h3>1. Titolare del trattamento</h3>
     <p>Il titolare del trattamento è il medico responsabile del servizio, iscritto all'Ordine dei Medici Chirurghi e Odontoiatri. Per esercitare i tuoi diritti: info@medicoora.com</p>
@@ -408,7 +441,7 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
   <header><button class="btn-ghost" onclick="showScreen(prevScreen||'s-home')" style="font-size:20px">←</button><div style="margin-left:8px"><div class="logo">Termini di Servizio</div></div></header>
   <div class="legal-section">
     <h2>Termini e Condizioni</h2>
-    <p><strong>Ultimo aggiornamento:</strong> Maggio 2025</p>
+    <p><strong>Ultimo aggiornamento:</strong> 2026</p>
     <h3>1. Il servizio</h3>
     <p>Medico Subito è una piattaforma di telemedicina asincrona. Il servizio è erogato da medici qualificati iscritti all'Ordine dei Medici, in conformità alle Linee Guida sulla Telemedicina del Ministero della Salute (settembre 2022).</p>
     <h3>2. Limiti del servizio</h3>
@@ -423,10 +456,6 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
     <p>Servizio attivo 7 giorni su 7. I tempi di risposta dipendono dal volume delle richieste.</p>
     <h3>7. Tariffe</h3>
     <p>Abbonamento annuale €60, accesso illimitato per 12 mesi. Il pagamento non garantisce automaticamente l'emissione di prescrizioni.</p>
-    <h3>7. Responsabilità professionale</h3>
-    <p>I medici che operano su Medico Subito sono iscritti all'Ordine dei Medici Chirurghi e Odontoiatri e in possesso di polizza di responsabilità civile professionale. Ogni atto medico è conforme alle Linee Guida FNOMCeO sulla telemedicina e alle indicazioni del Ministero della Salute (settembre 2022).</p>
-    <h3>8. Limiti della telemedicina asincrona</h3>
-    <p>La telemedicina asincrona non consente la visita fisica e si basa esclusivamente sulle informazioni fornite dal paziente. Il medico può richiedere ulteriori informazioni o indirizzare il paziente a una visita in presenza qualora lo ritenga necessario.</p>
     <h3>9. Legge applicabile</h3>
     <p>Diritto italiano. Foro esclusivo: Roma.</p>
     <h3>10. Contatti</h3>
@@ -498,7 +527,7 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
     <button class="sign-btn" id="sign-btn" onclick="inviaRisposta()" disabled>⏳ Preparazione bozza...</button>
     <button class="btn-secondary" style="margin-bottom:20px;height:44px;font-size:14px" onclick="showScreen('s-doc-dash')">← Torna alla lista</button>
     <div class="sent-ok" id="dc-sent">
-      <h3>✅ Risposta firmata e inviata!</h3>
+      <h3>✅ Risposta inviata!</h3>
       <p id="dc-sent-msg">Il paziente ha ricevuto la risposta medica.</p>
     </div>
   </div>
@@ -572,11 +601,28 @@ function toBase64(file){
   });
 }
 
+// Triage logic
+document.addEventListener('change', function(e){
+  if(e.target.classList.contains('triage-check')){
+    const checks = document.querySelectorAll('.triage-check');
+    const anyChecked = Array.from(checks).some(c => c.checked);
+    document.getElementById('triage-alert').style.display = anyChecked ? 'block' : 'none';
+    document.getElementById('triage-ok').style.display = (!anyChecked && checks.length > 0) ? 'none' : 'none';
+  }
+});
+
 async function sendRequest(){
   const type=document.getElementById("requestType").value;
   const text=document.getElementById("problem").value.trim();
   if(!type){alert("Seleziona il tipo di richiesta");return;}
   if(!text){alert("Descrivi la tua situazione");return;}
+  // Blocca se triage positivo
+  const triageChecks = document.querySelectorAll('.triage-check');
+  const triagePositivo = Array.from(triageChecks).some(c => c.checked);
+  if(triagePositivo){
+    alert("⚠️ Hai indicato sintomi urgenti. Chiama il 118 o vai al Pronto Soccorso. Questo servizio non gestisce emergenze.");
+    return;
+  }
   tipoRichiesta=type;
   conversazione=[];
   showLoading();
@@ -772,13 +818,13 @@ async function generaAI(caso){
     document.getElementById("dc-ai").className="ai-text";
     document.getElementById("dc-reply").value=testo;
     btn.disabled=false;
-    btn.textContent="✅ Firma e invia al paziente";
+    btn.textContent="✅ Conferma e invia risposta medica";
   }catch(e){
     document.getElementById("dc-ai").textContent="Analisi non disponibile. Scrivi la risposta manualmente.";
     document.getElementById("dc-ai").className="ai-text";
     document.getElementById("dc-reply").value="";
     btn.disabled=false;
-    btn.textContent="✅ Firma e invia al paziente";
+    btn.textContent="✅ Conferma e invia risposta medica";
   }
 }
 
@@ -799,11 +845,24 @@ async function inviaRisposta(){
     if(c) c.risposta_medico=txt;
     document.getElementById("dc-sent").style.display="block";
     document.getElementById("dc-sent-msg").textContent="Risposta inviata a "+(c?.email||'il paziente')+".";
-    btn.textContent="✅ Firmato";
+    btn.textContent="✅ Inviato";
   }catch(e){
     alert("Errore: "+e.message);
     btn.disabled=false;
-    btn.textContent="✅ Firma e invia al paziente";
+    btn.textContent="✅ Conferma e invia risposta medica";
+  }
+}
+
+async function startStripeFromSuccess(){
+  const email = document.getElementById("stripe-email-success") ? document.getElementById("stripe-email-success").value.trim() : '';
+  if(!email || !email.includes('@')){alert("Inserisci la tua email");return;}
+  try{
+    const res=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    const data=await res.json();
+    if(data.url) window.location.href=data.url;
+    else alert("Grazie! Ti contatteremo a "+email+" per completare l'abbonamento.");
+  }catch(e){
+    alert("Grazie! Ti contatteremo a "+email+" per completare l'abbonamento.");
   }
 }
 
