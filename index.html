@@ -17,6 +17,8 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{font-family:'Inter',sans-serif;background:#f1f5f9;color:#0f172a;line-height:1.6}
+input[type="checkbox"]{cursor:pointer;position:relative;z-index:999 !important;pointer-events:all !important;}
+label{cursor:pointer;}
 header{height:60px;background:white;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;gap:10px;padding:0 16px;position:sticky;top:0;z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.08)}
 .logo{font-size:21px;font-weight:800;color:#1e40af;letter-spacing:-0.5px}
 .logo-sub{font-size:11px;color:#64748b;font-weight:500}
@@ -42,15 +44,15 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#1e40af;box-sh
 .success-box{background:#f0fdf4;border:1px solid #86efac;border-radius:16px;padding:22px;text-align:center;margin-top:16px}
 .success-box h3{font-size:18px;font-weight:800;color:#15803d;margin-bottom:6px}
 .success-box p{font-size:13px;color:#166534;line-height:1.6}
-.upload-zone{border:2px dashed #cbd5e1;border-radius:12px;padding:18px;text-align:center;cursor:pointer;margin-bottom:12px;transition:all .2s;background:#f8fafc;position:relative;z-index:1;}
+.upload-zone{border:2px dashed #cbd5e1;border-radius:12px;padding:18px;text-align:center;cursor:pointer;margin-bottom:12px;transition:all .2s;background:#f8fafc;}
 .upload-zone:hover,.upload-zone.active{border-color:#1e40af;background:#eff6ff}
 .file-list{margin-top:8px;display:flex;flex-direction:column;gap:5px}
 .file-item{display:flex;align-items:center;justify-content:space-between;background:white;border:1px solid #e2e8f0;border-radius:8px;padding:7px 11px;font-size:12px}
 .file-name{color:#374151;font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .file-remove{color:#dc2626;cursor:pointer;font-weight:700;margin-left:8px}
-.consent-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin-bottom:12px;position:relative;z-index:50;}
+.consent-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin-bottom:12px;}
 .consent-row{display:flex;align-items:flex-start;gap:10px}
-.consent-row input[type="checkbox"]{width:26px;height:26px;min-width:26px;margin:0;flex-shrink:0;accent-color:#1e40af;cursor:pointer;margin-top:1px;position:relative;z-index:50;pointer-events:all !important;}
+.consent-row input[type="checkbox"]{width:26px;height:26px;min-width:26px;margin:0;flex-shrink:0;accent-color:#1e40af;cursor:pointer;margin-top:1px;}
 .consent-row label{font-size:12.5px;color:#374151;line-height:1.6;cursor:pointer}
 .consent-row a{color:#1e40af;text-decoration:underline;cursor:pointer}
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;height:68px;background:white;border-top:1px solid #e2e8f0;display:flex;justify-content:space-around;align-items:center;z-index:50;box-shadow:0 -1px 6px rgba(0,0,0,.06)}
@@ -117,9 +119,9 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
 
   <div style="padding:16px 16px 0">
     <div class="card" style="padding:22px">
-      <div style="font-size:20px;font-weight:900;background:#1e40af;color:#faff00;border-radius:12px;padding:12px 18px;display:block;margin-bottom:16px;letter-spacing:-0.3px;text-shadow:0 1px 3px rgba(0,0,0,.2);text-align:center;line-height:1.3">Prescrizioni e consulti<br>medici certificati online</div>
+      <div style="font-size:20px;font-weight:900;background:#1e40af;color:#faff00;border-radius:12px;padding:12px 18px;display:block;margin-bottom:16px;letter-spacing:-0.3px;text-shadow:0 1px 3px rgba(0,0,0,.2);text-align:center;line-height:1.3">Prescrizioni, certificati e consulti<br>medici online con risposta firmata dal medico</div>
       <h1 style="font-size:30px;line-height:1.1;font-weight:800;margin-bottom:12px;letter-spacing:-0.5px;color:#1e40af;width:100%;display:block">Il tuo medico online,<br>sempre disponibile.</h1>
-      <p style="font-size:17px;color:#0f172a;line-height:1.6;font-weight:700">Prescrizioni, richieste esami, certificati e valutazioni mediche. Risposta medica firmata, 7 giorni su 7.</p>
+      <p style="font-size:17px;color:#0f172a;line-height:1.6;font-weight:700">Valutazioni mediche, richieste esami, certificati e prescrizioni quando appropriati, con risposta firmata da medici abilitati.</p>
 
       <button class="btn-primary" onclick="showScreen('s-payment')">Attiva abbonamento — €60/anno per i primi 10.000 iscritti</button>
       <button class="btn-secondary" onclick="showScreen('s-richiesta')" style="background:#1e40af;border-color:#1e40af;color:#faff00;font-size:20px;font-weight:900;height:60px;margin-top:12px">Invia richiesta al medico</button>
@@ -174,7 +176,7 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
   </div>
 
   <footer>
-    <strong style="color:#0f172a">Medico Subito</strong> — Servizio di telemedicina certificato<br>
+    <strong style="color:#0f172a">Medico Subito</strong> — Servizio di telemedicina con valutazione medica professionale<br>
     <span style="font-size:11px;display:block;margin:4px 0 8px">Conforme alle Linee Guida Telemedicina Min. Salute 2022 · GDPR · FNOMCeO</span>
     <a onclick="prevScreen='s-home';showScreen('s-privacy')">Privacy Policy</a> &nbsp;·&nbsp;
     <a onclick="prevScreen='s-home';showScreen('s-termini')">Termini di Servizio</a> &nbsp;·&nbsp;
@@ -207,7 +209,7 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
         <input id="stripe-email-input" type="email" placeholder="La tua email *" style="margin-bottom:0;border-radius:12px;border:1.5px solid #cbd5e1;padding:14px;font-size:15px;font-family:Inter,sans-serif;width:100%"/>
       </div>
       <button class="btn-primary" onclick="startStripeCheckout()" style="margin-top:0">Attiva ora — Pagamento sicuro →</button>
-      <div style="margin-top:12px;font-size:11px;color:#94a3b8;line-height:1.5">🔒 Pagamento sicuro con Stripe<br>Le prestazioni cliniche sono erogate a discrezione del medico, previa valutazione individuale della richiesta.</div>
+      <div style="margin-top:12px;font-size:11px;color:#94a3b8;line-height:1.5">🔒 Pagamento sicuro con Stripe<br>Le prestazioni cliniche sono emesse solo se clinicamente appropriate.</div>
     </div>
     <div class="card">
       <div class="label">Incluso</div>
@@ -234,28 +236,21 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
     <div class="card" id="main-form">
       <div class="label">Nuova richiesta medica</div>
       
-      <!-- TRIAGE OBBLIGATORIO -->
+      <!-- AVVISO EMERGENZE -->
       <div style="background:#fef2f2;border:2px solid #fca5a5;border-radius:14px;padding:16px;margin-bottom:16px">
-        <div style="font-size:15px;font-weight:800;color:#991b1b;margin-bottom:10px">⚠️ Prima di procedere, rispondi:</div>
-        <div style="font-size:14px;font-weight:700;color:#7f1d1d;margin-bottom:12px">Hai uno di questi sintomi <strong>adesso</strong>?</div>
-        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
-          <label style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#374151;cursor:pointer"><input type="checkbox" class="triage-check" style="width:18px;height:18px;accent-color:#dc2626"> Dolore toracico o al petto</label>
-          <label style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#374151;cursor:pointer"><input type="checkbox" class="triage-check" style="width:18px;height:18px;accent-color:#dc2626"> Difficoltà respiratoria o mancanza di fiato</label>
-          <label style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#374151;cursor:pointer"><input type="checkbox" class="triage-check" style="width:18px;height:18px;accent-color:#dc2626"> Perdita di coscienza o svenimento</label>
-          <label style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#374151;cursor:pointer"><input type="checkbox" class="triage-check" style="width:18px;height:18px;accent-color:#dc2626"> Deficit neurologici (paralisi, confusione, disturbi visivi)</label>
-          <label style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#374151;cursor:pointer"><input type="checkbox" class="triage-check" style="width:18px;height:18px;accent-color:#dc2626"> Sanguinamento importante</label>
-          <label style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#374151;cursor:pointer"><input type="checkbox" class="triage-check" style="width:18px;height:18px;accent-color:#dc2626"> Dolore addominale severo</label>
-          <label style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#374151;cursor:pointer"><input type="checkbox" class="triage-check" style="width:18px;height:18px;accent-color:#dc2626"> Gravidanza con sintomi acuti</label>
-          <label style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:#374151;cursor:pointer"><input type="checkbox" class="triage-check" style="width:18px;height:18px;accent-color:#dc2626"> Pensieri di farsi del male</label>
+        <div style="font-size:15px;font-weight:800;color:#991b1b;margin-bottom:8px">🚨 NON usare questo servizio se hai:</div>
+        <div style="font-size:13.5px;color:#7f1d1d;line-height:1.8">
+          • Dolore toracico o difficoltà respiratoria<br>
+          • Perdita di coscienza o confusione mentale<br>
+          • Deficit neurologici (paralisi, disturbi visivi)<br>
+          • Sanguinamento importante<br>
+          • Dolore addominale severo<br>
+          • Gravidanza con sintomi acuti<br>
+          • Pensieri di farti del male
         </div>
-        <div id="triage-alert" style="display:none;background:#dc2626;color:white;border-radius:10px;padding:14px;text-align:center;font-weight:700;font-size:15px">
-          🚨 Chiama subito il <strong>118</strong> o vai al Pronto Soccorso.<br>
-          <span style="font-size:13px;font-weight:400;opacity:.9">Questo servizio non è adatto alle emergenze.</span>
+        <div style="margin-top:12px;background:#dc2626;color:white;border-radius:10px;padding:12px;text-align:center;font-weight:800;font-size:16px">
+          👉 Chiama il <strong>118</strong> o vai al Pronto Soccorso
         </div>
-        <div id="triage-ok" style="display:none;background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:10px;text-align:center;font-size:13px;color:#15803d;font-weight:600">
-          ✅ Puoi procedere con la richiesta
-        </div>
-        <div style="font-size:12px;color:#64748b;margin-top:10px;text-align:center">Se hai selezionato uno o più sintomi sopra, usa il 118.</div>
       </div>
 
       <select id="requestType">
@@ -299,10 +294,13 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
         <input id="patient-phone" placeholder="Telefono (opzionale)"/>
         <textarea id="patient-extra" placeholder="Farmaci in uso, allergie, patologie croniche..." style="min-height:65px"></textarea>
         <div class="section-title">Consenso informato</div>
-        <div class="consent-box">
-          <div class="consent-row">
-            <input type="checkbox" id="consenso"/>
-            <label for="consenso">Ho letto e accetto i <a onclick="prevScreen='s-richiesta';showScreen('s-termini')">Termini</a> e l'<a onclick="prevScreen='s-richiesta';showScreen('s-privacy')">Informativa Privacy</a> (GDPR art. 9). Comprendo che questo servizio non sostituisce il medico di base e non va usato in emergenza. *</label>
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px">
+          <div style="font-size:13px;color:#374151;line-height:1.7;margin-bottom:14px">
+            Ho letto e accetto i <a onclick="prevScreen='s-richiesta';showScreen('s-termini')" style="color:#1e40af;text-decoration:underline;cursor:pointer">Termini</a> e l'<a onclick="prevScreen='s-richiesta';showScreen('s-privacy')" style="color:#1e40af;text-decoration:underline;cursor:pointer">Informativa Privacy</a> (GDPR art. 9). Comprendo che questo servizio non sostituisce il medico di base e non va usato in emergenza.
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <button type="button" id="consenso-no" onclick="setConsenso(false)" style="padding:14px;border-radius:12px;border:2px solid #e2e8f0;background:white;font-size:15px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;color:#64748b">✗ Non accetto</button>
+            <button type="button" id="consenso-si" onclick="setConsenso(true)" style="padding:14px;border-radius:12px;border:2px solid #e2e8f0;background:white;font-size:15px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;color:#64748b">✓ Accetto</button>
           </div>
         </div>
         <button class="btn-primary" onclick="submitToDoctor()">Invia la richiesta →</button>
@@ -443,22 +441,22 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
     <h2>Termini e Condizioni</h2>
     <p><strong>Ultimo aggiornamento:</strong> 2026</p>
     <h3>1. Il servizio</h3>
-    <p>Medico Subito è una piattaforma di telemedicina asincrona. Il servizio è erogato da medici qualificati iscritti all'Ordine dei Medici, in conformità alle Linee Guida sulla Telemedicina del Ministero della Salute (settembre 2022).</p>
+    <p>Medico Subito è una piattaforma di telemedicina asincrona. Il servizio è erogato da medici qualificati iscritti all'Ordine dei Medici Chirurghi e Odontoiatri, in conformità alle Linee Guida sulla Telemedicina del Ministero della Salute (settembre 2022) e alle indicazioni FNOMCeO.</p>
     <h3>2. Limiti del servizio</h3>
-    <p>Medico Subito <strong>non è un servizio di emergenza</strong>. In emergenza: 118 o Pronto Soccorso. Il servizio non sostituisce il medico di base.</p>
+    <p>Medico Subito <strong>non è un servizio di emergenza</strong>. Non va utilizzato in caso di dolore toracico, difficoltà respiratoria, perdita di coscienza o qualsiasi altra urgenza. In emergenza: chiamare il 118 o recarsi al Pronto Soccorso. Il servizio non sostituisce il medico di base né elimina la necessità di visite ambulatoriali.</p>
     <h3>3. Atti medici e responsabilità professionale</h3>
-    <p>Tutte le prescrizioni e gli atti medici sono emessi da medici iscritti all'Ordine dei Medici Chirurghi e Odontoiatri, coperti da polizza di Responsabilità Civile Professionale. Ogni richiesta è valutata individualmente. Il medico si riserva il diritto di non emettere una prescrizione qualora non la ritenga clinicamente appropriata o le informazioni fornite siano insufficienti.</p>
+    <p>Tutte le prescrizioni e gli atti medici sono emessi da medici iscritti all'Ordine dei Medici, coperti da polizza di Responsabilità Civile Professionale. Le prestazioni cliniche sono emesse solo se clinicamente appropriate. Il medico si riserva il diritto di non emettere una prescrizione qualora non la ritenga appropriata o le informazioni fornite siano insufficienti.</p>
     <h3>4. Limiti della telemedicina asincrona</h3>
-    <p>Conformemente alle Linee Guida FNOMCeO e del Ministero della Salute (settembre 2022), la telemedicina asincrona non sostituisce la visita medica in presenza. Il medico può richiedere integrazione di informazioni o indirizzare il paziente a una visita ambulatoriale quando lo ritenga necessario per garantire la sicurezza del paziente.</p>
+    <p>La telemedicina asincrona non sostituisce la visita medica in presenza e si basa sulle informazioni fornite dal paziente. Il medico può richiedere ulteriori informazioni o indirizzare il paziente a una visita ambulatoriale quando necessario.</p>
     <h3>5. Responsabilità del paziente</h3>
-    <p>Il paziente è responsabile della veridicità delle informazioni fornite.</p>
+    <p>Il paziente è responsabile della veridicità e completezza delle informazioni fornite. Dichiarazioni false o incomplete possono pregiudicare la qualità della risposta medica.</p>
     <h3>6. Disponibilità</h3>
-    <p>Servizio attivo 7 giorni su 7. I tempi di risposta dipendono dal volume delle richieste.</p>
+    <p>Servizio attivo 7 giorni su 7. I tempi di risposta dipendono dal volume delle richieste ricevute.</p>
     <h3>7. Tariffe</h3>
-    <p>Abbonamento annuale €60, accesso illimitato per 12 mesi. Il pagamento non garantisce automaticamente l'emissione di prescrizioni.</p>
-    <h3>9. Legge applicabile</h3>
+    <p>Abbonamento annuale €60, accesso per 12 mesi all'invio di richieste mediche. Il pagamento non garantisce automaticamente l'emissione di prescrizioni o certificati, subordinati alla valutazione clinica individuale del medico.</p>
+    <h3>8. Legge applicabile</h3>
     <p>Diritto italiano. Foro esclusivo: Roma.</p>
-    <h3>10. Contatti</h3>
+    <h3>9. Contatti</h3>
     <p>info@medicoora.com</p>
   </div>
 </div>
@@ -534,7 +532,7 @@ footer a{color:#1e40af;text-decoration:none;cursor:pointer;font-weight:500}
 </div>
 
 <script>
-const DOC_PWD = 'medico2025';
+const DOC_PWD = 'medico2025'; // TODO: sostituire con autenticazione server-side prima del lancio pubblico
 let conversazione = [];
 let tipoRichiesta = '';
 let allCases = [];
@@ -601,28 +599,14 @@ function toBase64(file){
   });
 }
 
-// Triage logic
-document.addEventListener('change', function(e){
-  if(e.target.classList.contains('triage-check')){
-    const checks = document.querySelectorAll('.triage-check');
-    const anyChecked = Array.from(checks).some(c => c.checked);
-    document.getElementById('triage-alert').style.display = anyChecked ? 'block' : 'none';
-    document.getElementById('triage-ok').style.display = (!anyChecked && checks.length > 0) ? 'none' : 'none';
-  }
-});
+
 
 async function sendRequest(){
   const type=document.getElementById("requestType").value;
   const text=document.getElementById("problem").value.trim();
   if(!type){alert("Seleziona il tipo di richiesta");return;}
   if(!text){alert("Descrivi la tua situazione");return;}
-  // Blocca se triage positivo
-  const triageChecks = document.querySelectorAll('.triage-check');
-  const triagePositivo = Array.from(triageChecks).some(c => c.checked);
-  if(triagePositivo){
-    alert("⚠️ Hai indicato sintomi urgenti. Chiama il 118 o vai al Pronto Soccorso. Questo servizio non gestisce emergenze.");
-    return;
-  }
+
   tipoRichiesta=type;
   conversazione=[];
   showLoading();
@@ -681,7 +665,7 @@ async function submitToDoctor(){
   const email=document.getElementById("patient-email").value.trim();
   if(!nome){alert("Inserisci nome e cognome");return;}
   if(!email||!email.includes("@")){alert("Inserisci un'email valida");return;}
-  if(!document.getElementById("consenso").checked){alert("Devi accettare Termini e Privacy");return;}
+  
   const btn=document.querySelector('#doctor-form .btn-primary');
   btn.textContent="Invio in corso...";
   btn.disabled=true;
@@ -728,6 +712,28 @@ function newRequest(){
   document.getElementById("warning").style.display="none";
   conversazione=[];
   window.scrollTo({top:0,behavior:"smooth"});
+}
+
+let consensoAccettato = false;
+function setConsenso(val){
+  consensoAccettato = val;
+  const si = document.getElementById('consenso-si');
+  const no = document.getElementById('consenso-no');
+  if(val){
+    si.style.background='#1e40af';
+    si.style.color='white';
+    si.style.borderColor='#1e40af';
+    no.style.background='white';
+    no.style.color='#64748b';
+    no.style.borderColor='#e2e8f0';
+  } else {
+    no.style.background='#dc2626';
+    no.style.color='white';
+    no.style.borderColor='#dc2626';
+    si.style.background='white';
+    si.style.color='#64748b';
+    si.style.borderColor='#e2e8f0';
+  }
 }
 
 function loginMedico(){
