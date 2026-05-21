@@ -665,6 +665,7 @@ async function submitToDoctor(){
   const email=document.getElementById("patient-email").value.trim();
   if(!nome){alert("Inserisci nome e cognome");return;}
   if(!email||!email.includes("@")){alert("Inserisci un'email valida");return;}
+  if(!consensoAccettato){alert("Devi accettare Termini e Privacy per procedere");return;}
   
   const btn=document.querySelector('#doctor-form .btn-primary');
   btn.textContent="Invio in corso...";
