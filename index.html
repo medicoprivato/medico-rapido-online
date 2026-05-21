@@ -828,6 +828,28 @@ window.addEventListener('load', function(){
   }
   if(window.location.hash === '#medico') showScreen('s-doc-login');
   if(window.location.hash === '#area') entraNellAreaPaziente();
+
+  // Gestione ritorno da Stripe
+  const params = new URLSearchParams(window.location.search);
+  if(params.get('pagamento') === 'ok'){
+    const emailPag = params.get('email') || '';
+    setTimeout(()=>{
+      showScreen('s-home');
+      const msg = document.createElement('div');
+      msg.style.cssText = 'position:fixed;top:70px;left:16px;right:16px;background:#1e40af;color:white;border-radius:14px;padding:18px;z-index:200;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.2)';
+      msg.innerHTML = '<div style="font-size:20px;margin-bottom:6px">✅ Abbonamento attivato!</div><div style="font-size:13px;opacity:.9">Benvenuta su Medico Subito. Puoi ora inviare le tue richieste mediche.</div>';
+      document.body.appendChild(msg);
+      setTimeout(()=>msg.remove(), 5000);
+      // Pulisci URL
+      window.history.replaceState({}, '', '/');
+    }, 300);
+  }
+  if(params.get('pagamento') === 'annullato'){
+    setTimeout(()=>{
+      showScreen('s-payment');
+      window.history.replaceState({}, '', '/');
+    }, 300);
+  }
 });
  // IMPORTANTE: spostare in variabile d'ambiente Vercel prima del lancio
 let conversazione = [];
@@ -1015,7 +1037,7 @@ function newRequest(){
   document.getElementById("requestType").value="";
   document.getElementById("followup").value="";
   uploadedFiles=[];renderFileList();
-  document.getElementById("consenso").checked=false;
+  setConsenso(false);
   ["response","rx-section","doctor-form","success-box"].forEach(id=>document.getElementById(id).classList.add("hidden"));
   document.getElementById("warning").style.display="none";
   conversazione=[];
@@ -1210,36 +1232,55 @@ async function inviaRisposta(){
 }
 
 async function startStripeFromSuccess(){
-  const email = document.getElementById("stripe-email-success") ? document.getElementById("stripe-email-success").value.trim() : '';
+  const emailInput = document.getElementById("stripe-email-success");
+  const email = emailInput ? emailInput.value.trim() : '';
   if(!email || !email.includes('@')){alert("Inserisci la tua email");return;}
+  const btn = document.querySelector('#success-box button');
+  if(btn){ btn.textContent = "Caricamento..."; btn.disabled = true; }
   try{
-    const res=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
-    const data=await res.json();
-    if(data.url) window.location.href=data.url;
-    else alert("Grazie! Ti contatteremo a "+email+" per completare l'abbonamento.");
+    const res = await fetch('/api/create-checkout-session',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email})
+    });
+    const data = await res.json();
+    if(data.url) window.location.href = data.url;
+    else{
+      alert("Errore: " + (data.error || "Riprova"));
+      if(btn){ btn.textContent = "Attiva ora →"; btn.disabled = false; }
+    }
   }catch(e){
-    alert("Grazie! Ti contatteremo a "+email+" per completare l'abbonamento.");
+    alert("Errore di connessione. Riprova.");
+    if(btn){ btn.textContent = "Attiva ora →"; btn.disabled = false; }
   }
 }
 
 async function startStripeCheckout(){
-  const email = document.getElementById("stripe-email-input") ? document.getElementById("stripe-email-input").value.trim() : '';
+  const emailInput = document.getElementById("stripe-email-input");
+  const email = emailInput ? emailInput.value.trim() : '';
   if(!email || !email.includes('@')){
-    // Mostra form email
-    const modal = document.getElementById("stripe-modal");
-    if(modal) modal.style.display="flex";
+    alert("Inserisci la tua email per procedere al pagamento");
+    if(emailInput) emailInput.focus();
     return;
   }
+  const btn = document.querySelector('#s-payment .btn-primary');
+  if(btn){ btn.textContent = "Caricamento..."; btn.disabled = true; }
   try{
-    const res=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
-    const data=await res.json();
-    if(data.url) window.location.href=data.url;
-    else{
-      // Fallback: salva email e mostra conferma
-      alert("Abbonamento in arrivo! Ti contatteremo a "+email+" per completare il pagamento.");
+    const res = await fetch('/api/create-checkout-session',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email})
+    });
+    const data = await res.json();
+    if(data.url){
+      window.location.href = data.url;
+    } else {
+      alert("Errore: " + (data.error || "Riprova tra poco"));
+      if(btn){ btn.textContent = "Attiva ora — Pagamento sicuro →"; btn.disabled = false; }
     }
   }catch(e){
-    alert("Abbonamento in arrivo! Ti contatteremo a "+email+" per completare il pagamento.");
+    alert("Errore di connessione. Riprova.");
+    if(btn){ btn.textContent = "Attiva ora — Pagamento sicuro →"; btn.disabled = false; }
   }
 }
 </script>
