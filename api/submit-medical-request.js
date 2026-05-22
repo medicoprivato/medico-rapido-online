@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import nodemailer from "nodemailer";
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -46,19 +47,21 @@ function validateAllegati(allegati) {
 
 async function sendEmail(to, subject, html) {
   try {
-    const fromAddress = process.env.RESEND_DOMAIN_VERIFIED === "true"
-      ? "Medico Subito <noreply@medicoora.com>"
-      : "Medico Subito <onboarding@resend.dev>";
-
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.RESEND_API_KEY}`
-      },
-      body: JSON.stringify({ from: fromAddress, to: [to], subject, html })
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD
+      }
     });
-    return res.ok;
+
+    await transporter.sendMail({
+      from: `Medico Subito <${process.env.GMAIL_USER}>`,
+      to,
+      subject,
+      html
+    });
+    return true;
   } catch (e) {
     console.error("Email error:", e.message);
     return false;
