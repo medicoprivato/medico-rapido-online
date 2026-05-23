@@ -1,5 +1,4 @@
 import { createClient } from "@supabase/supabase-js";
-import nodemailer from "nodemailer";
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -47,18 +46,19 @@ function validateAllegati(allegati) {
 
 async function sendEmail(to, subject, html) {
   try {
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD
-      }
+    const fromAddress = process.env.RESEND_DOMAIN_VERIFIED === "true"
+      ? "Medico Subito <noreply@medicoora.com>"
+      : "Medico Subito <onboarding@resend.dev>";
+
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.RESEND_API_KEY}`
+      },
+      body: JSON.stringify({ from: fromAddress, to: [to], subject, html })
     });
-    await transporter.sendMail({
-      from: `Medico Subito <${process.env.GMAIL_USER}>`,
-      to, subject, html
-    });
-    return true;
+    return res.ok;
   } catch (e) {
     console.error("Email error:", e.message);
     return false;
@@ -67,50 +67,61 @@ async function sendEmail(to, subject, html) {
 
 function emailMedico(patientName, tipo, email, phone, dateOfBirth, patientText, clinicalData, codiceFiscale) {
   return `<!DOCTYPE html>
-<html lang="it"><head><meta charset="UTF-8"/><style>
+<html lang="it">
+<head><meta charset="UTF-8"/><style>
 body{font-family:Arial,sans-serif;background:#f1f5f9;margin:0;padding:20px}
 .card{background:white;border-radius:12px;padding:24px;max-width:600px;margin:0 auto;border:1px solid #e2e8f0}
 .header{background:#1e3a8a;color:white;border-radius:10px;padding:16px;margin-bottom:20px}
+.header h2{margin:0;font-size:18px}
 .field{margin-bottom:12px}
 .label{font-size:11px;font-weight:700;color:#1e40af;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}
 .value{font-size:14px;color:#0f172a;line-height:1.6}
 .problema{background:#f8fafc;border-left:3px solid #1e40af;padding:12px;border-radius:0 8px 8px 0;margin:16px 0}
 .btn{display:inline-block;background:#1e40af;color:white;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;margin-top:16px}
+.footer{font-size:11px;color:#94a3b8;text-align:center;margin-top:20px}
 </style></head>
-<body><div class="card">
-  <div class="header"><h2 style="margin:0">🩺 Nuova richiesta medica</h2></div>
+<body>
+<div class="card">
+  <div class="header"><h2>🩺 Nuova richiesta medica</h2><p style="margin:4px 0 0;font-size:13px;opacity:.8">Medico Subito — Area Riservata</p></div>
   <div class="field"><div class="label">Paziente</div><div class="value"><strong>${patientName}</strong></div></div>
   <div class="field"><div class="label">Codice Fiscale</div><div class="value">${codiceFiscale||'—'}</div></div>
   <div class="field"><div class="label">Data di nascita</div><div class="value">${dateOfBirth||'—'}</div></div>
-  <div class="field"><div class="label">Email</div><div class="value">${email}</div></div>
+  <div class="field"><div class="label">Email paziente</div><div class="value">${email}</div></div>
   <div class="field"><div class="label">Telefono</div><div class="value">${phone||'—'}</div></div>
-  <div class="field"><div class="label">Tipo</div><div class="value">${tipo||'—'}</div></div>
+  <div class="field"><div class="label">Tipo richiesta</div><div class="value">${tipo||'—'}</div></div>
   <div class="field"><div class="label">Dati clinici</div><div class="value">${clinicalData||'—'}</div></div>
   <div class="field"><div class="label">Descrizione</div><div class="problema" style="white-space:pre-wrap">${patientText}</div></div>
   <a class="btn" href="https://www.medicoora.com/#medico">Accedi alla dashboard →</a>
-  <p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:20px">Medico Subito · info@medicoora.com</p>
-</div></body></html>`;
+  <div class="footer">Medico Subito · info@medicoora.com · 7 giorni su 7</div>
+</div>
+</body></html>`;
 }
 
 function emailPaziente(patientName, tipo, risposta) {
   return `<!DOCTYPE html>
-<html lang="it"><head><meta charset="UTF-8"/><style>
+<html lang="it">
+<head><meta charset="UTF-8"/><style>
 body{font-family:Arial,sans-serif;background:#f1f5f9;margin:0;padding:20px}
 .card{background:white;border-radius:12px;padding:24px;max-width:600px;margin:0 auto;border:1px solid #e2e8f0}
 .header{background:#1e3a8a;color:white;border-radius:10px;padding:16px;margin-bottom:20px}
 .risposta{background:#f0f9ff;border:1px solid #bae6fd;border-radius:10px;padding:16px;font-size:14px;line-height:1.8;white-space:pre-wrap;color:#0f172a}
+.medico{background:#f8fafc;border-radius:10px;padding:14px;margin-top:20px;font-size:13px;color:#475569}
+.disclaimer{font-size:11px;color:#94a3b8;margin-top:16px;line-height:1.6;border-top:1px solid #e2e8f0;padding-top:14px}
 </style></head>
-<body><div class="card">
-  <div class="header"><h2 style="margin:0">🩺 Risposta medica</h2><p style="margin:4px 0 0;font-size:13px;opacity:.8">${tipo||'consulto'}</p></div>
-  <p style="font-size:14px;color:#374151;margin-bottom:16px">Gentile <strong>${patientName}</strong>,</p>
+<body>
+<div class="card">
+  <div class="header"><h2 style="margin:0">🩺 Risposta medica — Medico Subito</h2><p style="margin:4px 0 0;font-size:13px;opacity:.8">Risposta alla tua richiesta: ${tipo||'consulto medico'}</p></div>
+  <p style="font-size:14px;color:#374151;margin-bottom:16px">Gentile <strong>${patientName}</strong>,<br>il medico ha valutato la tua richiesta:</p>
   <div class="risposta">${risposta}</div>
-  <div style="background:#f8fafc;border-radius:10px;padding:14px;margin-top:20px;font-size:13px;color:#475569">
+  <div class="medico">
     <strong>Dott.ssa Anna Maria Ferri</strong><br>
     Medico Chirurgo · Specialista in Ginecologia e Ostetricia<br>
     Ordine dei Medici Chirurghi di Frosinone · N. 3363
   </div>
-  <p style="font-size:11px;color:#94a3b8;margin-top:16px">⚠️ Non sostituisce la visita medica. In emergenza chiama il 118.</p>
-</div></body></html>`;
+  <div class="disclaimer">⚠️ Non sostituisce la visita medica. In emergenza chiama il 118.<br>Per informazioni: info@medicoora.com</div>
+  <p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:20px">Medico Subito · © 2026</p>
+</div>
+</body></html>`;
 }
 
 export default async function handler(req, res) {
@@ -126,22 +137,12 @@ export default async function handler(req, res) {
     if (auth !== `Bearer ${DOC_PASSWORD}`) {
       return res.status(401).json({ error: "Non autorizzato" });
     }
-
     const emailFilter = req.query.email;
-
-    let query = supabase
-      .from("consults")
-      .select("*")
-      .order("created_at", { ascending: false });
-
-    if (emailFilter) {
-      // Filtro case-insensitive: usa ilike per trovare l'email indipendentemente da maiuscole/minuscole
-      query = query.ilike("email", emailFilter.trim());
-    }
-
+    let query = supabase.from("consults").select("*").order("created_at", { ascending: false });
+    if (emailFilter) query = query.eq("email", emailFilter);
     const { data, error } = await query;
     if (error) return res.status(500).json({ error: error.message });
-    return res.status(200).json(data || []);
+    return res.status(200).json(data);
   }
 
   if (req.method === "POST") {
@@ -163,15 +164,12 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: allegatCheck.error });
     }
 
-    // Salva email sempre in minuscolo per coerenza
-    const emailNorm = email.trim().toLowerCase();
-
     const { error } = await supabase.from("consults").insert({
       tipo,
       patient_text: patientText,
       patient_name: patientName,
       date_of_birth: dateOfBirth,
-      email: emailNorm,
+      email,
       phone,
       clinical_data: clinicalData,
       ai_response: aiResponse,
@@ -189,11 +187,11 @@ export default async function handler(req, res) {
     await sendEmail(
       "ferriam78@gmail.com",
       `🩺 Nuova richiesta: ${tipo||'consulto'} — ${patientName}`,
-      emailMedico(patientName, tipo, emailNorm, phone, dateOfBirth, patientText, clinicalData, codiceFiscale)
+      emailMedico(patientName, tipo, email, phone, dateOfBirth, patientText, clinicalData, codiceFiscale)
     );
 
     await sendEmail(
-      emailNorm,
+      email,
       "Medico Subito — Richiesta ricevuta",
       `<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;background:#f1f5f9;padding:20px">
       <div style="background:white;border-radius:12px;padding:24px;max-width:600px;margin:0 auto">
@@ -249,7 +247,7 @@ export default async function handler(req, res) {
       "ferriam78@gmail.com",
       `✅ Risposta inviata a ${consult?.patient_name||'paziente'}`,
       `<div style="font-family:Arial,sans-serif;padding:20px">
-        <h3>Risposta inviata</h3>
+        <h3>Risposta inviata con successo</h3>
         <p><strong>Paziente:</strong> ${consult?.patient_name||'—'}</p>
         <p><strong>Email:</strong> ${consult?.email||'—'}</p>
         <p style="white-space:pre-wrap;background:#f8fafc;padding:12px;border-radius:8px">${risposta_medico}</p>
