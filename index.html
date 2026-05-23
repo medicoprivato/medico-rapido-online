@@ -1,6 +1,4 @@
-from pathlib import Path
-
-html = r'''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8"/>
@@ -546,8 +544,3 @@ async function inviaRisposta(){alert('Funzione medico disattivata nel frontend p
 </script>
 </body>
 </html>
-'''
-
-path = Path("/mnt/data/index-corretto-medico-subito.html")
-path.write_text(html, encoding="utf-8")
-print(f"Creato: {path} ({path.stat().st_size} bytes)")
