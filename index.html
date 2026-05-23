@@ -886,14 +886,29 @@ async function registraPaz(){
       const msg=d.error_description||d.msg||d.message||(d.error&&typeof d.error==='string'?d.error:JSON.stringify(d.error))||'Errore registrazione';
       err.textContent='❌ '+msg;err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;return;
     }
-    // Registrazione ok - fai subito login automatico
+    // Registrazione ok - login diretto senza passare per il form
     btn.textContent='Registrati →';btn.disabled=false;
-    alert('✅ Account creato! Accesso in corso...');
-    // Login automatico dopo registrazione
-    document.getElementById('paz-email').value = email;
-    document.getElementById('paz-pwd').value = pwd;
-    showPazLogin();
-    await loginPaz();
+    // Login diretto con le credenziali appena usate
+    try{
+      const lr=await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
+        body:JSON.stringify({email,password:pwd})
+      });
+      const ld=await lr.json();
+      if(lr.ok && ld.access_token && ld.user?.id){
+        pazCorrente={email:ld.user.email,nome:nome,token:ld.access_token,id:ld.user.id,loginTime:Date.now()};
+        localStorage.setItem('paziente',JSON.stringify(pazCorrente));
+        alert('✅ Account creato! Benvenuto/a '+nome+'!');
+        entraPaziente();
+      } else {
+        alert('Account creato! Ora accedi con email e password.');
+        showPazLogin();
+      }
+    }catch(ex){
+      alert('Account creato! Ora accedi con email e password.');
+      showPazLogin();
+    }
   }catch(e){err.textContent='❌ Errore rete: '+e.message;err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;}
 }
 
