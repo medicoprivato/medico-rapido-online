@@ -58,7 +58,7 @@ textarea{min-height:120px;resize:none}
 .spacer{height:90px}
 
 .hero{background:linear-gradient(145deg,var(--blu-deep) 0%,#2563eb 100%);padding:32px 20px 36px;position:relative;overflow:hidden}
-.hero-img{position:absolute;right:-8px;bottom:0;width:200px;height:200px;opacity:.09;pointer-events:none}
+.hero-img{position:absolute;right:-15px;bottom:-10px;width:240px;height:240px;opacity:.13;pointer-events:none}
 .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:5px 13px;font-size:12px;font-weight:600;color:rgba(255,255,255,.9);margin-bottom:16px;letter-spacing:.3px}
 .hero-badge::before{content:'●';color:#4ade80;font-size:9px}
 .hero h1{font-family:'Playfair Display',serif;font-size:30px;line-height:1.16;color:#fff;margin-bottom:18px;letter-spacing:-.4px;max-width:76%}
@@ -260,21 +260,31 @@ textarea{min-height:120px;resize:none}
 <!-- HOME -->
 <div id="s-home" class="screen active">
   <div class="hero">
-    <svg class="hero-img" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="70" cy="45" rx="21" ry="23" fill="white"/>
-      <rect x="47" y="70" width="46" height="68" rx="14" fill="white"/>
-      <path d="M59 88 Q50 104 50 117 Q50 133 65 133 Q80 133 80 117 Q80 104 71 88" stroke="white" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-      <circle cx="65" cy="133" r="5.5" fill="white"/>
-      <line x1="65" y1="88" x2="65" y2="70" stroke="white" stroke-width="3" stroke-linecap="round"/>
-      <line x1="75" y1="88" x2="75" y2="70" stroke="white" stroke-width="3" stroke-linecap="round"/>
-      <line x1="60" y1="100" x2="80" y2="100" stroke="rgba(29,78,216,0.3)" stroke-width="1.5" stroke-linecap="round"/>
-      <line x1="60" y1="108" x2="80" y2="108" stroke="rgba(29,78,216,0.3)" stroke-width="1.5" stroke-linecap="round"/>
-      <ellipse cx="148" cy="116" rx="17" ry="18" fill="white"/>
-      <rect x="129" y="136" width="38" height="46" rx="12" fill="white"/>
-      <rect x="116" y="143" width="26" height="20" rx="3" fill="rgba(255,255,255,0.25)" stroke="white" stroke-width="1.5"/>
-      <line x1="120" y1="149" x2="138" y2="149" stroke="rgba(29,78,216,0.4)" stroke-width="1.5" stroke-linecap="round"/>
-      <line x1="120" y1="154" x2="137" y2="154" stroke="rgba(29,78,216,0.4)" stroke-width="1.5" stroke-linecap="round"/>
-      <line x1="120" y1="159" x2="138" y2="159" stroke="rgba(29,78,216,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+    <svg class="hero-img" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- MEDICO: testa -->
+      <ellipse cx="72" cy="40" rx="22" ry="24" fill="white"/>
+      <!-- MEDICO: camice -->
+      <rect x="48" y="66" width="48" height="72" rx="15" fill="white"/>
+      <!-- STETOSCOPIO 1 sul medico, grande -->
+      <path d="M60 86 Q48 106 48 121 Q48 141 66 141 Q84 141 84 121 Q84 106 72 86" stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <circle cx="66" cy="141" r="8" fill="white"/>
+      <circle cx="66" cy="141" r="4" fill="rgba(29,78,216,0.25)"/>
+      <line x1="66" y1="86" x2="60" y2="70" stroke="white" stroke-width="4" stroke-linecap="round"/>
+      <line x1="72" y1="86" x2="78" y2="70" stroke="white" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="59" cy="68" r="5" fill="white"/>
+      <circle cx="79" cy="68" r="5" fill="white"/>
+      <!-- PAZIENTE: testa -->
+      <ellipse cx="156" cy="106" rx="18" ry="20" fill="white"/>
+      <!-- PAZIENTE: corpo -->
+      <rect x="136" y="128" width="40" height="52" rx="13" fill="white"/>
+      <!-- STETOSCOPIO 2 sul paziente, grande -->
+      <path d="M149 136 Q140 150 140 162 Q140 175 153 175 Q166 175 166 162 Q166 150 159 136" stroke="white" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <circle cx="153" cy="175" r="7" fill="white"/>
+      <circle cx="153" cy="175" r="3.5" fill="rgba(29,78,216,0.25)"/>
+      <line x1="153" y1="136" x2="148" y2="122" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="159" y1="136" x2="164" y2="122" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="147" cy="120" r="4" fill="white"/>
+      <circle cx="165" cy="120" r="4" fill="white"/>
     </svg>
 
     <div class="hero-badge">Attivo 7 giorni su 7</div>
@@ -810,8 +820,17 @@ async function loginPaz(){
   try{
     const r=await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPA_KEY},body:JSON.stringify({email,password:pwd})});
     const d=await r.json();
-    if(d.error){err.textContent='Email o password non corretti. Usa "Password dimenticata?" se non ricordi.';err.style.display='block';btn.textContent='Accedi →';btn.disabled=false;return;}
-    pazCorrente={email,nome:d.user?.user_metadata?.nome||email,token:d.access_token,id:d.user?.id,loginTime:Date.now()};
+    // Controllo esplicito: deve esserci access_token E user.id, altrimenti rifiuta
+    if(d.error||!d.access_token||!d.user?.id){
+      err.textContent='Email o password non corretti.';
+      err.style.display='block';btn.textContent='Accedi →';btn.disabled=false;return;
+    }
+    // Verifica aggiuntiva: l'email nel token deve corrispondere a quella inserita
+    if(d.user?.email && d.user.email.toLowerCase()!==email.toLowerCase()){
+      err.textContent='Errore di autenticazione. Riprova.';
+      err.style.display='block';btn.textContent='Accedi →';btn.disabled=false;return;
+    }
+    pazCorrente={email:d.user.email,nome:d.user?.user_metadata?.nome||email,token:d.access_token,id:d.user.id,loginTime:Date.now()};
     localStorage.setItem('paziente',JSON.stringify(pazCorrente));
     err.style.display='none';btn.textContent='Accedi →';btn.disabled=false;
     entraPaziente();
