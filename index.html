@@ -801,7 +801,7 @@ textarea{min-height:120px;resize:none}
 <script>
 const DOC_PWD='medico2025';
 const SUPA_URL='https://dxfvdqtgsgnrjahlabga.supabase.co';
-const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4ZnZkcXRnc2ducmphaGxhYmdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyNzY3OTIsImV4cCI6MjA5Mzg1Mjc5Mn0.D9OPao1QZHHsy-mpA3DUYYUwotwdTepTRO4ah8uZpiU';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4ZnZkcXRnc2ducmphaGxhYmdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyNzY3OTIsImV4cCI6MjA5Mzg1Mjc5Mn0.N0zHBgOGoBl_r9YKDpZ8hxQkXmEwPqRvS5uWlTnIcFo';
 const THIRTY_DAYS=30*24*60*60*1000;
 
 let pazCorrente=null,conversazione=[],tipoRichiesta='',allCases=[],currentCaseId=null,uploadedFiles=[],prevScr='s-home',consensoOk=false,archivioOk=false;
@@ -860,17 +860,26 @@ async function loginPaz(){
       body:JSON.stringify({email,password:pwd})
     });
     const d=await r.json();
-    // Mostra errore esatto da Supabase per debug
+    // Deve esserci access_token E user.id validi
     if(!r.ok || d.error || !d.access_token || !d.user?.id){
-      const msg = d.error_description || d.msg || d.message || (d.error && typeof d.error==='string' ? d.error : JSON.stringify(d.error)) || 'Credenziali non valide';
-      err.textContent='❌ '+msg;
+      err.textContent='Email o password non corretti.';
+      err.style.display='block';btn.textContent='Accedi →';btn.disabled=false;return;
+    }
+    // Email nel token deve corrispondere
+    if(d.user.email && d.user.email.toLowerCase()!==email.toLowerCase()){
+      err.textContent='Errore di autenticazione. Riprova.';
+      err.style.display='block';btn.textContent='Accedi →';btn.disabled=false;return;
+    }
+    // Deve aver confermato la email (se Supabase ha confirm email attivo)
+    if(d.user.email_confirmed_at===null && d.user.confirmed_at===null){
+      err.textContent='Devi prima confermare la tua email. Controlla la posta.';
       err.style.display='block';btn.textContent='Accedi →';btn.disabled=false;return;
     }
     pazCorrente={email:d.user.email,nome:d.user?.user_metadata?.nome||email,token:d.access_token,id:d.user.id,loginTime:Date.now()};
     localStorage.setItem('paziente',JSON.stringify(pazCorrente));
     btn.textContent='Accedi →';btn.disabled=false;
     entraPaziente();
-  }catch(e){err.textContent='❌ Errore rete: '+e.message;err.style.display='block';btn.textContent='Accedi →';btn.disabled=false;}
+  }catch(e){err.textContent='Errore di connessione. Riprova.';err.style.display='block';btn.textContent='Accedi →';btn.disabled=false;}
 }
 
 async function registraPaz(){
@@ -878,38 +887,16 @@ async function registraPaz(){
   if(!nome||!email||!pwd||!cf){err.textContent='Compila tutti i campi';err.style.display='block';return;}
   if(pwd.length<8){err.textContent='Password minimo 8 caratteri';err.style.display='block';return;}
   const btn=document.querySelector('#paz-form-reg .btn-p');btn.textContent='Registrazione...';btn.disabled=true;
-  err.style.display='none';
   try{
     const r=await fetch(SUPA_URL+'/auth/v1/signup',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPA_KEY},body:JSON.stringify({email,password:pwd,data:{nome,codice_fiscale:cf}})});
     const d=await r.json();
-    if(!r.ok||d.error){
-      const msg=d.error_description||d.msg||d.message||(d.error&&typeof d.error==='string'?d.error:JSON.stringify(d.error))||'Errore registrazione';
-      err.textContent='❌ '+msg;err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;return;
-    }
-    // Registrazione ok - login diretto senza passare per il form
+    if(d.error){err.textContent=d.error;err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;return;}
+    pazCorrente={email,nome,id:d.user?.id,loginTime:Date.now()};
+    localStorage.setItem('paziente',JSON.stringify(pazCorrente));
+    alert('Account creato! Controlla la tua email per confermare la registrazione, poi accedi.');
     btn.textContent='Registrati →';btn.disabled=false;
-    // Login diretto con le credenziali appena usate
-    try{
-      const lr=await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{
-        method:'POST',
-        headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
-        body:JSON.stringify({email,password:pwd})
-      });
-      const ld=await lr.json();
-      if(lr.ok && ld.access_token && ld.user?.id){
-        pazCorrente={email:ld.user.email,nome:nome,token:ld.access_token,id:ld.user.id,loginTime:Date.now()};
-        localStorage.setItem('paziente',JSON.stringify(pazCorrente));
-        alert('✅ Account creato! Benvenuto/a '+nome+'!');
-        entraPaziente();
-      } else {
-        alert('Account creato! Ora accedi con email e password.');
-        showPazLogin();
-      }
-    }catch(ex){
-      alert('Account creato! Ora accedi con email e password.');
-      showPazLogin();
-    }
-  }catch(e){err.textContent='❌ Errore rete: '+e.message;err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;}
+    showPazLogin();
+  }catch(e){err.textContent='Errore di connessione.';err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;}
 }
 
 function entraPaziente(){
