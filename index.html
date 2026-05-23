@@ -1267,13 +1267,28 @@ async function registraPaz(){
     const d=await r.json();
 
     if(!r.ok || d.error){
-      err.textContent=d.error || 'Errore durante la registrazione.';
+      err.textContent=d.error?.message || d.msg || d.error || 'Errore durante la registrazione.';
       err.style.display='block';
       btn.textContent='Registrati →';
       btn.disabled=false;
       return;
     }
 
+    localStorage.removeItem('paziente');
+    pazCorrente=null;
+
+    alert('Account creato. Controlla la tua email, conferma la registrazione e poi accedi.');
+    btn.textContent='Registrati →';
+    btn.disabled=false;
+    showPazLogin();
+
+  }catch(e){
+    err.textContent='Errore di connessione.';
+    err.style.display='block';
+    btn.textContent='Registrati →';
+    btn.disabled=false;
+  }
+}
     alert('Account creato. Ora controlla la tua email, conferma la registrazione e poi accedi.');
     btn.textContent='Registrati →';
     btn.disabled=false;
