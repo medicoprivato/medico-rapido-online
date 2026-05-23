@@ -58,7 +58,7 @@ textarea{min-height:120px;resize:none}
 .spacer{height:90px}
 
 .hero{background:linear-gradient(145deg,var(--blu-deep) 0%,#2563eb 100%);padding:32px 20px 36px;position:relative;overflow:hidden}
-.hero-img{position:absolute;right:-20px;bottom:-20px;width:300px;height:300px;opacity:.22;pointer-events:none}
+.hero-img{position:absolute;right:-10px;bottom:-10px;width:340px;height:340px;opacity:.35;pointer-events:none}
 .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:5px 13px;font-size:12px;font-weight:600;color:rgba(255,255,255,.9);margin-bottom:16px;letter-spacing:.3px}
 .hero-badge::before{content:'●';color:#4ade80;font-size:9px}
 .hero h1{font-family:'Playfair Display',serif;font-size:30px;line-height:1.16;color:#fff;margin-bottom:18px;letter-spacing:-.4px;max-width:76%}
@@ -116,8 +116,8 @@ textarea{min-height:120px;resize:none}
 
 .trust-wrap{padding:16px 16px 0}
 .trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.trust-item{background:#fff;border:1px solid var(--brd);border-radius:var(--r-s);padding:13px;font-size:13px;color:var(--txt-s);font-weight:500;line-height:1.4}
-.trust-item strong{display:block;font-size:14px;color:var(--txt);margin-bottom:2px}
+.trust-item{background:#fff;border:1px solid var(--brd);border-radius:var(--r-s);padding:16px 14px;font-size:14px;color:var(--txt-s);font-weight:500;line-height:1.5}
+.trust-item strong{display:block;font-size:15px;color:var(--txt);margin-bottom:3px}
 
 .emerg{background:#fef2f2;border:2px solid #fca5a5;border-radius:var(--r);padding:16px;margin-bottom:16px}
 .emerg-t{font-size:15px;font-weight:800;color:#991b1b;margin-bottom:8px}
@@ -260,51 +260,67 @@ textarea{min-height:120px;resize:none}
 <!-- HOME -->
 <div id="s-home" class="screen active">
   <div class="hero">
-    <svg class="hero-img" viewBox="0 0 240 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="hero-img" viewBox="0 0 260 300" fill="none" xmlns="http://www.w3.org/2000/svg">
 
-      <!-- ══ MEDICO (sinistra) ══ -->
+      <!-- MEDICO CAUCASICO — camice bianco, stetoscopio -->
+      <!-- Capelli -->
+      <ellipse cx="80" cy="28" rx="26" ry="10" fill="rgba(255,255,255,0.6)"/>
       <!-- Testa -->
-      <ellipse cx="75" cy="38" rx="24" ry="26" fill="white"/>
-      <!-- Corpo/camice -->
-      <rect x="50" y="66" width="50" height="80" rx="16" fill="white"/>
+      <ellipse cx="80" cy="42" rx="22" ry="24" fill="white"/>
+      <!-- Orecchie -->
+      <ellipse cx="58" cy="44" rx="5" ry="7" fill="white"/>
+      <ellipse cx="102" cy="44" rx="5" ry="7" fill="white"/>
+      <!-- Collo -->
+      <rect x="72" y="64" width="16" height="12" fill="white"/>
+      <!-- Camice bianco — corpo -->
+      <rect x="50" y="74" width="60" height="90" rx="18" fill="white"/>
+      <!-- Taschino camice -->
+      <rect x="58" y="90" width="16" height="12" rx="3" fill="rgba(29,78,216,0.25)"/>
+      <!-- Croce rossa taschino -->
+      <line x1="66" y1="91" x2="66" y2="101" stroke="rgba(220,38,38,0.5)" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="61" y1="96" x2="71" y2="96" stroke="rgba(220,38,38,0.5)" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Braccia -->
+      <rect x="34" y="76" width="18" height="50" rx="9" fill="white"/>
+      <rect x="108" y="76" width="18" height="50" rx="9" fill="white"/>
 
-      <!-- STETOSCOPIO GRANDE 1 — tubo a U sotto il camice -->
-      <!-- tubo sinistro giù -->
-      <line x1="62" y1="95" x2="52" y2="130" stroke="white" stroke-width="6" stroke-linecap="round"/>
-      <!-- curva in basso -->
-      <path d="M52 130 Q52 158 75 158 Q98 158 98 130" stroke="white" stroke-width="6" fill="none" stroke-linecap="round"/>
-      <!-- tubo destro su -->
-      <line x1="98" y1="130" x2="88" y2="95" stroke="white" stroke-width="6" stroke-linecap="round"/>
-      <!-- membrana (diaframma) grande -->
-      <circle cx="75" cy="160" r="12" fill="white"/>
-      <circle cx="75" cy="160" r="6" fill="rgba(30,58,138,0.4)"/>
-      <!-- auricolari -->
-      <line x1="62" y1="95" x2="55" y2="78" stroke="white" stroke-width="5" stroke-linecap="round"/>
-      <line x1="88" y1="95" x2="95" y2="78" stroke="white" stroke-width="5" stroke-linecap="round"/>
-      <circle cx="53" cy="75" r="7" fill="white"/>
-      <circle cx="97" cy="75" r="7" fill="white"/>
+      <!-- STETOSCOPIO GRANDE sul medico -->
+      <!-- tubo sinistro scende -->
+      <line x1="68" y1="100" x2="55" y2="140" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
+      <!-- curva U in basso -->
+      <path d="M55 140 Q54 168 78 168 Q102 168 101 140" stroke="white" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+      <!-- tubo destro sale -->
+      <line x1="101" y1="140" x2="90" y2="100" stroke="white" stroke-width="5.5" stroke-linecap="round"/>
+      <!-- Diaframma grande -->
+      <circle cx="78" cy="170" r="13" fill="white"/>
+      <circle cx="78" cy="170" r="7" fill="rgba(29,78,216,0.35)"/>
+      <!-- Tubo verso auricolari -->
+      <line x1="68" y1="100" x2="62" y2="82" stroke="white" stroke-width="5" stroke-linecap="round"/>
+      <line x1="90" y1="100" x2="96" y2="82" stroke="white" stroke-width="5" stroke-linecap="round"/>
+      <!-- Auricolari -->
+      <circle cx="60" cy="79" r="8" fill="white"/>
+      <circle cx="98" cy="79" r="8" fill="white"/>
 
-      <!-- ══ PAZIENTE (destra) ══ -->
-      <!-- Testa -->
-      <ellipse cx="170" cy="100" rx="20" ry="22" fill="white"/>
-      <!-- Corpo -->
-      <rect x="148" y="124" width="44" height="56" rx="14" fill="white"/>
+      <!-- PAZIENTE (destra) -->
+      <!-- Testa paziente -->
+      <ellipse cx="186" cy="110" rx="20" ry="22" fill="white"/>
+      <!-- Corpo paziente -->
+      <rect x="164" y="133" width="44" height="60" rx="14" fill="white"/>
+      <!-- Mani paziente in grembo -->
+      <ellipse cx="175" cy="196" rx="10" ry="7" fill="white"/>
+      <ellipse cx="197" cy="196" rx="10" ry="7" fill="white"/>
 
-      <!-- STETOSCOPIO GRANDE 2 — tubo a U sul paziente -->
-      <!-- tubo sinistro giù -->
-      <line x1="158" y1="148" x2="150" y2="175" stroke="white" stroke-width="5" stroke-linecap="round"/>
-      <!-- curva in basso -->
-      <path d="M150 175 Q150 196 170 196 Q190 196 190 175" stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
-      <!-- tubo destro su -->
-      <line x1="190" y1="175" x2="182" y2="148" stroke="white" stroke-width="5" stroke-linecap="round"/>
-      <!-- membrana grande -->
-      <circle cx="170" cy="198" r="10" fill="white"/>
-      <circle cx="170" cy="198" r="5" fill="rgba(30,58,138,0.4)"/>
-      <!-- auricolari -->
-      <line x1="158" y1="148" x2="153" y2="134" stroke="white" stroke-width="4" stroke-linecap="round"/>
-      <line x1="182" y1="148" x2="187" y2="134" stroke="white" stroke-width="4" stroke-linecap="round"/>
-      <circle cx="151" cy="131" r="6" fill="white"/>
-      <circle cx="189" cy="131" r="6" fill="white"/>
+      <!-- STETOSCOPIO 2 — medico ausculta paziente -->
+      <!-- Tubo dal medico al paziente -->
+      <path d="M108 110 Q140 95 158 120" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="6,4"/>
+      <!-- Diaframma sul petto paziente -->
+      <circle cx="172" cy="148" r="11" fill="white"/>
+      <circle cx="172" cy="148" r="6" fill="rgba(29,78,216,0.3)"/>
+
+      <!-- Clipboard/cartella clinica tra le mani del medico -->
+      <rect x="108" y="130" width="32" height="40" rx="4" fill="rgba(255,255,255,0.3)" stroke="white" stroke-width="2"/>
+      <line x1="113" y1="140" x2="135" y2="140" stroke="rgba(29,78,216,0.4)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="113" y1="147" x2="135" y2="147" stroke="rgba(29,78,216,0.4)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="113" y1="154" x2="128" y2="154" stroke="rgba(29,78,216,0.4)" stroke-width="2" stroke-linecap="round"/>
 
     </svg>
 
@@ -347,7 +363,7 @@ textarea{min-height:120px;resize:none}
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
         Abbonamento — €80/anno
       </button>
-      <button class="btn-hg" onclick="showScreen('s-paz-login')">Accedi alla tua area paziente →</button>
+      <button class="btn-hg" onclick="pazCorrente?entraPaziente():showScreen('s-paz-login')">Accedi alla tua area paziente →</button>
     </div>
   </div>
 
@@ -389,11 +405,23 @@ textarea{min-height:120px;resize:none}
   </div>
 
   <div class="trust-wrap">
-    <div class="trust-grid">
-      <div class="trust-item"><strong>🔏 Firmato dal medico</strong>Ogni risposta porta la firma del professionista responsabile.</div>
-      <div class="trust-item"><strong>🔒 GDPR compliant</strong>Dati sanitari crittografati secondo normativa europea.</div>
-      <div class="trust-item"><strong>📋 FNOMCeO</strong>Conforme Linee Guida Telemedicina Min. Salute 2022.</div>
-      <div class="trust-item" onclick="prevScr='s-home';showScreen('s-termini')" style="cursor:pointer;border-color:var(--blu-mid)"><strong>💶 Detraibile 730</strong>Ricevuta fiscale per detrazione IRPEF (modello 730). <span style="color:var(--blu);font-size:12px">→ Dettagli</span></div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div onclick="prevScr='s-home';showScreen('s-medici')" class="trust-item" style="cursor:pointer;display:flex;align-items:center;gap:14px;padding:16px">
+        <div style="font-size:2.2rem;flex-shrink:0">🔏</div>
+        <div><strong style="font-size:15px;display:block;margin-bottom:3px">Firmato dal medico</strong><span style="font-size:14px">Ogni risposta porta la firma del professionista responsabile.</span></div>
+      </div>
+      <div onclick="prevScr='s-home';showScreen('s-privacy')" class="trust-item" style="cursor:pointer;display:flex;align-items:center;gap:14px;padding:16px">
+        <div style="font-size:2.2rem;flex-shrink:0">🔒</div>
+        <div><strong style="font-size:15px;display:block;margin-bottom:3px">GDPR compliant</strong><span style="font-size:14px">Dati sanitari crittografati secondo normativa europea.</span></div>
+      </div>
+      <div onclick="prevScr='s-home';showScreen('s-termini')" class="trust-item" style="cursor:pointer;display:flex;align-items:center;gap:14px;padding:16px">
+        <div style="font-size:2.2rem;flex-shrink:0">📋</div>
+        <div><strong style="font-size:15px;display:block;margin-bottom:3px">FNOMCeO</strong><span style="font-size:14px">Conforme Linee Guida Telemedicina Min. Salute 2022.</span></div>
+      </div>
+      <div onclick="prevScr='s-home';showScreen('s-termini')" class="trust-item" style="cursor:pointer;display:flex;align-items:center;gap:14px;padding:16px;border-color:var(--blu-mid)">
+        <div style="font-size:2.2rem;flex-shrink:0">💶</div>
+        <div><strong style="font-size:15px;display:block;margin-bottom:3px">Detraibile 730</strong><span style="font-size:14px">Ricevuta fiscale per detrazione IRPEF (modello 730). <span style="color:var(--blu);font-weight:700">→ Dettagli</span></span></div>
+      </div>
     </div>
   </div>
 
@@ -500,7 +528,7 @@ textarea{min-height:120px;resize:none}
       </div>
       <div id="response" class="ans-box hidden"></div>
       <div id="rx-section" class="hidden" style="margin-top:12px">
-        <button class="btn btn-p" onclick="showDoctorForm()" style="height:52px">📋 Completa e invia al medico</button>
+        <button class="btn btn-p" onclick="checkPagamentoEProcedi()" style="height:52px">📋 Completa e invia al medico</button>
         <div class="ftit" style="margin-top:12px">Vuoi aggiungere dettagli?</div>
         <textarea id="followup" placeholder="Aggiungi informazioni utili..." style="min-height:80px"></textarea>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
@@ -717,7 +745,7 @@ textarea{min-height:120px;resize:none}
     <div id="paz-storico"><div class="loader-box">Caricamento...</div></div>
   </div>
   <div class="bnav">
-    <div class="nav-it active" onclick="showScreen('s-paz-area')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
+    <div class="nav-it active" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
     <div class="nav-it" onclick="showScreen('s-richiesta')"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Richiesta</div>
     <div class="nav-it" onclick="prevScr='s-paz-area';showScreen('s-faq')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-linecap="round"/><path d="M12 16v-4M12 8h.01" stroke-linecap="round"/></svg>FAQ</div>
     <div class="nav-it" onclick="showScreen('s-contatti')"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Contatti</div>
@@ -784,10 +812,24 @@ textarea{min-height:120px;resize:none}
   </div>
 </div>
 
+
+<!-- PAYWALL MODAL -->
+<div id="paywall-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:999;align-items:center;justify-content:center;padding:16px">
+  <div style="background:#fff;border-radius:20px;padding:28px 22px;max-width:400px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+    <div style="font-size:2.5rem;margin-bottom:12px">🔒</div>
+    <div style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:8px;color:var(--blu-deep)">Abbonamento richiesto</div>
+    <p style="font-size:15px;color:var(--txt-s);margin-bottom:20px;line-height:1.6">Per inviare la richiesta al medico è necessario un abbonamento attivo.<br><strong style="color:var(--txt)">€80/anno · solo €6,60/mese</strong></p>
+    <input id="paywall-email" type="email" placeholder="La tua email *" autocomplete="email" style="width:100%;border:1.5px solid var(--brd);border-radius:10px;padding:14px 16px;font-size:16px;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:12px"/>
+    <button onclick="startStripePaywall()" style="width:100%;background:var(--blu);color:#fff;border:none;border-radius:10px;padding:15px;font-size:16px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:10px">Abbonati ora — Pagamento sicuro →</button>
+    <div style="font-size:12px;color:var(--txt-l);margin-bottom:14px">🔒 Stripe · Ricevuta fiscale detraibile IRPEF 730</div>
+    <button onclick="chiudiPaywall()" style="background:none;border:none;color:var(--txt-l);font-size:13px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Annulla</button>
+  </div>
+</div>
+
 <script>
 const DOC_PWD='medico2025';
 const SUPA_URL='https://dxfvdqtgsgnrjahlabga.supabase.co';
-const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4ZnZkcXRnc2ducmphaGxhYmdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyNzY3OTIsImV4cCI6MjA5Mzg1Mjc5Mn0.N0zHBgOGoBl_r9YKDpZ8hxQkXmEwPqRvS5uWlTnIcFo';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4ZnZkcXRnc2ducmphaGxhYmdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyNzY3OTIsImV4cCI6MjA5Mzg1Mjc5Mn0.D9OPao1QZHHsy-mpA3DUYYUwotwdTepTRO4ah8uZpiU';
 const THIRTY_DAYS=30*24*60*60*1000;
 
 let pazCorrente=null,conversazione=[],tipoRichiesta='',allCases=[],currentCaseId=null,uploadedFiles=[],prevScr='s-home',consensoOk=false,archivioOk=false;
@@ -812,12 +854,13 @@ window.addEventListener('load',function(){
     }
   }catch(e){}
   if(window.location.hash==='#medico') showScreen('s-doc-login');
-  if(window.location.hash==='#area'&&pazCorrente) entraPaziente();
+  else if(pazCorrente) entraPaziente();
+  else if(window.location.hash==='#area') showScreen('s-paz-login');
   const p=new URLSearchParams(window.location.search);
   if(p.get('pagamento')==='ok'){
-    setTimeout(()=>{showScreen('s-home');const m=document.createElement('div');m.style.cssText='position:fixed;top:70px;left:16px;right:16px;background:var(--blu);color:#fff;border-radius:14px;padding:18px;z-index:200;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.2)';m.innerHTML='<div style="font-size:20px;margin-bottom:6px">✅ Abbonamento attivato!</div><div style="font-size:14px;opacity:.9">Benvenuta su Medico Subito.</div>';document.body.appendChild(m);setTimeout(()=>m.remove(),5000);window.history.replaceState({},'','/');},300);
+    setTimeout(()=>{showScreen('s-home');const m=document.createElement('div');m.style.cssText='position:fixed;top:70px;left:16px;right:16px;background:var(--blu);color:#fff;border-radius:14px;padding:18px;z-index:200;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.2)';m.innerHTML='<div style="font-size:20px;margin-bottom:6px">✅ Abbonamento attivato!</div><div style="font-size:14px;opacity:.9">Benvenuta su Medico Subito.</div>';document.body.appendChild(m);setTimeout(()=>m.remove(),5000);localStorage.setItem('abbonamento_attivo','si');window.history.replaceState({},'','/');},300);
   }
-  if(p.get('pagamento')==='annullato'){setTimeout(()=>{showScreen('s-payment');window.history.replaceState({},'','/');},300);}
+  if(p.get('pagamento')==='annullato'){setTimeout(()=>{showScreen('s-payment');localStorage.setItem('abbonamento_attivo','si');window.history.replaceState({},'','/');},300);}
 });
 
 function showPazLogin(){document.getElementById('paz-form-login').style.display='block';document.getElementById('paz-form-reg').style.display='none';}
@@ -838,24 +881,25 @@ async function loginPaz(){
   if(!email||!pwd){err.textContent='Inserisci email e password';err.style.display='block';return;}
   const btn=document.querySelector('#paz-form-login .btn-p');
   btn.textContent='Accesso in corso...';btn.disabled=true;
+  err.style.display='none';
   try{
-    const r=await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPA_KEY},body:JSON.stringify({email,password:pwd})});
+    const r=await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
+      body:JSON.stringify({email,password:pwd})
+    });
     const d=await r.json();
-    // Controllo esplicito: deve esserci access_token E user.id, altrimenti rifiuta
-    if(d.error||!d.access_token||!d.user?.id){
-      err.textContent='Email o password non corretti.';
-      err.style.display='block';btn.textContent='Accedi →';btn.disabled=false;return;
-    }
-    // Verifica aggiuntiva: l'email nel token deve corrispondere a quella inserita
-    if(d.user?.email && d.user.email.toLowerCase()!==email.toLowerCase()){
-      err.textContent='Errore di autenticazione. Riprova.';
+    // Mostra errore esatto da Supabase per debug
+    if(!r.ok || d.error || !d.access_token || !d.user?.id){
+      const msg = d.error_description || d.msg || d.message || (d.error && typeof d.error==='string' ? d.error : JSON.stringify(d.error)) || 'Credenziali non valide';
+      err.textContent='❌ '+msg;
       err.style.display='block';btn.textContent='Accedi →';btn.disabled=false;return;
     }
     pazCorrente={email:d.user.email,nome:d.user?.user_metadata?.nome||email,token:d.access_token,id:d.user.id,loginTime:Date.now()};
     localStorage.setItem('paziente',JSON.stringify(pazCorrente));
-    err.style.display='none';btn.textContent='Accedi →';btn.disabled=false;
+    btn.textContent='Accedi →';btn.disabled=false;
     entraPaziente();
-  }catch(e){err.textContent='Errore di connessione. Riprova.';err.style.display='block';btn.textContent='Accedi →';btn.disabled=false;}
+  }catch(e){err.textContent='❌ Errore rete: '+e.message;err.style.display='block';btn.textContent='Accedi →';btn.disabled=false;}
 }
 
 async function registraPaz(){
@@ -863,16 +907,38 @@ async function registraPaz(){
   if(!nome||!email||!pwd||!cf){err.textContent='Compila tutti i campi';err.style.display='block';return;}
   if(pwd.length<8){err.textContent='Password minimo 8 caratteri';err.style.display='block';return;}
   const btn=document.querySelector('#paz-form-reg .btn-p');btn.textContent='Registrazione...';btn.disabled=true;
+  err.style.display='none';
   try{
     const r=await fetch(SUPA_URL+'/auth/v1/signup',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPA_KEY},body:JSON.stringify({email,password:pwd,data:{nome,codice_fiscale:cf}})});
     const d=await r.json();
-    if(d.error){err.textContent=d.error;err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;return;}
-    pazCorrente={email,nome,id:d.user?.id,loginTime:Date.now()};
-    localStorage.setItem('paziente',JSON.stringify(pazCorrente));
-    alert('Account creato! Controlla la tua email per confermare la registrazione, poi accedi.');
+    if(!r.ok||d.error){
+      const msg=d.error_description||d.msg||d.message||(d.error&&typeof d.error==='string'?d.error:JSON.stringify(d.error))||'Errore registrazione';
+      err.textContent='❌ '+msg;err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;return;
+    }
+    // Registrazione ok - login diretto senza passare per il form
     btn.textContent='Registrati →';btn.disabled=false;
-    showPazLogin();
-  }catch(e){err.textContent='Errore di connessione.';err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;}
+    // Login diretto con le credenziali appena usate
+    try{
+      const lr=await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
+        body:JSON.stringify({email,password:pwd})
+      });
+      const ld=await lr.json();
+      if(lr.ok && ld.access_token && ld.user?.id){
+        pazCorrente={email:ld.user.email,nome:nome,token:ld.access_token,id:ld.user.id,loginTime:Date.now()};
+        localStorage.setItem('paziente',JSON.stringify(pazCorrente));
+        alert('✅ Account creato! Benvenuto/a '+nome+'!');
+        entraPaziente();
+      } else {
+        alert('Account creato! Ora accedi con email e password.');
+        showPazLogin();
+      }
+    }catch(ex){
+      alert('Account creato! Ora accedi con email e password.');
+      showPazLogin();
+    }
+  }catch(e){err.textContent='❌ Errore rete: '+e.message;err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;}
 }
 
 function entraPaziente(){
@@ -880,7 +946,7 @@ function entraPaziente(){
   document.getElementById('paz-nome-disp').textContent=pazCorrente.nome||pazCorrente.email;
   document.getElementById('paz-email-disp').textContent=pazCorrente.email;
   showScreen('s-paz-area');
-  caricaStorico();
+  setTimeout(caricaStorico, 300);
 }
 
 async function caricaStorico(){
@@ -888,9 +954,19 @@ async function caricaStorico(){
   if(!pazCorrente){cont.innerHTML='<div style="text-align:center;color:var(--txt-l);padding:20px">Accedi per vedere lo storico</div>';return;}
   cont.innerHTML='<div class="loader-box">Caricamento...</div>';
   try{
-    const r=await fetch('/api/submit-medical-request?email='+encodeURIComponent(pazCorrente.email),{headers:{'Authorization':'Bearer '+DOC_PWD}});
-    const d=await r.json();
-    if(!Array.isArray(d)||d.length===0){
+    const url='/api/submit-medical-request?email='+encodeURIComponent(pazCorrente.email);
+    const r=await fetch(url,{headers:{'Authorization':'Bearer '+DOC_PWD}});
+    const raw=await r.text();
+    let d;
+    try{d=JSON.parse(raw);}catch(pe){
+      cont.innerHTML='<div style="color:var(--err);padding:12px;font-size:13px">⚠️ Errore API (HTTP '+r.status+'):<br><pre style="font-size:11px;overflow:auto;background:#f8f8f8;padding:8px;border-radius:6px;margin-top:6px">'+raw.slice(0,400)+'</pre></div>';
+      return;
+    }
+    if(!Array.isArray(d)){
+      cont.innerHTML='<div style="color:var(--err);padding:12px;font-size:13px">⚠️ Risposta inattesa (HTTP '+r.status+'):<br><pre style="font-size:11px;overflow:auto;background:#f8f8f8;padding:8px;border-radius:6px;margin-top:6px">'+JSON.stringify(d).slice(0,400)+'</pre></div>';
+      return;
+    }
+    if(d.length===0){
       cont.innerHTML='<div style="text-align:center;color:var(--txt-l);padding:24px;font-size:15px">Nessuna richiesta ancora inviata.<br><br><button onclick="showScreen(\'s-richiesta\')" style="background:var(--blu);color:#fff;border:none;border-radius:8px;padding:12px 20px;font-size:14px;font-weight:700;cursor:pointer;font-family:\'Plus Jakarta Sans\',sans-serif">Invia la prima richiesta →</button></div>';
       return;
     }
@@ -908,7 +984,7 @@ async function caricaStorico(){
   }catch(e){cont.innerHTML='<div style="color:var(--err);font-size:14px;padding:10px">Errore nel caricamento. Riprova.</div>';}
 }
 
-function logoutPaz(){pazCorrente=null;localStorage.removeItem('paziente');showScreen('s-home');}
+function logoutPaz(){pazCorrente=null;localStorage.removeItem('paziente');localStorage.removeItem('abbonamento_attivo');showScreen('s-home');}
 
 function quickStart(tipo){document.getElementById('requestType').value=tipo;showScreen('s-richiesta');setTimeout(()=>document.getElementById('problem').focus(),300);}
 
@@ -1148,6 +1224,43 @@ async function inviaRisposta(){
     btn.textContent='✅ Inviato';
   }catch(e){alert('Errore: '+e.message);btn.disabled=false;btn.textContent='✅ Conferma e invia risposta medica';}
 }
+
+function checkPagamentoEProcedi(){
+  // Controlla se ha già pagato (localStorage flag)
+  const paid = localStorage.getItem('abbonamento_attivo');
+  if(paid === 'si'){
+    showDoctorForm();
+    return;
+  }
+  // Altrimenti mostra paywall
+  const modal = document.getElementById('paywall-modal');
+  modal.style.display = 'flex';
+  // Pre-popola email se disponibile
+  const emailField = document.getElementById('patient-email');
+  if(emailField && emailField.value){
+    document.getElementById('paywall-email').value = emailField.value;
+  } else if(pazCorrente){
+    document.getElementById('paywall-email').value = pazCorrente.email || '';
+  }
+}
+
+function chiudiPaywall(){
+  document.getElementById('paywall-modal').style.display = 'none';
+}
+
+async function startStripePaywall(){
+  const email = document.getElementById('paywall-email').value.trim();
+  if(!email || !email.includes('@')){alert('Inserisci la tua email');return;}
+  const btn = document.querySelector('#paywall-modal button');
+  btn.textContent = 'Caricamento...'; btn.disabled = true;
+  try{
+    const r = await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    const d = await r.json();
+    if(d.url) window.location.href = d.url;
+    else{alert('Errore: '+(d.error||'Riprova'));btn.textContent='Abbonati ora — Pagamento sicuro →';btn.disabled=false;}
+  }catch(e){alert('Errore di connessione.');btn.textContent='Abbonati ora — Pagamento sicuro →';btn.disabled=false;}
+}
+
 </script>
 </body>
 </html>
