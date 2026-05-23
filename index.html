@@ -347,7 +347,7 @@ textarea{min-height:120px;resize:none}
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
         Abbonamento — €80/anno
       </button>
-      <button class="btn-hg" onclick="pazCorrente?entraPaziente():showScreen('s-paz-login')">Accedi alla tua area paziente →</button>
+      <button class="btn-hg" onclick="showScreen('s-paz-login')">Accedi alla tua area paziente →</button>
     </div>
   </div>
 
@@ -500,7 +500,7 @@ textarea{min-height:120px;resize:none}
       </div>
       <div id="response" class="ans-box hidden"></div>
       <div id="rx-section" class="hidden" style="margin-top:12px">
-        <button class="btn btn-p" onclick="checkPagamentoEProcedi()" style="height:52px">📋 Completa e invia al medico</button>
+        <button class="btn btn-p" onclick="showDoctorForm()" style="height:52px">📋 Completa e invia al medico</button>
         <div class="ftit" style="margin-top:12px">Vuoi aggiungere dettagli?</div>
         <textarea id="followup" placeholder="Aggiungi informazioni utili..." style="min-height:80px"></textarea>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
@@ -717,7 +717,7 @@ textarea{min-height:120px;resize:none}
     <div id="paz-storico"><div class="loader-box">Caricamento...</div></div>
   </div>
   <div class="bnav">
-    <div class="nav-it active" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
+    <div class="nav-it active" onclick="showScreen('s-paz-area')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
     <div class="nav-it" onclick="showScreen('s-richiesta')"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Richiesta</div>
     <div class="nav-it" onclick="prevScr='s-paz-area';showScreen('s-faq')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-linecap="round"/><path d="M12 16v-4M12 8h.01" stroke-linecap="round"/></svg>FAQ</div>
     <div class="nav-it" onclick="showScreen('s-contatti')"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Contatti</div>
@@ -784,24 +784,10 @@ textarea{min-height:120px;resize:none}
   </div>
 </div>
 
-
-<!-- PAYWALL MODAL -->
-<div id="paywall-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:999;align-items:center;justify-content:center;padding:16px">
-  <div style="background:#fff;border-radius:20px;padding:28px 22px;max-width:400px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)">
-    <div style="font-size:2.5rem;margin-bottom:12px">🔒</div>
-    <div style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:8px;color:var(--blu-deep)">Abbonamento richiesto</div>
-    <p style="font-size:15px;color:var(--txt-s);margin-bottom:20px;line-height:1.6">Per inviare la richiesta al medico è necessario un abbonamento attivo.<br><strong style="color:var(--txt)">€80/anno · solo €6,60/mese</strong></p>
-    <input id="paywall-email" type="email" placeholder="La tua email *" autocomplete="email" style="width:100%;border:1.5px solid var(--brd);border-radius:10px;padding:14px 16px;font-size:16px;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:12px"/>
-    <button onclick="startStripePaywall()" style="width:100%;background:var(--blu);color:#fff;border:none;border-radius:10px;padding:15px;font-size:16px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:10px">Abbonati ora — Pagamento sicuro →</button>
-    <div style="font-size:12px;color:var(--txt-l);margin-bottom:14px">🔒 Stripe · Ricevuta fiscale detraibile IRPEF 730</div>
-    <button onclick="chiudiPaywall()" style="background:none;border:none;color:var(--txt-l);font-size:13px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Annulla</button>
-  </div>
-</div>
-
 <script>
 const DOC_PWD='medico2025';
 const SUPA_URL='https://dxfvdqtgsgnrjahlabga.supabase.co';
-const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4ZnZkcXRnc2ducmphaGxhYmdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyNzY3OTIsImV4cCI6MjA5Mzg1Mjc5Mn0.D9OPao1QZHHsy-mpA3DUYYUwotwdTepTRO4ah8uZpiU';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4ZnZkcXRnc2ducmphaGxhYmdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyNzY3OTIsImV4cCI6MjA5Mzg1Mjc5Mn0.N0zHBgOGoBl_r9YKDpZ8hxQkXmEwPqRvS5uWlTnIcFo';
 const THIRTY_DAYS=30*24*60*60*1000;
 
 let pazCorrente=null,conversazione=[],tipoRichiesta='',allCases=[],currentCaseId=null,uploadedFiles=[],prevScr='s-home',consensoOk=false,archivioOk=false;
@@ -826,13 +812,12 @@ window.addEventListener('load',function(){
     }
   }catch(e){}
   if(window.location.hash==='#medico') showScreen('s-doc-login');
-  else if(pazCorrente) entraPaziente();
-  else if(window.location.hash==='#area') showScreen('s-paz-login');
+  if(window.location.hash==='#area'&&pazCorrente) entraPaziente();
   const p=new URLSearchParams(window.location.search);
   if(p.get('pagamento')==='ok'){
-    setTimeout(()=>{showScreen('s-home');const m=document.createElement('div');m.style.cssText='position:fixed;top:70px;left:16px;right:16px;background:var(--blu);color:#fff;border-radius:14px;padding:18px;z-index:200;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.2)';m.innerHTML='<div style="font-size:20px;margin-bottom:6px">✅ Abbonamento attivato!</div><div style="font-size:14px;opacity:.9">Benvenuta su Medico Subito.</div>';document.body.appendChild(m);setTimeout(()=>m.remove(),5000);localStorage.setItem('abbonamento_attivo','si');window.history.replaceState({},'','/');},300);
+    setTimeout(()=>{showScreen('s-home');const m=document.createElement('div');m.style.cssText='position:fixed;top:70px;left:16px;right:16px;background:var(--blu);color:#fff;border-radius:14px;padding:18px;z-index:200;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.2)';m.innerHTML='<div style="font-size:20px;margin-bottom:6px">✅ Abbonamento attivato!</div><div style="font-size:14px;opacity:.9">Benvenuta su Medico Subito.</div>';document.body.appendChild(m);setTimeout(()=>m.remove(),5000);window.history.replaceState({},'','/');},300);
   }
-  if(p.get('pagamento')==='annullato'){setTimeout(()=>{showScreen('s-payment');localStorage.setItem('abbonamento_attivo','si');window.history.replaceState({},'','/');},300);}
+  if(p.get('pagamento')==='annullato'){setTimeout(()=>{showScreen('s-payment');window.history.replaceState({},'','/');},300);}
 });
 
 function showPazLogin(){document.getElementById('paz-form-login').style.display='block';document.getElementById('paz-form-reg').style.display='none';}
@@ -853,25 +838,24 @@ async function loginPaz(){
   if(!email||!pwd){err.textContent='Inserisci email e password';err.style.display='block';return;}
   const btn=document.querySelector('#paz-form-login .btn-p');
   btn.textContent='Accesso in corso...';btn.disabled=true;
-  err.style.display='none';
   try{
-    const r=await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
-      body:JSON.stringify({email,password:pwd})
-    });
+    const r=await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPA_KEY},body:JSON.stringify({email,password:pwd})});
     const d=await r.json();
-    // Mostra errore esatto da Supabase per debug
-    if(!r.ok || d.error || !d.access_token || !d.user?.id){
-      const msg = d.error_description || d.msg || d.message || (d.error && typeof d.error==='string' ? d.error : JSON.stringify(d.error)) || 'Credenziali non valide';
-      err.textContent='❌ '+msg;
+    // Controllo esplicito: deve esserci access_token E user.id, altrimenti rifiuta
+    if(d.error||!d.access_token||!d.user?.id){
+      err.textContent='Email o password non corretti.';
+      err.style.display='block';btn.textContent='Accedi →';btn.disabled=false;return;
+    }
+    // Verifica aggiuntiva: l'email nel token deve corrispondere a quella inserita
+    if(d.user?.email && d.user.email.toLowerCase()!==email.toLowerCase()){
+      err.textContent='Errore di autenticazione. Riprova.';
       err.style.display='block';btn.textContent='Accedi →';btn.disabled=false;return;
     }
     pazCorrente={email:d.user.email,nome:d.user?.user_metadata?.nome||email,token:d.access_token,id:d.user.id,loginTime:Date.now()};
     localStorage.setItem('paziente',JSON.stringify(pazCorrente));
-    btn.textContent='Accedi →';btn.disabled=false;
+    err.style.display='none';btn.textContent='Accedi →';btn.disabled=false;
     entraPaziente();
-  }catch(e){err.textContent='❌ Errore rete: '+e.message;err.style.display='block';btn.textContent='Accedi →';btn.disabled=false;}
+  }catch(e){err.textContent='Errore di connessione. Riprova.';err.style.display='block';btn.textContent='Accedi →';btn.disabled=false;}
 }
 
 async function registraPaz(){
@@ -879,38 +863,16 @@ async function registraPaz(){
   if(!nome||!email||!pwd||!cf){err.textContent='Compila tutti i campi';err.style.display='block';return;}
   if(pwd.length<8){err.textContent='Password minimo 8 caratteri';err.style.display='block';return;}
   const btn=document.querySelector('#paz-form-reg .btn-p');btn.textContent='Registrazione...';btn.disabled=true;
-  err.style.display='none';
   try{
     const r=await fetch(SUPA_URL+'/auth/v1/signup',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPA_KEY},body:JSON.stringify({email,password:pwd,data:{nome,codice_fiscale:cf}})});
     const d=await r.json();
-    if(!r.ok||d.error){
-      const msg=d.error_description||d.msg||d.message||(d.error&&typeof d.error==='string'?d.error:JSON.stringify(d.error))||'Errore registrazione';
-      err.textContent='❌ '+msg;err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;return;
-    }
-    // Registrazione ok - login diretto senza passare per il form
+    if(d.error){err.textContent=d.error;err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;return;}
+    pazCorrente={email,nome,id:d.user?.id,loginTime:Date.now()};
+    localStorage.setItem('paziente',JSON.stringify(pazCorrente));
+    alert('Account creato! Controlla la tua email per confermare la registrazione, poi accedi.');
     btn.textContent='Registrati →';btn.disabled=false;
-    // Login diretto con le credenziali appena usate
-    try{
-      const lr=await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{
-        method:'POST',
-        headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
-        body:JSON.stringify({email,password:pwd})
-      });
-      const ld=await lr.json();
-      if(lr.ok && ld.access_token && ld.user?.id){
-        pazCorrente={email:ld.user.email,nome:nome,token:ld.access_token,id:ld.user.id,loginTime:Date.now()};
-        localStorage.setItem('paziente',JSON.stringify(pazCorrente));
-        alert('✅ Account creato! Benvenuto/a '+nome+'!');
-        entraPaziente();
-      } else {
-        alert('Account creato! Ora accedi con email e password.');
-        showPazLogin();
-      }
-    }catch(ex){
-      alert('Account creato! Ora accedi con email e password.');
-      showPazLogin();
-    }
-  }catch(e){err.textContent='❌ Errore rete: '+e.message;err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;}
+    showPazLogin();
+  }catch(e){err.textContent='Errore di connessione.';err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;}
 }
 
 function entraPaziente(){
@@ -926,19 +888,9 @@ async function caricaStorico(){
   if(!pazCorrente){cont.innerHTML='<div style="text-align:center;color:var(--txt-l);padding:20px">Accedi per vedere lo storico</div>';return;}
   cont.innerHTML='<div class="loader-box">Caricamento...</div>';
   try{
-    const url='/api/submit-medical-request?email='+encodeURIComponent(pazCorrente.email);
-    const r=await fetch(url,{headers:{'Authorization':'Bearer '+DOC_PWD}});
-    const raw=await r.text();
-    let d;
-    try{d=JSON.parse(raw);}catch(pe){
-      cont.innerHTML='<div style="color:var(--err);padding:12px;font-size:13px">⚠️ Errore API (HTTP '+r.status+'):<br><pre style="font-size:11px;overflow:auto;background:#f8f8f8;padding:8px;border-radius:6px;margin-top:6px">'+raw.slice(0,400)+'</pre></div>';
-      return;
-    }
-    if(!Array.isArray(d)){
-      cont.innerHTML='<div style="color:var(--err);padding:12px;font-size:13px">⚠️ Risposta inattesa (HTTP '+r.status+'):<br><pre style="font-size:11px;overflow:auto;background:#f8f8f8;padding:8px;border-radius:6px;margin-top:6px">'+JSON.stringify(d).slice(0,400)+'</pre></div>';
-      return;
-    }
-    if(d.length===0){
+    const r=await fetch('/api/submit-medical-request?email='+encodeURIComponent(pazCorrente.email),{headers:{'Authorization':'Bearer '+DOC_PWD}});
+    const d=await r.json();
+    if(!Array.isArray(d)||d.length===0){
       cont.innerHTML='<div style="text-align:center;color:var(--txt-l);padding:24px;font-size:15px">Nessuna richiesta ancora inviata.<br><br><button onclick="showScreen(\'s-richiesta\')" style="background:var(--blu);color:#fff;border:none;border-radius:8px;padding:12px 20px;font-size:14px;font-weight:700;cursor:pointer;font-family:\'Plus Jakarta Sans\',sans-serif">Invia la prima richiesta →</button></div>';
       return;
     }
@@ -956,7 +908,7 @@ async function caricaStorico(){
   }catch(e){cont.innerHTML='<div style="color:var(--err);font-size:14px;padding:10px">Errore nel caricamento. Riprova.</div>';}
 }
 
-function logoutPaz(){pazCorrente=null;localStorage.removeItem('paziente');localStorage.removeItem('abbonamento_attivo');showScreen('s-home');}
+function logoutPaz(){pazCorrente=null;localStorage.removeItem('paziente');showScreen('s-home');}
 
 function quickStart(tipo){document.getElementById('requestType').value=tipo;showScreen('s-richiesta');setTimeout(()=>document.getElementById('problem').focus(),300);}
 
@@ -1196,43 +1148,144 @@ async function inviaRisposta(){
     btn.textContent='✅ Inviato';
   }catch(e){alert('Errore: '+e.message);btn.disabled=false;btn.textContent='✅ Conferma e invia risposta medica';}
 }
+  /* FIX AUTENTICAZIONE PAZIENTE — Supabase email confirmation */
 
-function checkPagamentoEProcedi(){
-  // Controlla se ha già pagato (localStorage flag)
-  const paid = localStorage.getItem('abbonamento_attivo');
-  if(paid === 'si'){
-    showDoctorForm();
+async function loginPaz(){
+  const email=document.getElementById('paz-email').value.trim();
+  const pwd=document.getElementById('paz-pwd').value;
+  const err=document.getElementById('paz-err');
+
+  if(!email||!pwd){
+    err.textContent='Inserisci email e password';
+    err.style.display='block';
     return;
   }
-  // Altrimenti mostra paywall
-  const modal = document.getElementById('paywall-modal');
-  modal.style.display = 'flex';
-  // Pre-popola email se disponibile
-  const emailField = document.getElementById('patient-email');
-  if(emailField && emailField.value){
-    document.getElementById('paywall-email').value = emailField.value;
-  } else if(pazCorrente){
-    document.getElementById('paywall-email').value = pazCorrente.email || '';
+
+  const btn=document.querySelector('#paz-form-login .btn-p');
+  btn.textContent='Accesso in corso...';
+  btn.disabled=true;
+
+  try{
+    localStorage.removeItem('paziente');
+
+    const r=await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'apikey':SUPA_KEY
+      },
+      body:JSON.stringify({email,password:pwd})
+    });
+
+    const d=await r.json();
+
+    if(!r.ok || d.error || !d.access_token || !d.user || !d.user.id){
+      err.textContent='Email o password non corretti.';
+      err.style.display='block';
+      btn.textContent='Accedi →';
+      btn.disabled=false;
+      return;
+    }
+
+    if(d.user.email && d.user.email.toLowerCase()!==email.toLowerCase()){
+      err.textContent='Errore di autenticazione. Riprova.';
+      err.style.display='block';
+      btn.textContent='Accedi →';
+      btn.disabled=false;
+      return;
+    }
+
+    if(!d.user.email_confirmed_at && !d.user.confirmed_at){
+      err.textContent='Devi prima confermare la tua email.';
+      err.style.display='block';
+      btn.textContent='Accedi →';
+      btn.disabled=false;
+      return;
+    }
+
+    pazCorrente={
+      email:d.user.email,
+      nome:d.user?.user_metadata?.nome||d.user.email,
+      token:d.access_token,
+      id:d.user.id,
+      loginTime:Date.now()
+    };
+
+    localStorage.setItem('paziente',JSON.stringify(pazCorrente));
+    err.style.display='none';
+    btn.textContent='Accedi →';
+    btn.disabled=false;
+    entraPaziente();
+
+  }catch(e){
+    err.textContent='Errore di connessione. Riprova.';
+    err.style.display='block';
+    btn.textContent='Accedi →';
+    btn.disabled=false;
   }
 }
 
-function chiudiPaywall(){
-  document.getElementById('paywall-modal').style.display = 'none';
-}
+async function registraPaz(){
+  const nome=document.getElementById('reg-nome').value.trim();
+  const email=document.getElementById('reg-email').value.trim();
+  const pwd=document.getElementById('reg-pwd').value;
+  const cf=document.getElementById('reg-cf').value.trim().toUpperCase();
+  const err=document.getElementById('reg-err');
 
-async function startStripePaywall(){
-  const email = document.getElementById('paywall-email').value.trim();
-  if(!email || !email.includes('@')){alert('Inserisci la tua email');return;}
-  const btn = document.querySelector('#paywall-modal button');
-  btn.textContent = 'Caricamento...'; btn.disabled = true;
+  if(!nome||!email||!pwd||!cf){
+    err.textContent='Compila tutti i campi';
+    err.style.display='block';
+    return;
+  }
+
+  if(pwd.length<8){
+    err.textContent='Password minimo 8 caratteri';
+    err.style.display='block';
+    return;
+  }
+
+  const btn=document.querySelector('#paz-form-reg .btn-p');
+  btn.textContent='Registrazione...';
+  btn.disabled=true;
+
   try{
-    const r = await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
-    const d = await r.json();
-    if(d.url) window.location.href = d.url;
-    else{alert('Errore: '+(d.error||'Riprova'));btn.textContent='Abbonati ora — Pagamento sicuro →';btn.disabled=false;}
-  }catch(e){alert('Errore di connessione.');btn.textContent='Abbonati ora — Pagamento sicuro →';btn.disabled=false;}
-}
+    localStorage.removeItem('paziente');
 
+    const r=await fetch(SUPA_URL+'/auth/v1/signup',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'apikey':SUPA_KEY
+      },
+      body:JSON.stringify({
+        email,
+        password:pwd,
+        data:{nome,codice_fiscale:cf}
+      })
+    });
+
+    const d=await r.json();
+
+    if(!r.ok || d.error){
+      err.textContent=d.error || 'Errore durante la registrazione.';
+      err.style.display='block';
+      btn.textContent='Registrati →';
+      btn.disabled=false;
+      return;
+    }
+
+    alert('Account creato. Ora controlla la tua email, conferma la registrazione e poi accedi.');
+    btn.textContent='Registrati →';
+    btn.disabled=false;
+    showPazLogin();
+
+  }catch(e){
+    err.textContent='Errore di connessione.';
+    err.style.display='block';
+    btn.textContent='Registrati →';
+    btn.disabled=false;
+  }
+      }
 </script>
 </body>
-</html>
+  </html>
