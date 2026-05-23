@@ -54,12 +54,9 @@ async function sendEmail(to, subject, html) {
         pass: process.env.GMAIL_APP_PASSWORD
       }
     });
-
     await transporter.sendMail({
       from: `Medico Subito <${process.env.GMAIL_USER}>`,
-      to,
-      subject,
-      html
+      to, subject, html
     });
     return true;
   } catch (e) {
@@ -129,12 +126,22 @@ export default async function handler(req, res) {
     if (auth !== `Bearer ${DOC_PASSWORD}`) {
       return res.status(401).json({ error: "Non autorizzato" });
     }
+
     const emailFilter = req.query.email;
-    let query = supabase.from("consults").select("*").order("created_at", { ascending: false });
-    if (emailFilter) query = query.eq("email", emailFilter);
+
+    let query = supabase
+      .from("consults")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (emailFilter) {
+      // Filtro case-insensitive: usa ilike per trovare l'email indipendentemente da maiuscole/minuscole
+      query = query.ilike("email", emailFilter.trim());
+    }
+
     const { data, error } = await query;
     if (error) return res.status(500).json({ error: error.message });
-    return res.status(200).json(data);
+    return res.status(200).json(data || []);
   }
 
   if (req.method === "POST") {
@@ -156,12 +163,15 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: allegatCheck.error });
     }
 
+    // Salva email sempre in minuscolo per coerenza
+    const emailNorm = email.trim().toLowerCase();
+
     const { error } = await supabase.from("consults").insert({
       tipo,
       patient_text: patientText,
       patient_name: patientName,
       date_of_birth: dateOfBirth,
-      email,
+      email: emailNorm,
       phone,
       clinical_data: clinicalData,
       ai_response: aiResponse,
@@ -179,11 +189,11 @@ export default async function handler(req, res) {
     await sendEmail(
       "ferriam78@gmail.com",
       `🩺 Nuova richiesta: ${tipo||'consulto'} — ${patientName}`,
-      emailMedico(patientName, tipo, email, phone, dateOfBirth, patientText, clinicalData, codiceFiscale)
+      emailMedico(patientName, tipo, emailNorm, phone, dateOfBirth, patientText, clinicalData, codiceFiscale)
     );
 
     await sendEmail(
-      email,
+      emailNorm,
       "Medico Subito — Richiesta ricevuta",
       `<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;background:#f1f5f9;padding:20px">
       <div style="background:white;border-radius:12px;padding:24px;max-width:600px;margin:0 auto">
