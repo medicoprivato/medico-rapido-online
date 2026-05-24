@@ -89,12 +89,12 @@ textarea{min-height:120px;resize:none}
 .btn-hg{background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.6);color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:800;cursor:pointer;text-align:center;width:100%;padding:14px;border-radius:var(--r-s);letter-spacing:.3px;text-decoration:none}
 
 .serv-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 16px 0}
-.serv-card{border-radius:var(--r);padding:18px 16px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.serv-card{border-radius:var(--r);padding:22px 16px 18px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;box-shadow:none}
 .serv-card:active{transform:scale(.97)}
-.serv-card-sub{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px;opacity:.65;color:#fff}
-.serv-card-nm{font-size:17px;font-weight:800;line-height:1.2;color:#fff}
-.serv-card-ic{position:absolute;right:-4px;bottom:-8px;width:52px;height:52px;opacity:.2}
-.serv-card-ic svg{width:52px;height:52px;stroke:#fff;stroke-width:1.5;fill:none}
+.serv-card-sub{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;opacity:.8;color:#fff}
+.serv-card-nm{font-size:18px;font-weight:900;line-height:1.25;color:#fff;margin-top:4px}
+.serv-card-ic{display:none}
+.serv-card-emoji{font-size:2.4rem;margin-bottom:10px;display:block}
 
 .how-sec{padding:24px 16px 0}
 .sez-lbl{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--blu);margin-bottom:7px}
@@ -308,20 +308,24 @@ textarea{min-height:120px;resize:none}
 
   <div class="serv-grid">
     <div class="serv-card" onclick="quickStart('Rinnovo terapia')" style="background:linear-gradient(135deg,#1e3a8a,#2563eb)">
-      <div class="serv-card-sub">Farmaci</div><div class="serv-card-nm">Rinnovo<br>terapia</div>
-      <div class="serv-card-ic"><svg viewBox="0 0 24 24"><path d="M9 3H6a2 2 0 00-2 2v4m5-6h8a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H4a2 2 0 01-2-2V9m0 0h18" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="serv-card-emoji">💊</span>
+      <div class="serv-card-sub">Farmaci</div>
+      <div class="serv-card-nm">Rinnovo<br>terapia</div>
     </div>
     <div class="serv-card" onclick="quickStart('Richiesta esami')" style="background:linear-gradient(135deg,#065f46,#059669)">
-      <div class="serv-card-sub">Diagnostica</div><div class="serv-card-nm">Richiesta<br>esami</div>
-      <div class="serv-card-ic"><svg viewBox="0 0 24 24"><path d="M9 3v11a3 3 0 006 0V3M3 3h18M3 21h18" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="serv-card-emoji">🔬</span>
+      <div class="serv-card-sub">Diagnostica</div>
+      <div class="serv-card-nm">Richiesta<br>esami</div>
     </div>
     <div class="serv-card" onclick="quickStart('Certificato medico')" style="background:linear-gradient(135deg,#5b21b6,#7c3aed)">
-      <div class="serv-card-sub">Documenti</div><div class="serv-card-nm">Certificato<br>medico</div>
-      <div class="serv-card-ic"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="serv-card-emoji">📋</span>
+      <div class="serv-card-sub">Documenti</div>
+      <div class="serv-card-nm">Certificato<br>medico</div>
     </div>
     <div class="serv-card" onclick="quickStart('Seconda opinione')" style="background:linear-gradient(135deg,#9d174d,#db2777)">
-      <div class="serv-card-sub">Parere medico</div><div class="serv-card-nm">Seconda<br>opinione</div>
-      <div class="serv-card-ic"><svg viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="serv-card-emoji">💬</span>
+      <div class="serv-card-sub">Parere medico</div>
+      <div class="serv-card-nm">Seconda<br>opinione</div>
     </div>
   </div>
 
