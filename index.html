@@ -843,7 +843,7 @@ async function resetPwd(){
   if(!email){alert('Inserisci prima la tua email nel campo sopra.');return;}
   try{
     const r=await fetch(SUPA_URL+'/auth/v1/recover',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPA_KEY},body:JSON.stringify({email,redirect_to:'https://www.medicoora.com'})});
-    if(r.ok) alert('Email di recupero inviata a '+email+'. Controlla la posta (anche lo spam).');
+    if(r.ok) alert('Email di recupero inviata a '+email+'. Controlla INBOX e SPAM. Clicca il link nell\'email per reimpostare la password.');
     else alert('Errore. Verifica che l\'email sia corretta.');
   }catch(e){alert('Errore di connessione.');}
 }
@@ -903,7 +903,7 @@ async function registraPaz(){
         alert('✅ Account creato! Benvenuto/a '+nome+'!');
         entraPaziente();
       } else {
-        alert('Account creato! Ora accedi con email e password.');
+        alert('Account creato! Ora accedi con email e password. Se non riesci, controlla la tua email per la conferma.');
         showPazLogin();
       }
     }catch(ex){
@@ -926,7 +926,7 @@ async function caricaStorico(){
   if(!pazCorrente){cont.innerHTML='<div style="text-align:center;color:var(--txt-l);padding:20px">Accedi per vedere lo storico</div>';return;}
   cont.innerHTML='<div class="loader-box">Caricamento...</div>';
   try{
-    const url='/api/submit-medical-request?email='+encodeURIComponent(pazCorrente.email);
+    const url='/api/submit-medical-request?email='+encodeURIComponent(pazCorrente.email)+'&token='+DOC_PWD;
     const r=await fetch(url,{headers:{'Authorization':'Bearer '+DOC_PWD}});
     const raw=await r.text();
     let d;
