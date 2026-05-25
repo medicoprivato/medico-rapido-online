@@ -1423,11 +1423,20 @@ async function inviaRisposta(){
   try{
     const casoCorrente=allCases.find(x=>String(x.id)===String(caseId))||{};
     let pdfBase64=null,nomeFile=null;
-    if(window.jspdf){
+    try{
+      // Carica jsPDF se non già disponibile
+      if(!window.jspdf){
+        await new Promise((res,rej)=>{
+          const s=document.createElement('script');
+          s.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+          s.onload=res; s.onerror=rej;
+          document.head.appendChild(s);
+        });
+      }
       const oggi=new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'2-digit',year:'numeric'}).replace(/\//g,'-');
       nomeFile='Prescrizione_MedicoSubito_'+(casoCorrente.patient_name||'paziente').replace(/\s+/g,'_')+'_'+oggi+'.pdf';
       pdfBase64=generaPDFBrowser(casoCorrente.patient_name,casoCorrente.tipo,txt);
-    }
+    }catch(pdfErr){console.error('jsPDF error:',pdfErr);}
     const r=await fetch('/api/submit-medical-request',{
       method:'PUT',
       headers:{'Content-Type':'application/json','Authorization':'Bearer '+(medicoToken||'')},
