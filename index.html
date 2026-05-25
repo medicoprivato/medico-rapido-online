@@ -1420,31 +1420,25 @@ async function inviaRisposta(){
   const caseId=btn.dataset.caseId;
   if(!txt||!caseId)return;
   btn.disabled=true;btn.textContent='Invio in corso...';
-
   try{
-    // Genera PDF nel browser
-    const casoCorrente = allCases.find(c=>c.id==caseId)||{};
-    let pdfBase64 = null, nomeFile = null;
+    const casoCorrente=allCases.find(x=>String(x.id)===String(caseId))||{};
+    let pdfBase64=null,nomeFile=null;
     if(window.jspdf){
-      const oggi = new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'2-digit',year:'numeric'}).replace(/\//g,'-');
-      nomeFile = 'Prescrizione_MedicoSubito_'+(casoCorrente.patient_name||'paziente').replace(/\s+/g,'_')+'_'+oggi+'.pdf';
-      pdfBase64 = generaPDFBrowser(casoCorrente.patient_name, casoCorrente.tipo, txt);
+      const oggi=new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'2-digit',year:'numeric'}).replace(/\//g,'-');
+      nomeFile='Prescrizione_MedicoSubito_'+(casoCorrente.patient_name||'paziente').replace(/\s+/g,'_')+'_'+oggi+'.pdf';
+      pdfBase64=generaPDFBrowser(casoCorrente.patient_name,casoCorrente.tipo,txt);
     }
-
     const r=await fetch('/api/submit-medical-request',{
       method:'PUT',
       headers:{'Content-Type':'application/json','Authorization':'Bearer '+DOC_PWD},
-      body:JSON.stringify({id:caseId, risposta_medico:txt, stato:'risposto', pdfBase64, nomeFile})
+      body:JSON.stringify({id:caseId,risposta_medico:txt,stato:'risposto',pdfBase64,nomeFile})
     });
     const d=await r.json();
-    if(!r.ok){btn.textContent='❌ Errore: '+(d.error||'riprovare');btn.disabled=false;return;}
+    if(!r.ok){btn.textContent='❌ '+(d.error||'Errore');btn.disabled=false;return;}
     btn.textContent='✅ Inviato';
     setTimeout(()=>{showScreen('s-doc-dash');loadCases('pending');},1500);
-  }catch(e){
-    btn.textContent='❌ Errore connessione';btn.disabled=false;
-  }
+  }catch(e){btn.textContent='❌ Errore connessione';btn.disabled=false;}
 }
-
 async function startStripePaywall(){
   const email = document.getElementById('paywall-email').value.trim();
   if(!email || !email.includes('@')){alert('Inserisci la tua email');return;}
