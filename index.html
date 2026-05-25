@@ -50,7 +50,7 @@ textarea{min-height:120px;resize:none}
 .pwd-eye{position:absolute;right:14px;top:50%;transform:translateY(-65%);background:none;border:none;cursor:pointer;font-size:18px;color:var(--txt-l);padding:4px;line-height:1}
 
 .bnav{position:fixed;bottom:0;left:0;right:0;height:68px;background:#fff;border-top:1px solid var(--brd);display:flex;justify-content:space-around;align-items:center;z-index:50;box-shadow:0 -2px 10px rgba(0,0,0,.06)}
-.nav-it{display:flex;flex-direction:column;align-items:center;font-size:10px;color:var(--txt-l);font-weight:700;cursor:pointer;gap:3px;padding:6px 12px;border-radius:10px;transition:color .15s;letter-spacing:.3px;text-transform:uppercase}
+.nav-it{display:flex;flex-direction:column;align-items:center;font-size:10px;color:var(--txt-l);font-weight:800;cursor:pointer;gap:3px;padding:6px 12px;border-radius:10px;transition:all .15s;letter-spacing:.5px;text-transform:uppercase}
 .nav-it svg{width:22px;height:22px;stroke:var(--txt-l);stroke-width:1.8;fill:none;transition:stroke .15s}
 .nav-it:hover,.nav-it.active{color:var(--blu)}
 .nav-it:hover svg,.nav-it.active svg{stroke:var(--blu)}
@@ -411,17 +411,15 @@ textarea{min-height:120px;resize:none}
 
 <!-- RICHIESTA -->
 <div id="s-richiesta" class="screen">
-  <div class="hdr" style="justify-content:space-between">
-    <button class="btn-back" onclick="showScreen('s-home')">← Home</button>
-    <div style="display:flex;align-items:center;gap:8px">
-      <div class="logo-box"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 100 10A5 5 0 0012 2zM4 20c0-4 3.6-7 8-7s8 3 8 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="logo-txt">Medico Subito</div>
-    </div>
-    <div style="width:70px"></div>
+  <div style="background:linear-gradient(135deg,#0c1957,#1e40af);padding:28px 20px 24px;text-align:center">
+    <button class="btn-back" onclick="showScreen('s-home')" style="background:none;border:none;color:rgba(255,255,255,.7);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;position:absolute;left:20px;top:20px;text-transform:uppercase;letter-spacing:.5px">HOME</button>
+    <div style="font-size:3.5rem;margin-bottom:10px">🩺</div>
+    <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:800;color:#fff;letter-spacing:-.5px">Medico <span style="color:#facc15">Subito</span></div>
+    <div style="font-size:13px;color:rgba(255,255,255,.75);margin-top:6px;font-weight:600">Nuova richiesta medica</div>
   </div>
   <div style="padding:16px 16px 0">
     <div class="card" id="main-form">
-      <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blu);margin-bottom:12px">Nuova richiesta medica</div>
+      
       <div class="emerg">
         <div class="emerg-t">🚨 NON usare se hai:</div>
         <div class="emerg-l">• Dolore toracico o difficoltà respiratoria<br>• Perdita di coscienza o confusione<br>• Deficit neurologici · Sanguinamento importante<br>• Dolore addominale severo · Gravidanza con sintomi acuti</div>
