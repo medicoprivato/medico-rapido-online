@@ -962,12 +962,14 @@ window.addEventListener('load',function(){
 
   // Ripristina schermata da hash URL
   const hash=window.location.hash.replace('#','');
-  const schermate=['s-home','s-richiesta','s-payment','s-contatti','s-paz-login','s-faq','s-privacy','s-termini','s-info'];
+  const schermate=['s-home','s-richiesta','s-payment','s-contatti','s-paz-login','s-faq','s-privacy','s-termini','s-info','s-doc-login','s-doc-dash','s-triage','s-medici'];
+  const isDocHash=hash==='s-doc-login'||hash==='s-doc-dash';
   if(hash && schermate.includes(hash)){
     document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
     const el=document.getElementById(hash);
     if(el) el.classList.add('active');
   }
+  if(isDocHash){return;}
   try{
     const raw=localStorage.getItem('paziente');
     if(raw){
