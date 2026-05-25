@@ -41,13 +41,18 @@ function validateAllegati(allegati) {
   return { ok: true };
 }
 
-async function sendEmail(to, subject, html) {
+async function sendEmail(to, subject, html, attachments) {
   try {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_APP_PASSWORD }
     });
-    await transporter.sendMail({ from: `Medico Subito <${process.env.GMAIL_USER}>`, to, subject, html });
+    const mailOpts = { 
+      from: `Medico Subito <${process.env.GMAIL_USER}>`, 
+      to, subject, html 
+    };
+    if(attachments) mailOpts.attachments = attachments;
+    await transporter.sendMail(mailOpts);
     return true;
   } catch (e) { console.error("Email error:", e.message); return false; }
 }
@@ -214,10 +219,41 @@ export default async function handler(req, res) {
     if (error) return res.status(500).json({ error: error.message });
 
     if (consult?.email) {
+      const docHtml = emailPaziente(consult.patient_name, consult.tipo, risposta_medico);
+      const oggi = new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'2-digit',year:'numeric'}).replace(/\//g,'-');
+      const nomeFile = `Documento_Medico_${(consult.patient_name||'paziente').replace(/\s+/g,'_')}_${oggi}.html`;
+      
+      // Corpo email semplice
+      const corpoEmail = `<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;background:#f1f5f9;padding:20px">
+        <div style="background:white;border-radius:12px;padding:24px;max-width:600px;margin:0 auto;border:1px solid #e2e8f0">
+          <div style="background:#1e3a8a;color:white;border-radius:10px;padding:16px;margin-bottom:20px">
+            <h2 style="margin:0">🩺 Risposta medica — Medico Subito</h2>
+          </div>
+          <p>Gentile <strong>${consult.patient_name}</strong>,</p>
+          <p>Il medico ha valutato la tua richiesta di <strong>${consult.tipo||'consulto'}</strong>.</p>
+          <p style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:14px;font-size:14px">
+            📎 <strong>In allegato</strong> trovi il documento medico ufficiale (<em>${nomeFile}</em>).<br>
+            Aprilo e stampalo oppure salvalo come PDF dal menu di stampa del browser.
+          </p>
+          <p style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px;font-size:13px">
+            ⚠️ Questo documento è una prestazione medica privata. Non sostituisce la visita in presenza.<br>
+            In emergenza chiama il <strong>118</strong>.
+          </p>
+          <p style="font-size:12px;color:#94a3b8;margin-top:20px">
+            Medico Subito · medicoora.com · info@medicoora.com
+          </p>
+        </div>
+      </body></html>`;
+
       await sendEmail(
         consult.email,
-        `🩺 Medico Subito — Risposta medica: ${consult.tipo||'consulto'}`,
-        emailPaziente(consult.patient_name, consult.tipo, risposta_medico)
+        `🩺 Medico Subito — Documento medico: ${consult.tipo||'consulto'}`,
+        corpoEmail,
+        [{
+          filename: nomeFile,
+          content: docHtml,
+          contentType: 'text/html; charset=utf-8'
+        }]
       );
     }
 
