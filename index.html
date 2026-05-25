@@ -1295,14 +1295,8 @@ function loginMedico(){
 async function loadCases(filter){
   const cont=document.getElementById('cases-container');cont.innerHTML='<div class="loader-box" style="margin:16px">Caricamento richieste...</div>';
   try{
-    const ctrl=new AbortController();const tid=setTimeout(()=>ctrl.abort(),10000);
-    const r=await fetch('/api/submit-medical-request',{headers:{'Authorization':'Bearer '+DOC_PWD},signal:ctrl.signal});
-    clearTimeout(tid);
-    const raw=await r.text();
-    let allCasesData;
-    try{allCasesData=JSON.parse(raw);}catch(pe){cont.innerHTML='<div style="padding:16px;color:red">Errore API: '+raw.substring(0,200)+'</div>';return;}
-    if(!r.ok){cont.innerHTML='<div style="padding:16px;color:red">Errore '+r.status+': '+JSON.stringify(allCasesData)+'</div>';return;}
-    allCases=allCasesData;
+    const r=await fetch('/api/submit-medical-request',{headers:{'Authorization':'Bearer '+DOC_PWD}});
+    allCases=await r.json();
     if(!Array.isArray(allCases))allCases=[];
     const pending=allCases.filter(c=>!c.risposta_medico);
     document.getElementById('doc-count').textContent=pending.length+' in attesa';
