@@ -1,8 +1,9 @@
 import { createClient } from "@supabase/supabase-js";
 import nodemailer from "nodemailer";
-import PDFDocument from "pdfkit";
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+const PDFDocument = require("pdfkit");
 
-// Genera PDF prescrizione medica
 function generaPDF(patientName, tipo, risposta) {
   return new Promise((resolve, reject) => {
     const doc = new PDFDocument({ margin: 50, size: 'A4' });
@@ -22,7 +23,6 @@ function generaPDF(patientName, tipo, risposta) {
        .text('P.IVA IT17215181003')
        .text('Via Gaetano Marzotto 16 Int.3, 00133 Roma')
        .text('medicoora.com');
-
     doc.moveDown(0.5);
     doc.moveTo(50, doc.y).lineTo(545, doc.y).strokeColor('#1e3a8a').lineWidth(1.5).stroke();
     doc.moveDown(0.5);
@@ -37,12 +37,11 @@ function generaPDF(patientName, tipo, risposta) {
 
     // Corpo documento
     doc.fontSize(10).font('Helvetica').text(risposta, { lineGap: 3 });
-
     doc.moveDown(1.5);
     doc.moveTo(50, doc.y).lineTo(545, doc.y).strokeColor('#1e3a8a').lineWidth(1).stroke();
     doc.moveDown(0.5);
 
-    // Firma e timbro
+    // Timbro e firma
     doc.fontSize(11).font('Helvetica-Bold').text('TIMBRO E FIRMA DIGITALE DEL MEDICO');
     doc.moveDown(0.3);
     doc.fontSize(10).font('Helvetica')
@@ -52,12 +51,10 @@ function generaPDF(patientName, tipo, risposta) {
        .moveDown(0.3)
        .text('Firmato digitalmente ai sensi del D.Lgs. 82/2005 (CAD)')
        .text('e Linee Guida Telemedicina Min. Salute 2022');
-
     doc.moveDown(1);
     doc.fontSize(8).fillColor('#666666')
        .text('Documento emesso tramite piattaforma di telemedicina medicoora.com', { align: 'center' })
        .text('Non sostituisce la visita medica in presenza. In emergenza chiamare il 118.', { align: 'center' });
-
     doc.end();
   });
 }
@@ -331,8 +328,8 @@ export default async function handler(req, res) {
         corpoEmail,
         [{
           filename: nomeFile,
-          content: pdfBuffer,
-          contentType: 'application/pdf'
+          content: docHtml,
+          contentType: 'text/html; charset=utf-8'
         }]
       );
     }
