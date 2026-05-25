@@ -1106,6 +1106,10 @@ function entraPaziente(){
   if(!pazCorrente)return;
   document.getElementById('paz-nome-disp').textContent=pazCorrente.nome||pazCorrente.email;
   document.getElementById('paz-email-disp').textContent=pazCorrente.email;
+  // Bypass paywall per account test/medico
+  if(pazCorrente.email==='ferriam78@gmail.com'||pazCorrente.email==='testmedicoora@gmail.com'){
+    localStorage.setItem('abbonamento_attivo','si');
+  }
   // Pre-compila form richiesta
   const n=document.getElementById('patient-name');
   const e=document.getElementById('patient-email');
@@ -1386,7 +1390,7 @@ medicoora.com - info@medicoora.com
       templateDocumento='Genera un CONSULTO MEDICO SCRITTO PRIVATO nel seguente formato ESATTO:\n\n[INTESTAZIONE MEDICO]\n\nNome: [nome paziente]\nCognome: [cognome paziente]\nData di nascita: [data nascita]\nCodice Fiscale: [CF]\n\nVALUTAZIONE CLINICA:\n\n[Valutazione dettagliata del caso]\n\nINDICAZIONI TERAPEUTICHE:\n\n[Indicazioni specifiche]\n\nRACCOMANDAZIONI:\n\n[Follow-up e raccomandazioni]\n\nNota: questo consulto non sostituisce la visita medica in presenza.\n\nData: '+dataOra+'\n\nDOTT.SSA ANNA MARIA FERRI\\n\\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\nTIMBRO E FIRMA DIGITALE DEL MEDICO\\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\nDott.ssa Anna Maria Ferri\\nMedico Chirurgo - Spec. Ginecologia e Ostetricia\\nOrdine Medici Frosinone n. 3363 - P.IVA IT17215181003\\nFirmato digitalmente ai sensi del D.Lgs. 82/2005 (CAD)\\ne Linee Guida Telemedicina Min. Salute 2022';
     }
     const prompt='Sei un medico italiano specialista in Ginecologia e Ostetricia che lavora in telemedicina privata. Sostituisci [INTESTAZIONE MEDICO] con:\nDott.ssa Anna Maria Ferri\nMedico Chirurgo - Specialista in Ginecologia e Ostetricia\nOrdine dei Medici di Frosinone n. 3363 - P.IVA IT17215181003\nVia Gaetano Marzotto 16 Int. 3, 00133 Roma (RM)\nmedicoora.com\n\n'+templateDocumento+' IMPORTANTE: Separa la risposta in due sezioni ben distinte con questa struttura ESATTA:\n\n---ANALISI MEDICA (RISERVATA AL MEDICO)---\n[Scrivi qui in 3-4 frasi: valutazione clinica del caso, appropriatezza della richiesta, eventuali note per il medico. NON usare saluti. Stile clinico professionale. Aggiungi avviso se la richiesta potrebbe esulare dalla specializzazione in Ginecologia e Ostetricia.]\n\n---DOCUMENTO PER IL PAZIENTE---\n[Scrivi qui il documento legale completo pronto per la firma]\n\nDATA DOCUMENTO: '+dataOra+'. MEDICO: Dott.ssa Anna Maria Ferri, Medico Chirurgo Specialista in Ginecologia e Ostetricia, Ordine Medici Frosinone n.3363, P.IVA IT17215181003. PAZIENTE: '+(caso.patient_name||'')+', nato/a il '+(caso.date_of_birth||'n.d.')+', CF: '+(caso.codice_fiscale||'n.d.')+'. RICHIESTA: '+(caso.patient_text||'')+'. DATI CLINICI: '+(caso.clinical_data||'non forniti')+'. Solo testo, niente markdown.';
-    const r=await fetch('/api/consult',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:prompt,allegati:caso.allegati||[]})});
+    const r=await fetch('/api/consult',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:prompt})});
     const d=await r.json();const testo=stripMd(d.answer||'Analisi non disponibile.');
     // Separa le due sezioni
     const separatore='---DOCUMENTO PER IL PAZIENTE---';
