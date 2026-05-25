@@ -257,6 +257,61 @@ textarea{min-height:120px;resize:none}
   </div>
 </div>
 
+
+<!-- TRIAGE OBBLIGATORIO -->
+<div id="s-triage" class="screen">
+  <div style="background:linear-gradient(135deg,#0c1957,#1e40af);padding:28px 20px 24px;text-align:center;position:relative">
+    <button onclick="showScreen('s-home')" style="background:#1e3a8a;border:3px solid #facc15;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:900;cursor:pointer;position:absolute;left:16px;top:16px;text-transform:uppercase;letter-spacing:.5px;padding:10px 14px;border-radius:8px;width:72px;line-height:1.3;text-align:center">TORNA<br>HOME</button>
+    <div style="font-size:3.5rem;margin-bottom:10px;margin-top:16px">🩺</div>
+    <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:800;color:#fff;letter-spacing:-.5px">Scheda <span style="color:#facc15">Paziente</span></div>
+    <div style="font-size:14px;color:rgba(255,255,255,.8);margin-top:8px;font-weight:600">Compilare una sola volta · Dati salvati per future richieste</div>
+  </div>
+  <div style="padding:16px 16px 0;padding-bottom:90px">
+    <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:14px;margin-bottom:16px;font-size:13px;color:#92400e">
+      ⚠️ La compilazione è obbligatoria per legge (L. 219/2017). I dati sono necessari per garantire sicurezza e appropriatezza della prestazione medica.
+    </div>
+    <div class="card">
+      <div style="font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--blu);margin-bottom:14px">Dati anagrafici</div>
+      <input id="tr-nome" placeholder="Nome e cognome *" autocomplete="name"/>
+      <input id="tr-dob" placeholder="Data di nascita (gg/mm/aaaa) *" type="date"/>
+      <input id="tr-cf" placeholder="Codice fiscale *" style="text-transform:uppercase" maxlength="16"/>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+        <select id="tr-sesso" style="margin-bottom:0">
+          <option value="">Sesso biologico *</option>
+          <option value="M">Maschio</option>
+          <option value="F">Femmina</option>
+        </select>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <input id="tr-peso" type="number" placeholder="Peso (kg) *" style="margin-bottom:0"/>
+          <input id="tr-altezza" type="number" placeholder="Alt. (cm) *" style="margin-bottom:0"/>
+        </div>
+      </div>
+      <div style="font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--blu);margin:14px 0 10px">Anamnesi</div>
+      <textarea id="tr-allergie" placeholder="Allergie accertate (farmaci, alimenti, altro). Scrivi NESSUNA se non presenti. *" style="min-height:80px"></textarea>
+      <textarea id="tr-farmaci" placeholder="Farmaci in uso corrente (nome, dose, frequenza). Scrivi NESSUNO se non presenti. *" style="min-height:80px"></textarea>
+      <textarea id="tr-patologie" placeholder="Patologie croniche diagnosticate. Scrivi NESSUNA se non presenti. *" style="min-height:80px"></textarea>
+      <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:14px;margin:4px 0 14px;font-size:13px;color:#1e3a8a;line-height:1.6">
+        <strong>Consenso informato (L. 219/2017)</strong><br>
+        Dichiaro che le informazioni fornite sono veritiere e presto consenso al trattamento dei miei dati sanitari per l'erogazione della prestazione di telemedicina, ai sensi dell'art. 9 GDPR.
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+        <input type="checkbox" id="tr-consenso" style="width:20px;height:20px;flex-shrink:0;margin:0"/>
+        <label for="tr-consenso" style="font-size:14px;font-weight:700;color:var(--txt)">Accetto e confermo la veridicità dei dati</label>
+      </div>
+      <div id="tr-err" style="color:var(--err);font-size:13px;margin-bottom:10px;display:none"></div>
+      <button onclick="salvaTriage()" style="width:100%;background:linear-gradient(135deg,#facc15,#f59e0b);color:#0f172a;border:none;border-radius:12px;height:54px;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:900;cursor:pointer;box-shadow:0 4px 20px rgba(250,204,21,.4)">
+        Salva e procedi alla richiesta →
+      </button>
+    </div>
+  </div>
+  <div class="bnav">
+    <div class="nav-it" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
+    <div class="nav-it active"><span style="font-size:16px;line-height:1">🩺</span>Triage</div>
+    <div class="nav-it" onclick="showScreen('s-info')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-linecap="round"/><path d="M12 16v-4M12 8h.01" stroke-linecap="round"/></svg>Info</div>
+    <div class="nav-it" onclick="showScreen('s-contatti')"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Contatti</div>
+  </div>
+</div>
+
 <!-- HOME -->
 <div id="s-home" class="screen active">
   <div class="hero">
@@ -297,7 +352,7 @@ textarea{min-height:120px;resize:none}
     </div>
 
     <div class="hero-acts">
-      <button class="btn-hp" onclick="showScreen('s-richiesta')">
+      <button class="btn-hp" onclick="vaiARichiesta()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Invia richiesta al medico
       </button>
@@ -599,7 +654,7 @@ textarea{min-height:120px;resize:none}
   </div>
   <div class="bnav">
     <div class="nav-it" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
-    <div class="nav-it" onclick="showScreen('s-richiesta')"><span style="font-size:16px;line-height:1">🩺</span>Richiesta</div>
+    <div class="nav-it" onclick="vaiARichiesta()"><span style="font-size:16px;line-height:1">🩺</span>Richiesta</div>
     <div class="nav-it" onclick="showScreen('s-info')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-linecap="round"/><path d="M12 16v-4M12 8h.01" stroke-linecap="round"/></svg>Info</div>
     <div class="nav-it" onclick="showScreen('s-contatti')"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Contatti</div>
   </div>
@@ -907,15 +962,12 @@ window.addEventListener('load',function(){
 
   // Ripristina schermata da hash URL
   const hash=window.location.hash.replace('#','');
-  const schermate=['s-home','s-richiesta','s-payment','s-contatti','s-paz-login','s-faq','s-privacy','s-termini','s-info','s-doc-login','s-doc-dash','s-medici'];
-  const isDocHash = hash === 's-doc-login' || hash === 's-doc-dash';
+  const schermate=['s-home','s-richiesta','s-payment','s-contatti','s-paz-login','s-faq','s-privacy','s-termini','s-info'];
   if(hash && schermate.includes(hash)){
     document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
     const el=document.getElementById(hash);
     if(el) el.classList.add('active');
   }
-  // Non fare auto-login paziente se si sta accedendo all'area medico
-  if(isDocHash){ return; }
   try{
     const raw=localStorage.getItem('paziente');
     if(raw){
@@ -1082,7 +1134,8 @@ async function caricaStorico(){
 
 function logoutPaz(){pazCorrente=null;localStorage.removeItem('paziente');localStorage.removeItem('abbonamento_attivo');showScreen('s-home');}
 
-function quickStart(tipo){document.getElementById('requestType').value=tipo;showScreen('s-richiesta');setTimeout(()=>document.getElementById('problem').focus(),300);}
+function quickStart(tipo){
+  if(!checkTriage()){showScreen('s-triage');return;}document.getElementById('requestType').value=tipo;showScreen('s-richiesta');setTimeout(()=>document.getElementById('problem').focus(),300);}
 
 function stripMd(t){return t.replace(/\*\*(.*?)\*\*/g,'$1').replace(/\*(.*?)\*/g,'$1').replace(/#{1,6}\s/g,'').replace(/`(.*?)`/g,'$1').trim();}
 
@@ -1293,18 +1346,30 @@ async function openCase(id){
 async function generaAI(caso){
   const btn=document.getElementById('sign-btn');
   try{
-    const prompt='Sei un assistente clinico italiano. Prepara una bozza di risposta medica per il medico. Tipo: '+(caso.tipo||'consulto')+'. Paziente: '+(caso.patient_name||'')+', nato '+(caso.date_of_birth||'n.d.')+'. CF: '+(caso.codice_fiscale||'n.d.')+'. Problema: '+(caso.patient_text||'')+'. Dati clinici: '+(caso.clinical_data||'non specificati')+'. Scrivi: 1) Riepilogo clinico in 2 frasi. 2) Bozza risposta/prescrizione pronta da firmare. Per farmaci: nome, dosaggio, posologia, durata. Sii diretto e clinico. Niente markdown.';
+    const oggi=new Date();const dataOra=oggi.toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'})+' ore '+oggi.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
+    const tipo=caso.tipo||'consulto';
+    let templateDocumento='';
+    if(tipo==='Rinnovo terapia'||tipo.includes('terapia')){
+      templateDocumento='Genera una PRESCRIZIONE MEDICA in formato ricetta bianca italiana. Deve includere: intestazione con dati medico, dati paziente completi, farmaco/i da prescrivere con nome commerciale e generico, dosaggio, posologia (quante volte al giorno), durata della terapia, indicazione clinica, avvertenze se necessarie, spazio firma. Formato: testo ufficiale medico italiano, senza markdown.';
+    } else if(tipo==='Richiesta esami'||tipo.includes('esami')){
+      templateDocumento='Genera una RICHIESTA DI ESAMI DIAGNOSTICI (impegnativa) in formato italiano. Deve includere: intestazione con dati medico, dati paziente, esame/i richiesti con codice branca se applicabile, quesito diagnostico clinico, urgenza (routine/urgente), spazio firma. Formato: testo ufficiale medico italiano, senza markdown.';
+    } else if(tipo==='Certificato medico'||tipo.includes('certificato')){
+      templateDocumento='Genera un CERTIFICATO MEDICO in formato italiano ufficiale. Deve includere: intestazione con dati medico, dati paziente, oggetto del certificato, attestazione clinica, periodo di validità se applicabile, avvertenza che il certificato è rilasciato su richiesta per gli usi consentiti dalla legge, spazio firma. Formato: testo ufficiale, senza markdown.';
+    } else {
+      templateDocumento='Genera una RISPOSTA MEDICA SCRITTA ufficiale in italiano. Deve includere: intestazione con dati medico, dati paziente, valutazione clinica del caso, indicazioni terapeutiche o diagnostiche, raccomandazioni, follow-up consigliato, avvertenza che non sostituisce visita in presenza, spazio firma. Formato: testo ufficiale medico italiano, senza markdown.';
+    }
+    const prompt='Sei un medico italiano. '+templateDocumento+' DATI: Data e ora: '+dataOra+'. Medico: Dott.ssa Anna Maria Ferri, Medico Chirurgo Specialista in Ginecologia e Ostetricia, Ordine Medici Frosinone n.3363, P.IVA IT17215181003. Paziente: '+(caso.patient_name||'')+', nato/a il '+(caso.date_of_birth||'n.d.')+', CF: '+(caso.codice_fiscale||'n.d.')+'. Richiesta del paziente: '+(caso.patient_text||'')+'. Dati clinici anamnestici: '+(caso.clinical_data||'non forniti')+'. Genera il documento COMPLETO e PRONTO per la firma del medico. Solo testo, niente markdown.';
     const r=await fetch('/api/consult',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:prompt})});
     const d=await r.json();const testo=stripMd(d.answer||'Analisi non disponibile.');
     document.getElementById('dc-ai').textContent=testo;
     document.getElementById('dc-ai').className='ai-txt';
     document.getElementById('dc-reply').value=testo;
-    btn.disabled=false;btn.textContent='✅ Conferma e invia risposta medica';
+    btn.disabled=false;btn.textContent='✍️ Firma e Invia al paziente';
   }catch(e){
     document.getElementById('dc-ai').textContent='Analisi AI non disponibile. Scrivi la risposta manualmente.';
     document.getElementById('dc-ai').className='ai-txt';
     document.getElementById('dc-reply').value='';
-    btn.disabled=false;btn.textContent='✅ Conferma e invia risposta medica';
+    btn.disabled=false;btn.textContent='✍️ Firma e Invia al paziente';
   }
 }
 
@@ -1318,7 +1383,7 @@ async function inviaRisposta(){
     document.getElementById('dc-sent').style.display='block';
     document.getElementById('dc-sent-msg').textContent='Risposta inviata a '+(c?.email||'il paziente')+'.';
     btn.textContent='✅ Inviato';
-  }catch(e){alert('Errore: '+e.message);btn.disabled=false;btn.textContent='✅ Conferma e invia risposta medica';}
+  }catch(e){alert('Errore: '+e.message);btn.disabled=false;btn.textContent='✍️ Firma e Invia al paziente';}
 }
 
 function checkPagamentoEProcedi(){
@@ -1355,6 +1420,72 @@ async function startStripePaywall(){
     if(d.url) window.location.href = d.url;
     else{alert('Errore: '+(d.error||'Riprova'));btn.textContent='Abbonati ora — Pagamento sicuro →';btn.disabled=false;}
   }catch(e){alert('Errore di connessione.');btn.textContent='Abbonati ora — Pagamento sicuro →';btn.disabled=false;}
+}
+
+
+function salvaTriage(){
+  const nome=document.getElementById('tr-nome').value.trim();
+  const dob=document.getElementById('tr-dob').value;
+  const cf=document.getElementById('tr-cf').value.trim().toUpperCase();
+  const sesso=document.getElementById('tr-sesso').value;
+  const peso=document.getElementById('tr-peso').value;
+  const altezza=document.getElementById('tr-altezza').value;
+  const allergie=document.getElementById('tr-allergie').value.trim();
+  const farmaci=document.getElementById('tr-farmaci').value.trim();
+  const patologie=document.getElementById('tr-patologie').value.trim();
+  const consenso=document.getElementById('tr-consenso').checked;
+  const err=document.getElementById('tr-err');
+
+  if(!nome||!dob||!cf||!sesso||!peso||!altezza||!allergie||!farmaci||!patologie){
+    err.textContent='Compila tutti i campi obbligatori (*)';err.style.display='block';return;
+  }
+  if(cf.length!==16){err.textContent='Codice fiscale non valido (16 caratteri)';err.style.display='block';return;}
+  if(!consenso){err.textContent='Devi accettare il consenso informato';err.style.display='block';return;}
+  err.style.display='none';
+
+  const triage={nome,dob,cf,sesso,peso,altezza,allergie,farmaci,patologie,completato:true,data:new Date().toISOString()};
+  localStorage.setItem('triage',JSON.stringify(triage));
+  
+  // Pre-compila form richiesta
+  const n=document.getElementById('patient-name');
+  const e=document.getElementById('patient-email');
+  const pcf=document.getElementById('patient-cf');
+  const pdob=document.getElementById('patient-dob');
+  if(n)n.value=nome;
+  if(e&&pazCorrente)e.value=pazCorrente.email||'';
+  if(pcf)pcf.value=cf;
+  if(pdob)pdob.value=dob;
+  
+  showScreen('s-richiesta');
+}
+
+function checkTriage(){
+  const t=localStorage.getItem('triage');
+  if(!t) return false;
+  try{ return JSON.parse(t).completato===true; }catch(e){ return false; }
+}
+
+function vaiARichiesta(){
+  if(!checkTriage()){
+    // Carica dati triage se paziente loggato
+    if(pazCorrente){
+      const n=document.getElementById('tr-nome');
+      const e=document.getElementById('tr-cf');
+      if(n&&!n.value)n.value=pazCorrente.nome||'';
+    }
+    showScreen('s-triage');
+  } else {
+    // Triage già fatto, pre-compila e vai
+    const t=JSON.parse(localStorage.getItem('triage'));
+    const n=document.getElementById('patient-name');
+    const pcf=document.getElementById('patient-cf');
+    const pdob=document.getElementById('patient-dob');
+    if(n)n.value=t.nome||'';
+    if(pcf)pcf.value=t.cf||'';
+    if(pdob)pdob.value=t.dob||'';
+    if(pazCorrente){const e=document.getElementById('patient-email');if(e)e.value=pazCorrente.email||'';}
+    showScreen('s-richiesta');
+  }
 }
 
 </script>
