@@ -1026,8 +1026,8 @@ async function caricaStorico(){
   if(!pazCorrente){cont.innerHTML='<div style="text-align:center;color:var(--txt-l);padding:20px">Accedi per vedere lo storico</div>';return;}
   cont.innerHTML='<div class="loader-box">Caricamento...</div>';
   try{
-    const url='/api/submit-medical-request?email='+encodeURIComponent(pazCorrente.email)+'&token='+DOC_PWD;
-    const r=await fetch(url,{headers:{'Authorization':'Bearer '+DOC_PWD}});
+    const url='/api/submit-medical-request?email='+encodeURIComponent(pazCorrente.email)+'&token='+DOC_PWD+'&paztoken='+encodeURIComponent(pazCorrente.token||'');
+    const r=await fetch(url,{headers:{'Authorization':'Bearer '+DOC_PWD,'X-Paz-Token':pazCorrente.token||''}});
     const raw=await r.text();
     let d;
     try{d=JSON.parse(raw);}catch(pe){
