@@ -411,13 +411,16 @@ textarea{min-height:120px;resize:none}
 
 <!-- RICHIESTA -->
 <div id="s-richiesta" class="screen">
-  <div style="background:linear-gradient(135deg,#0c1957,#1e40af);padding:28px 20px 24px;text-align:center">
-    <button class="btn-back" onclick="showScreen('s-home')" style="background:none;border:none;color:rgba(255,255,255,.7);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;position:absolute;left:20px;top:20px;text-transform:uppercase;letter-spacing:.5px">HOME</button>
+  <div style="background:linear-gradient(135deg,#0c1957,#1e40af);padding:28px 20px 24px;text-align:center;position:relative">
+    <button class="btn-back" onclick="showScreen('s-home')" style="background:#fff;border:none;color:#1e3a8a;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:900;cursor:pointer;position:absolute;left:16px;top:16px;text-transform:uppercase;letter-spacing:.5px;padding:8px 16px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.15)">← Torna alla Home</button>
     <div style="font-size:3.5rem;margin-bottom:10px">🩺</div>
     <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:800;color:#fff;letter-spacing:-.5px">Medico <span style="color:#facc15">Subito</span></div>
-    <div style="font-size:22px;color:#fff;margin-top:10px;font-weight:900;letter-spacing:.3px;text-shadow:0 0 20px rgba(255,255,255,.6)">Nuova richiesta medica</div>
   </div>
   <div style="padding:16px 16px 0">
+    <div style="background:linear-gradient(135deg,#1e40af,#2563eb);border-radius:16px;padding:18px 20px;margin-bottom:16px;text-align:center;box-shadow:0 4px 20px rgba(29,78,216,.2)">
+      <div style="font-size:24px;font-weight:900;color:#fff;letter-spacing:.3px;text-shadow:0 0 20px rgba(255,255,255,.4)">📋 Nuova richiesta medica</div>
+      <div style="font-size:14px;color:rgba(255,255,255,.85);margin-top:6px;font-weight:600">Compila il modulo qui sotto e ricevi risposta firmata</div>
+    </div>
     <div class="card" id="main-form">
       
       <div class="emerg">
