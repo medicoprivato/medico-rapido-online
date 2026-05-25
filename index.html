@@ -592,10 +592,18 @@ textarea{min-height:120px;resize:none}
 
 <!-- MEDICI -->
 <div id="s-medici" class="screen">
-  <div style="padding:20px;text-align:center">
-    <p style="color:var(--txt-s);font-size:14px;margin-bottom:16px">Informazioni sul soggetto erogante disponibili nei Termini e Condizioni.</p>
-    <button onclick="showScreen(\'s-termini\')" style="background:var(--blu);color:#fff;border:none;padding:12px 20px;border-radius:8px;font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:700;cursor:pointer">Vai ai Termini →</button>
+  <div class="hdr"><button class="btn-back" onclick="showScreen(prevScr||'s-home')">← Torna</button><div class="logo-txt" style="margin-left:8px">Il servizio</div></div>
+  <div style="padding:20px;text-align:center;padding-bottom:90px">
+    <p style="color:var(--txt-s);font-size:14px;margin-bottom:16px">Informazioni sul professionista sanitario disponibili nei Termini e Condizioni.</p>
+    <button onclick="showScreen('s-termini')" style="background:var(--blu);color:#fff;border:none;padding:12px 20px;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;cursor:pointer">Vai ai Termini →</button>
   </div>
+  <div class="bnav">
+    <div class="nav-it" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
+    <div class="nav-it" onclick="showScreen('s-richiesta')"><span style="font-size:16px;line-height:1">🩺</span>Richiesta</div>
+    <div class="nav-it" onclick="showScreen('s-info')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-linecap="round"/><path d="M12 16v-4M12 8h.01" stroke-linecap="round"/></svg>Info</div>
+    <div class="nav-it" onclick="showScreen('s-contatti')"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Contatti</div>
+  </div>
+</div>
 
 <!-- FAQ -->
 <div id="s-faq" class="screen">
