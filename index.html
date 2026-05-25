@@ -851,13 +851,46 @@ const THIRTY_DAYS=30*24*60*60*1000;
 
 let pazCorrente=null,conversazione=[],tipoRichiesta='',allCases=[],currentCaseId=null,uploadedFiles=[],prevScr='s-home',consensoOk=false,archivioOk=false;
 
-if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('/sw.js').then(reg=>{
+      reg.update(); // Forza controllo aggiornamenti
+    }).catch(()=>{});
+    // Ascolta messaggi dal service worker
+    navigator.serviceWorker.addEventListener('controllerchange',()=>{
+      if(!window._swRefreshing){ window._swRefreshing=true; }
+    });
+  });
+}
 
 function togglePwd(id,btn){const i=document.getElementById(id);if(i.type==='password'){i.type='text';btn.textContent='🙈';}else{i.type='password';btn.textContent='👁';}}
 
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});window.location.hash=id;}
 
 window.addEventListener('load',function(){
+  // Gestisci reset password da Supabase (link nell'email)
+  const fullHash = window.location.hash;
+  if(fullHash.includes('access_token') && fullHash.includes('type=recovery')){
+    const params = new URLSearchParams(fullHash.replace('#',''));
+    const recToken = params.get('access_token');
+    if(recToken){
+      window.location.hash = '';
+      setTimeout(()=>{
+        const nuovaPwd = prompt('Inserisci la tua nuova password (minimo 8 caratteri):');
+        if(!nuovaPwd || nuovaPwd.length < 8){ alert('Password troppo corta.'); return; }
+        fetch(SUPA_URL+'/auth/v1/user',{
+          method:'PUT',
+          headers:{'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+recToken},
+          body:JSON.stringify({password:nuovaPwd})
+        }).then(r=>r.json()).then(d=>{
+          if(d.id || d.email){ alert('✅ Password aggiornata! Ora puoi accedere.'); showScreen('s-paz-login'); }
+          else { alert('❌ Errore: '+JSON.stringify(d)); }
+        }).catch(e=>alert('Errore: '+e.message));
+      }, 500);
+      return;
+    }
+  }
+
   // Ripristina schermata da hash URL
   const hash=window.location.hash.replace('#','');
   const schermate=['s-home','s-richiesta','s-payment','s-contatti','s-paz-login','s-faq','s-privacy','s-termini','s-info'];
@@ -896,7 +929,7 @@ async function resetPwd(){
   if(!email){alert('Inserisci prima la tua email nel campo sopra.');return;}
   try{
     const r=await fetch(SUPA_URL+'/auth/v1/recover',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPA_KEY},body:JSON.stringify({email,redirect_to:'https://www.medicoora.com'})});
-    if(r.ok) alert('Email di recupero inviata a '+email+'. Controlla INBOX e SPAM. Clicca il link nell\'email per reimpostare la password.');
+    if(r.ok) alert('✅ Email inviata a '+email+'\n\nCONTROLLA INBOX E SPAM.\n\nClicca il link nell\'email — si aprirà medicoora.com dove potrai inserire la nuova password.');
     else alert('Errore. Verifica che l\'email sia corretta.');
   }catch(e){alert('Errore di connessione.');}
 }
@@ -934,8 +967,9 @@ async function registraPaz(){
   const btn=document.querySelector('#paz-form-reg .btn-p');btn.textContent='Registrazione...';btn.disabled=true;
   err.style.display='none';
   try{
-    const r=await fetch(SUPA_URL+'/auth/v1/signup',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPA_KEY},body:JSON.stringify({email,password:pwd,data:{nome,codice_fiscale:cf}})});
+    const r=await fetch(SUPA_URL+'/auth/v1/signup',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPA_KEY},body:JSON.stringify({email,password:pwd,options:{emailRedirectTo:'https://www.medicoora.com'},data:{nome,codice_fiscale:cf}})});
     const d=await r.json();
+    if(d.msg&&d.msg.includes('already registered')){err.textContent='Email già registrata. Usa il login.';err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;setTimeout(()=>showPazLogin(),1500);return;}
     if(!r.ok||d.error){
       const msg=d.error_description||d.msg||d.message||(d.error&&typeof d.error==='string'?d.error:JSON.stringify(d.error))||'Errore registrazione';
       err.textContent='❌ '+msg;err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;return;
@@ -956,11 +990,24 @@ async function registraPaz(){
         alert('✅ Account creato! Benvenuto/a '+nome+'!');
         entraPaziente();
       } else {
-        alert('Account creato! Ora accedi con email e password. Se non riesci, controlla la tua email per la conferma.');
-        showPazLogin();
+        // Prova auto-login immediato
+      const loginR = await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
+        body:JSON.stringify({email,password:pwd})
+      });
+      const loginD = await loginR.json();
+      if(loginD.access_token){
+        pazCorrente={email:loginD.user.email,nome,token:loginD.access_token,id:loginD.user.id,loginTime:Date.now()};
+        localStorage.setItem('paziente',JSON.stringify(pazCorrente));
+        btn.textContent='Registrati →';btn.disabled=false;
+        entraPaziente();return;
       }
+      alert('Account creato! Controlla la tua email per confermare, poi accedi.');
+      showPazLogin();
+    }
     }catch(ex){
-      alert('Account creato! Ora accedi con email e password.');
+      alert('Account creato! Controlla email e poi accedi.');
       showPazLogin();
     }
   }catch(e){err.textContent='❌ Errore rete: '+e.message;err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;}
