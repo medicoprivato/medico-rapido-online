@@ -876,6 +876,7 @@ textarea{min-height:120px;resize:none}
     </div>
     <div class="compl-block"><div class="blk-lbl">Descrizione del paziente</div><div id="dc-complaint">—</div></div>
     <div id="dc-att-block" style="display:none;margin-bottom:10px"><div class="compl-block"><div class="blk-lbl">Allegati</div><div id="dc-att"></div></div></div>
+    <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:12px;color:#92400e">⚠️ <strong>Verifica competenza:</strong> Sei specialista in Ginecologia e Ostetricia. Controlla che la richiesta rientri nel tuo ambito prima di firmare.</div>
     <div class="ai-block"><div class="blk-lbl">📋 Analisi clinica AI — riservata al medico</div><div id="dc-ai" class="ai-load">Preparazione analisi clinica...</div></div>
     <div class="card" style="margin-bottom:10px"><div class="blk-lbl" style="color:var(--txt-s)">Risposta medica — modifica se necessario</div><textarea class="reply-area" id="dc-reply" placeholder="La bozza AI apparirà automaticamente. Modifica prima di firmare."></textarea></div>
     <button class="sign-btn" id="sign-btn" onclick="inviaRisposta()" disabled>⏳ Preparazione bozza...</button>
@@ -1360,12 +1361,21 @@ async function generaAI(caso){
     } else {
       templateDocumento='Genera una RISPOSTA MEDICA SCRITTA ufficiale in italiano. Deve includere: intestazione con dati medico, dati paziente, valutazione clinica del caso, indicazioni terapeutiche o diagnostiche, raccomandazioni, follow-up consigliato, avvertenza che non sostituisce visita in presenza, spazio firma. Formato: testo ufficiale medico italiano, senza markdown.';
     }
-    const prompt='Sei un medico italiano. '+templateDocumento+' DATI: Data e ora: '+dataOra+'. Medico: Dott.ssa Anna Maria Ferri, Medico Chirurgo Specialista in Ginecologia e Ostetricia, Ordine Medici Frosinone n.3363, P.IVA IT17215181003. Paziente: '+(caso.patient_name||'')+', nato/a il '+(caso.date_of_birth||'n.d.')+', CF: '+(caso.codice_fiscale||'n.d.')+'. Richiesta del paziente: '+(caso.patient_text||'')+'. Dati clinici anamnestici: '+(caso.clinical_data||'non forniti')+'. Genera il documento COMPLETO e PRONTO per la firma del medico. Solo testo, niente markdown.';
+    const prompt='Sei un medico italiano specialista in Ginecologia e Ostetricia. '+templateDocumento+' IMPORTANTE: Separa la risposta in due sezioni ben distinte con questa struttura ESATTA:\n\n---ANALISI MEDICA (RISERVATA AL MEDICO)---\n[Scrivi qui in 3-4 frasi: valutazione clinica del caso, appropriatezza della richiesta, eventuali note per il medico. NON usare saluti. Stile clinico professionale. Aggiungi avviso se la richiesta potrebbe esulare dalla specializzazione in Ginecologia e Ostetricia.]\n\n---DOCUMENTO PER IL PAZIENTE---\n[Scrivi qui il documento legale completo pronto per la firma]\n\nDATA DOCUMENTO: '+dataOra+'. MEDICO: Dott.ssa Anna Maria Ferri, Medico Chirurgo Specialista in Ginecologia e Ostetricia, Ordine Medici Frosinone n.3363, P.IVA IT17215181003. PAZIENTE: '+(caso.patient_name||'')+', nato/a il '+(caso.date_of_birth||'n.d.')+', CF: '+(caso.codice_fiscale||'n.d.')+'. RICHIESTA: '+(caso.patient_text||'')+'. DATI CLINICI: '+(caso.clinical_data||'non forniti')+'. Solo testo, niente markdown.';
     const r=await fetch('/api/consult',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:prompt})});
     const d=await r.json();const testo=stripMd(d.answer||'Analisi non disponibile.');
-    document.getElementById('dc-ai').textContent=testo;
+    // Separa le due sezioni
+    const separatore='---DOCUMENTO PER IL PAZIENTE---';
+    const sepAnalisi='---ANALISI MEDICA (RISERVATA AL MEDICO)---';
+    let analisi=testo, documento=testo;
+    if(testo.includes(separatore)){
+      const parti=testo.split(separatore);
+      analisi=parti[0].replace(sepAnalisi,'').trim();
+      documento=parti[1]?parti[1].trim():testo;
+    }
+    document.getElementById('dc-ai').textContent=analisi;
     document.getElementById('dc-ai').className='ai-txt';
-    document.getElementById('dc-reply').value=testo;
+    document.getElementById('dc-reply').value=documento;
     btn.disabled=false;btn.textContent='✍️ Firma e Invia al paziente';
   }catch(e){
     document.getElementById('dc-ai').textContent='Analisi AI non disponibile. Scrivi la risposta manualmente.';
