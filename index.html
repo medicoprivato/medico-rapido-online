@@ -294,10 +294,11 @@ textarea{min-height:120px;resize:none}
         <strong>Consenso informato (L. 219/2017)</strong><br>
         Dichiaro che le informazioni fornite sono veritiere e presto consenso al trattamento dei miei dati sanitari per l'erogazione della prestazione di telemedicina, ai sensi dell'art. 9 GDPR.
       </div>
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-        <input type="checkbox" id="tr-consenso" style="width:20px;height:20px;flex-shrink:0;margin:0"/>
-        <label for="tr-consenso" style="font-size:14px;font-weight:700;color:var(--txt)">Accetto e confermo la veridicità dei dati</label>
+      <div id="tr-consenso-btn" onclick="toggleConsenso()" style="cursor:pointer;background:#f1f5f9;border:2px solid var(--brd);border-radius:12px;padding:14px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px;transition:all .2s">
+        <div id="tr-check-box" style="width:28px;height:28px;border-radius:6px;border:2px solid var(--brd);background:#fff;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;transition:all .2s"></div>
+        <div style="font-size:14px;font-weight:700;color:var(--txt)">Accetto e confermo la veridicità dei dati</div>
       </div>
+      <input type="checkbox" id="tr-consenso" style="display:none"/>
       <div id="tr-err" style="color:var(--err);font-size:13px;margin-bottom:10px;display:none"></div>
       <button onclick="salvaTriage()" style="width:100%;background:linear-gradient(135deg,#facc15,#f59e0b);color:#0f172a;border:none;border-radius:12px;height:54px;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:900;cursor:pointer;box-shadow:0 4px 20px rgba(250,204,21,.4)">
         Salva e procedi alla richiesta →
@@ -1434,6 +1435,27 @@ async function startStripePaywall(){
   }catch(e){alert('Errore di connessione.');btn.textContent='Abbonati ora — Pagamento sicuro →';btn.disabled=false;}
 }
 
+
+function toggleConsenso(){
+  const cb = document.getElementById('tr-consenso');
+  const btn = document.getElementById('tr-consenso-btn');
+  const box = document.getElementById('tr-check-box');
+  cb.checked = !cb.checked;
+  if(cb.checked){
+    btn.style.background='#eff6ff';
+    btn.style.borderColor='var(--blu)';
+    box.style.background='var(--blu)';
+    box.style.borderColor='var(--blu)';
+    box.textContent='✓';
+    box.style.color='#fff';
+  } else {
+    btn.style.background='#f1f5f9';
+    btn.style.borderColor='var(--brd)';
+    box.style.background='#fff';
+    box.style.borderColor='var(--brd)';
+    box.textContent='';
+  }
+}
 
 function salvaTriage(){
   const nome=document.getElementById('tr-nome').value.trim();
