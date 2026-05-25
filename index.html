@@ -865,7 +865,21 @@ if('serviceWorker' in navigator){
 
 function togglePwd(id,btn){const i=document.getElementById(id);if(i.type==='password'){i.type='text';btn.textContent='🙈';}else{i.type='password';btn.textContent='👁';}}
 
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});window.location.hash=id;}
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  window.location.hash=id;
+  // Pre-compila form richiesta se paziente loggato
+  if(id==='s-richiesta' && pazCorrente){
+    const n=document.getElementById('patient-name');
+    const e=document.getElementById('patient-email');
+    const cf=document.getElementById('patient-cf');
+    if(n && !n.value) n.value=pazCorrente.nome||'';
+    if(e && !e.value) e.value=pazCorrente.email||'';
+    if(cf && !cf.value && pazCorrente.cf) cf.value=pazCorrente.cf||'';
+  }
+}
 
 window.addEventListener('load',function(){
   // Gestisci reset password da Supabase (link nell'email)
@@ -953,7 +967,7 @@ async function loginPaz(){
       err.textContent='❌ '+msg;
       err.style.display='block';btn.textContent='Accedi →';btn.disabled=false;return;
     }
-    pazCorrente={email:d.user.email,nome:d.user?.user_metadata?.nome||email,token:d.access_token,id:d.user.id,loginTime:Date.now()};
+    pazCorrente={email:d.user.email,nome:d.user?.user_metadata?.nome||email,cf:d.user?.user_metadata?.codice_fiscale||d.user?.user_metadata?.cf||'',token:d.access_token,id:d.user.id,loginTime:Date.now()};
     localStorage.setItem('paziente',JSON.stringify(pazCorrente));
     btn.textContent='Accedi →';btn.disabled=false;
     entraPaziente();
@@ -1017,6 +1031,13 @@ function entraPaziente(){
   if(!pazCorrente)return;
   document.getElementById('paz-nome-disp').textContent=pazCorrente.nome||pazCorrente.email;
   document.getElementById('paz-email-disp').textContent=pazCorrente.email;
+  // Pre-compila form richiesta
+  const n=document.getElementById('patient-name');
+  const e=document.getElementById('patient-email');
+  const cf=document.getElementById('patient-cf');
+  if(n) n.value=pazCorrente.nome||'';
+  if(e) e.value=pazCorrente.email||'';
+  if(cf && pazCorrente.cf) cf.value=pazCorrente.cf||'';
   showScreen('s-paz-area');
   caricaStorico();
 }
