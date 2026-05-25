@@ -1,5 +1,7 @@
 {
   "version": 2,
+  "buildCommand": null,
+  "outputDirectory": ".",
   "routes": [
     {
       "src": "/api/(.*)",
@@ -7,6 +9,9 @@
     },
     {
       "src": "/manifest.json",
+      "headers": {
+        "Content-Type": "application/manifest+json"
+      },
       "dest": "/manifest.json"
     },
     {
@@ -14,12 +19,8 @@
       "dest": "/sw.js"
     },
     {
-      "src": "/icon-192.png",
-      "dest": "/icon-192.png"
-    },
-    {
-      "src": "/icon-512.png",
-      "dest": "/icon-512.png"
+      "src": "/(.*\\.(png|ico|jpg|svg))",
+      "dest": "/$1"
     },
     {
       "src": "/(.*)",
