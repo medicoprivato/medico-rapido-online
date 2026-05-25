@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   }
 
   const secretKey = process.env.STRIPE_SECRET_KEY;
-  const priceId = process.env.STRIPE_PRICE_ID;
+  const priceId = process.env.STRIPE_PRICE_ID || 'price_1Tb465L97xjKYys51Ri4Cu6B';
 
   if (!secretKey) {
     return res.status(500).json({ error: "Stripe non configurato" });
