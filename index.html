@@ -559,7 +559,6 @@ textarea{min-height:120px;resize:none}
       <div style="display:flex;flex-direction:column;gap:14px;margin-top:8px">
         <a onclick="prevScr='s-info';showScreen('s-privacy')" style="color:var(--blu);font-size:16px;font-weight:700;text-decoration:none;display:block;padding:12px;background:var(--bg);border-radius:8px;border:1px solid var(--brd)">🔒 Informativa Privacy (GDPR) →</a>
         <a onclick="prevScr='s-info';showScreen('s-termini')" style="color:var(--blu);font-size:16px;font-weight:700;text-decoration:none;display:block;padding:12px;background:var(--bg);border-radius:8px;border:1px solid var(--brd)">📄 Termini e Condizioni →</a>
-        <a onclick="prevScr='s-info';showScreen('s-medici')" style="color:var(--blu);font-size:16px;font-weight:700;text-decoration:none;display:block;padding:12px;background:var(--bg);border-radius:8px;border:1px solid var(--brd)">👨‍⚕️ I nostri medici →</a>
       </div>
     </div>
   </div>
@@ -593,17 +592,10 @@ textarea{min-height:120px;resize:none}
 
 <!-- MEDICI -->
 <div id="s-medici" class="screen">
-  <div class="hdr"><button class="btn-back" onclick="showScreen(prevScr||'s-home')">← Torna</button><div class="logo-txt" style="margin-left:8px">Team medico</div></div>
-  <div style="padding:16px 16px 90px">
-    <div class="medico-card">
-      <div style="font-size:10px;opacity:.6;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Medico responsabile</div>
-      <div style="font-family:'Playfair Display',serif;font-size:21px;margin-bottom:4px">Dott.ssa Anna Maria Ferri</div>
-      <div style="font-size:13px;opacity:.75;margin-bottom:14px;line-height:1.5">Medico Chirurgo · Specialista in Ginecologia e Ostetricia<br>Master in Management delle Strutture Sanitarie</div>
-      <div><span class="chip">🏥 Ordine Medici Frosinone · N. 3363</span><span class="chip">🇮🇹 Abilitata in Italia</span><span class="chip">🔏 RC Professionale</span></div>
-    </div>
-    <div class="info-card"><p>I medici che operano su Medico Subito sono professionisti iscritti all'Ordine dei Medici Chirurghi e Odontoiatri, abilitati alla professione medica in Italia. Ogni risposta medica è firmata dal professionista responsabile, che si assume piena responsabilità clinica e deontologica.</p></div>
+  <div style="padding:20px;text-align:center">
+    <p style="color:var(--txt-s);font-size:14px;margin-bottom:16px">Informazioni sul soggetto erogante disponibili nei Termini e Condizioni.</p>
+    <button onclick="showScreen(\'s-termini\')" style="background:var(--blu);color:#fff;border:none;padding:12px 20px;border-radius:8px;font-family:\'Plus Jakarta Sans\',sans-serif;font-weight:700;cursor:pointer">Vai ai Termini →</button>
   </div>
-</div>
 
 <!-- FAQ -->
 <div id="s-faq" class="screen">
@@ -660,7 +652,9 @@ textarea{min-height:120px;resize:none}
     <p>Il servizio è riservato esclusivamente a pazienti residenti o domiciliati in <strong>Italia</strong>. La telemedicina transfrontaliera è soggetta a normativa specifica (Dir. UE 2011/24/UE) e non è al momento erogata.</p>
     <h3>10. Reclami e controversie</h3>
     <p>Per reclami scrivi a info@medicoora.com. Risposta garantita entro 14 giorni. Per controversie non risolte puoi accedere alla piattaforma europea ODR: <strong>ec.europa.eu/consumers/odr</strong> (Reg. UE 524/2013). Foro competente: quello del consumatore.</p>
-    <h3>11. Soggetto erogante</h3>
+    <h3>11. Professionisti sanitari</h3>
+    <p>I medici che operano su Medico Subito sono professionisti iscritti all'Ordine dei Medici Chirurghi e Odontoiatri, abilitati alla professione medica in Italia. Ogni risposta è firmata dal professionista responsabile, che si assume piena responsabilità clinica e deontologica.</p>
+    <h3>12. Soggetto erogante</h3>
     <p><strong>Dott.ssa Anna Maria Ferri</strong> — Medico Chirurgo specialista in Ginecologia e Ostetricia. P.IVA: IT17215181003. Iscrizione Ordine dei Medici di Frosinone n. 3363. Indirizzo professionale: Via Gaetano Marzotto 16 Int. 3, 00133 Roma (RM). Email: info@medicoora.com. Titolare del trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR).</p>
   </div>
 </div>
