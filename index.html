@@ -766,9 +766,17 @@ if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.se
 
 function togglePwd(id,btn){const i=document.getElementById(id);if(i.type==='password'){i.type='text';btn.textContent='🙈';}else{i.type='password';btn.textContent='👁';}}
 
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});window.location.hash=id;}
 
 window.addEventListener('load',function(){
+  // Ripristina schermata da hash URL
+  const hash=window.location.hash.replace('#','');
+  const schermate=['s-home','s-richiesta','s-payment','s-contatti','s-paz-login','s-faq','s-privacy','s-termini','s-info'];
+  if(hash && schermate.includes(hash)){
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    const el=document.getElementById(hash);
+    if(el) el.classList.add('active');
+  }
   try{
     const raw=localStorage.getItem('paziente');
     if(raw){
