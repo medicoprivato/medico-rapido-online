@@ -115,9 +115,28 @@ function emailPaziente(patientName, tipo, risposta) {
     </div>
     <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#1e3a8a;margin-bottom:8px">Documento medico privato</div>
     <div class="document-body">${rispostaFormatted}</div>
-    <div class="firma-box">
-      <div class="firma-item"><div class="firma-line"></div><div class="firma-label">Firma del medico</div></div>
-      <div class="firma-item"><div class="firma-line"></div><div class="firma-label">Timbro</div></div>
+    <div style="margin-top:28px;border-top:2px solid #1e3a8a;padding-top:20px">
+      <div style="display:flex;gap:24px;align-items:flex-start">
+        <div style="flex:1;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#64748b;margin-bottom:10px">Firma digitale del medico prescrittore</div>
+          <div style="font-family:'Times New Roman',serif;font-size:20px;color:#1e3a8a;font-style:italic;margin-bottom:8px;border-bottom:1px solid #cbd5e1;padding-bottom:8px">Dott.ssa Anna Maria Ferri</div>
+          <div style="font-size:12px;color:#475569;line-height:1.7">
+            <strong>Medico Chirurgo</strong><br>
+            Specialista in Ginecologia e Ostetricia<br>
+            Ordine dei Medici di Frosinone · N. 3363<br>
+            P.IVA: IT17215181003
+          </div>
+        </div>
+        <div style="width:180px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px;text-align:center;flex-shrink:0">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#64748b;margin-bottom:10px">Data e ora di emissione</div>
+          <div style="font-size:16px;font-weight:800;color:#1e3a8a;margin-bottom:4px">${oggi}</div>
+          <div style="font-size:14px;color:#475569;font-weight:600">ore ${ora}</div>
+          <div style="margin-top:10px;font-size:10px;color:#94a3b8;line-height:1.5">Documento emesso tramite piattaforma di telemedicina certificata</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;padding:10px 12px;font-size:11px;color:#1e40af;text-align:center">
+        🔏 Documento firmato digitalmente da Dott.ssa Anna Maria Ferri · ${oggi} ore ${ora} · medicoora.com
+      </div>
     </div>
     <div class="disclaimer">⚠️ Documento emesso tramite telemedicina ai sensi delle Linee Guida Min. Salute 2022 e FNOMCeO. Prestazione medica privata — non sostituisce la visita in presenza. In emergenza chiamare il 118 o recarsi al Pronto Soccorso.</div>
   </div>
