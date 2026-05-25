@@ -656,10 +656,18 @@ textarea{min-height:120px;resize:none}
 
 <!-- MEDICI -->
 <div id="s-medici" class="screen">
-  <div class="hdr"><button class="btn-back" onclick="showScreen(prevScr||'s-home')">← Torna</button><div class="logo-txt" style="margin-left:8px">Il servizio</div></div>
-  <div style="padding:20px;text-align:center;padding-bottom:90px">
-    <p style="color:var(--txt-s);font-size:14px;margin-bottom:16px">Informazioni sui professionisti sanitari disponibili nei Termini e Condizioni.</p>
-    <button onclick="showScreen('s-termini')" style="background:var(--blu);color:#fff;border:none;padding:12px 20px;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;cursor:pointer">Vai ai Termini →</button>
+  <div style="background:linear-gradient(135deg,#0c1957,#1e40af);padding:36px 20px 30px;text-align:center">
+    <div style="font-size:4rem;margin-bottom:14px">🩺</div>
+    <div style="font-family:'Playfair Display',serif;font-size:30px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:8px">I nostri <span style="color:#facc15">medici</span></div>
+    <div style="font-size:16px;color:rgba(255,255,255,.85);font-weight:600;line-height:1.6">Professionisti iscritti all'Ordine dei Medici Chirurghi.<br>Ogni risposta è firmata dal medico responsabile.</div>
+  </div>
+  <div style="padding:24px 20px;padding-bottom:90px;text-align:center">
+    <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:16px;padding:24px;margin-bottom:20px">
+      <div style="font-size:18px;font-weight:700;color:#1e3a8a;margin-bottom:8px">Trasparenza e legalità</div>
+      <div style="font-size:16px;color:var(--txt-s);line-height:1.7">Le informazioni complete sui professionisti sanitari che erogano il servizio sono disponibili nei Termini e Condizioni, nel rispetto del D.Lgs. 70/2003 e del GDPR.</div>
+    </div>
+    <button onclick="showScreen('s-termini')" style="background:linear-gradient(135deg,#1e40af,#2563eb);color:#fff;border:none;padding:16px 32px;border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:16px;cursor:pointer;box-shadow:0 4px 16px rgba(29,78,216,.3);width:100%">Leggi i Termini e Condizioni →</button>
+    <button onclick="showScreen(prevScr||'s-home')" style="background:none;border:none;color:var(--blu);font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;margin-top:14px;text-decoration:underline">← Torna indietro</button>
   </div>
   <div class="bnav">
     <div class="nav-it" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
