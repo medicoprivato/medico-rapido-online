@@ -1,0 +1,1 @@
+{"rewrites":[{"source":"/((?!api/).*\.(?!js|json|png|ico|svg|css|txt).*)","destination":"/index.html"},{"source":"/","destination":"/index.html"}]}
