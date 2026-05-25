@@ -628,11 +628,14 @@ textarea{min-height:120px;resize:none}
 
 <!-- CONTATTI -->
 <div id="s-contatti" class="screen">
-  <div class="hdr"><div class="logo-box"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 100 10A5 5 0 0012 2zM4 20c0-4 3.6-7 8-7s8 3 8 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="logo-txt" style="margin-left:8px">Contatti</div></div>
+  <div class="hdr" style="justify-content:space-between">
+    <div class="logo-txt">Contatti</div>
+    <button onclick="vaiARichiesta()" style="background:#1e3a8a;border:none;color:#facc15;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:900;cursor:pointer;padding:8px 12px;border-radius:8px;text-transform:uppercase;letter-spacing:.3px">Torna alla richiesta medica</button>
+  </div>
   <div style="padding:16px 16px 0;padding-bottom:90px">
-    <div class="sez-lbl" style="margin-bottom:6px">Assistenza</div>
-    <div class="sez-title serif">Siamo qui per te</div>
-    <div class="info-card" style="cursor:pointer" onclick="window.location.href='mailto:info@medicoora.com'"><h3>✉️ Email</h3><p>info@medicoora.com<br><span style="font-size:12px;color:var(--txt-l)">Rispondiamo entro poche ore, 7 giorni su 7</span></p></div>
+    <div class="sez-lbl" style="margin-bottom:6px">Siamo qui per te</div>
+    <div class="sez-title serif">Il tuo medico online,<br>sempre disponibile.</div>
+    <div class="info-card" style="cursor:pointer" onclick="window.location.href='mailto:contatti@medicoora.com'"><h3>✉️ Email</h3><p>contatti@medicoora.com<br><span style="font-size:12px;color:var(--txt-l)">Rispondiamo entro poche ore, 7 giorni su 7</span></p></div>
     <div class="info-card"><h3>🕐 Disponibilità</h3><p>Servizio attivo <strong>24 ore su 24, 7 giorni su 7</strong>, inclusi sabato, domenica e festivi.</p></div>
     <div class="info-card"><h3>🔒 Sicurezza</h3><p>Dati protetti con crittografia GDPR e Linee Guida Telemedicina 2022.</p></div>
     <div class="info-card"><h3>👨‍⚕️ Team medico</h3><p>Medici qualificati iscritti all'Ordine dei Medici Chirurghi.<br><a onclick="prevScr='s-contatti';showScreen('s-medici')" style="color:var(--blu)">→ Scopri i nostri medici</a></p></div>
