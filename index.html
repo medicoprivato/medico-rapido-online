@@ -847,24 +847,20 @@ textarea{min-height:120px;resize:none}
   <div style="max-width:380px;margin:40px auto;padding:0 16px">
     <div class="card">
       <div style="text-align:center;margin-bottom:20px">
-        <div style="width:56px;height:56px;background:var(--blu-lt);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--blu)" stroke-width="1.8" stroke-linecap="round"><path d="M12 2a5 5 0 100 10A5 5 0 0012 2zM4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <div style="font-family:'Playfair Display',serif;font-size:20px;margin-bottom:3px">Area Medico</div>
-        <div style="font-size:13px;color:var(--txt-s)">Accesso riservato al personale medico</div>
+        <div style="font-size:3rem;margin-bottom:10px">🩺</div>
+        <div style="font-size:18px;font-weight:800;color:var(--txt)">Area Medico</div>
+        <div style="font-size:13px;color:var(--txt-s);margin-top:4px">Accesso riservato al medico</div>
       </div>
+      <input id="doc-email" type="email" placeholder="Email medico *" autocomplete="email"/>
       <div class="pwd-w">
-        <input type="password" id="doc-pwd" placeholder="Password medico" onkeydown="if(event.key==='Enter')loginMedico()"/>
-        <button class="pwd-eye" type="button" onclick="togglePwd('doc-pwd',this)">👁</button>
+        <input id="doc-pwd-new" type="password" placeholder="Password *" autocomplete="current-password"/>
+        <button class="pwd-eye" type="button" onclick="togglePwd('doc-pwd-new',this)">&#128065;</button>
       </div>
-      <div id="e-pwd" style="color:var(--err);font-size:13px;margin-top:-6px;margin-bottom:10px;display:none">Password non corretta</div>
-      <button class="btn btn-p" onclick="loginMedico()">Accedi →</button>
+      <div id="e-pwd" style="color:var(--err);font-size:13px;margin:-6px 0 10px;display:none">Email o password errati</div>
+      <button class="btn btn-p" onclick="loginMedicoSupabase()">Accedi all'area medico →</button>
       <div style="text-align:center;margin-top:12px">
-        <button onclick="alert('Per recuperare la password medico contatta:\ninfo@medicoora.com')" style="background:none;border:none;color:var(--blu);font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;font-weight:600">Password dimenticata?</button>
-      </div>
-    </div>
-  </div>
-</div>
+        <button onclick="resetPwdMedico()" style="background:none;border:none;color:var(--blu);font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;font-weight:600">Password dimenticata?</button>
+      </div></div>
 
 <!-- DASHBOARD MEDICO -->
 <div id="s-doc-dash" class="screen">
@@ -922,7 +918,7 @@ const SUPA_URL='https://dxfvdqtgsgnrjahlabga.supabase.co';
 const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4ZnZkcXRnc2ducmphaGxhYmdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyNzY3OTIsImV4cCI6MjA5Mzg1Mjc5Mn0.D9OPao1QZHHsy-mpA3DUYYUwotwdTepTRO4ah8uZpiU';
 const THIRTY_DAYS=30*24*60*60*1000;
 
-let pazCorrente=null,conversazione=[],tipoRichiesta='',allCases=[],currentCaseId=null,uploadedFiles=[],prevScr='s-home',consensoOk=false,archivioOk=false;
+let pazCorrente=null,medicoToken=localStorage.getItem('medicoToken')||null,conversazione=[],tipoRichiesta='',allCases=[],currentCaseId=null,uploadedFiles=[],prevScr='s-home',consensoOk=false,archivioOk=false;
 
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{
@@ -1307,16 +1303,57 @@ async function startStripeSuc(){
   }catch(e){alert('Errore di connessione.');if(btn){btn.textContent='Attiva ora →';btn.disabled=false;}}
 }
 
-function loginMedico(){
-  const pwd=document.getElementById('doc-pwd').value;
-  if(pwd===DOC_PWD){document.getElementById('e-pwd').style.display='none';showScreen('s-doc-dash');loadCases('pending');}
-  else{document.getElementById('e-pwd').style.display='block';}
+async function loginMedicoSupabase(){
+  const email=document.getElementById('doc-email').value.trim();
+  const pwd=document.getElementById('doc-pwd-new').value;
+  const err=document.getElementById('e-pwd');
+  const btn=document.querySelector('#s-doc-login .btn-p');
+  if(!email||!pwd){err.textContent='Inserisci email e password';err.style.display='block';return;}
+  btn.textContent='Accesso in corso...';btn.disabled=true;err.style.display='none';
+  try{
+    const r=await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
+      body:JSON.stringify({email,password:pwd})
+    });
+    const d=await r.json();
+    if(!r.ok||d.error||!d.access_token){
+      err.textContent='Email o password errati';err.style.display='block';
+      btn.textContent='Accedi all\'area medico →';btn.disabled=false;return;
+    }
+    // Verifica che sia l'email del medico
+    const emailNorm=d.user?.email?.toLowerCase()||'';
+    const emailsAutorizzate=['ferriam78@gmail.com'];
+    if(!emailsAutorizzate.includes(emailNorm)){
+      err.textContent='Accesso non autorizzato per questo account';err.style.display='block';
+      btn.textContent='Accedi all\'area medico →';btn.disabled=false;return;
+    }
+    medicoToken=d.access_token;
+    localStorage.setItem('medicoToken',medicoToken);
+    localStorage.setItem('medicoEmail',emailNorm);
+    err.style.display='none';
+    btn.textContent='Accedi all\'area medico →';btn.disabled=false;
+    showScreen('s-doc-dash');loadCases('pending');
+  }catch(ex){
+    err.textContent='Errore di connessione';err.style.display='block';
+    btn.textContent='Accedi all\'area medico →';btn.disabled=false;
+  }
 }
+
+function resetPwdMedico(){
+  const email=document.getElementById('doc-email').value.trim()||'ferriam78@gmail.com';
+  fetch(SUPA_URL+'/auth/v1/recover',{method:'POST',
+    headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
+    body:JSON.stringify({email,redirect_to:'https://www.medicoora.com/#s-doc-login'})
+  }).then(()=>alert('Email di reset inviata a '+email+'. Controlla la casella.'));
+}
+
+function loginMedico(){loginMedicoSupabase();}
 
 async function loadCases(filter){
   const cont=document.getElementById('cases-container');cont.innerHTML='<div class="loader-box" style="margin:16px">Caricamento richieste...</div>';
   try{
-    const r=await fetch('/api/submit-medical-request',{headers:{'Authorization':'Bearer '+DOC_PWD}});
+    const authToken=medicoToken||DOC_PWD;const r=await fetch('/api/submit-medical-request',{headers:{'Authorization':'Bearer '+authToken}});
     allCases=await r.json();
     if(!Array.isArray(allCases))allCases=[];
     const pending=allCases.filter(c=>!c.risposta_medico);
