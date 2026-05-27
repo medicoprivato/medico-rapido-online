@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import nodemailer from "nodemailer";
+import PDFDocument from "pdfkit";
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -24,6 +25,67 @@ function setSecurityHeaders(res) {
   res.setHeader("X-XSS-Protection", "1; mode=block");
 }
 
+function generaPDF(patientName, tipo, risposta) {
+  return new Promise((resolve, reject) => {
+    const doc = new PDFDocument({ margin: 50, size: "A4" });
+    const buffers = [];
+    doc.on("data", chunk => buffers.push(chunk));
+    doc.on("end", () => resolve(Buffer.concat(buffers)));
+    doc.on("error", reject);
+
+    const oggi = new Date().toLocaleDateString("it-IT", { day: "2-digit", month: "long", year: "numeric" });
+    const ora = new Date().toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" });
+
+    // Intestazione medico
+    doc.fontSize(13).font("Helvetica-Bold").text("Dott.ssa Anna Maria Ferri");
+    doc.fontSize(10).font("Helvetica")
+       .text("Medico Chirurgo - Specialista in Ginecologia e Ostetricia")
+       .text("Ordine dei Medici di Frosinone n. 3363")
+       .text("P.IVA IT17215181003")
+       .text("Via Gaetano Marzotto 16 Int.3, 00133 Roma")
+       .text("medicoora.com");
+
+    doc.moveDown(0.5);
+    doc.moveTo(50, doc.y).lineTo(545, doc.y).strokeColor("#1e3a8a").lineWidth(1.5).stroke();
+    doc.moveDown(0.5);
+
+    // Tipo documento
+    doc.fontSize(12).font("Helvetica-Bold").fillColor("#1e3a8a")
+       .text((tipo || "DOCUMENTO MEDICO PRIVATO").toUpperCase(), { align: "center" });
+    doc.fillColor("#000000");
+    doc.moveDown(0.5);
+    doc.moveTo(50, doc.y).lineTo(545, doc.y).strokeColor("#cccccc").lineWidth(0.5).stroke();
+    doc.moveDown(0.5);
+
+    // Corpo documento
+    doc.fontSize(10).font("Helvetica").text(risposta, { lineGap: 3 });
+    doc.moveDown(1.5);
+
+    // Linea firma
+    doc.moveTo(50, doc.y).lineTo(545, doc.y).strokeColor("#1e3a8a").lineWidth(1).stroke();
+    doc.moveDown(0.5);
+
+    // Timbro e firma
+    doc.fontSize(11).font("Helvetica-Bold").text("TIMBRO E FIRMA DIGITALE DEL MEDICO");
+    doc.moveDown(0.3);
+    doc.fontSize(10).font("Helvetica")
+       .text("Dott.ssa Anna Maria Ferri")
+       .text("Medico Chirurgo - Specialista in Ginecologia e Ostetricia")
+       .text("Ordine dei Medici di Frosinone n. 3363 - P.IVA IT17215181003")
+       .text(`Data: ${oggi} ore ${ora}`)
+       .moveDown(0.3)
+       .text("Firmato digitalmente ai sensi del D.Lgs. 82/2005 (CAD)")
+       .text("e Linee Guida Telemedicina Min. Salute 2022");
+
+    doc.moveDown(1);
+    doc.fontSize(8).fillColor("#666666")
+       .text("Documento emesso tramite piattaforma di telemedicina medicoora.com", { align: "center" })
+       .text("Non sostituisce la visita medica in presenza. In emergenza chiamare il 118.", { align: "center" });
+
+    doc.end();
+  });
+}
+
 async function sendEmail(to, subject, html, attachments) {
   try {
     const transporter = nodemailer.createTransport({
@@ -38,7 +100,7 @@ async function sendEmail(to, subject, html, attachments) {
 }
 
 function emailMedico(patientName, tipo, email, phone, dateOfBirth, patientText, clinicalData, codiceFiscale) {
-  return `<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;background:#f1f5f9;padding:20px"><div style="background:white;border-radius:12px;padding:24px;max-width:600px;margin:0 auto"><div style="background:#1e3a8a;color:white;border-radius:10px;padding:16px;margin-bottom:20px"><h2 style="margin:0">🩺 Nuova richiesta: ${tipo||'consulto'}</h2></div><p><strong>Paziente:</strong> ${patientName}</p><p><strong>CF:</strong> ${codiceFiscale||'—'}</p><p><strong>Nato/a:</strong> ${dateOfBirth||'—'}</p><p><strong>Email:</strong> ${email}</p><p><strong>Tel:</strong> ${phone||'—'}</p><p><strong>Dati clinici:</strong> ${clinicalData||'—'}</p><p><strong>Richiesta:</strong><br>${patientText}</p><a href="https://www.medicoora.com/#s-doc-login" style="display:inline-block;background:#1e40af;color:white;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700;margin-top:16px">Apri dashboard →</a></div></body></html>`;
+  return `<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;background:#f1f5f9;padding:20px"><div style="background:white;border-radius:12px;padding:24px;max-width:600px;margin:0 auto"><div style="background:#1e3a8a;color:white;border-radius:10px;padding:16px;margin-bottom:20px"><h2 style="margin:0">🩺 Nuova richiesta: ${tipo||"consulto"}</h2></div><p><strong>Paziente:</strong> ${patientName}</p><p><strong>CF:</strong> ${codiceFiscale||"—"}</p><p><strong>Nato/a:</strong> ${dateOfBirth||"—"}</p><p><strong>Email:</strong> ${email}</p><p><strong>Tel:</strong> ${phone||"—"}</p><p><strong>Dati clinici:</strong> ${clinicalData||"—"}</p><p><strong>Richiesta:</strong><br>${patientText}</p><a href="https://www.medicoora.com/#s-doc-login" style="display:inline-block;background:#1e40af;color:white;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700;margin-top:16px">Apri dashboard →</a></div></body></html>`;
 }
 
 export default async function handler(req, res) {
@@ -46,7 +108,6 @@ export default async function handler(req, res) {
   const ip = req.headers["x-forwarded-for"]?.split(",")[0] || "unknown";
   if (isRateLimited(ip)) return res.status(429).json({ error: "Troppe richieste." });
 
-  // GET - lista richieste
   if (req.method === "GET") {
     const auth = req.headers.authorization;
     const tokenParam = req.query.token;
@@ -73,7 +134,6 @@ export default async function handler(req, res) {
     return res.status(200).json(data || []);
   }
 
-  // POST - nuova richiesta paziente
   if (req.method === "POST") {
     const { tipo, patientText, patientName, dateOfBirth, email, phone, clinicalData,
             aiResponse, conversazione, allegati, consenso, codiceFiscale } = req.body;
@@ -90,7 +150,8 @@ export default async function handler(req, res) {
     });
     if (error) return res.status(500).json({ error: error.message });
 
-    await sendEmail("ferriam78@gmail.com", `🩺 Nuova richiesta: ${tipo||'consulto'} — ${patientName}`,
+    await sendEmail("ferriam78@gmail.com",
+      `🩺 Nuova richiesta: ${tipo||"consulto"} — ${patientName}`,
       emailMedico(patientName, tipo, emailNorm, phone, dateOfBirth, patientText, clinicalData, codiceFiscale));
 
     await sendEmail(emailNorm, "Medico Subito — Richiesta ricevuta",
@@ -99,13 +160,12 @@ export default async function handler(req, res) {
     return res.status(200).json({ ok: true });
   }
 
-  // PUT - risposta medico con PDF allegato
   if (req.method === "PUT") {
     const auth = req.headers.authorization;
     const isDocAuth = auth === `Bearer ${DOC_PASSWORD}` || auth === `Bearer ${FALLBACK_PWD}`;
     if (!isDocAuth) return res.status(401).json({ error: "Non autorizzato" });
 
-    const { id, risposta_medico, stato, pdfBase64, nomeFile } = req.body;
+    const { id, risposta_medico, stato } = req.body;
     if (!id || !risposta_medico) return res.status(400).json({ error: "ID e risposta obbligatori" });
 
     const { data: consult } = await supabase.from("consults").select("*").eq("id", id).single();
@@ -115,24 +175,24 @@ export default async function handler(req, res) {
     if (error) return res.status(500).json({ error: error.message });
 
     if (consult?.email) {
-      const corpoEmail = `<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;background:#f1f5f9;padding:20px"><div style="background:white;border-radius:12px;padding:24px;max-width:600px;margin:0 auto;border:1px solid #e2e8f0"><div style="background:#1e3a8a;color:white;border-radius:10px;padding:16px;margin-bottom:20px"><h2 style="margin:0">🩺 Risposta medica — Medico Subito</h2></div><p>Gentile <strong>${consult.patient_name}</strong>,</p><p>Il medico ha risposto alla tua richiesta di <strong>${consult.tipo||'consulto'}</strong>.</p><p style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:14px">📎 <strong>In allegato</strong> trovi il documento medico in formato <strong>PDF</strong>.<br>Aprilo e salvalo sul tuo dispositivo.</p><p style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px;font-size:13px">⚠️ Non sostituisce la visita medica. In emergenza chiama il <strong>118</strong>.</p><p style="font-size:12px;color:#94a3b8">Medico Subito · medicoora.com</p></div></body></html>`;
+      const oggi = new Date().toLocaleDateString("it-IT", {day:"2-digit",month:"2-digit",year:"numeric"}).replace(/\//g,"-");
+      const nomeFile = `Prescrizione_MedicoSubito_${(consult.patient_name||"paziente").replace(/\s+/g,"_")}_${oggi}.pdf`;
 
-      const attachments = [];
-      if (pdfBase64 && nomeFile) {
-        attachments.push({
-          filename: nomeFile,
-          content: Buffer.from(pdfBase64, 'base64'),
-          contentType: 'application/pdf'
-        });
-      }
+      const corpoEmail = `<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;background:#f1f5f9;padding:20px"><div style="background:white;border-radius:12px;padding:24px;max-width:600px;margin:0 auto;border:1px solid #e2e8f0"><div style="background:#1e3a8a;color:white;border-radius:10px;padding:16px;margin-bottom:20px"><h2 style="margin:0">🩺 Risposta medica — Medico Subito</h2></div><p>Gentile <strong>${consult.patient_name}</strong>,</p><p>Il medico ha risposto alla tua richiesta di <strong>${consult.tipo||"consulto"}</strong>.</p><p style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:14px">📎 <strong>In allegato</strong> trovi il documento medico in formato <strong>PDF</strong>.<br>Aprilo e salvalo sul tuo dispositivo.</p><p style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px;font-size:13px">⚠️ Non sostituisce la visita medica. In emergenza chiama il <strong>118</strong>.</p><p style="font-size:12px;color:#94a3b8">Medico Subito · medicoora.com</p></div></body></html>`;
 
-      await sendEmail(consult.email,
-        `🩺 Medico Subito — Documento medico: ${consult.tipo||'consulto'}`,
-        corpoEmail, attachments.length > 0 ? attachments : null);
+      const pdfBuffer = await generaPDF(consult.patient_name, consult.tipo, risposta_medico);
+
+      await sendEmail(
+        consult.email,
+        `🩺 Medico Subito — Documento medico: ${consult.tipo||"consulto"}`,
+        corpoEmail,
+        [{ filename: nomeFile, content: pdfBuffer, contentType: "application/pdf" }]
+      );
     }
 
-    await sendEmail("ferriam78@gmail.com", `✅ Risposta inviata a ${consult?.patient_name||'paziente'}`,
-      `<div style="font-family:Arial,sans-serif;padding:20px"><h3>Risposta inviata</h3><p><strong>Paziente:</strong> ${consult?.patient_name||'—'}</p><p style="white-space:pre-wrap;background:#f8fafc;padding:12px;border-radius:8px;font-size:13px">${risposta_medico}</p></div>`);
+    await sendEmail("ferriam78@gmail.com",
+      `✅ Risposta inviata a ${consult?.patient_name||"paziente"}`,
+      `<div style="font-family:Arial,sans-serif;padding:20px"><h3>Risposta inviata</h3><p><strong>Paziente:</strong> ${consult?.patient_name||"—"}</p><p style="white-space:pre-wrap;background:#f8fafc;padding:12px;border-radius:8px;font-size:13px">${risposta_medico}</p></div>`);
 
     return res.status(200).json({ ok: true });
   }
