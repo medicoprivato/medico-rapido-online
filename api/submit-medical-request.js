@@ -1,6 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
 import nodemailer from "nodemailer";
-import PDFDocument from "pdfkit";
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -23,67 +22,6 @@ function setSecurityHeaders(res) {
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("X-Frame-Options", "DENY");
   res.setHeader("X-XSS-Protection", "1; mode=block");
-}
-
-function generaPDF(patientName, tipo, risposta) {
-  return new Promise((resolve, reject) => {
-    const doc = new PDFDocument({ margin: 50, size: "A4" });
-    const buffers = [];
-    doc.on("data", chunk => buffers.push(chunk));
-    doc.on("end", () => resolve(Buffer.concat(buffers)));
-    doc.on("error", reject);
-
-    const oggi = new Date().toLocaleDateString("it-IT", { day: "2-digit", month: "long", year: "numeric" });
-    const ora = new Date().toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" });
-
-    // Intestazione medico
-    doc.fontSize(13).font("Helvetica-Bold").text("Dott.ssa Anna Maria Ferri");
-    doc.fontSize(10).font("Helvetica")
-       .text("Medico Chirurgo - Specialista in Ginecologia e Ostetricia")
-       .text("Ordine dei Medici di Frosinone n. 3363")
-       .text("P.IVA IT17215181003")
-       .text("Via Gaetano Marzotto 16 Int.3, 00133 Roma")
-       .text("medicoora.com");
-
-    doc.moveDown(0.5);
-    doc.moveTo(50, doc.y).lineTo(545, doc.y).strokeColor("#1e3a8a").lineWidth(1.5).stroke();
-    doc.moveDown(0.5);
-
-    // Tipo documento
-    doc.fontSize(12).font("Helvetica-Bold").fillColor("#1e3a8a")
-       .text((tipo || "DOCUMENTO MEDICO PRIVATO").toUpperCase(), { align: "center" });
-    doc.fillColor("#000000");
-    doc.moveDown(0.5);
-    doc.moveTo(50, doc.y).lineTo(545, doc.y).strokeColor("#cccccc").lineWidth(0.5).stroke();
-    doc.moveDown(0.5);
-
-    // Corpo documento
-    doc.fontSize(10).font("Helvetica").text(risposta, { lineGap: 3 });
-    doc.moveDown(1.5);
-
-    // Linea firma
-    doc.moveTo(50, doc.y).lineTo(545, doc.y).strokeColor("#1e3a8a").lineWidth(1).stroke();
-    doc.moveDown(0.5);
-
-    // Timbro e firma
-    doc.fontSize(11).font("Helvetica-Bold").text("TIMBRO E FIRMA DIGITALE DEL MEDICO");
-    doc.moveDown(0.3);
-    doc.fontSize(10).font("Helvetica")
-       .text("Dott.ssa Anna Maria Ferri")
-       .text("Medico Chirurgo - Specialista in Ginecologia e Ostetricia")
-       .text("Ordine dei Medici di Frosinone n. 3363 - P.IVA IT17215181003")
-       .text(`Data: ${oggi} ore ${ora}`)
-       .moveDown(0.3)
-       .text("Firmato digitalmente ai sensi del D.Lgs. 82/2005 (CAD)")
-       .text("e Linee Guida Telemedicina Min. Salute 2022");
-
-    doc.moveDown(1);
-    doc.fontSize(8).fillColor("#666666")
-       .text("Documento emesso tramite piattaforma di telemedicina medicoora.com", { align: "center" })
-       .text("Non sostituisce la visita medica in presenza. In emergenza chiamare il 118.", { align: "center" });
-
-    doc.end();
-  });
 }
 
 async function sendEmail(to, subject, html, attachments) {
@@ -165,7 +103,7 @@ export default async function handler(req, res) {
     const isDocAuth = auth === `Bearer ${DOC_PASSWORD}` || auth === `Bearer ${FALLBACK_PWD}`;
     if (!isDocAuth) return res.status(401).json({ error: "Non autorizzato" });
 
-    const { id, risposta_medico, stato } = req.body;
+    const { id, risposta_medico, stato, pdfBase64, nomeFile } = req.body;
     if (!id || !risposta_medico) return res.status(400).json({ error: "ID e risposta obbligatori" });
 
     const { data: consult } = await supabase.from("consults").select("*").eq("id", id).single();
