@@ -118,13 +118,12 @@ export default async function handler(req, res) {
 
       const corpoEmail = `<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;background:#f1f5f9;padding:20px"><div style="background:white;border-radius:12px;padding:24px;max-width:600px;margin:0 auto;border:1px solid #e2e8f0"><div style="background:#1e3a8a;color:white;border-radius:10px;padding:16px;margin-bottom:20px"><h2 style="margin:0">🩺 Risposta medica — Medico Subito</h2></div><p>Gentile <strong>${consult.patient_name}</strong>,</p><p>Il medico ha risposto alla tua richiesta di <strong>${consult.tipo||"consulto"}</strong>.</p><p style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:14px">📎 <strong>In allegato</strong> trovi il documento medico in formato <strong>PDF</strong>.<br>Aprilo e salvalo sul tuo dispositivo.</p><p style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px;font-size:13px">⚠️ Non sostituisce la visita medica. In emergenza chiama il <strong>118</strong>.</p><p style="font-size:12px;color:#94a3b8">Medico Subito · medicoora.com</p></div></body></html>`;
 
-      const pdfBuffer = await generaPDF(consult.patient_name, consult.tipo, risposta_medico);
-
+      const attachments = pdfBase64 ? [{ filename: nomeFile, content: Buffer.from(pdfBase64, 'base64'), contentType: "application/pdf" }] : null;
       await sendEmail(
         consult.email,
         `🩺 Medico Subito — Documento medico: ${consult.tipo||"consulto"}`,
         corpoEmail,
-        [{ filename: nomeFile, content: pdfBuffer, contentType: "application/pdf" }]
+        attachments
       );
     }
 
