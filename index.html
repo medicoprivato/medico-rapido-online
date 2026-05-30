@@ -1203,8 +1203,9 @@ async function callAI(){
     document.getElementById('response').classList.add('hidden');
     document.getElementById('rx-section').classList.add('hidden');
     document.getElementById('warning').style.display='none';
-    document.getElementById('doctor-form').classList.add('hidden');
-    document.getElementById('success-box').classList.remove('hidden');
+    document.getElementById('success-box').classList.add('hidden');
+    document.getElementById('doctor-form').classList.remove('hidden');
+    document.getElementById('doctor-form').scrollIntoView({behavior:'smooth'});
   }catch(e){
     document.getElementById('loading').classList.add('hidden');
     alert('Errore di connessione. Controlla la connessione internet e riprova.');
