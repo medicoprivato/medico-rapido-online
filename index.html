@@ -1200,13 +1200,11 @@ async function callAI(){
     const d=await r.json();const rsp=stripMd(d.answer||d.error||'Errore.');
     conversazione.push({role:'assistant',content:rsp});
     document.getElementById('loading').classList.add('hidden');
-    document.getElementById('response').classList.remove('hidden');
-    const sepDoc='---DOCUMENTO PER IL PAZIENTE---';const soloDoc=rsp.includes(sepDoc)?rsp.split(sepDoc)[1].trim():rsp;document.getElementById('response').textContent=soloDoc;
-    document.getElementById('rx-section').classList.remove('hidden');
-    document.getElementById('warning').style.display='block';
+    document.getElementById('response').classList.add('hidden');
+    document.getElementById('rx-section').classList.add('hidden');
+    document.getElementById('warning').style.display='none';
     document.getElementById('doctor-form').classList.add('hidden');
-    document.getElementById('success-box').classList.add('hidden');
-    document.getElementById('response').scrollIntoView({behavior:'smooth'});
+    document.getElementById('success-box').classList.remove('hidden');
   }catch(e){
     document.getElementById('loading').classList.add('hidden');
     alert('Errore di connessione. Controlla la connessione internet e riprova.');
