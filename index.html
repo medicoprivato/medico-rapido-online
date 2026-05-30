@@ -1201,7 +1201,7 @@ async function callAI(){
     conversazione.push({role:'assistant',content:rsp});
     document.getElementById('loading').classList.add('hidden');
     document.getElementById('response').classList.remove('hidden');
-    document.getElementById('response').textContent=rsp;
+    const sepDoc='---DOCUMENTO PER IL PAZIENTE---';const soloDoc=rsp.includes(sepDoc)?rsp.split(sepDoc)[1].trim():rsp;document.getElementById('response').textContent=soloDoc;
     document.getElementById('rx-section').classList.remove('hidden');
     document.getElementById('warning').style.display='block';
     document.getElementById('doctor-form').classList.add('hidden');
