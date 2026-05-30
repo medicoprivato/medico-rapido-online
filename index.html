@@ -1416,7 +1416,7 @@ medicoora.com - info@medicoora.com
 async function inviaRisposta(){
   const btn=document.getElementById('sign-btn');
   const txt=document.getElementById('dc-reply').value.trim();
-  const caseId=btn.dataset.caseId;
+  const caseId=currentCaseId;
   if(!txt||!caseId)return;
   btn.disabled=true;btn.textContent='Invio in corso...';
   const caso=allCases.find(x=>String(x.id)===String(caseId))||{};
