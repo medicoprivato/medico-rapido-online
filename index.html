@@ -1418,12 +1418,11 @@ async function inviaRisposta(){
   const txt=document.getElementById('dc-reply').value.trim();
   const caseId=btn.dataset.caseId;
   if(!txt||!caseId)return;
-  btn.disabled=true;btn.textContent='Generazione PDF...';
+  btn.disabled=true;btn.textContent='Invio in corso...';
   const caso=allCases.find(x=>String(x.id)===String(caseId))||{};
   const oggi=new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'2-digit',year:'numeric'}).replace(/\//g,'-');
   const nomeFile='Prescrizione_MedicoSubito_'+(caso.patient_name||'paziente').replace(/\s+/g,'_')+'_'+oggi+'.pdf';
-  const pdfBase64=generaPDFBrowser(caso.patient_name,caso.tipo,txt);
-  btn.textContent='Invio in corso...';
+  let pdfBase64=null;try{pdfBase64=generaPDFBrowser(caso.patient_name,caso.tipo,txt);}catch(pe){console.warn('PDF skip:',pe);}
   try{
     const r=await fetch('/api/submit-medical-request',{method:'PUT',
       headers:{'Content-Type':'application/json','Authorization':'Bearer '+DOC_PWD},
