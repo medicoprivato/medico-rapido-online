@@ -1471,25 +1471,131 @@ function toggleConsenso(){
 
 
 function generaPDFBrowser(patientName, tipo, risposta) {
-  try {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
-    const lm = 15, rm = 195, w = rm - lm;
-    let y = 15;
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+  const oggi = new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'});
+  const ora = new Date().toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
+  let y = 20;
+  const lm = 20, rm = 190, w = rm - lm;
 
-    doc.setFontSize(9); doc.setFont('helvetica', 'normal');
-    const lines = doc.splitTextToSize(risposta, w);
-    for (const line of lines) {
-      if (y > 275) { doc.addPage(); y = 15; }
-      doc.text(line, lm, y);
-      y += 5;
+  // Intestazione medico
+  doc.setFontSize(13); doc.setFont('helvetica','bold');
+  doc.text('Dott.ssa Anna Maria Ferri', lm, y); y += 7;
+  doc.setFontSize(9); doc.setFont('helvetica','normal');
+  doc.text('Medico Chirurgo - Specialista in Ginecologia e Ostetricia', lm, y); y += 5;
+  doc.text('Ordine dei Medici di Frosinone n. 3363', lm, y); y += 5;
+  doc.text('P.IVA IT17215181003', lm, y); y += 5;
+  doc.text('Via Gaetano Marzotto 16 Int.3, 00133 Roma', lm, y); y += 5;
+  doc.text('medicoora.com', lm, y); y += 6;
+
+  // Linea separatrice blu
+  doc.setDrawColor(30, 58, 138); doc.setLineWidth(0.5);
+  doc.line(lm, y, rm, y); y += 6;
+
+  // Tipo documento
+  doc.setFontSize(11); doc.setFont('helvetica','bold');
+  doc.setTextColor(30, 58, 138);
+  doc.text((tipo||'DOCUMENTO MEDICO PRIVATO').toUpperCase(), 105, y, {align:'center'}); y += 6;
+  doc.setTextColor(0,0,0);
+  doc.setDrawColor(180,180,180); doc.line(lm, y, rm, y); y += 5;
+
+  // Corpo documento
+  doc.setFontSize(9); doc.setFont('helvetica','normal');
+  const lines = doc.splitTextToSize(risposta, w);
+  for (const line of lines) {
+    if (y > 230) { doc.addPage(); y = 20; }
+    doc.text(line, lm, y); y += 5;
+  }
+  y += 6;
+
+  // Linea firma
+  doc.setDrawColor(30, 58, 138); doc.setLineWidth(0.5);
+  doc.line(lm, y, rm, y); y += 6;
+
+  // Timbro e firma digitale
+  doc.setFontSize(10); doc.setFont('helvetica','bold');
+  doc.text('TIMBRO E FIRMA DIGITALE DEL MEDICO', lm, y); y += 6;
+  doc.setFontSize(9); doc.setFont('helvetica','normal');
+  doc.text('Dott.ssa Anna Maria Ferri', lm, y); y += 5;
+  doc.text('Medico Chirurgo - Specialista in Ginecologia e Ostetricia', lm, y); y += 5;
+  doc.text('Ordine dei Medici di Frosinone n. 3363 - P.IVA IT17215181003', lm, y); y += 5;
+  doc.text('Data: ' + oggi + ' ore ' + ora, lm, y); y += 5;
+  doc.text('Firmato digitalmente ai sensi del D.Lgs. 82/2005 (CAD)', lm, y); y += 5;
+  doc.text('e Linee Guida Telemedicina Min. Salute 2022', lm, y); y += 8;
+
+  // Footer
+  doc.setFontSize(7); doc.setTextColor(120,120,120);
+  doc.text('Documento emesso tramite piattaforma di telemedicina medicoora.com', 105, y, {align:'center'}); y += 4;
+  doc.text('Non sostituisce la visita medica in presenza. In emergenza chiamare il 118.', 105, y, {align:'center'});
+
+  return doc.output('datauristring').split(',')[1]; // base64
+}
+
+function salvaTriage(){
+  const nome=document.getElementById('tr-nome').value.trim();
+  const dob=document.getElementById('tr-dob').value;
+  const cf=document.getElementById('tr-cf').value.trim().toUpperCase();
+  const sesso=document.getElementById('tr-sesso').value;
+  const peso=document.getElementById('tr-peso').value;
+  const altezza=document.getElementById('tr-altezza').value;
+  const allergie=document.getElementById('tr-allergie').value.trim();
+  const farmaci=document.getElementById('tr-farmaci').value.trim();
+  const patologie=document.getElementById('tr-patologie').value.trim();
+  const consenso=document.getElementById('tr-consenso').checked;
+  const err=document.getElementById('tr-err');
+
+  if(!nome||!dob||!cf||!sesso||!peso||!altezza||!allergie||!farmaci||!patologie){
+    err.textContent='Compila tutti i campi obbligatori (*)';err.style.display='block';return;
+  }
+  if(cf.length!==16){err.textContent='Codice fiscale non valido (16 caratteri)';err.style.display='block';return;}
+  if(!consenso){err.textContent='Devi accettare il consenso informato';err.style.display='block';return;}
+  err.style.display='none';
+
+  const triage={nome,dob,cf,sesso,peso,altezza,allergie,farmaci,patologie,completato:true,data:new Date().toISOString()};
+  localStorage.setItem('triage',JSON.stringify(triage));
+  
+  // Pre-compila form richiesta
+  const n=document.getElementById('patient-name');
+  const e=document.getElementById('patient-email');
+  const pcf=document.getElementById('patient-cf');
+  const pdob=document.getElementById('patient-dob');
+  if(n)n.value=nome;
+  if(e&&pazCorrente)e.value=pazCorrente.email||'';
+  if(pcf)pcf.value=cf;
+  if(pdob)pdob.value=dob;
+  
+  showScreen('s-richiesta');
+}
+
+function checkTriage(){
+  const t=localStorage.getItem('triage');
+  if(!t) return false;
+  try{ return JSON.parse(t).completato===true; }catch(e){ return false; }
+}
+
+function vaiARichiesta(){
+  if(!checkTriage()){
+    // Carica dati triage se paziente loggato
+    if(pazCorrente){
+      const n=document.getElementById('tr-nome');
+      const e=document.getElementById('tr-cf');
+      if(n&&!n.value)n.value=pazCorrente.nome||'';
     }
-
-    return doc.output('datauristring').split(',')[1];
-  } catch(e) {
-    console.warn('PDF error:', e);
-    return null;
+    showScreen('s-triage');
+  } else {
+    // Triage già fatto, pre-compila e vai
+    const t=JSON.parse(localStorage.getItem('triage'));
+    const n=document.getElementById('patient-name');
+    const pcf=document.getElementById('patient-cf');
+    const pdob=document.getElementById('patient-dob');
+    if(n)n.value=t.nome||'';
+    if(pcf)pcf.value=t.cf||'';
+    if(pdob)pdob.value=t.dob||'';
+    if(pazCorrente){const e=document.getElementById('patient-email');if(e)e.value=pazCorrente.email||'';}
+    showScreen('s-richiesta');
   }
 }
 
-
+</script>
+</body>
+</html>
