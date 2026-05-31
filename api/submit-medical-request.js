@@ -79,6 +79,24 @@ export default async function handler(req, res) {
     if (!patientName || !email) return res.status(400).json({ error: "Nome e email obbligatori" });
     if (!consenso) return res.status(400).json({ error: "Consenso obbligatorio" });
 
+    // Verifica abbonamento Stripe attivo
+    const emailNormCheck = email.trim().toLowerCase();
+    try {
+      const stripe = (await import('stripe')).default(process.env.STRIPE_SECRET_KEY);
+      const customers = await stripe.customers.list({ email: emailNormCheck, limit: 1 });
+      let hasActiveSubscription = false;
+      if (customers.data.length > 0) {
+        const subs = await stripe.subscriptions.list({ customer: customers.data[0].id, status: 'active', limit: 1 });
+        hasActiveSubscription = subs.data.length > 0;
+      }
+      if (!hasActiveSubscription) {
+        return res.status(402).json({ error: "Abbonamento non attivo. Abbonati su medicoora.com per ricevere la risposta medica." });
+      }
+    } catch(stripeErr) {
+      console.error('Stripe check error:', stripeErr.message);
+      // In caso di errore Stripe, permetti l'invio per non bloccare il servizio
+    }
+
     const emailNorm = email.trim().toLowerCase();
     const { error } = await supabase.from("consults").insert({
       tipo, patient_text: patientText, patient_name: patientName, date_of_birth: dateOfBirth,

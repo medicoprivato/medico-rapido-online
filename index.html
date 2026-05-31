@@ -1266,6 +1266,12 @@ async function submitToDoctor(){
       aiResponse:ulr,conversazione:conversazione.map(m=>m.role+': '+m.content).join('\n\n'),
       allegati,consenso:true,archivioReferti:archivioOk
     })});
+    if(r.status===402){
+      const d=await r.json();
+      alert('⚠️ '+d.error);
+      showScreen('s-payment');
+      return;
+    }
     if(!r.ok)throw new Error('Errore server '+r.status);
     document.getElementById('doctor-form').classList.add('hidden');
     document.getElementById('rx-section').classList.add('hidden');
