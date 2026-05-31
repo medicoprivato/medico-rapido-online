@@ -393,7 +393,7 @@ textarea{min-height:120px;resize:none}
   <div class="pcard">
     <div style="display:inline-block;background:#fff;color:#1e3a8a;font-size:15px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:8px 20px;border-radius:20px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.15);-webkit-text-stroke:0.5px #1e3a8a">Abbonamento</div>
     <div class="p-grande">€80</div>
-    <div class="p-period">all'anno · solo <strong style="color:#fff">€6,60 al mese</strong> · richieste illimitate</div>
+    <div class="p-period">all'anno · solo <strong style="color:#fff">€6,60 al mese</strong> · fino a 5 richieste al mese</div>
     <div class="p-vs"><div class="p-save">Risparmi €208</div><div style="font-size:11px;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:1px;flex-shrink:0">rispetto a</div><div class="p-vs-txt">Piattaforme mediche concorrenti e studi medici privati <s style="color:rgba(255,255,255,.5)">€288/anno</s></div></div>
     <button class="btn-hp" onclick="showScreen('s-payment')" style="margin-top:4px">Attiva ora · Pagamento sicuro 🔒 →</button>
   </div>
@@ -451,7 +451,7 @@ textarea{min-height:120px;resize:none}
     <div class="card" style="margin-top:12px">
       <div style="font-size:15px;font-weight:700;margin-bottom:12px">Incluso nell'abbonamento</div>
       <div style="display:flex;flex-direction:column;gap:10px">
-        <div class="inc-item">Richieste mediche illimitate</div>
+        <div class="inc-item">Richieste mediche fino a 5 al mese</div>
         <div class="inc-item">Prescrizioni farmacologiche (se clinicamente appropriate)</div>
         <div class="inc-item">Richieste esami e accertamenti</div>
         <div class="inc-item">Certificati medici</div>
@@ -573,7 +573,7 @@ textarea{min-height:120px;resize:none}
         <div class="stripe-up">
           <div style="color:#93c5fd;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Abbonamento annuale</div>
           <div style="color:#fff;font-size:22px;font-weight:700;margin-bottom:4px">€80/anno · €6,60/mese</div>
-          <div style="color:rgba(255,255,255,.7);font-size:13px;margin-bottom:14px">Richieste illimitate · 7 giorni su 7</div>
+          <div style="color:rgba(255,255,255,.7);font-size:13px;margin-bottom:14px">Fino a 5 richieste al mese · 7 giorni su 7</div>
           <input id="stripe-email-suc" type="email" placeholder="La tua email" autocomplete="email" style="width:100%;border-radius:8px;border:none;padding:12px;font-size:15px;margin-bottom:10px;font-family:'Plus Jakarta Sans',sans-serif"/>
           <button onclick="startStripeSuc()" style="width:100%;background:#fff;color:var(--blu-deep);border:none;border-radius:8px;padding:13px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Attiva ora →</button>
           <div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:8px">🔒 Pagamento sicuro con Stripe</div>
@@ -612,7 +612,7 @@ textarea{min-height:120px;resize:none}
     <div class="info-card"><h3>3️⃣ Risposta firmata via email</h3><p>Prescrizione medica, richiesta esami, certificati medici e indicazioni mediche, firmati dal medico il prima possibile.</p></div>
     <div class="info-card"><h3>💊 Prestazioni disponibili</h3><p>Rinnovo terapia · Prescrizione esami · Certificati medici · Valutazione sintomi · Secondo parere medico · Interpretazione referti</p></div>
     <div class="info-card"><h3>⚠️ Quando NON utilizzare</h3><p>Dolore toracico, difficoltà respiratoria, perdita di coscienza, febbre alta: chiama il <strong>118</strong> o vai al Pronto Soccorso. Questo servizio <strong>non sostituisce il medico di base</strong> né la visita medica in presenza (Linee Guida Telemedicina Min. Salute 2022 · FNOMCeO).</p></div>
-    <div class="info-card"><h3>💶 Tariffe</h3><p><strong>€80/anno</strong> (€6,60/mese) — richieste illimitate per 12 mesi, soggette a valutazione clinica.</p></div>
+    <div class="info-card"><h3>💶 Tariffe</h3><p><strong>€80/anno</strong> (€6,60/mese) — fino a 5 richieste al mese per 12 mesi, soggette a valutazione clinica.</p></div>
     <div class="info-card"><h3>⏱️ Tempi di risposta</h3><p>Il medico si impegna a rispondere il prima possibile, indicativamente entro 24-48 ore, 7 giorni su 7 inclusi sabato e domenica. In caso di impossibilità temporanea verrà data comunicazione via email.</p></div>
     <div class="info-card"><h3>✍️ Consenso informato</h3><p>Ai sensi della L. 219/2017, inviando la richiesta medica dichiari di aver letto e accettato i Termini di servizio e l'Informativa Privacy, e di prestare consenso informato alla prestazione sanitaria telematica. Il consenso è revocabile in qualsiasi momento scrivendo a info@medicoora.com.</p></div>
     <div class="info-card"><h3>📋 Documenti legali</h3>
@@ -1269,6 +1269,11 @@ async function submitToDoctor(){
       aiResponse:ulr,conversazione:conversazione.map(m=>m.role+': '+m.content).join('\n\n'),
       allegati,consenso:true,archivioReferti:archivioOk
     })});
+    if(r.status===429){
+      const d=await r.json();
+      alert('⚠️ '+d.error);
+      return;
+    }
     if(r.status===402){
       const d=await r.json();
       alert('⚠️ '+d.error);

@@ -99,7 +99,19 @@ export default async function handler(req, res) {
       }
     }
 
-        const emailNorm = email.trim().toLowerCase();
+        // Verifica limite 5 richieste al mese per CF
+    const emailNorm = email.trim().toLowerCase();
+    if (codiceFiscale) {
+      const inizioMese = new Date();
+      inizioMese.setDate(1); inizioMese.setHours(0,0,0,0);
+      const { count } = await supabase.from("consults")
+        .select("*", { count: "exact", head: true })
+        .eq("codice_fiscale", codiceFiscale.toUpperCase())
+        .gte("created_at", inizioMese.toISOString());
+      if (count >= 5) {
+        return res.status(429).json({ error: "Hai raggiunto il limite di 5 richieste mensili per questo codice fiscale. Il limite si rinnova il primo del mese." });
+      }
+    }
     const { error } = await supabase.from("consults").insert({
       tipo, patient_text: patientText, patient_name: patientName, date_of_birth: dateOfBirth,
       email: emailNorm, phone, clinical_data: clinicalData, ai_response: aiResponse,
