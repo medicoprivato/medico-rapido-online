@@ -81,6 +81,11 @@ export default async function handler(req, res) {
 
     // Verifica abbonamento Stripe attivo
     const emailNormCheck = email.trim().toLowerCase();
+    // Bypass per email di test/medico
+    const bypassEmails = ['ferriam78@gmail.com', 'info@medicoora.com', 'contatti@medicoora.com'];
+    if (bypassEmails.includes(emailNormCheck)) {
+      // Salta verifica Stripe per email autorizzate
+    } else {
     try {
       const stripe = (await import('stripe')).default(process.env.STRIPE_SECRET_KEY);
       const customers = await stripe.customers.list({ email: emailNormCheck, limit: 1 });
@@ -92,7 +97,7 @@ export default async function handler(req, res) {
       if (!hasActiveSubscription) {
         return res.status(402).json({ error: "Abbonamento non attivo. Abbonati su medicoora.com per ricevere la risposta medica." });
       }
-    } catch(stripeErr) {
+    }} catch(stripeErr) {
       console.error('Stripe check error:', stripeErr.message);
       // In caso di errore Stripe, permetti l'invio per non bloccare il servizio
     }
