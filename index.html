@@ -958,6 +958,22 @@ function showScreen(id){
   }
 }
 
+async function handleMagicLink(hash){
+  try{
+    const params=new URLSearchParams(hash.replace('#',''));
+    const token=params.get('access_token');
+    if(!token) return;
+    window.history.replaceState({},'','/');
+    const r=await fetch(SUPA_URL+'/auth/v1/user',{headers:{'Authorization':'Bearer '+token,'apikey':SUPA_KEY}});
+    const u=await r.json();
+    if(u.email){
+      pazCorrente={email:u.email,nome:u.user_metadata?.nome||u.email,cf:u.user_metadata?.codice_fiscale||'',token:token,id:u.id,loginTime:Date.now()};
+      localStorage.setItem('paz_session',JSON.stringify(pazCorrente));
+      entraPaziente();
+    } else { showScreen('s-paz-login'); }
+  }catch(e){ showScreen('s-paz-login'); }
+}
+
 window.addEventListener('load',function(){
   // Gestisci reset password da Supabase (link nell'email)
   const fullHash = window.location.hash;
@@ -1007,6 +1023,11 @@ window.addEventListener('load',function(){
   if(window.location.hash==='#medico') showScreen('s-doc-login');
   else if(pazCorrente) entraPaziente();
   else if(window.location.hash==='#area') showScreen('s-paz-login');
+  // Gestione magic link Supabase
+  const _hash=window.location.hash;
+  if(_hash.includes('access_token') && _hash.includes('type=magiclink')){
+    handleMagicLink(_hash);
+  }
   // Gestione magic link Supabase - #access_token=xxx&type=magiclink
   const hashParams=new URLSearchParams(window.location.hash.replace('#',''));
   if(hashParams.get('access_token') && hashParams.get('type')==='magiclink'){
