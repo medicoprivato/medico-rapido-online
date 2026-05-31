@@ -1007,6 +1007,21 @@ window.addEventListener('load',function(){
   if(window.location.hash==='#medico') showScreen('s-doc-login');
   else if(pazCorrente) entraPaziente();
   else if(window.location.hash==='#area') showScreen('s-paz-login');
+  // Gestione magic link Supabase - #access_token=xxx&type=magiclink
+  const hashParams=new URLSearchParams(window.location.hash.replace('#',''));
+  if(hashParams.get('access_token') && hashParams.get('type')==='magiclink'){
+    const token=hashParams.get('access_token');
+    window.history.replaceState({},'','/');
+    try{
+      const r=await fetch(SUPA_URL+'/auth/v1/user',{headers:{'Authorization':'Bearer '+token,'apikey':SUPA_KEY}});
+      const u=await r.json();
+      if(u.email){
+        pazCorrente={email:u.email,nome:u.user_metadata?.nome||u.email,cf:u.user_metadata?.codice_fiscale||'',token:token,id:u.id,loginTime:Date.now()};
+        localStorage.setItem('paz_session',JSON.stringify(pazCorrente));
+        entraPaziente();
+      }
+    }catch(e){showScreen('s-paz-login');}
+  }
   const p=new URLSearchParams(window.location.search);
   if(p.get('pagamento')==='ok'){
     setTimeout(()=>{showScreen('s-home');const m=document.createElement('div');m.style.cssText='position:fixed;top:70px;left:16px;right:16px;background:var(--blu);color:#fff;border-radius:14px;padding:18px;z-index:200;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.2)';m.innerHTML='<div style="font-size:20px;margin-bottom:6px">✅ Abbonamento attivato!</div><div style="font-size:14px;opacity:.9">Benvenuta su Medico Subito.</div>';document.body.appendChild(m);setTimeout(()=>m.remove(),5000);localStorage.setItem('abbonamento_attivo','si');window.history.replaceState({},'','/');},300);
