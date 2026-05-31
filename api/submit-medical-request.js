@@ -81,28 +81,25 @@ export default async function handler(req, res) {
 
     // Verifica abbonamento Stripe attivo
     const emailNormCheck = email.trim().toLowerCase();
-    // Bypass per email di test/medico
     const bypassEmails = ['ferriam78@gmail.com', 'info@medicoora.com', 'contatti@medicoora.com'];
-    if (bypassEmails.includes(emailNormCheck)) {
-      // Salta verifica Stripe per email autorizzate
-    } else {
-    try {
-      const stripe = (await import('stripe')).default(process.env.STRIPE_SECRET_KEY);
-      const customers = await stripe.customers.list({ email: emailNormCheck, limit: 1 });
-      let hasActiveSubscription = false;
-      if (customers.data.length > 0) {
-        const subs = await stripe.subscriptions.list({ customer: customers.data[0].id, status: 'active', limit: 1 });
-        hasActiveSubscription = subs.data.length > 0;
+    if (!bypassEmails.includes(emailNormCheck)) {
+      try {
+        const stripe = (await import('stripe')).default(process.env.STRIPE_SECRET_KEY);
+        const customers = await stripe.customers.list({ email: emailNormCheck, limit: 1 });
+        let hasActiveSub = false;
+        if (customers.data.length > 0) {
+          const subs = await stripe.subscriptions.list({ customer: customers.data[0].id, status: 'active', limit: 1 });
+          hasActiveSub = subs.data.length > 0;
+        }
+        if (!hasActiveSub) {
+          return res.status(402).json({ error: "Abbonamento non attivo. Abbonati su medicoora.com per ricevere la risposta medica." });
+        }
+      } catch(stripeErr) {
+        console.error('Stripe check error:', stripeErr.message);
       }
-      if (!hasActiveSubscription) {
-        return res.status(402).json({ error: "Abbonamento non attivo. Abbonati su medicoora.com per ricevere la risposta medica." });
-      }
-    }} catch(stripeErr) {
-      console.error('Stripe check error:', stripeErr.message);
-      // In caso di errore Stripe, permetti l'invio per non bloccare il servizio
     }
 
-    const emailNorm = email.trim().toLowerCase();
+        const emailNorm = email.trim().toLowerCase();
     const { error } = await supabase.from("consults").insert({
       tipo, patient_text: patientText, patient_name: patientName, date_of_birth: dateOfBirth,
       email: emailNorm, phone, clinical_data: clinicalData, ai_response: aiResponse,
