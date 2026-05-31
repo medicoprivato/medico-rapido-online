@@ -1597,5 +1597,33 @@ function vaiARichiesta(){
 }
 
 </script>
+
+<!-- COOKIE BANNER GDPR -->
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1e3a8a;color:#fff;padding:16px 20px;z-index:9999;box-shadow:0 -4px 20px rgba(0,0,0,.3);font-family:'Plus Jakarta Sans',sans-serif">
+  <div style="max-width:600px;margin:0 auto">
+    <p style="margin:0 0 12px;font-size:13px;line-height:1.5">🍪 <strong>Questo sito utilizza cookie tecnici</strong> necessari al funzionamento del servizio. Non utilizziamo cookie di profilazione né cediamo dati a terzi per scopi pubblicitari. Per maggiori informazioni consulta la nostra <a onclick="showScreen('s-privacy')" style="color:#93c5fd;cursor:pointer;text-decoration:underline">Privacy Policy</a>.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button onclick="accettaCookie()" style="background:#22c55e;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-weight:700;font-size:13px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">✓ Accetta e continua</button>
+      <button onclick="rifiutaCookie()" style="background:transparent;color:#cbd5e1;border:1px solid #cbd5e1;border-radius:8px;padding:10px 20px;font-weight:600;font-size:13px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Solo tecnici</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  if(!localStorage.getItem('cookie_consent')){
+    document.getElementById('cookie-banner').style.display='block';
+  }
+})();
+function accettaCookie(){
+  localStorage.setItem('cookie_consent','accepted');
+  document.getElementById('cookie-banner').style.display='none';
+}
+function rifiutaCookie(){
+  localStorage.setItem('cookie_consent','technical_only');
+  document.getElementById('cookie-banner').style.display='none';
+}
+</script>
+
 </body>
 </html>
