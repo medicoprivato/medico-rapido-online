@@ -228,18 +228,12 @@ textarea{min-height:120px;resize:none}
     </div>
     <div class="card">
       <div id="paz-form-login">
+        <div style="font-size:14px;color:var(--txt-s);margin-bottom:14px;text-align:center">Inserisci la tua email per ricevere il link di accesso</div>
         <input id="paz-email" type="email" placeholder="Email *" autocomplete="email"/>
-        <div class="pwd-w">
-          <input id="paz-pwd" type="password" placeholder="Password *" autocomplete="current-password"/>
-          <button class="pwd-eye" type="button" onclick="togglePwd('paz-pwd',this)">👁</button>
-        </div>
         <div id="paz-err" style="color:var(--err);font-size:13px;margin:-6px 0 10px;display:none"></div>
-        <button class="btn btn-p" onclick="loginPaz()">Accedi →</button>
-        <button class="btn btn-o" onclick="showPazReg()" style="margin-top:10px;height:46px">Crea account gratuito</button>
-        <div style="text-align:center;margin-top:14px">
-          <button onclick="resetPwd()" style="background:none;border:none;color:var(--blu);font-size:14px;font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;font-weight:600">Password dimenticata?</button>
-        </div>
-        <button onclick="showScreen('s-home')" style="width:100%;background:none;border:none;color:var(--txt-l);font-size:13px;margin-top:10px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Continua senza account</button>
+        <div id="paz-ok" style="color:green;font-size:14px;margin:-6px 0 10px;display:none;text-align:center">✅ Link inviato! Controlla la tua email.</div>
+        <button class="btn btn-p" onclick="loginPazMagic()">📧 Invia link di accesso →</button>
+        <button onclick="showScreen('s-home')" style="width:100%;background:none;border:none;color:var(--txt-l);font-size:13px;margin-top:14px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Continua senza account</button>
       </div>
       <div id="paz-form-reg" style="display:none">
         <div style="font-size:18px;font-weight:700;margin-bottom:14px">Crea account</div>
@@ -1031,6 +1025,22 @@ async function resetPwd(){
     if(r.ok) alert('✅ Email inviata a '+email+'\n\nCONTROLLA INBOX E SPAM.\n\nClicca il link nell\'email — si aprirà medicoora.com dove potrai inserire la nuova password.');
     else alert('Errore. Verifica che l\'email sia corretta.');
   }catch(e){alert('Errore di connessione.');}
+}
+
+async function loginPazMagic(){
+  const email=document.getElementById('paz-email').value.trim();
+  const err=document.getElementById('paz-err');
+  const ok=document.getElementById('paz-ok');
+  err.style.display='none'; ok.style.display='none';
+  if(!email){err.textContent='Inserisci la tua email';err.style.display='block';return;}
+  try{
+    const r=await fetch(SUPA_URL+'/auth/v1/magiclink',{method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SUPA_KEY},
+      body:JSON.stringify({email,options:{emailRedirectTo:'https://www.medicoora.com/#area'}})
+    });
+    if(r.ok){ok.style.display='block';}
+    else{err.textContent='Errore invio email. Riprova.';err.style.display='block';}
+  }catch(e){err.textContent='Errore di connessione.';err.style.display='block';}
 }
 
 async function loginPaz(){
