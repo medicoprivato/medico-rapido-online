@@ -961,6 +961,12 @@ function showScreen(id){
   }
 }
 
+// Rimuovi parametri UTM dall'URL (branding)
+if(window.location.search){
+  const cleanUrl=window.location.pathname+window.location.hash;
+  window.history.replaceState({},'',cleanUrl);
+}
+
 window.addEventListener('load',function(){
   // Gestisci reset password da Supabase (link nell'email)
   const fullHash = window.location.hash;
