@@ -109,7 +109,7 @@ textarea{min-height:120px;resize:none}
 .pcard::before{content:'€';position:absolute;right:8px;top:-8px;font-size:110px;opacity:.06;font-family:'Playfair Display',serif}
 .p-grande{font-family:'Playfair Display',serif;font-size:52px;color:#facc15;line-height:1;margin-bottom:5px;font-weight:800}
 .p-period{font-size:16px;color:#fff;font-weight:900}
-.p-vs{display:flex;align-items:center;gap:6px;margin:13px 0;background:rgba(255,255,255,.1);border-radius:8px;padding:10px 10px;flex-wrap:wrap;justify-content:flex-start}
+.p-vs{display:flex;align-items:center;gap:6px;margin:13px 0;background:rgba(255,255,255,.1);border-radius:8px;padding:10px 10px;flex-wrap:wrap;justify-content:center;text-align:center}
 .p-vs-txt{font-size:13px;color:rgba(255,255,255,.8)}
 .p-vs-txt s{color:rgba(255,255,255,.4)}
 .p-save{background:#4ade80;color:#14532d;font-size:14px;font-weight:900;border-radius:8px;padding:6px 12px;margin-left:0;white-space:nowrap}
@@ -463,7 +463,7 @@ textarea{min-height:120px;resize:none}
   <div class="pcard">
     <div style="display:inline-block;background:#fff;color:#1e3a8a;font-size:15px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:8px 20px;border-radius:20px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.15);-webkit-text-stroke:0.5px #1e3a8a">Abbonamento</div>
     <div class="p-vs"><div class="p-save">Risparmi €208</div><div style="font-size:11px;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:1px;flex-shrink:0">rispetto a</div><div class="p-vs-txt">Piattaforme mediche concorrenti e studi medici privati <s style="color:rgba(255,255,255,.5)">€288/anno</s></div></div>
-    <button class="btn-hp" onclick="showScreen('s-payment')" style="margin-top:4px">Attiva ora · Pagamento sicuro 🔒 →</button>
+    <button class="btn-hp" onclick="showScreen('s-payment')" style="margin-top:4px">Attiva ora · Pagamento sicuro 🔒</button>
   </div>
 
   <div class="trust-wrap">
@@ -526,7 +526,7 @@ textarea{min-height:120px;resize:none}
   <div style="padding:16px 16px 0">
     <div class="card">
       <input id="stripe-email" type="email" placeholder="La tua email *" autocomplete="email"/>
-      <button class="btn btn-p" onclick="startStripe()" style="margin-top:0">Attiva ora · Pagamento sicuro 🔒 →</button>
+      <button class="btn btn-p" onclick="startStripe()" style="margin-top:0">Attiva ora · Pagamento sicuro 🔒</button>
       <div style="margin-top:10px;font-size:12px;color:var(--txt-l);text-align:center;line-height:1.5">🔒 Pagamento sicuro con Stripe · Ricevuta fiscale per detrazione IRPEF 730</div>
     </div>
     <div class="card" style="margin-top:12px">
@@ -1412,8 +1412,8 @@ async function startStripe(){
     const r=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
     const d=await r.json();
     if(d.url)window.location.href=d.url;
-    else{alert('Errore: '+(d.error||'Riprova'));if(btn){btn.textContent='Attiva ora · Pagamento sicuro 🔒 →';btn.disabled=false;}}
-  }catch(e){alert('Errore di connessione.');if(btn){btn.textContent='Attiva ora · Pagamento sicuro 🔒 →';btn.disabled=false;}}
+    else{alert('Errore: '+(d.error||'Riprova'));if(btn){btn.textContent='Attiva ora · Pagamento sicuro 🔒';btn.disabled=false;}}
+  }catch(e){alert('Errore di connessione.');if(btn){btn.textContent='Attiva ora · Pagamento sicuro 🔒';btn.disabled=false;}}
 }
 
 async function startStripeSuc(){
