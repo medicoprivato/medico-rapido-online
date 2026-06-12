@@ -30,7 +30,7 @@ async function sendEmail(to, subject, html, attachments) {
       service: "gmail",
       auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_APP_PASSWORD }
     });
-    const mail = { from: `Medico Subito <${process.env.GMAIL_USER}>`, to, subject, html };
+    const mail = { from: `Medico Subito <contatti@medicoora.com>`, to, subject, html };
     if (attachments) mail.attachments = attachments;
     await transporter.sendMail(mail);
     return true;
