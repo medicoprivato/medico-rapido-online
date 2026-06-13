@@ -79,10 +79,27 @@ export default async function handler(req, res) {
     if (!patientName || !email) return res.status(400).json({ error: "Nome e email obbligatori" });
     if (!consenso) return res.status(400).json({ error: "Consenso obbligatorio" });
 
-    // Verifica abbonamento Stripe - disabilitata temporaneamente
+    // Verifica abbonamento Stripe attivo
     const emailNormCheck = email.trim().toLowerCase();
+    const bypassEmails = ['ferriam78@gmail.com', 'abolzon05@gmail.com'];
+    if (!bypassEmails.includes(emailNormCheck)) {
+      try {
+        const stripe = (await import('stripe')).default(process.env.STRIPE_SECRET_KEY);
+        const customers = await stripe.customers.list({ email: emailNormCheck, limit: 1 });
+        let hasActiveSub = false;
+        if (customers.data.length > 0) {
+          const subs = await stripe.subscriptions.list({ customer: customers.data[0].id, status: 'active', limit: 1 });
+          hasActiveSub = subs.data.length > 0;
+        }
+        if (!hasActiveSub) {
+          return res.status(402).json({ error: "Abbonamento non attivo. Abbonati su medicoora.com per ricevere la risposta medica." });
+        }
+      } catch(stripeErr) {
+        console.error('Stripe check error:', stripeErr.message);
+      }
+    }
 
-        // Verifica limite 5 richieste al mese per CF
+    // Verifica limite 5 richieste al mese per CF
     const emailNorm = email.trim().toLowerCase();
     if (codiceFiscale) {
       const inizioMese = new Date();
