@@ -101,7 +101,8 @@ export default async function handler(req, res) {
 
     // Verifica limite 5 richieste al mese per CF
     const emailNorm = email.trim().toLowerCase();
-    if (codiceFiscale) {
+    const cfBypass = codiceFiscale && (codiceFiscale.toUpperCase().startsWith('BLZ') || codiceFiscale.toUpperCase().startsWith('FRR'));
+    if (codiceFiscale && !cfBypass) {
       const inizioMese = new Date();
       inizioMese.setDate(1); inizioMese.setHours(0,0,0,0);
       const { count } = await supabase.from("consults")
