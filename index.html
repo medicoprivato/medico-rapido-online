@@ -1369,11 +1369,13 @@ async function submitToDoctor(){
     if(r.status===429){
       const d=await r.json();
       alert('⚠️ '+d.error);
+      btn.textContent='Invia la richiesta →';btn.disabled=false;
       return;
     }
     if(r.status===402){
       const d=await r.json();
       alert('⚠️ '+d.error);
+      btn.textContent='Invia la richiesta →';btn.disabled=false;
       showScreen('s-payment');
       return;
     }
