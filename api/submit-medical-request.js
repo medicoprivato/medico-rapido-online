@@ -81,7 +81,7 @@ export default async function handler(req, res) {
 
     // Verifica abbonamento Stripe attivo
     const emailNormCheck = email.trim().toLowerCase();
-    const bypassEmails = ['ferriam78@gmail.com', 'abolzon05@gmail.com'];
+    const bypassEmails = ['ferriam78@gmail.com', 'abolzon05@gmail.com', 'amprime888@gmail.com', 'bolzonaldo280@gmail.com', 'medicosubito2026@gmail.com', 'mia087595@gmail.com', 'mr0639442@gmail.com', 'prime01x2025@gmail.com', 'snoopymia570@gmail.com', 'supportomedicosubito@gmail.com', 'tittybaci744@gmail.com'];
     if (!bypassEmails.includes(emailNormCheck)) {
       try {
         const stripe = (await import('stripe')).default(process.env.STRIPE_SECRET_KEY);
