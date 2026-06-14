@@ -676,6 +676,7 @@ textarea{min-height:120px;resize:none}
           <button onclick="startStripeSuc()" style="width:100%;background:#fff;color:var(--blu-deep);border:none;border-radius:8px;padding:13px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Attiva ora →</button>
           <div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:8px">🔒 Pagamento sicuro con Stripe</div>
         </div>
+        <button onclick="newRequest()" style="width:100%;background:#fff;color:#1e3a8a;border:none;border-radius:10px;padding:14px;font-size:16px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Plus Jakarta Sans',sans-serif">📋 Invia nuova richiesta</button>
       </div>
     </div>
   </div>
@@ -1407,8 +1408,11 @@ async function submitToDoctor(){
 function newRequest(){
   document.getElementById('problem').value='';document.getElementById('requestType').value='';document.getElementById('followup').value='';
   uploadedFiles=[];renderFilesPreview();setConsenso(false);
-  ['response','rx-section','doctor-form','success-box'].forEach(id=>document.getElementById(id).classList.add('hidden'));
-  document.getElementById('warning').style.display='none';conversazione=[];window.scrollTo({top:0,behavior:'smooth'});
+  ['response','rx-section','doctor-form','success-box','loading'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.add('hidden');});
+  document.getElementById('warning').style.display='none';
+  conversazione=[];tipoRichiesta='';
+  const btn=document.querySelector('#doctor-form .btn-p');if(btn){btn.textContent='Invia al medico';btn.disabled=false;}
+  showScreen('s-richiesta');window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function togFaq(el){const a=el.nextElementSibling,arr=el.querySelector('span');if(a.classList.contains('open')){a.classList.remove('open');arr.textContent='▾';}else{a.classList.add('open');arr.textContent='▴';}}
