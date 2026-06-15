@@ -1684,7 +1684,8 @@ function generaPDFBrowser(patientName, tipo, risposta) {
 
 function salvaTriage(){
   const nome=document.getElementById('tr-nome').value.trim();
-  const dob=document.getElementById('tr-dob').value;
+  const dobRaw=document.getElementById('tr-dob').value;
+  const dob=dobRaw?dobRaw.split('-').reverse().join('/'):'';
   const cf=document.getElementById('tr-cf').value.trim().toUpperCase();
   const sesso=document.getElementById('tr-sesso').value;
   const peso=document.getElementById('tr-peso').value;
