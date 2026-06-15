@@ -232,7 +232,7 @@ textarea{min-height:120px;resize:none}
         <input id="paz-email" type="email" placeholder="Email *" autocomplete="email"/>
         <div id="paz-err" style="color:var(--err);font-size:13px;margin:-6px 0 10px;display:none"></div>
         <div id="paz-ok" style="color:green;font-size:14px;margin:-6px 0 10px;display:none;text-align:center">✅ Link inviato! Controlla la tua email.</div>
-        <button class="btn btn-p" onclick="loginPazMagic()">📧 Invia link di accesso →</button>
+        <button class="btn btn-p" onclick="loginPazMagic()">📧 Invia link di accesso</button>
         <button onclick="showScreen('s-home')" style="width:100%;background:none;border:none;color:var(--txt-l);font-size:13px;margin-top:14px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Continua senza account</button>
       </div>
       <div id="paz-form-reg" style="display:none">
@@ -245,7 +245,7 @@ textarea{min-height:120px;resize:none}
         </div>
         <input id="reg-cf" placeholder="Codice fiscale *" style="text-transform:uppercase"/>
         <div id="reg-err" style="color:var(--err);font-size:13px;margin:-6px 0 10px;display:none"></div>
-        <button class="btn btn-p" onclick="registraPaz()">Registrati →</button>
+        <button class="btn btn-p" onclick="registraPaz()">Registrati</button>
         <button class="btn btn-o" onclick="showPazLogin()" style="margin-top:10px;height:46px">Ho già un account</button>
       </div>
     </div>
@@ -296,7 +296,7 @@ textarea{min-height:120px;resize:none}
       <input type="checkbox" id="tr-consenso" style="display:none"/>
       <div id="tr-err" style="color:var(--err);font-size:13px;margin-bottom:10px;display:none"></div>
       <button onclick="salvaTriage()" style="width:100%;background:linear-gradient(135deg,#facc15,#f59e0b);color:#0f172a;border:none;border-radius:12px;height:54px;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:900;cursor:pointer;box-shadow:none">
-        Salva e procedi alla richiesta →
+        Salva e procedi alla richiesta
       </button>
     </div>
   </div>
@@ -485,10 +485,10 @@ textarea{min-height:120px;resize:none}
 
   <div class="trust-wrap">
     <div class="trust-grid">
-      <div class="trust-item" onclick="prevScr='s-home';showScreen('s-medici')" style="cursor:pointer"><strong>🔏 Firmato dal medico</strong>Ogni risposta porta la firma del professionista responsabile. <span style="color:var(--blu);font-size:12px">→ Team medico</span></div>
-      <div class="trust-item" onclick="prevScr='s-home';showScreen('s-privacy')" style="cursor:pointer"><strong>🔒 GDPR compliant</strong>Dati sanitari crittografati secondo normativa europea. <span style="color:var(--blu);font-size:12px">→ Privacy Policy</span></div>
-      <div class="trust-item" onclick="prevScr='s-home';showScreen('s-termini')" style="cursor:pointer"><strong>📋 FNOMCeO</strong>Conforme Linee Guida Telemedicina Min. Salute 2022. <span style="color:var(--blu);font-size:12px">→ Termini</span></div>
-      <div class="trust-item" onclick="prevScr='s-home';showScreen('s-termini')" style="cursor:pointer;border-color:var(--blu-mid)"><strong>💶 Detraibile 730</strong>Ricevuta fiscale per detrazione IRPEF (modello 730). <span style="color:var(--blu);font-size:12px">→ Dettagli</span></div>
+      <div class="trust-item" onclick="prevScr='s-home';showScreen('s-medici')" style="cursor:pointer"><strong>🔏 Firmato dal medico</strong>Ogni risposta porta la firma del professionista responsabile. <span style="color:var(--blu);font-size:12px">Team medico</span></div>
+      <div class="trust-item" onclick="prevScr='s-home';showScreen('s-privacy')" style="cursor:pointer"><strong>🔒 GDPR compliant</strong>Dati sanitari crittografati secondo normativa europea. <span style="color:var(--blu);font-size:12px">Privacy Policy</span></div>
+      <div class="trust-item" onclick="prevScr='s-home';showScreen('s-termini')" style="cursor:pointer"><strong>📋 FNOMCeO</strong>Conforme Linee Guida Telemedicina Min. Salute 2022. <span style="color:var(--blu);font-size:12px">Termini</span></div>
+      <div class="trust-item" onclick="prevScr='s-home';showScreen('s-termini')" style="cursor:pointer;border-color:var(--blu-mid)"><strong>💶 Detraibile 730</strong>Ricevuta fiscale per detrazione IRPEF (modello 730). <span style="color:var(--blu);font-size:12px">Dettagli</span></div>
     </div>
   </div>
 
@@ -661,7 +661,7 @@ textarea{min-height:120px;resize:none}
           <div class="con-txt">Acconsento alla conservazione digitale delle mie richieste e risposte nella piattaforma Medico Subito.</div>
           <div class="tog-grid"><button type="button" id="archivio-no" class="tog-btn" onclick="setArchivio(false)">No</button><button type="button" id="archivio-si" class="tog-btn" onclick="setArchivio(true)">Sì</button></div>
         </div>
-        <button class="btn btn-p" onclick="submitToDoctor()">Invia la richiesta →</button>
+        <button class="btn btn-p" onclick="submitToDoctor()">Invia la richiesta</button>
         <button class="btn btn-o" onclick="hideDoctorForm()" style="margin-top:8px;height:44px;font-size:14px">Annulla</button>
       </div>
       <div id="success-box" class="suc-box hidden">
@@ -673,7 +673,7 @@ textarea{min-height:120px;resize:none}
           <div style="color:#fff;font-size:22px;font-weight:700;margin-bottom:4px">€80/anno · €6,60/mese</div>
           <div style="color:rgba(255,255,255,.7);font-size:13px;margin-bottom:14px">Fino a 5 richieste al mese · 7 giorni su 7</div>
           <input id="stripe-email-suc" type="email" placeholder="La tua email" autocomplete="email" style="width:100%;border-radius:8px;border:none;padding:12px;font-size:15px;margin-bottom:10px;font-family:'Plus Jakarta Sans',sans-serif"/>
-          <button onclick="startStripeSuc()" style="width:100%;background:#fff;color:var(--blu-deep);border:none;border-radius:8px;padding:13px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Attiva ora →</button>
+          <button onclick="startStripeSuc()" style="width:100%;background:#fff;color:var(--blu-deep);border:none;border-radius:8px;padding:13px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Attiva ora</button>
           <div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:8px">🔒 Pagamento sicuro con Stripe</div>
         </div>
         <button onclick="newRequest()" style="width:100%;background:#fff;color:#1e3a8a;border:none;border-radius:10px;padding:14px;font-size:16px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Plus Jakarta Sans',sans-serif">📋 Invia nuova richiesta</button>
@@ -716,8 +716,8 @@ textarea{min-height:120px;resize:none}
     <div class="info-card"><h3>✍️ Consenso informato</h3><p>Ai sensi della L. 219/2017, inviando la richiesta medica dichiari di aver letto e accettato i Termini di servizio e l'Informativa Privacy, e di prestare consenso informato alla prestazione sanitaria telematica. Il consenso è revocabile in qualsiasi momento scrivendo a info@medicoora.com.</p></div>
     <div class="info-card"><h3>📋 Documenti legali</h3>
       <div style="display:flex;flex-direction:column;gap:14px;margin-top:8px">
-        <a onclick="prevScr='s-info';showScreen('s-privacy')" style="color:var(--blu);font-size:16px;font-weight:700;text-decoration:none;display:block;padding:12px;background:var(--bg);border-radius:8px;border:1px solid var(--brd)">🔒 Informativa Privacy (GDPR) →</a>
-        <a onclick="prevScr='s-info';showScreen('s-termini')" style="color:var(--blu);font-size:16px;font-weight:700;text-decoration:none;display:block;padding:12px;background:var(--bg);border-radius:8px;border:1px solid var(--brd)">📄 Termini e Condizioni →</a>
+        <a onclick="prevScr='s-info';showScreen('s-privacy')" style="color:var(--blu);font-size:16px;font-weight:700;text-decoration:none;display:block;padding:12px;background:var(--bg);border-radius:8px;border:1px solid var(--brd)">🔒 Informativa Privacy (GDPR)</a>
+        <a onclick="prevScr='s-info';showScreen('s-termini')" style="color:var(--blu);font-size:16px;font-weight:700;text-decoration:none;display:block;padding:12px;background:var(--bg);border-radius:8px;border:1px solid var(--brd)">📄 Termini e Condizioni</a>
       </div>
     </div>
   </div>
@@ -747,7 +747,7 @@ textarea{min-height:120px;resize:none}
     <div class="info-card"><h3>🕐 Disponibilità</h3><p>Servizio attivo <strong>24 ore su 24, 7 giorni su 7</strong>, inclusi sabato, domenica e festivi.</p></div>
     <div class="info-card"><h3>🔒 Sicurezza</h3><p>Dati protetti con crittografia GDPR e Linee Guida Telemedicina 2022.</p></div>
     <div class="info-card"><h3>👨‍⚕️ Team medico</h3><p>Medici iscritti all'Ordine dei Medici Chirurghi.</p></div>
-    <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="margin-top:6px">Fai una richiesta →</button>
+    <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="margin-top:6px">Fai una richiesta</button>
   </div>
   <div class="bnav">
     <div class="nav-it" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
@@ -769,7 +769,7 @@ textarea{min-height:120px;resize:none}
       <div style="font-size:18px;font-weight:700;color:#1e3a8a;margin-bottom:8px">Trasparenza e legalità</div>
       <div style="font-size:16px;color:var(--txt-s);line-height:1.7">Le informazioni complete sui professionisti sanitari che erogano il servizio sono disponibili nei Termini e Condizioni, nel rispetto del D.Lgs. 70/2003 e del GDPR.</div>
     </div>
-    <button onclick="showScreen('s-termini')" style="background:linear-gradient(135deg,#1e40af,#2563eb);color:#fff;border:none;padding:16px 32px;border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:16px;cursor:pointer;box-shadow:0 4px 16px rgba(29,78,216,.3);width:100%">Leggi i Termini e Condizioni →</button>
+    <button onclick="showScreen('s-termini')" style="background:linear-gradient(135deg,#1e40af,#2563eb);color:#fff;border:none;padding:16px 32px;border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:16px;cursor:pointer;box-shadow:0 4px 16px rgba(29,78,216,.3);width:100%">Leggi i Termini e Condizioni</button>
     <button onclick="showScreen(prevScr||'s-home')" style="background:none;border:none;color:var(--blu);font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;margin-top:14px;text-decoration:underline">← Torna indietro</button>
   </div>
   <div class="bnav">
@@ -972,7 +972,7 @@ textarea{min-height:120px;resize:none}
         <button class="pwd-eye" type="button" onclick="togglePwd('doc-pwd',this)">👁</button>
       </div>
       <div id="e-pwd" style="color:var(--err);font-size:13px;margin-top:-6px;margin-bottom:10px;display:none">Password non corretta</div>
-      <button class="btn btn-p" onclick="loginMedico()">Accedi →</button>
+      <button class="btn btn-p" onclick="loginMedico()">Accedi</button>
       <div style="text-align:center;margin-top:12px">
         <button onclick="alert('Per recuperare la password medico contatta:\ninfo@medicoora.com')" style="background:none;border:none;color:var(--blu);font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;font-weight:600">Password dimenticata?</button>
       </div>
@@ -1024,7 +1024,7 @@ textarea{min-height:120px;resize:none}
     <div style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:8px;color:var(--blu-deep)">Abbonamento richiesto</div>
     <p style="font-size:15px;color:var(--txt-s);margin-bottom:20px;line-height:1.6">Per inviare la richiesta al medico è necessario un abbonamento attivo.<br><strong style="color:var(--txt)">€80/anno · solo €6,60/mese</strong></p>
     <input id="paywall-email" type="email" placeholder="La tua email *" autocomplete="email" style="width:100%;border:1.5px solid var(--brd);border-radius:10px;padding:14px 16px;font-size:16px;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:12px"/>
-    <button onclick="startStripePaywall()" style="width:100%;background:var(--blu);color:#fff;border:none;border-radius:10px;padding:15px;font-size:16px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:10px">Abbonati ora — Pagamento sicuro →</button>
+    <button onclick="startStripePaywall()" style="width:100%;background:var(--blu);color:#fff;border:none;border-radius:10px;padding:15px;font-size:16px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:10px">Abbonati ora — Pagamento sicuro</button>
     <div style="font-size:12px;color:var(--txt-l);margin-bottom:14px">🔒 Stripe · Ricevuta fiscale detraibile IRPEF 730</div>
     <button onclick="chiudiPaywall()" style="background:none;border:none;color:var(--txt-l);font-size:13px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Annulla</button>
   </div>
@@ -1176,13 +1176,13 @@ async function loginPaz(){
     if(!r.ok || d.error || !d.access_token || !d.user?.id){
       const msg = d.error_description || d.msg || d.message || (d.error && typeof d.error==='string' ? d.error : JSON.stringify(d.error)) || 'Credenziali non valide';
       err.textContent='❌ '+msg;
-      err.style.display='block';btn.textContent='Accedi →';btn.disabled=false;return;
+      err.style.display='block';btn.textContent='Accedi';btn.disabled=false;return;
     }
     pazCorrente={email:d.user.email,nome:d.user?.user_metadata?.nome||email,cf:d.user?.user_metadata?.codice_fiscale||d.user?.user_metadata?.cf||'',token:d.access_token,id:d.user.id,loginTime:Date.now()};
     localStorage.setItem('paziente',JSON.stringify(pazCorrente));
-    btn.textContent='Accedi →';btn.disabled=false;
+    btn.textContent='Accedi';btn.disabled=false;
     entraPaziente();
-  }catch(e){err.textContent='❌ Errore rete: '+e.message;err.style.display='block';btn.textContent='Accedi →';btn.disabled=false;}
+  }catch(e){err.textContent='❌ Errore rete: '+e.message;err.style.display='block';btn.textContent='Accedi';btn.disabled=false;}
 }
 
 async function registraPaz(){
@@ -1194,13 +1194,13 @@ async function registraPaz(){
   try{
     const r=await fetch(SUPA_URL+'/auth/v1/signup',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPA_KEY},body:JSON.stringify({email,password:pwd,options:{emailRedirectTo:'https://www.medicoora.com'},data:{nome,codice_fiscale:cf}})});
     const d=await r.json();
-    if(d.msg&&d.msg.includes('already registered')){err.textContent='Email già registrata. Usa il login.';err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;setTimeout(()=>showPazLogin(),1500);return;}
+    if(d.msg&&d.msg.includes('already registered')){err.textContent='Email già registrata. Usa il login.';err.style.display='block';btn.textContent='Registrati';btn.disabled=false;setTimeout(()=>showPazLogin(),1500);return;}
     if(!r.ok||d.error){
       const msg=d.error_description||d.msg||d.message||(d.error&&typeof d.error==='string'?d.error:JSON.stringify(d.error))||'Errore registrazione';
-      err.textContent='❌ '+msg;err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;return;
+      err.textContent='❌ '+msg;err.style.display='block';btn.textContent='Registrati';btn.disabled=false;return;
     }
     // Registrazione ok - login diretto senza passare per il form
-    btn.textContent='Registrati →';btn.disabled=false;
+    btn.textContent='Registrati';btn.disabled=false;
     // Login diretto con le credenziali appena usate
     try{
       const lr=await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{
@@ -1225,7 +1225,7 @@ async function registraPaz(){
       if(loginD.access_token){
         pazCorrente={email:loginD.user.email,nome,token:loginD.access_token,id:loginD.user.id,loginTime:Date.now()};
         localStorage.setItem('paziente',JSON.stringify(pazCorrente));
-        btn.textContent='Registrati →';btn.disabled=false;
+        btn.textContent='Registrati';btn.disabled=false;
         entraPaziente();return;
       }
       alert('Account creato! Controlla la tua email per confermare, poi accedi.');
@@ -1235,7 +1235,7 @@ async function registraPaz(){
       alert('Account creato! Controlla email e poi accedi.');
       showPazLogin();
     }
-  }catch(e){err.textContent='❌ Errore rete: '+e.message;err.style.display='block';btn.textContent='Registrati →';btn.disabled=false;}
+  }catch(e){err.textContent='❌ Errore rete: '+e.message;err.style.display='block';btn.textContent='Registrati';btn.disabled=false;}
 }
 
 function entraPaziente(){
@@ -1275,7 +1275,7 @@ async function caricaStorico(){
       return;
     }
     if(d.length===0){
-      cont.innerHTML='<div style="text-align:center;color:var(--txt-l);padding:24px;font-size:15px">Nessuna richiesta ancora inviata.<br><br><button onclick="showScreen(\'s-richiesta\')" style="background:var(--blu);color:#fff;border:none;border-radius:8px;padding:12px 20px;font-size:14px;font-weight:700;cursor:pointer;font-family:\'Plus Jakarta Sans\',sans-serif">Invia la prima richiesta →</button></div>';
+      cont.innerHTML='<div style="text-align:center;color:var(--txt-l);padding:24px;font-size:15px">Nessuna richiesta ancora inviata.<br><br><button onclick="showScreen(\'s-richiesta\')" style="background:var(--blu);color:#fff;border:none;border-radius:8px;padding:12px 20px;font-size:14px;font-weight:700;cursor:pointer;font-family:\'Plus Jakarta Sans\',sans-serif">Invia la prima richiesta</button></div>';
       return;
     }
     cont.innerHTML=d.map(c=>`<div class="info-card" style="margin-bottom:10px">
@@ -1385,13 +1385,13 @@ async function submitToDoctor(){
     if(r.status===429){
       const d=await r.json();
       alert('⚠️ '+d.error);
-      btn.textContent='Invia la richiesta →';btn.disabled=false;
+      btn.textContent='Invia la richiesta';btn.disabled=false;
       return;
     }
     if(r.status===402){
       const d=await r.json();
       alert('⚠️ '+d.error);
-      btn.textContent='Invia la richiesta →';btn.disabled=false;
+      btn.textContent='Invia la richiesta';btn.disabled=false;
       showScreen('s-payment');
       return;
     }
@@ -1402,7 +1402,7 @@ async function submitToDoctor(){
     document.getElementById('success-box').classList.remove('hidden');
     document.getElementById('success-box').scrollIntoView({behavior:'smooth'});
     uploadedFiles=[];renderFilesPreview();
-  }catch(e){alert('Errore nell\'invio. Riprova tra qualche secondo.');btn.textContent='Invia la richiesta →';btn.disabled=false;}
+  }catch(e){alert('Errore nell\'invio. Riprova tra qualche secondo.');btn.textContent='Invia la richiesta';btn.disabled=false;}
 }
 
 function newRequest(){
@@ -1454,8 +1454,8 @@ async function startStripeSuc(){
     const r=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
     const d=await r.json();
     if(d.url)window.location.href=d.url;
-    else{alert('Errore: '+(d.error||'Riprova'));if(btn){btn.textContent='Attiva ora →';btn.disabled=false;}}
-  }catch(e){alert('Errore di connessione.');if(btn){btn.textContent='Attiva ora →';btn.disabled=false;}}
+    else{alert('Errore: '+(d.error||'Riprova'));if(btn){btn.textContent='Attiva ora';btn.disabled=false;}}
+  }catch(e){alert('Errore di connessione.');if(btn){btn.textContent='Attiva ora';btn.disabled=false;}}
 }
 
 function loginMedico(){
@@ -1594,8 +1594,8 @@ async function startStripePaywall(){
     const r = await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
     const d = await r.json();
     if(d.url) window.location.href = d.url;
-    else{alert('Errore: '+(d.error||'Riprova'));btn.textContent='Abbonati ora — Pagamento sicuro →';btn.disabled=false;}
-  }catch(e){alert('Errore di connessione.');btn.textContent='Abbonati ora — Pagamento sicuro →';btn.disabled=false;}
+    else{alert('Errore: '+(d.error||'Riprova'));btn.textContent='Abbonati ora — Pagamento sicuro';btn.disabled=false;}
+  }catch(e){alert('Errore di connessione.');btn.textContent='Abbonati ora — Pagamento sicuro';btn.disabled=false;}
 }
 
 
