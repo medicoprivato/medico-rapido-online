@@ -109,8 +109,8 @@ export default async function handler(req, res) {
         .select("*", { count: "exact", head: true })
         .eq("codice_fiscale", codiceFiscale.toUpperCase())
         .gte("created_at", inizioMese.toISOString());
-      if (count >= 5) {
-        return res.status(429).json({ error: "Hai raggiunto il limite di 5 richieste mensili per questo codice fiscale. Il limite si rinnova il primo del mese." });
+      if (count >= 3) {
+        return res.status(429).json({ error: "Hai raggiunto il limite di 3 richieste mensili per questo codice fiscale. Il limite si rinnova il primo del mese." });
       }
     }
     const { error } = await supabase.from("consults").insert({
