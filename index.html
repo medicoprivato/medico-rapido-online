@@ -1158,6 +1158,10 @@ textarea{min-height:120px;resize:none}
     <button onclick="loadCases('pending')" style="background:var(--blu);color:#fff;border:none;border-radius:100px;padding:7px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">In attesa</button>
     <button onclick="loadCases('all')" style="background:#fff;color:var(--txt-s);border:1px solid var(--brd);border-radius:100px;padding:7px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Tutte</button>
   </div>
+  <div id="visit-counter-box" style="margin:12px 16px 0;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between">
+    <div style="font-size:13px;color:#166534;font-weight:700">Visite totali sito</div>
+    <div id="visit-counter-num" style="font-size:20px;color:#16a34a;font-weight:900">—</div>
+  </div>
   <div id="cases-container" style="padding-bottom:20px"><div class="loader-box" style="margin:16px">Caricamento richieste...</div></div>
 </div>
 
@@ -1628,8 +1632,17 @@ async function startStripeSuc(){
 
 function loginMedico(){
   const pwd=document.getElementById('doc-pwd').value;
-  if(pwd===DOC_PWD){document.getElementById('e-pwd').style.display='none';showScreen('s-doc-dash');loadCases('pending');}
+  if(pwd===DOC_PWD){document.getElementById('e-pwd').style.display='none';showScreen('s-doc-dash');loadCases('pending');loadVisitCounter();}
   else{document.getElementById('e-pwd').style.display='block';}
+}
+
+async function loadVisitCounter(){
+  try{
+    const r=await fetch('/api/track-visit',{headers:{'Authorization':'Bearer '+DOC_PWD}});
+    const d=await r.json();
+    const el=document.getElementById('visit-counter-num');
+    if(el) el.textContent=(d.totalViews!==undefined)?d.totalViews:'—';
+  }catch(e){}
 }
 
 async function loadCases(filter){
@@ -1750,7 +1763,7 @@ async function inviaRisposta(){
     const d=await r.json();
     if(!r.ok){btn.textContent='❌ '+(d.error||'Errore');btn.disabled=false;return;}
     btn.textContent='✅ Inviato';
-    setTimeout(()=>{showScreen('s-doc-dash');loadCases('pending');},1500);
+    setTimeout(()=>{showScreen('s-doc-dash');loadCases('pending');loadVisitCounter();},1500);
   }catch(e){btn.textContent='❌ Errore';btn.disabled=false;}
 }
 async function startStripePaywall(){
