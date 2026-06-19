@@ -1965,5 +1965,8 @@ function hideCookieBanner(){document.getElementById('cookie-banner').style.displ
 function acceptCookies(){hideCookieBanner();localStorage.setItem('cookie-consent','accepted');}
 if(!localStorage.getItem('cookie-consent')){document.getElementById('cookie-banner').style.display='block';}
 </script>
+<script>
+try{fetch('/api/track-visit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({page:location.pathname})}).catch(()=>{});}catch(e){}
+</script>
 </body>
 </html>
