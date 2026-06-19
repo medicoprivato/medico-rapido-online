@@ -714,6 +714,7 @@ textarea{min-height:120px;resize:none}
     <div class="info-card"><h3>Prestazioni disponibili</h3><p>Rinnovo terapia · Prescrizione esami · Certificati medici · Valutazione sintomi · Secondo parere medico · Interpretazione referti</p></div>
     <div class="info-card"><h3>Quando NON utilizzare</h3><p>Dolore toracico, difficoltà respiratoria, perdita di coscienza, febbre alta: chiama il <strong>118</strong> o vai al Pronto Soccorso. Questo servizio <strong>non sostituisce il medico di base</strong> né la visita medica in presenza (Linee Guida Telemedicina Min. Salute 2022 · FNOMCeO).</p></div>
     <div class="info-card"><h3>A chi è rivolto</h3><p>Servizio rivolto esclusivamente a pazienti adulti (18 anni compiuti). Per i minori rivolgiti al pediatra.</p></div>
+    <div class="info-card" onclick="showScreen('s-blog')" style="cursor:pointer"><h3>Blog e guide</h3><p>Articoli su telemedicina, prescrizioni e salute. Tocca per leggere le guide complete.</p></div>
     <div class="info-card"><h3>Tariffe</h3><p><strong>€80/anno</strong> (€6,60/mese). Fino a 3 richieste al mese per 12 mesi, soggette a valutazione clinica.</p></div>
     <div class="info-card"><h3>Tempi di risposta</h3><p>Il medico si impegna a rispondere il prima possibile, indicativamente entro 24 ore, 7 giorni su 7 inclusi sabato e domenica. In caso di impossibilità temporanea verrà data comunicazione via email.</p></div>
     <div class="info-card"><h3>Consenso informato</h3><p>Ai sensi della L. 219/2017, inviando la richiesta medica dichiari di aver letto e accettato i Termini di servizio e l'Informativa Privacy, e di prestare consenso informato alla prestazione sanitaria telematica. Il consenso è revocabile in qualsiasi momento scrivendo a info@medicoora.com.</p></div>
@@ -799,6 +800,155 @@ textarea{min-height:120px;resize:none}
     <div class="faq-item"><div class="faq-q" onclick="togFaq(this)">Quante richieste posso fare al mese? <span>▾</span></div><div class="faq-a">Con l'abbonamento attivo puoi inviare fino a 3 richieste al mese per codice fiscale. Il limite si rinnova automaticamente il primo giorno di ogni mese. È pensato per garantire un servizio di qualità e personale a tutti gli abbonati.</div></div>
     <div class="faq-item"><div class="faq-q" onclick="togFaq(this)">Posso ricevere una prescrizione per farmaci cronici? <span>▾</span></div><div class="faq-a">Sì. Il rinnovo di terapie croniche è uno dei casi più frequenti. Il medico esamina la richiesta e la documentazione che fornisci.</div></div>
     <div class="faq-item"><div class="faq-q" onclick="togFaq(this)">Vale come ricetta del medico di base? <span>▾</span></div><div class="faq-a">È una prescrizione medica privata firmata da un medico iscritto all'Ordine dei Medici Chirurghi. Non è una ricetta SSN, quindi viene accettata in farmacia come ricetta privata.</div></div>
+  </div>
+</div>
+
+
+<!-- BLOG -->
+<div id="s-blog" class="screen">
+  <div class="hdr"><button class="btn-back" onclick="showScreen(prevScr||'s-home')">← Torna</button><div class="logo-txt" style="margin-left:8px">Blog</div></div>
+  <div style="padding:16px 16px 90px">
+    <div class="sez-title serif" style="margin-bottom:14px">Articoli e guide</div>
+
+    <div class="blog-card" onclick="showScreen('s-blog-1')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+      <div style="font-weight:800;color:#1e3a8a;font-size:16px;margin-bottom:6px">Cosa fare se il medico di base è chiuso il sabato</div>
+      <div style="font-size:13px;color:#64748b">Le alternative legittime quando l'ambulatorio è chiuso e non si tratta di un'emergenza.</div>
+    </div>
+
+    <div class="blog-card" onclick="showScreen('s-blog-2')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+      <div style="font-weight:800;color:#1e3a8a;font-size:16px;margin-bottom:6px">Quanto costa una ricetta medica online in Italia</div>
+      <div style="font-size:13px;color:#64748b">Confronto tra pagamento a consulto singolo e abbonamento annuale.</div>
+    </div>
+
+    <div class="blog-card" onclick="showScreen('s-blog-3')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+      <div style="font-weight:800;color:#1e3a8a;font-size:16px;margin-bottom:6px">Come rinnovare la terapia per la pressione alta senza andare dal medico</div>
+      <div style="font-size:13px;color:#64748b">Cosa prevede la normativa sulla telemedicina per le terapie croniche stabili.</div>
+    </div>
+
+    <div class="blog-card" onclick="showScreen('s-blog-4')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+      <div style="font-weight:800;color:#1e3a8a;font-size:16px;margin-bottom:6px">Medico online per chi vive all'estero</div>
+      <div style="font-size:13px;color:#64748b">Come gli italiani fuori dall'Italia possono mantenere un riferimento medico italiano.</div>
+    </div>
+
+    <div class="blog-card" onclick="showScreen('s-blog-5')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+      <div style="font-weight:800;color:#1e3a8a;font-size:16px;margin-bottom:6px">Differenza tra ricetta rossa e ricetta bianca</div>
+      <div style="font-size:13px;color:#64748b">Quando serve l'una o l'altra e qual è il valore legale di ciascuna.</div>
+    </div>
+
+    <div class="blog-card" onclick="showScreen('s-blog-6')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+      <div style="font-weight:800;color:#1e3a8a;font-size:16px;margin-bottom:6px">Perché scegliere Medico Subito</div>
+      <div style="font-size:13px;color:#64748b">Tempi di risposta e vantaggi dell'abbonamento annuale.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- BLOG ARTICOLO 1 -->
+<div id="s-blog-1" class="screen">
+  <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
+  <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
+    <h2 style="color:#1e3a8a;font-size:22px;margin-bottom:4px">Cosa fare se il medico di base è chiuso il sabato</h2>
+    <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
+    <p style="margin-bottom:14px;line-height:1.7">Hai bisogno di una ricetta, di un certificato o di un parere medico, ma il tuo medico di base è chiuso. È sabato, o domenica, o è un giorno festivo. La guardia medica risponde per le urgenze, non per le richieste ordinarie. Il pronto soccorso è riservato alle emergenze vere.</p>
+    <p style="margin-bottom:14px;line-height:1.7">Molti italiani si trovano ogni settimana in questa situazione. La soluzione esiste, ed è più semplice di quello che pensi.</p>
+    <h3 style="color:#1e3a8a;margin:20px 0 8px">Il problema reale: gli ambulatori sono aperti poche ore</h3>
+    <p style="margin-bottom:14px;line-height:1.7">In Italia il medico di base riceve mediamente tre o cinque giorni a settimana, per poche ore al giorno. Il sabato mattina alcuni sono disponibili, ma la maggior parte no. La domenica gli ambulatori sono chiusi. Durante le festività la situazione peggiora ulteriormente.</p>
+    <p style="margin-bottom:14px;line-height:1.7">Questo significa che per almeno due o tre giorni ogni settimana, senza contare ferie e malattia del medico, non hai accesso al tuo medico di fiducia.</p>
+    <h3 style="color:#1e3a8a;margin:20px 0 8px">Cosa non devi fare</h3>
+    <p style="margin-bottom:14px;line-height:1.7">Non andare al Pronto Soccorso per richieste non urgenti. Il pronto soccorso è pensato per emergenze come dolore toracico, difficoltà respiratoria, traumi, perdita di coscienza. Presentarsi al PS per rinnovare una terapia o richiedere esami del sangue significa aspettare ore, intasare un servizio di emergenza e spesso ricevere un ticket per codice bianco.</p>
+    <p style="margin-bottom:14px;line-height:1.7">Non chiamare il 118 per lo stesso motivo. Il 118 è per le emergenze vere.</p>
+    <h3 style="color:#1e3a8a;margin:20px 0 8px">Le alternative legittime</h3>
+    <p style="margin-bottom:14px;line-height:1.7"><strong>La guardia medica.</strong> Copre le ore notturne e i festivi per le situazioni che non possono aspettare ma non sono emergenze. Puoi chiamarla per sintomi acuti, febbre alta, dolori che non migliorano. Non è però il canale giusto per richieste programmate come rinnovo terapie o certificati.</p>
+    <p style="margin-bottom:14px;line-height:1.7"><strong>Il medico sostituto.</strong> Se il tuo medico di base è assente per ferie o malattia, di solito indica un sostituto. Controlla il sito della tua ASL o chiama lo studio per trovare il sostituto di riferimento.</p>
+    <p style="margin-bottom:14px;line-height:1.7"><strong>La telemedicina.</strong> Per richieste programmate e non urgenti come il rinnovo di una terapia cronica, la richiesta di esami del sangue, un certificato medico o l'interpretazione di un referto, la telemedicina è oggi la soluzione più pratica. Un medico online può valutare la tua situazione e fornirti la documentazione necessaria anche di sabato, domenica e nei giorni festivi.</p>
+    <h3 style="color:#1e3a8a;margin:20px 0 8px">Cosa puoi richiedere online e cosa no</h3>
+    <p style="margin-bottom:14px;line-height:1.7">Puoi richiedere il rinnovo di terapie croniche in corso, esami del sangue o strumentali di controllo, certificati medici, una seconda opinione su referti o diagnosi, indicazioni su farmaci da banco. Non puoi richiedere visite che necessitano un esame fisico diretto, la gestione di emergenze, o prescrizioni per farmaci a normativa restrittiva.</p>
+    <h3 style="color:#1e3a8a;margin:20px 0 8px">Come funziona Medico Subito</h3>
+    <p style="margin-bottom:14px;line-height:1.7">Medico Subito è una piattaforma italiana di telemedicina attiva sette giorni su sette, sabato e domenica inclusi. Descrivi la tua situazione nel modulo online, un medico iscritto all'Ordine valuta la tua richiesta, e ricevi la risposta firmata via email entro ventiquattro ore, con eventuale documentazione in PDF.</p>
+    <p style="margin-bottom:14px;line-height:1.7">L'abbonamento annuale è di ottanta euro e include fino a tre richieste al mese. Il servizio è rivolto esclusivamente a pazienti adulti residenti in Italia.</p>
+    <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">In caso di emergenza chiama il 118 o vai al Pronto Soccorso. La telemedicina non sostituisce il soccorso d'emergenza.</p>
+    <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
+  </div>
+</div>
+
+<!-- BLOG ARTICOLO 2 -->
+<div id="s-blog-2" class="screen">
+  <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
+  <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
+    <h2 style="color:#1e3a8a;font-size:22px;margin-bottom:4px">Quanto costa una ricetta medica online in Italia</h2>
+    <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
+    <p style="margin-bottom:14px;line-height:1.7">Chi cerca un medico online per la prima volta si pone quasi sempre la stessa domanda: quanto costa davvero. La risposta cambia molto da una piattaforma all'altra, e capire le differenze aiuta a scegliere con consapevolezza.</p>
+    <p style="margin-bottom:14px;line-height:1.7">Molti servizi di telemedicina applicano un costo per singola visita, che in Italia oscilla generalmente tra i venti e i quaranta euro a consulto. Significa che ogni volta che hai bisogno di un parere medico, di un rinnovo di terapia o di una richiesta di esami, paghi una cifra separata. Per chi ha patologie croniche e necessita di contatti regolari con un medico, questo modello diventa costoso nel tempo.</p>
+    <h3 style="color:#1e3a8a;margin:20px 0 8px">Il modello ad abbonamento</h3>
+    <p style="margin-bottom:14px;line-height:1.7">Medico Subito funziona diversamente. L'abbonamento annuale costa ottanta euro, equivalenti a circa sei euro e sessanta al mese, e include fino a tre richieste mediche mensili per tutta la durata dell'anno. Chi utilizza il servizio anche solo due o tre volte al mese ottiene un risparmio netto rispetto al pagamento a consulto singolo.</p>
+    <p style="margin-bottom:14px;line-height:1.7">Il prezzo include la valutazione del medico, la documentazione firmata e l'invio della risposta entro ventiquattro ore, sette giorni su sette, sabato e domenica compresi. Non ci sono costi nascosti né pagamenti aggiuntivi per le richieste comprese nel limite mensile.</p>
+    <h3 style="color:#1e3a8a;margin:20px 0 8px">Per chi conviene di più</h3>
+    <p style="margin-bottom:20px;line-height:1.7">Per chi deve rinnovare una terapia cronica, richiedere periodicamente esami di controllo o necessita occasionalmente di un certificato medico, l'abbonamento annuale rappresenta la soluzione più conveniente rispetto al pagamento per singola prestazione.</p>
+    <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
+  </div>
+</div>
+
+<!-- BLOG ARTICOLO 3 -->
+<div id="s-blog-3" class="screen">
+  <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
+  <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
+    <h2 style="color:#1e3a8a;font-size:22px;margin-bottom:4px">Come rinnovare la terapia per la pressione alta senza andare dal medico</h2>
+    <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
+    <p style="margin-bottom:14px;line-height:1.7">Chi convive con l'ipertensione sa quanto sia frequente la necessità di rinnovare la terapia. Le visite di controllo per la sola conferma della cura già in corso, quando i valori sono stabili e non ci sono nuovi sintomi, rappresentano spesso una perdita di tempo evitabile.</p>
+    <p style="margin-bottom:14px;line-height:1.7">La normativa italiana sulla telemedicina, definita dalle Linee Guida del Ministero della Salute del 2022, consente ai medici di valutare a distanza richieste di questo tipo, quando clinicamente appropriato. Questo significa che per molte terapie croniche stabili non è necessario presentarsi fisicamente in ambulatorio ogni volta.</p>
+    <h3 style="color:#1e3a8a;margin:20px 0 8px">Come funziona la valutazione a distanza</h3>
+    <p style="margin-bottom:14px;line-height:1.7">Attraverso Medico Subito è possibile descrivere la propria situazione clinica, indicare la terapia in corso e i valori pressori rilevati, e ricevere la valutazione di un medico iscritto all'Ordine entro ventiquattro ore. Se il rinnovo è clinicamente appropriato, il medico fornisce la documentazione necessaria firmata digitalmente.</p>
+    <p style="margin-bottom:14px;line-height:1.7">Questo approccio è particolarmente utile per chi lavora con orari rigidi, per chi vive lontano dal proprio medico di base, o semplicemente per chi vuole evitare l'attesa in studio per una pratica di routine.</p>
+    <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">In presenza di nuovi sintomi, valori pressori fortemente alterati o cambiamenti significativi delle condizioni di salute è necessaria una valutazione medica diretta e non un consulto a distanza.</p>
+    <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
+  </div>
+</div>
+
+<!-- BLOG ARTICOLO 4 -->
+<div id="s-blog-4" class="screen">
+  <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
+  <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
+    <h2 style="color:#1e3a8a;font-size:22px;margin-bottom:4px">Medico online per chi vive all'estero</h2>
+    <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
+    <p style="margin-bottom:14px;line-height:1.7">Vivere all'estero comporta spesso una difficoltà che pochi considerano prima di trasferirsi: trovare un medico che parli italiano e conosca il sistema sanitario nazionale, soprattutto per questioni come il rinnovo di una terapia iniziata in Italia o la richiesta di un certificato in italiano.</p>
+    <p style="margin-bottom:14px;line-height:1.7">Gli italiani residenti fuori dal territorio nazionale, sia per lavoro che per studio o vita personale, si trovano spesso a dover gestire la propria salute in un sistema sanitario diverso, con medici che non hanno accesso alla loro storia clinica italiana e che comunicano in una lingua non sempre comprensibile fino in fondo.</p>
+    <h3 style="color:#1e3a8a;margin:20px 0 8px">Un punto di riferimento italiano</h3>
+    <p style="margin-bottom:14px;line-height:1.7">Un medico online italiano risolve diversi di questi problemi. Permette di mantenere continuità con la terapia prescritta in Italia, di ottenere certificati medici scritti in italiano riconoscibili dalle istituzioni italiane, e di ricevere un parere medico comprensibile senza barriere linguistiche, indipendentemente dal fuso orario o dal paese di residenza.</p>
+    <p style="margin-bottom:20px;line-height:1.7">Medico Subito è accessibile da qualsiasi parte del mondo con una connessione internet. Le richieste vengono valutate da un medico italiano iscritto all'Ordine, e la documentazione viene fornita in italiano, utile sia per la gestione sanitaria personale sia per eventuali necessità burocratiche legate all'Italia.</p>
+    <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
+  </div>
+</div>
+
+<!-- BLOG ARTICOLO 5 -->
+<div id="s-blog-5" class="screen">
+  <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
+  <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
+    <h2 style="color:#1e3a8a;font-size:22px;margin-bottom:4px">Differenza tra ricetta rossa e ricetta bianca</h2>
+    <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
+    <p style="margin-bottom:14px;line-height:1.7">Chi non lavora in ambito sanitario spesso confonde i diversi tipi di prescrizione medica, generando incertezza al momento di rivolgersi a un medico o di recarsi in farmacia.</p>
+    <p style="margin-bottom:14px;line-height:1.7">La ricetta rossa, tecnicamente chiamata ricetta del Servizio Sanitario Nazionale, viene utilizzata per prescrivere farmaci e prestazioni a carico parziale o totale del sistema sanitario pubblico. Viene emessa dal medico di base o dallo specialista convenzionato e permette di accedere a farmaci con il ticket previsto o gratuitamente, a seconda della propria situazione.</p>
+    <p style="margin-bottom:14px;line-height:1.7">La ricetta bianca, invece, è una prescrizione privata. Viene utilizzata quando il farmaco o la prestazione richiesta non rientrano nei criteri di rimborso del sistema sanitario nazionale, oppure quando il paziente sceglie volontariamente la via privata, ad esempio per maggiore rapidità. Il costo del farmaco o della prestazione, in questo caso, è interamente a carico del paziente.</p>
+    <h3 style="color:#1e3a8a;margin:20px 0 8px">Il valore legale della ricetta bianca</h3>
+    <p style="margin-bottom:14px;line-height:1.7">I servizi di telemedicina privata come Medico Subito operano attraverso ricette bianche, in quanto il consulto avviene al di fuori del circuito del Servizio Sanitario Nazionale. Questo non significa che la prescrizione abbia minore valore legale: una ricetta bianca emessa da un medico abilitato è a tutti gli effetti un documento medico valido, semplicemente non dà diritto alle agevolazioni del sistema pubblico.</p>
+    <p style="margin-bottom:20px;line-height:1.7">Per chi necessita di una prescrizione rapida, senza i tempi di attesa del sistema pubblico, e accetta di sostenere il costo pieno del farmaco, la ricetta bianca ottenuta tramite consulto online rappresenta un'alternativa pratica e legalmente valida.</p>
+    <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
+  </div>
+</div>
+
+<!-- BLOG ARTICOLO 6 -->
+<div id="s-blog-6" class="screen">
+  <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
+  <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
+    <h2 style="color:#1e3a8a;font-size:22px;margin-bottom:4px">Perché scegliere Medico Subito</h2>
+    <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
+    <p style="margin-bottom:14px;line-height:1.7">Quando si sceglie un servizio di telemedicina, due fattori pesano più di ogni altro nella decisione: la velocità con cui si riceve una risposta e il costo complessivo nel tempo.</p>
+    <h3 style="color:#1e3a8a;margin:20px 0 8px">Tempi di risposta</h3>
+    <p style="margin-bottom:14px;line-height:1.7">Su Medico Subito la risposta del medico arriva entro ventiquattro ore dall'invio della richiesta, sette giorni su sette, inclusi sabato, domenica e giorni festivi. Non esistono orari di chiusura né attese settimanali: una richiesta inviata di sabato sera riceve risposta entro la giornata successiva, senza dover aspettare il lunedì.</p>
+    <h3 style="color:#1e3a8a;margin:20px 0 8px">Costo nel tempo</h3>
+    <p style="margin-bottom:14px;line-height:1.7">Sul piano economico, l'abbonamento annuale di ottanta euro copre fino a tre richieste mediche al mese per dodici mesi consecutivi. Confrontato con il costo medio di una visita privata in studio, che in Italia si attesta generalmente tra i cinquanta e i cento euro, la differenza è netta già dal primo utilizzo dell'abbonamento.</p>
+    <p style="margin-bottom:14px;line-height:1.7">Ogni risposta del medico viene fornita con documentazione firmata digitalmente, pronta per essere utilizzata in farmacia o conservata come riferimento sanitario personale. Non sono richiesti spostamenti, non ci sono sale d'attesa, e l'intero processo si svolge dal proprio telefono o computer.</p>
+    <p style="margin-bottom:20px;line-height:1.7">Per chi gestisce terapie croniche, necessita periodicamente di certificati o desidera un secondo parere medico senza i tempi del sistema tradizionale, l'abbonamento rappresenta una soluzione che unisce rapidità e risparmio concreto.</p>
+    <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
   </div>
 </div>
 
