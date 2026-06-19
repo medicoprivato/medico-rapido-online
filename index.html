@@ -525,7 +525,8 @@ textarea{min-height:120px;resize:none}
     <div style="font-size:10px;opacity:.4;line-height:1.7">
       Servizio conforme alle Linee Guida Telemedicina Min. Salute 2022 · GDPR · FNOMCeO<br>
       Medico iscritto all'Ordine dei Medici italiano · P.IVA IT17215181003<br>
-      © 2026 Medico Subito · medicoora.com
+      © 2026 Medico Subito · medicoora.com<br>
+      <span id="public-visit-count" style="opacity:.7"></span>
     </div>
   </div>
 
@@ -1980,6 +1981,10 @@ if(!localStorage.getItem('cookie-consent')){document.getElementById('cookie-bann
 </script>
 <script>
 try{fetch('/api/track-visit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({page:location.pathname})}).catch(()=>{});}catch(e){}
+fetch('/api/track-visit?public=1').then(r=>r.json()).then(d=>{
+  const el=document.getElementById('public-visit-count');
+  if(el && d.totalViews!==undefined) el.textContent='Visite al sito: '+d.totalViews;
+}).catch(()=>{});
 </script>
 </body>
 </html>
