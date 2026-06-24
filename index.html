@@ -36,12 +36,12 @@
 :root{
   --blu:#7c3aed;--blu-dk:#6d28d9;--blu-deep:#5b21b6;
   --blu-lt:#faf5ff;--blu-mid:#ede9fe;
-  --txt:#0f172a;--txt-s:#475569;--txt-l:#64748b;
-  --brd:#ddd6fe;--bg:#faf5ff;--wht:#fff;
-  --ok:#15803d;--ok-bg:#f0fdf4;--warn:#b45309;--err:#dc2626;
+  --txt:#0f172a;--txt-s:#5b21b6;--txt-l:#7c3aed;
+  --brd:#ddd6fe;--bg:#fff;--wht:#fff;
+  --ok:#7c3aed;--ok-bg:#faf5ff;--warn:#7c3aed;--err:#5b21b6;
   --r:16px;--r-s:10px;
-  --sh:0 1px 4px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04);
-  --sh-b:0 4px 20px rgba(124,58,237,.2);
+  --sh:0 1px 4px rgba(124,58,237,.08),0 4px 16px rgba(124,58,237,.06);
+  --sh-b:0 4px 20px rgba(56,189,248,.35);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;font-size:17px}
@@ -76,28 +76,28 @@ textarea{min-height:120px;resize:none}
 
 .spacer{height:90px}
 
-.hero{background:#fff;border-bottom:1px solid #ddd6fe;padding:40px 20px 40px;position:relative;overflow:hidden}
+.hero{background:linear-gradient(145deg,#5b21b6 0%,#7c3aed 60%,#a855f7 100%);padding:40px 20px 40px;position:relative;overflow:hidden}
 
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:#38bdf8;border:none;border-radius:24px;padding:8px 20px;font-size:14px;font-weight:900;color:#5b21b6;margin-bottom:18px;letter-spacing:.6px;text-transform:uppercase;box-shadow:0 4px 20px rgba(56,189,248,.3)}
 .hero-badge::before{content:'';width:11px;height:11px;background:#16a34a;border-radius:50%;display:inline-block;flex-shrink:0}
-.hero h1{font-family:'Playfair Display',serif;font-size:34px;line-height:1.15;color:#5b21b6;margin-bottom:22px;letter-spacing:-.8px;font-weight:700;max-width:90%}
-.hero h1 em{font-style:italic;color:#7c3aed;font-weight:800}
+.hero h1{font-family:'Playfair Display',serif;font-size:34px;line-height:1.15;color:#fff;margin-bottom:22px;letter-spacing:-.8px;font-weight:700;max-width:90%}
+.hero h1 em{font-style:italic;color:#facc15;font-weight:800}
 
 .hero-serv{background:linear-gradient(135deg,rgba(15,23,42,.6),rgba(109,40,217,.4));backdrop-filter:blur(10px);border:1px solid rgba(250,204,21,.25);border-radius:18px;padding:22px 22px;margin-bottom:16px;box-shadow:0 8px 32px rgba(0,0,0,.2)}
-.hero-serv-lbl{font-size:18px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:#5b21b6;margin-bottom:14px}
-.hero-serv-list{font-size:18px;font-weight:800;color:#7c3aed;line-height:1.9;letter-spacing:.3px;text-transform:uppercase}
-.hero-serv-list .so{color:#38bdf8;font-weight:900;font-size:20px;display:block;margin-top:4px}
-.hero-nota{font-size:13px;color:#64748b;margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1);line-height:1.6;font-weight:600;text-transform:none;letter-spacing:.2px}
+.hero-serv-lbl{font-size:18px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:#fff;margin-bottom:14px}
+.hero-serv-list{font-size:18px;font-weight:800;color:#facc15;line-height:1.9;letter-spacing:.3px;text-transform:uppercase}
+.hero-serv-list .so{color:#facc15;font-weight:900;font-size:20px;display:block;margin-top:4px}
+.hero-nota{font-size:13px;color:rgba(255,255,255,.85);margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1);line-height:1.6;font-weight:600;text-transform:none;letter-spacing:.2px}
 
 .hero-24h{background:rgba(250,204,21,.08);border:1px solid rgba(250,204,21,.3);border-radius:14px;padding:16px 20px;margin-bottom:22px;display:flex;align-items:center;gap:14px}
-.hero-24h-ico{width:44px;height:44px;background:#ede9fe;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.hero-24h-ico svg{width:22px;height:22px;stroke:#7c3aed;stroke-width:2;fill:none}
-.hero-24h-title{font-size:18px;font-weight:900;color:#5b21b6;margin-bottom:4px;letter-spacing:.5px;text-transform:uppercase}
-.hero-24h-sub{font-size:15px;color:#374151;line-height:1.45;font-weight:600}
-.hero-24h-sub strong{color:#5b21b6}
+.hero-24h-ico{width:44px;height:44px;background:rgba(255,255,255,.15);border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hero-24h-ico svg{width:22px;height:22px;stroke:#fff;stroke-width:2;fill:none}
+.hero-24h-title{font-size:18px;font-weight:900;color:#fff;margin-bottom:4px;letter-spacing:.5px;text-transform:uppercase}
+.hero-24h-sub{font-size:15px;color:rgba(255,255,255,.9);line-height:1.45;font-weight:600}
+.hero-24h-sub strong{color:#fff}
 
 .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
-.hero-stat{background:#fff;border:1px solid #ddd6fe;border-radius:10px;padding:10px 8px;text-align:center}
+.hero-stat{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:10px 8px;text-align:center}
 .hero-stat-n{font-family:'Playfair Display',serif;font-size:28px;color:#facc15;line-height:1;margin-bottom:4px}
 .hero-stat-l{font-size:13px;color:#fff;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
 
@@ -164,7 +164,7 @@ textarea{min-height:120px;resize:none}
 .suc-box{background:var(--ok-bg);border:1px solid #86efac;border-radius:var(--r);padding:22px;text-align:center;margin-top:14px}
 .warn-pill{background:#fffbeb;border:1px solid #fde68a;color:#92400e;padding:11px 14px;border-radius:8px;font-size:14px;line-height:1.55;margin-top:10px}
 
-.doc-hdr{background:var(--blu-deep);color:#fff;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.doc-hdr{background:#fff;border-bottom:2px solid #ddd6fe;color:#5b21b6;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between}
 .doc-exit{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:8px;padding:6px 14px;font-size:13px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
 .case-card{background:#fff;border:1px solid var(--brd);border-radius:var(--r);padding:14px 16px;margin:10px 16px 0;cursor:pointer;transition:all .2s}
 .case-card:hover{border-color:var(--blu);box-shadow:0 4px 14px rgba(124,58,237,.1)}
@@ -175,7 +175,7 @@ textarea{min-height:120px;resize:none}
 .bdg-att{font-size:11px;font-weight:700;color:var(--warn);margin-top:6px}
 .bdg-ok{font-size:11px;font-weight:700;color:var(--ok);margin-top:6px}
 
-.paz-block{background:var(--blu-deep);color:#fff;border-radius:var(--r);padding:16px;margin-bottom:10px}
+.paz-block{background:#faf5ff;border:1px solid #ddd6fe;color:#5b21b6;border-radius:var(--r);padding:16px;margin-bottom:10px}
 .paz-row{display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.08)}
 .paz-row:last-child{border-bottom:none}
 .paz-lbl{opacity:.55}
@@ -208,7 +208,7 @@ textarea{min-height:120px;resize:none}
 .login-wrap{max-width:420px;margin:28px auto;padding:0 16px}
 .login-hdr{text-align:center;margin-bottom:24px}
 
-.medico-card{background:linear-gradient(135deg,var(--blu-deep),var(--blu));border-radius:var(--r);padding:22px;color:#fff;margin-bottom:14px}
+.medico-card{background:#fff;border:1px solid #ddd6fe;border-radius:var(--r);padding:22px;color:#5b21b6;margin-bottom:14px}
 .chip{background:rgba(255,255,255,.15);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:600;display:inline-block;margin:4px 4px 0 0}
 
 .faq-item{background:#fff;border:1px solid var(--brd);border-radius:var(--r-s);margin-bottom:8px;overflow:hidden}
@@ -216,14 +216,14 @@ textarea{min-height:120px;resize:none}
 .faq-a{padding:0 16px 14px;font-size:14px;color:var(--txt-s);line-height:1.65;display:none;border-top:1px solid var(--brd)}
 .faq-a.open{display:block}
 
-.pay-hero{background:linear-gradient(135deg,var(--blu-deep),var(--blu));padding:28px 20px;color:#fff;position:relative;overflow:hidden}
+.pay-hero{background:#fff;border-bottom:2px solid #ddd6fe;padding:28px 20px;color:#5b21b6;position:relative;overflow:hidden}
 .pay-hero::before{content:'€';position:absolute;right:5px;bottom:-15px;font-size:110px;opacity:.07;font-family:'Playfair Display',serif}
 .p-pay{font-family:'Playfair Display',serif;font-size:50px;color:#fff;line-height:1}
 .inc-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--txt-s)}
 .inc-item::before{content:'✓';color:var(--blu);font-weight:800}
 
-.paz-hero{background:linear-gradient(135deg,var(--blu-deep),var(--blu));border-radius:var(--r);padding:18px;color:#fff;margin-bottom:14px;position:relative;overflow:hidden}
-.stripe-up{background:var(--blu-deep);border-radius:var(--r);padding:20px;margin-top:12px;text-align:center}
+.paz-hero{background:#faf5ff;border:1px solid #ddd6fe;border-radius:var(--r);padding:18px;color:#5b21b6;margin-bottom:14px;position:relative;overflow:hidden}
+.stripe-up{background:#faf5ff;border:1px solid #ddd6fe;border-radius:var(--r);padding:20px;margin-top:12px;text-align:center}
 .empty{text-align:center;padding:46px 20px;color:var(--txt-l)}
 .detail-wrap{padding:16px;padding-bottom:40px}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.2)}}</style>
@@ -336,23 +336,23 @@ textarea{min-height:120px;resize:none}
     <div style="text-align:center;margin-bottom:24px;padding-top:4px">
       <div style="width:120px;height:120px;margin:0 auto 18px;background:linear-gradient(135deg,#facc15,#f59e0b);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:5.5rem">🩺</div>
       <div style="font-family:'Playfair Display',serif;font-size:42px;font-weight:800;color:#fff;letter-spacing:-1px;line-height:1.05">
-        Medico <span style="color:#7c3aed">Subito</span>
+        Medico <span style="color:#facc15">Subito</span>
       </div>
     </div>
 
     <div class="hero-badge">Attivo 7 giorni su 7</div>
     <h1 class="serif">Il medico che<br>risponde <em>subito.</em></h1>
-    <div style="background:rgba(56,189,248,.18);border:1.5px solid #38bdf8;border-radius:14px;padding:14px 18px;margin:16px 0 20px"><div style="font-size:16px;color:#fff;font-weight:700;line-height:1.5">Prima chiedi quello che ti serve, poi paghi.</div><div style="font-size:19px;font-weight:900;color:#38bdf8;margin-top:5px">80€ all'anno · Solo per i primi 2.000 iscritti</div></div>
+    <div style="background:rgba(56,189,248,.2);border:1.5px solid #38bdf8;border-radius:12px;padding:12px 16px;margin:14px 0 18px"><div style="color:#fff;font-weight:700;font-size:15px">Prima chiedi quello che ti serve, poi paghi.</div><div style="color:#38bdf8;font-weight:900;font-size:18px;margin-top:4px">80€ all'anno · Solo per i primi 2.000 iscritti</div></div>
 
-    <div style="background:#5b21b6;border:3px solid #facc15;border-radius:18px;padding:22px 20px;margin:18px 0">
-      <div style="font-size:20px;font-weight:900;letter-spacing:.5px;color:#5b21b6;margin-bottom:10px;line-height:1.25">MEDICO DI BASE IRRAGGIUNGIBILE?</div>
-      <div style="font-size:17px;line-height:1.55;color:#374151;font-weight:600;margin-bottom:14px">Weekend, ponti, festivi: quando il tuo MMG non risponde, noi sì. 7 giorni su 7, anche nei giorni in cui è impossibile trovare un medico.</div>
+    <div style="background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.5);border-radius:18px;padding:22px 20px;margin:18px 0">
+      <div style="font-size:24px;font-weight:900;letter-spacing:1px;color:#38bdf8;margin-bottom:12px;line-height:1.25">MEDICO DI BASE IRRAGGIUNGIBILE?</div>
+      <div style="font-size:20px;line-height:1.55;color:#fff;font-weight:700;margin-bottom:14px">Weekend, ponti, festivi: quando il tuo MMG non risponde, noi sì. 7 giorni su 7, anche nei giorni in cui è impossibile trovare un medico.</div>
       <div style="display:inline-flex;align-items:center;gap:8px;background:#fff;color:#16a34a;font-size:16px;font-weight:900;padding:8px 16px;border-radius:30px"><span style="font-size:18px">✓</span> Nessuna sala d'attesa</div>
     </div>
 
-    <div style="background:#5b21b6;border:3px solid #facc15;border-radius:18px;padding:22px 20px;margin:14px 0 18px">
-      <div style="font-size:20px;font-weight:900;letter-spacing:.5px;color:#5b21b6;margin-bottom:10px;line-height:1.25">LISTA D'ATTESA PER LO SPECIALISTA?</div>
-      <div style="font-size:17px;line-height:1.55;color:#374151;font-weight:600">Mesi di attesa per una visita cardiologica, endocrinologica, dermatologica. Mentre aspetti, ottieni un parere medico qualificato su referti, sintomi e percorso da seguire.</div>
+    <div style="background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.5);border-radius:18px;padding:22px 20px;margin:14px 0 18px">
+      <div style="font-size:24px;font-weight:900;letter-spacing:1px;color:#38bdf8;margin-bottom:12px;line-height:1.25">LISTA D'ATTESA PER LO SPECIALISTA?</div>
+      <div style="font-size:20px;line-height:1.55;color:#fff;font-weight:700">Mesi di attesa per una visita cardiologica, endocrinologica, dermatologica. Mentre aspetti, ottieni un parere medico qualificato su referti, sintomi e percorso da seguire.</div>
     </div>
 
     <button class="btn-hp" onclick="vaiARichiesta()" style="width:100%;margin-bottom:18px">
@@ -360,7 +360,7 @@ textarea{min-height:120px;resize:none}
       Invia richiesta al medico
     </button>
 
-    <button onclick="showScreen('s-blog')" style="width:100%;margin-bottom:18px;background:#16a34a;color:#fff;border:none;border-radius:14px;padding:16px;font-size:16px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 14px rgba(22,163,74,.35)">
+    <button onclick="showScreen('s-blog')" style="width:100%;margin-bottom:18px;background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.6);border-radius:14px;padding:16px;font-size:16px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 14px rgba(22,163,74,.35)">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Leggi le guide sul Blog
     </button>
@@ -597,7 +597,7 @@ textarea{min-height:120px;resize:none}
   <div style="background:linear-gradient(135deg,#2e1065,#6d28d9);padding:28px 20px 24px;text-align:center;position:relative">
     <button class="btn-back" onclick="showScreen('s-home')" style="background:#5b21b6;border:3px solid #facc15;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:900;cursor:pointer;position:absolute;left:16px;top:16px;text-transform:uppercase;letter-spacing:.5px;padding:10px 14px;border-radius:8px;width:72px;line-height:1.3;text-align:center">TORNA<br>HOME</button>
     <div style="font-size:6rem;margin-bottom:14px;margin-top:16px">🩺</div>
-    <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:800;color:#fff;letter-spacing:-.5px">Medico <span style="color:#7c3aed">Subito</span></div>
+    <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:800;color:#fff;letter-spacing:-.5px">Medico <span style="color:#facc15">Subito</span></div>
   </div>
   <div style="padding:16px 16px 0">
     <div style="background:linear-gradient(135deg,#6d28d9,#7c3aed);border-radius:16px;padding:18px 20px;margin-bottom:16px;text-align:center;box-shadow:0 4px 20px rgba(124,58,237,.2)">
@@ -727,7 +727,7 @@ textarea{min-height:120px;resize:none}
   <div style="display:flex;height:90px">
     <div style="flex:1;background:linear-gradient(135deg,#2e1065,#6d28d9);display:flex;align-items:center;gap:10px;padding:0 18px">
       <span style="font-size:2.2rem">🩺</span>
-      <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:800;color:#fff;letter-spacing:-.3px">Medico <span style="color:#7c3aed">Subito</span></div>
+      <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:800;color:#fff;letter-spacing:-.3px">Medico <span style="color:#facc15">Subito</span></div>
     </div>
     <div onclick="showScreen('s-richiesta')" style="flex:1;background:#2d2d2d;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:8px;background:#2e1065">
       <div style="background:#5b21b6;border:3px solid #facc15;border-radius:8px;padding:12px 14px;width:100%;text-align:center">
