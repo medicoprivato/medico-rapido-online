@@ -354,12 +354,12 @@ textarea{min-height:120px;resize:none}
       <div style="font-size:20px;line-height:1.55;color:#fff;font-weight:700">Mesi di attesa per una visita cardiologica, endocrinologica, dermatologica. Mentre aspetti, ottieni un parere medico qualificato su referti, sintomi e percorso da seguire.</div>
     </div>
 
-    <button class="btn-hp" onclick="vaiARichiesta()" style="width:100%;margin-bottom:18px">
+    <button class="btn-hp btn-azzurro" onclick="vaiARichiesta()" style="width:100%;margin-bottom:18px">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Invia richiesta al medico
     </button>
 
-    <button onclick="showScreen('s-blog')" style="width:100%;margin-bottom:18px;background:#16a34a;color:#fff;border:none;border-radius:14px;padding:16px;font-size:16px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 14px rgba(22,163,74,.35)">
+    <button onclick="showScreen('s-blog')" style="width:100%;margin-bottom:18px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.5);color:#fff;border:none;border-radius:14px;padding:16px;font-size:16px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 14px rgba(22,163,74,.35)">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Leggi le guide sul Blog
     </button>
@@ -389,7 +389,7 @@ textarea{min-height:120px;resize:none}
     </div>
 
     <div class="hero-acts">
-      <button class="btn-hp" onclick="vaiARichiesta()">
+      <button class="btn-hp btn-azzurro" onclick="vaiARichiesta()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Invia richiesta al medico
       </button>
@@ -533,7 +533,7 @@ textarea{min-height:120px;resize:none}
       WhatsApp: 340 388 2191
     </a>
   </div>
-  <div style="background:#5b21b6;color:#fff;padding:24px 20px;text-align:center;border-radius:0 0 0 0">
+  <div style="background:linear-gradient(145deg,#5b21b6 0%,#7c3aed 100%);color:#fff;padding:24px 20px;text-align:center">
     <div style="font-weight:800;font-size:16px;margin-bottom:4px">🩺 Medico Subito</div>
     <div style="font-size:12px;opacity:.6;margin-bottom:14px">Piattaforma italiana di telemedicina</div>
     <div style="display:flex;gap:14px;justify-content:center;margin-bottom:12px">
@@ -2799,7 +2799,7 @@ function vaiARichiesta(){
 </script>
 
 <!-- COOKIE BANNER GDPR -->
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#5b21b6;color:#fff;padding:16px 20px;z-index:9999;box-shadow:0 -4px 20px rgba(0,0,0,.3);font-family:'Plus Jakarta Sans',sans-serif">
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#fff;color:#0f172a;padding:16px 20px;z-index:9999;box-shadow:0 -4px 20px rgba(124,58,237,.15);border-top:2px solid #7c3aed;font-family:'Plus Jakarta Sans',sans-serif">
   <div style="max-width:600px;margin:0 auto">
     <p style="margin:0 0 12px;font-size:13px;line-height:1.5">🍪 <strong>Questo sito utilizza cookie tecnici</strong> necessari al funzionamento del servizio. Non utilizziamo cookie di profilazione né cediamo dati a terzi per scopi pubblicitari. Per maggiori informazioni consulta la nostra <a onclick="showScreen('s-privacy')" style="color:#93c5fd;cursor:pointer;text-decoration:underline">Privacy Policy</a>.</p>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
@@ -2831,7 +2831,7 @@ function rifiutaCookie(){
 </a>
 
 <!-- COOKIE BANNER -->
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#5b21b6;color:#fff;padding:14px 16px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,.2)">
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#fff;color:#0f172a;padding:14px 16px;z-index:9999;box-shadow:0 -2px 10px rgba(124,58,237,.15);border-top:2px solid #7c3aed">
   <div style="max-width:600px;margin:0 auto">
     <p style="font-size:13px;margin-bottom:10px;line-height:1.5">🍪 Questo sito usa cookie tecnici necessari al funzionamento. Nessun dato sanitario viene condiviso con inserzionisti. <a href="#" onclick="showScreen('s-privacy');hideCookieBanner();return false" style="color:#fde047;text-decoration:underline">Privacy Policy</a></p>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
