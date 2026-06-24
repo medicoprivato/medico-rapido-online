@@ -1047,6 +1047,21 @@ textarea{min-height:120px;resize:none}
       <div style="font-size:13px;color:#64748b">Come assistere un genitore anziano nel rinnovo delle terapie senza spostamenti.</div>
     </div>
 
+    <div class="blog-card" onclick="showScreen('s-blog-42')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+      <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Medico subito: come avere una risposta medica in 24 ore</div>
+      <div style="font-size:13px;color:#64748b">Come ottenere una risposta qualificata senza code e senza attese.</div>
+    </div>
+
+    <div class="blog-card" onclick="showScreen('s-blog-43')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+      <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Rinnovo ricetta subito: come non restare senza farmaci cronici</div>
+      <div style="font-size:13px;color:#64748b">Cosa fare quando la ricetta scade e il medico non è disponibile.</div>
+    </div>
+
+    <div class="blog-card" onclick="showScreen('s-blog-44')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+      <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Consulto medico urgente online: quando non puoi aspettare il lunedì</div>
+      <div style="font-size:13px;color:#64748b">Come gestire i dubbi medici del weekend senza pronto soccorso.</div>
+    </div>
+
   </div>
 </div>
 
@@ -1706,6 +1721,50 @@ textarea{min-height:120px;resize:none}
     <p style="margin-bottom:14px;line-height:1.7">Un figlio o un familiare può assistere il proprio caro nella compilazione del modulo di richiesta online, inserendo i dati clinici necessari e allegando la documentazione disponibile, permettendo così di ottenere il rinnovo di una terapia o una richiesta di esami senza dover organizzare uno spostamento che per una persona anziana può essere faticoso o complicato.</p>
     <p style="margin-bottom:14px;line-height:1.7">Questo approccio è particolarmente utile per chi vive lontano dai propri genitori anziani e vuole garantire loro continuità terapeutica anche a distanza, soprattutto nei periodi in cui il medico di base non è immediatamente disponibile o quando gli appuntamenti richiedono tempi di attesa significativi.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Il servizio rimane rivolto esclusivamente a pazienti adulti. Per situazioni che richiedono una valutazione clinica diretta, rimane sempre necessario il coinvolgimento del medico curante o dello specialista di riferimento.</p>
+    <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
+  </div>
+</div>
+
+
+<!-- BLOG ARTICOLO 42 -->
+<div id="s-blog-42" class="screen">
+  <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
+  <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
+    <h2 style="color:#1e3a8a;font-size:22px;margin-bottom:4px">Medico subito: come avere una risposta medica in 24 ore</h2>
+    <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
+    <p style="margin-bottom:14px;line-height:1.7">Tra le frustrazioni più comuni di chi ha bisogno di assistenza medica fuori dal pronto soccorso c'è l'attesa: giorni per un appuntamento con il medico di base, settimane per uno specialista, code in ambulatorio anche per le richieste più semplici. La necessità di avere una risposta medica rapida, senza sacrificare la qualità, è reale e diffusa.</p>
+    <h3 style="color:#1e3a8a;margin:20px 0 8px">Come funziona la risposta in 24 ore</h3>
+    <p style="margin-bottom:14px;line-height:1.7">La telemedicina risponde esattamente a questo bisogno: la possibilità di inviare una richiesta medica in qualsiasi momento, anche di sera o nel weekend, e ricevere una risposta da un medico iscritto all'Ordine entro ventiquattro ore, senza dover attendere la riapertura dell'ambulatorio o la disponibilità di un appuntamento.</p>
+    <p style="margin-bottom:14px;line-height:1.7">Con Medico Subito la richiesta si invia compilando un modulo online in pochi minuti, descrivendo la situazione clinica e allegando eventuale documentazione. Il medico valuta, risponde e, se appropriato, fornisce la documentazione necessaria firmata digitalmente, che arriva direttamente via email entro il giorno successivo.</p>
+    <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Le emergenze richiedono sempre il pronto soccorso e il 118. Ma per le richieste di routine che non possono aspettare settimane, avere una risposta qualificata entro ventiquattro ore cambia concretamente la gestione quotidiana della propria salute.</p>
+    <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
+  </div>
+</div>
+
+<!-- BLOG ARTICOLO 43 -->
+<div id="s-blog-43" class="screen">
+  <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
+  <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
+    <h2 style="color:#1e3a8a;font-size:22px;margin-bottom:4px">Rinnovo ricetta subito: come non restare senza farmaci cronici</h2>
+    <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
+    <p style="margin-bottom:14px;line-height:1.7">Restare senza farmaci per una terapia cronica è una situazione che molti pazienti hanno vissuto almeno una volta: la ricetta è scaduta, il medico non è disponibile nei giorni immediatamente successivi, e la farmacia non può dispensare il farmaco senza una nuova prescrizione. Il risultato è un'interruzione della terapia che, per alcune patologie, può avere conseguenze negative.</p>
+    <h3 style="color:#1e3a8a;margin:20px 0 8px">Come evitare l'interruzione della cura</h3>
+    <p style="margin-bottom:14px;line-height:1.7">Un servizio di telemedicina permette di inviare la richiesta di rinnovo in qualsiasi momento e ricevere la prescrizione entro ventiquattro ore, senza dover aspettare la riapertura dell'ambulatorio. Descrivi la terapia in corso, indica il farmaco da rinnovare e fornisci le informazioni cliniche necessarie: il medico valuta e, se appropriato, emette la ricetta privata necessaria per acquistare il farmaco in farmacia senza interruzione della cura.</p>
+    <p style="margin-bottom:20px;line-height:1.7">La prescrizione ottenuta tramite telemedicina è una ricetta bianca privata, valida in tutte le farmacie italiane. Per i farmaci che richiedono ricetta rossa del SSN con agevolazioni, è comunque necessario contattare il proprio medico di base alla prima occasione utile.</p>
+    <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
+  </div>
+</div>
+
+<!-- BLOG ARTICOLO 44 -->
+<div id="s-blog-44" class="screen">
+  <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
+  <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
+    <h2 style="color:#1e3a8a;font-size:22px;margin-bottom:4px">Consulto medico urgente online: quando non puoi aspettare il lunedì</h2>
+    <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
+    <p style="margin-bottom:14px;line-height:1.7">Il lunedì mattina gli studi medici si riempiono di persone che hanno aspettato il fine settimana per rivolgersi al proprio medico, raccogliendo dubbi, preoccupazioni e piccoli problemi che si sono manifestati nei due giorni precedenti. Per molte di queste persone l'attesa è stata inutilmente ansiosa, perché il problema avrebbe potuto essere affrontato già il sabato con un semplice consulto medico a distanza.</p>
+    <h3 style="color:#1e3a8a;margin:20px 0 8px">Cosa puoi fare nel weekend</h3>
+    <p style="margin-bottom:14px;line-height:1.7">La telemedicina è utile anche quando si ha un dubbio concreto che richiede un parere medico qualificato nel fine settimana. Descrivere i propri sintomi, allegare una fotografia se si tratta di un problema visibile, o chiedere un parere su un referto appena ricevuto sono tutte situazioni che non richiedono necessariamente una visita fisica e possono essere gestite da un medico online entro ventiquattro ore, sette giorni su sette, inclusi sabato e domenica.</p>
+    <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Dolore toracico, difficoltà respiratorie, confusione improvvisa, perdita di coscienza o qualsiasi sintomo che spaventa richiedono sempre e immediatamente il 118 o il pronto soccorso, non un consulto online. Per tutto il resto, avere un medico disponibile nel weekend fa una differenza concreta.</p>
     <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
   </div>
 </div>
