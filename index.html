@@ -6,7 +6,7 @@
 <title>Medico Subito — Consulti Medici Online</title>
 <meta name="google-site-verification" content="up75EGRkxnJKhr60hBd0ZXuB1TsHeZqYiN9y5fCc-Dc" />
 <link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#7c3aed">
+<meta name="theme-color" content="#2A8A8A">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Medico Subito">
@@ -34,14 +34,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --blu:#7c3aed;--blu-dk:#6d28d9;--blu-deep:#5b21b6;
-  --blu-lt:#faf5ff;--blu-mid:#ede9fe;
-  --txt:#0f172a;--txt-s:#5b21b6;--txt-l:#7c3aed;
-  --brd:#ddd6fe;--bg:#fff;--wht:#fff;
-  --ok:#7c3aed;--ok-bg:#faf5ff;--warn:#7c3aed;--err:#5b21b6;
+  --blu:#2A8A8A;--blu-dk:#1A5F6A;--blu-deep:#0D4F5C;
+  --blu-lt:#F0FAFA;--blu-mid:#E0F5F4;
+  --txt:#0f172a;--txt-s:#0D4F5C;--txt-l:#2A8A8A;
+  --brd:#B2E0DC;--bg:#fff;--wht:#fff;
+  --ok:#2A8A8A;--ok-bg:#F0FAFA;--warn:#2A8A8A;--err:#0D4F5C;
   --r:16px;--r-s:10px;
-  --sh:0 1px 4px rgba(124,58,237,.08),0 4px 16px rgba(124,58,237,.06);
-  --sh-b:0 4px 20px rgba(56,189,248,.35);
+  --sh:0 1px 4px rgba(42,138,138,.08),0 4px 16px rgba(42,138,138,.06);
+  --sh-b:0 4px 20px rgba(91,191,181,.35);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;font-size:17px}
@@ -63,7 +63,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .card{background:var(--wht);border-radius:var(--r);padding:20px;border:1px solid var(--brd);box-shadow:var(--sh)}
 
 input,textarea,select{width:100%;border:1.5px solid var(--brd);border-radius:var(--r-s);padding:14px 16px;font-size:16px;background:#fff;margin-bottom:12px;font-family:'Plus Jakarta Sans',sans-serif;color:var(--txt);-webkit-appearance:none;transition:border-color .15s,box-shadow .15s}
-input:focus,textarea:focus,select:focus{outline:none;border-color:var(--blu);box-shadow:0 0 0 3px rgba(124,58,237,.1)}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--blu);box-shadow:0 0 0 3px rgba(42,138,138,.1)}
 textarea{min-height:120px;resize:none}
 .pwd-w{position:relative}.pwd-w input{padding-right:52px}
 .pwd-eye{position:absolute;right:14px;top:50%;transform:translateY(-65%);background:none;border:none;cursor:pointer;font-size:18px;color:var(--txt-l);padding:4px;line-height:1}
@@ -76,20 +76,20 @@ textarea{min-height:120px;resize:none}
 
 .spacer{height:90px}
 
-.hero{background:linear-gradient(145deg,#5b21b6 0%,#7c3aed 60%,#a855f7 100%);padding:40px 20px 40px;position:relative;overflow:hidden}
+.hero{background:linear-gradient(145deg,#0D4F5C 0%,#1A5F6A 30%,#2A8A8A 65%,#5BBFB5 100%);padding:40px 20px 40px;position:relative;overflow:hidden}
 
-.hero-badge{display:flex;align-items:center;justify-content:center;gap:8px;background:#38bdf8;border:none;border-radius:24px;padding:12px 24px;font-size:18px;font-weight:900;color:#5b21b6;margin-bottom:18px;letter-spacing:.6px;text-transform:uppercase;box-shadow:0 4px 20px rgba(56,189,248,.3);width:100%;text-align:center}
+.hero-badge{display:flex;align-items:center;justify-content:center;gap:8px;background:#5BBFB5;border:none;border-radius:24px;padding:12px 24px;font-size:18px;font-weight:900;color:#0D4F5C;margin-bottom:18px;letter-spacing:.6px;text-transform:uppercase;box-shadow:0 4px 20px rgba(56,189,248,.3);width:100%;text-align:center}
 .hero-badge::before{content:'';width:11px;height:11px;background:#16a34a;border-radius:50%;display:inline-block;flex-shrink:0}
 .hero h1{font-family:'Playfair Display',serif;font-size:44px;line-height:1.1;color:#fff;margin-bottom:22px;letter-spacing:-1px;font-weight:700;text-align:center;width:100%}
 .hero h1 em{font-style:italic;color:#facc15;font-weight:800}
 
-.hero-serv{background:linear-gradient(135deg,rgba(15,23,42,.6),rgba(109,40,217,.4));backdrop-filter:blur(10px);border:1px solid rgba(250,204,21,.25);border-radius:18px;padding:22px 22px;margin-bottom:16px;box-shadow:0 8px 32px rgba(0,0,0,.2)}
+.hero-serv{background:linear-gradient(135deg,rgba(15,23,42,.6),rgba(26,95,106,.4));backdrop-filter:blur(10px);border:1px solid rgba(250,204,21,.25);border-radius:18px;padding:22px 22px;margin-bottom:16px;box-shadow:0 8px 32px rgba(0,0,0,.2)}
 .hero-serv-lbl{font-size:18px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:#fff;margin-bottom:14px}
 .hero-serv-list{font-size:18px;font-weight:800;color:#facc15;line-height:1.9;letter-spacing:.3px;text-transform:uppercase}
 .hero-serv-list .so{color:#facc15;font-weight:900;font-size:20px;display:block;margin-top:4px}
 .hero-nota{font-size:13px;color:rgba(255,255,255,.85);margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1);line-height:1.6;font-weight:600;text-transform:none;letter-spacing:.2px}
 
-.hero-24h{background:#2563eb;border:none;border-radius:14px;padding:16px 20px;margin-bottom:22px;display:flex;align-items:center;gap:14px}
+.hero-24h{background:#0D4F5C;border:none;border-radius:14px;padding:16px 20px;margin-bottom:22px;display:flex;align-items:center;gap:14px}
 .hero-24h-ico{width:44px;height:44px;background:rgba(255,255,255,.15);border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .hero-24h-ico svg{width:22px;height:22px;stroke:#fff;stroke-width:2;fill:none}
 .hero-24h-title{font-size:18px;font-weight:900;color:#fff;margin-bottom:4px;letter-spacing:.5px;text-transform:uppercase}
@@ -97,12 +97,12 @@ textarea{min-height:120px;resize:none}
 .hero-24h-sub strong{color:#fff}
 
 .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
-.hero-stat{background:#5b21b6;border:1px solid #7c3aed;border-radius:10px;padding:10px 8px;text-align:center}
+.hero-stat{background:#0D4F5C;border:1px solid #2A8A8A;border-radius:10px;padding:10px 8px;text-align:center}
 .hero-stat-n{font-family:'Playfair Display',serif;font-size:28px;color:#facc15;line-height:1;margin-bottom:4px}
 .hero-stat-l{font-size:13px;color:#fff;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
 
 .hero-acts{display:flex;flex-direction:column;gap:10px}
-.btn-hp{background:#facc15;color:#5b21b6;border:none;border-radius:16px;height:68px;font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 4px 14px rgba(250,204,21,.4);transition:all .2s;letter-spacing:.3px}
+.btn-hp{background:#facc15;color:#0D4F5C;border:none;border-radius:16px;height:68px;font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 4px 14px rgba(250,204,21,.4);transition:all .2s;letter-spacing:.3px}
 .btn-hp:hover{transform:translateY(-2px)}
 .btn-hs{background:#16a34a;color:#fff;border:none;border-radius:16px;height:68px;font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:800;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 4px 14px rgba(22,163,74,.4);line-height:1.3}
 .btn-hg{background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.6);color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:800;cursor:pointer;text-align:center;width:100%;padding:14px;border-radius:var(--r-s);letter-spacing:.3px;text-decoration:none}
@@ -120,11 +120,11 @@ textarea{min-height:120px;resize:none}
 .sez-title{font-family:'Playfair Display',serif;font-size:34px;color:var(--txt);margin-bottom:20px;font-weight:800}
 .step{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--brd)}
 .step:last-child{border-bottom:none}
-.step-n{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#6d28d9,#8b5cf6);color:#fff;font-weight:900;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(124,58,237,.3)}
+.step-n{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#1A5F6A,#3DA8A0);color:#fff;font-weight:900;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(42,138,138,.3)}
 .step-t{font-size:18px;font-weight:900;margin-bottom:6px;color:var(--txt)}
 .step-d{font-size:16px;color:var(--txt-s);line-height:1.65}
 
-.pcard{margin:20px 16px 0;background:linear-gradient(135deg,#2e1065,#5b21b6 60%,#6d28d9);border-radius:20px;padding:26px 22px;color:#fff;position:relative;overflow:hidden;border:1px solid rgba(250,204,21,.35);box-shadow:0 10px 40px rgba(15,23,42,.2)}
+.pcard{margin:20px 16px 0;background:linear-gradient(135deg,#0A3D47,#0D4F5C 60%,#1A5F6A);border-radius:20px;padding:26px 22px;color:#fff;position:relative;overflow:hidden;border:1px solid rgba(250,204,21,.35);box-shadow:0 10px 40px rgba(15,23,42,.2)}
 .pcard::before{content:'€';position:absolute;right:8px;top:-8px;font-size:110px;opacity:.06;font-family:'Playfair Display',serif}
 .p-grande{font-family:'Playfair Display',serif;font-size:52px;color:#facc15;line-height:1;margin-bottom:5px;font-weight:800}
 .p-period{font-size:16px;color:#fff;font-weight:900}
@@ -135,7 +135,7 @@ textarea{min-height:120px;resize:none}
 
 .trust-wrap{padding:16px 16px 0}
 .trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.trust-item{background:#fff;border:1px solid var(--brd);border-radius:12px;padding:14px;font-size:13px;color:var(--txt-s);font-weight:500;line-height:1.5;transition:all .2s}.trust-item:hover{border-color:var(--blu);transform:translateY(-2px);box-shadow:0 6px 16px rgba(124,58,237,.1)}
+.trust-item{background:#fff;border:1px solid var(--brd);border-radius:12px;padding:14px;font-size:13px;color:var(--txt-s);font-weight:500;line-height:1.5;transition:all .2s}.trust-item:hover{border-color:var(--blu);transform:translateY(-2px);box-shadow:0 6px 16px rgba(42,138,138,.1)}
 .trust-item strong{display:block;font-size:14px;color:var(--txt);margin-bottom:2px}
 
 .emerg{background:#fef2f2;border:2px solid #fca5a5;border-radius:var(--r);padding:16px;margin-bottom:16px}
@@ -164,10 +164,10 @@ textarea{min-height:120px;resize:none}
 .suc-box{background:var(--ok-bg);border:1px solid #86efac;border-radius:var(--r);padding:22px;text-align:center;margin-top:14px}
 .warn-pill{background:#fffbeb;border:1px solid #fde68a;color:#92400e;padding:11px 14px;border-radius:8px;font-size:14px;line-height:1.55;margin-top:10px}
 
-.doc-hdr{background:#fff;border-bottom:2px solid #ddd6fe;color:#5b21b6;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.doc-hdr{background:#fff;border-bottom:2px solid #B2E0DC;color:#0D4F5C;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between}
 .doc-exit{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:8px;padding:6px 14px;font-size:13px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
 .case-card{background:#fff;border:1px solid var(--brd);border-radius:var(--r);padding:14px 16px;margin:10px 16px 0;cursor:pointer;transition:all .2s}
-.case-card:hover{border-color:var(--blu);box-shadow:0 4px 14px rgba(124,58,237,.1)}
+.case-card:hover{border-color:var(--blu);box-shadow:0 4px 14px rgba(42,138,138,.1)}
 .case-card.pending{border-left:3px solid var(--blu)}
 .case-nm{font-size:14px;font-weight:700;margin-bottom:3px}
 .case-meta{font-size:11px;color:var(--txt-l);margin-bottom:6px}
@@ -175,7 +175,7 @@ textarea{min-height:120px;resize:none}
 .bdg-att{font-size:11px;font-weight:700;color:var(--warn);margin-top:6px}
 .bdg-ok{font-size:11px;font-weight:700;color:var(--ok);margin-top:6px}
 
-.paz-block{background:#faf5ff;border:1px solid #ddd6fe;color:#5b21b6;border-radius:var(--r);padding:16px;margin-bottom:10px}
+.paz-block{background:#F0FAFA;border:1px solid #B2E0DC;color:#0D4F5C;border-radius:var(--r);padding:16px;margin-bottom:10px}
 .paz-row{display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.08)}
 .paz-row:last-child{border-bottom:none}
 .paz-lbl{opacity:.55}
@@ -199,7 +199,7 @@ textarea{min-height:120px;resize:none}
 .legal a{color:var(--blu);cursor:pointer}
 
 .info-card{background:#fff;border-radius:var(--r);padding:26px;border:1px solid var(--brd);margin-bottom:14px;box-shadow:var(--sh)}
-.info-card h3{font-size:22px;font-weight:900;color:#5b21b6;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.info-card h3{font-size:22px;font-weight:900;color:#0D4F5C;margin-bottom:6px;display:flex;align-items:center;gap:8px}
 .info-card p{font-size:17px;color:#374151;line-height:1.75}
 
 .pfoot{text-align:center;padding:20px 16px 90px;font-size:12px;color:var(--txt-l);background:#fff;border-top:1px solid var(--brd);margin-top:16px}
@@ -208,7 +208,7 @@ textarea{min-height:120px;resize:none}
 .login-wrap{max-width:420px;margin:28px auto;padding:0 16px}
 .login-hdr{text-align:center;margin-bottom:24px}
 
-.medico-card{background:#fff;border:1px solid #ddd6fe;border-radius:var(--r);padding:22px;color:#5b21b6;margin-bottom:14px}
+.medico-card{background:#fff;border:1px solid #B2E0DC;border-radius:var(--r);padding:22px;color:#0D4F5C;margin-bottom:14px}
 .chip{background:rgba(255,255,255,.15);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:600;display:inline-block;margin:4px 4px 0 0}
 
 .faq-item{background:#fff;border:1px solid var(--brd);border-radius:var(--r-s);margin-bottom:8px;overflow:hidden}
@@ -216,14 +216,14 @@ textarea{min-height:120px;resize:none}
 .faq-a{padding:0 16px 14px;font-size:14px;color:var(--txt-s);line-height:1.65;display:none;border-top:1px solid var(--brd)}
 .faq-a.open{display:block}
 
-.pay-hero{background:#fff;border-bottom:2px solid #ddd6fe;padding:28px 20px;color:#5b21b6;position:relative;overflow:hidden}
+.pay-hero{background:#fff;border-bottom:2px solid #B2E0DC;padding:28px 20px;color:#0D4F5C;position:relative;overflow:hidden}
 .pay-hero::before{content:'€';position:absolute;right:5px;bottom:-15px;font-size:110px;opacity:.07;font-family:'Playfair Display',serif}
 .p-pay{font-family:'Playfair Display',serif;font-size:50px;color:#fff;line-height:1}
 .inc-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--txt-s)}
 .inc-item::before{content:'✓';color:var(--blu);font-weight:800}
 
-.paz-hero{background:#faf5ff;border:1px solid #ddd6fe;border-radius:var(--r);padding:18px;color:#5b21b6;margin-bottom:14px;position:relative;overflow:hidden}
-.stripe-up{background:#faf5ff;border:1px solid #ddd6fe;border-radius:var(--r);padding:20px;margin-top:12px;text-align:center}
+.paz-hero{background:#F0FAFA;border:1px solid #B2E0DC;border-radius:var(--r);padding:18px;color:#0D4F5C;margin-bottom:14px;position:relative;overflow:hidden}
+.stripe-up{background:#F0FAFA;border:1px solid #B2E0DC;border-radius:var(--r);padding:20px;margin-top:12px;text-align:center}
 .empty{text-align:center;padding:46px 20px;color:var(--txt-l)}
 .detail-wrap{padding:16px;padding-bottom:40px}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.2)}}</style>
@@ -275,8 +275,8 @@ textarea{min-height:120px;resize:none}
 
 <!-- TRIAGE OBBLIGATORIO -->
 <div id="s-triage" class="screen">
-  <div style="background:linear-gradient(135deg,#2e1065,#6d28d9);padding:28px 20px 24px;text-align:center;position:relative">
-    <button onclick="showScreen('s-home')" style="background:#5b21b6;border:3px solid #facc15;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:900;cursor:pointer;position:absolute;left:16px;top:16px;text-transform:uppercase;letter-spacing:.5px;padding:10px 14px;border-radius:8px;width:72px;line-height:1.3;text-align:center">TORNA<br>HOME</button>
+  <div style="background:linear-gradient(135deg,#0A3D47,#1A5F6A);padding:28px 20px 24px;text-align:center;position:relative">
+    <button onclick="showScreen('s-home')" style="background:#0D4F5C;border:3px solid #facc15;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:900;cursor:pointer;position:absolute;left:16px;top:16px;text-transform:uppercase;letter-spacing:.5px;padding:10px 14px;border-radius:8px;width:72px;line-height:1.3;text-align:center">TORNA<br>HOME</button>
     <div style="font-size:3.5rem;margin-bottom:10px;margin-top:16px">🩺</div>
     <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:800;color:#fff;letter-spacing:-.5px">Scheda <span style="color:#facc15">Paziente</span></div>
     <div style="font-size:14px;color:rgba(255,255,255,.8);margin-top:8px;font-weight:600">Compilare una sola volta · Dati salvati per future richieste</div>
@@ -305,7 +305,7 @@ textarea{min-height:120px;resize:none}
       <textarea id="tr-allergie" placeholder="Allergie accertate (farmaci, alimenti, altro). Scrivi NESSUNA se non presenti. *" style="min-height:80px"></textarea>
       <textarea id="tr-farmaci" placeholder="Farmaci in uso corrente (nome, dose, frequenza). Scrivi NESSUNO se non presenti. *" style="min-height:80px"></textarea>
       <textarea id="tr-patologie" placeholder="Patologie croniche diagnosticate. Scrivi NESSUNA se non presenti. *" style="min-height:80px"></textarea>
-      <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:10px;padding:14px;margin:4px 0 14px;font-size:13px;color:#5b21b6;line-height:1.6">
+      <div style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:10px;padding:14px;margin:4px 0 14px;font-size:13px;color:#0D4F5C;line-height:1.6">
         <strong>Consenso informato (L. 219/2017)</strong><br>
         Dichiaro che le informazioni fornite sono veritiere e presto consenso al trattamento dei miei dati sanitari per l'erogazione della prestazione di telemedicina, ai sensi dell'art. 9 GDPR.
       </div>
@@ -344,9 +344,9 @@ textarea{min-height:120px;resize:none}
       <span class="hero-badge" style="font-size:20px;padding:14px 28px">Attivo 7 giorni su 7</span>
     </div>
     <h1 class="serif" style="text-align:center"><span style="text-decoration:underline">Prescrizioni e consulti medici</span> online <span style="color:#facc15;font-style:normal">subito!</span></h1>
-    <div style="background:#fff;border:2px solid #ddd6fe;border-radius:14px;padding:16px 20px;margin:16px 0 20px;text-align:center"><div style="color:#2563eb;font-weight:900;font-size:22px;margin-bottom:8px">Scrivi subito al MEDICO: esponi la tua richiesta o il tuo consulto e ottieni subito la tua risposta o prescrizione</div><div style="color:#16a34a;font-weight:600;font-size:13px;margin-top:6px">200€ all'anno: fino a 3 prescrizioni mediche richiedibili e/o consulti medici scritti &#8209; al mese</div></div>
+    <div style="background:#fff;border:2px solid #B2E0DC;border-radius:14px;padding:16px 20px;margin:16px 0 20px;text-align:center"><div style="color:#2A8A8A;font-weight:900;font-size:22px;margin-bottom:8px">Scrivi subito al MEDICO: esponi la tua richiesta o il tuo consulto e ottieni subito la tua risposta o prescrizione</div><div style="color:#16a34a;font-weight:600;font-size:13px;margin-top:6px">200€ all'anno: fino a 3 prescrizioni mediche richiedibili e/o consulti medici scritti &#8209; al mese</div></div>
 
-    <button onclick="vaiARichiesta()" style="width:100%;margin-bottom:18px;background:#fff;color:#2563eb;border:2px solid #2563eb;border-radius:16px;padding:16px;font-size:22px;font-weight:900;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;justify-content:center">
+    <button onclick="vaiARichiesta()" style="width:100%;margin-bottom:18px;background:#fff;color:#2A8A8A;border:2px solid #2A8A8A;border-radius:16px;padding:16px;font-size:22px;font-weight:900;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;justify-content:center">
       Invia richiesta al medico
     </button>
 
@@ -387,7 +387,7 @@ textarea{min-height:120px;resize:none}
   </div>
 
   <div class="serv-grid">
-    <div class="serv-card" onclick="quickStart('Rinnovo terapia')" style="background:#2563eb">
+    <div class="serv-card" onclick="quickStart('Rinnovo terapia')" style="background:#2A8A8A">
       <span class="serv-card-emoji">💊</span>
       <div class="serv-card-sub">Farmaci</div>
       <div class="serv-card-nm">Rinnovo<br>terapia</div>
@@ -397,7 +397,7 @@ textarea{min-height:120px;resize:none}
       <div class="serv-card-sub">Diagnostica</div>
       <div class="serv-card-nm">Richiesta<br>esami</div>
     </div>
-    <div class="serv-card" onclick="quickStart('Certificato medico')" style="background:linear-gradient(135deg,#5b21b6,#7c3aed)">
+    <div class="serv-card" onclick="quickStart('Certificato medico')" style="background:linear-gradient(135deg,#0D4F5C,#2A8A8A)">
       <span class="serv-card-emoji">📋</span>
       <div class="serv-card-sub">Documenti</div>
       <div class="serv-card-nm">Certificato<br>medico</div>
@@ -482,7 +482,7 @@ textarea{min-height:120px;resize:none}
   </div>
 
   <div class="pcard">
-    <div style="display:block;text-align:center;background:#fff;color:#5b21b6;font-size:20px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:10px 20px;border-radius:20px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.15);-webkit-text-stroke:0.5px #5b21b6">Abbonamento</div>
+    <div style="display:block;text-align:center;background:#fff;color:#0D4F5C;font-size:20px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:10px 20px;border-radius:20px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.15);-webkit-text-stroke:0.5px #0D4F5C">Abbonamento</div>
     <div class="p-vs"><div class="p-save">Risparmi €208</div><div style="font-size:17px;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:1px;flex-shrink:0">rispetto a</div><div class="p-vs-txt">Piattaforme mediche concorrenti e studi medici privati <s style="color:rgba(255,255,255,.5)">€288/anno</s></div></div>
     <button class="btn-hp" onclick="showScreen('s-payment')" style="margin-top:4px;width:100%">Attiva ora · Pagamento sicuro 🔒</button>
   </div>
@@ -501,9 +501,9 @@ textarea{min-height:120px;resize:none}
   </div>
 
   <div class="pfoot">
-    <div style="background:#faf5ff;border:2px solid #ddd6fe;border-radius:14px;padding:18px 20px;margin-bottom:20px;text-align:center;font-size:16px">
+    <div style="background:#F0FAFA;border:2px solid #B2E0DC;border-radius:14px;padding:18px 20px;margin-bottom:20px;text-align:center;font-size:16px">
       📧 <strong style="font-size:17px">Assistenza:</strong><br>
-      <a href="mailto:contatti@medicoora.com" style="color:#6d28d9;font-weight:800;font-size:18px;text-decoration:none;display:inline-block;margin-top:6px">contatti@medicoora.com</a>
+      <a href="mailto:contatti@medicoora.com" style="color:#1A5F6A;font-weight:800;font-size:18px;text-decoration:none;display:inline-block;margin-top:6px">contatti@medicoora.com</a>
       <div style="font-size:13px;color:#64748b;margin-top:6px">Risposta entro 24h · 7 giorni su 7</div>
     </div>
     <a href="https://wa.me/393403882191" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;background:#25D366;color:#fff;font-weight:800;font-size:16px;padding:14px 20px;border-radius:14px;text-decoration:none;margin-bottom:20px">
@@ -511,7 +511,7 @@ textarea{min-height:120px;resize:none}
       WhatsApp: 340 388 2191
     </a>
   </div>
-  <div style="background:#5b21b6;color:#fff;padding:24px 20px;text-align:center;border-radius:0 0 0 0">
+  <div style="background:#0D4F5C;color:#fff;padding:24px 20px;text-align:center;border-radius:0 0 0 0">
     <div style="font-weight:800;font-size:16px;margin-bottom:4px">🩺 Medico Subito</div>
     <div style="font-size:12px;opacity:.6;margin-bottom:14px">Piattaforma italiana di telemedicina</div>
     <div style="display:flex;gap:14px;justify-content:center;margin-bottom:12px">
@@ -541,7 +541,7 @@ textarea{min-height:120px;resize:none}
 <div id="s-payment" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-home')">← Torna</button><div class="logo-txt" style="margin-left:8px">Abbonamento</div></div>
   <div class="pay-hero">
-    <div style="display:inline-block;background:#fff;color:#5b21b6;font-size:14px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:6px 18px;border-radius:20px;margin-bottom:12px;-webkit-text-stroke:.5px #5b21b6">Offerta lancio</div>
+    <div style="display:inline-block;background:#fff;color:#0D4F5C;font-size:14px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:6px 18px;border-radius:20px;margin-bottom:12px;-webkit-text-stroke:.5px #0D4F5C">Offerta lancio</div>
     <div class="p-pay">€200</div>
     <div style="font-size:14px;color:rgba(255,255,255,.8);margin:4px 0 10px">all'anno · soli <strong style="color:#fff">€6,60 al mese</strong> · primi 10.000 iscritti</div>
     <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:8px 12px;font-size:13px;color:rgba(255,255,255,.85)">Risparmia €208 rispetto ai concorrenti</div>
@@ -571,13 +571,13 @@ textarea{min-height:120px;resize:none}
 
 <!-- RICHIESTA -->
 <div id="s-richiesta" class="screen">
-  <div style="background:linear-gradient(135deg,#2e1065,#6d28d9);padding:28px 20px 24px;text-align:center;position:relative">
-    <button class="btn-back" onclick="showScreen('s-home')" style="background:#5b21b6;border:3px solid #facc15;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:900;cursor:pointer;position:absolute;left:16px;top:16px;text-transform:uppercase;letter-spacing:.5px;padding:10px 14px;border-radius:8px;width:72px;line-height:1.3;text-align:center">TORNA<br>HOME</button>
+  <div style="background:linear-gradient(135deg,#0A3D47,#1A5F6A);padding:28px 20px 24px;text-align:center;position:relative">
+    <button class="btn-back" onclick="showScreen('s-home')" style="background:#0D4F5C;border:3px solid #facc15;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:900;cursor:pointer;position:absolute;left:16px;top:16px;text-transform:uppercase;letter-spacing:.5px;padding:10px 14px;border-radius:8px;width:72px;line-height:1.3;text-align:center">TORNA<br>HOME</button>
     <div style="font-size:6rem;margin-bottom:14px;margin-top:16px">🩺</div>
     <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:800;color:#fff;letter-spacing:-.5px">Medico <span style="color:#facc15">Subito</span></div>
   </div>
   <div style="padding:16px 16px 0">
-    <div style="background:linear-gradient(135deg,#6d28d9,#7c3aed);border-radius:16px;padding:18px 20px;margin-bottom:16px;text-align:center;box-shadow:0 4px 20px rgba(124,58,237,.2)">
+    <div style="background:linear-gradient(135deg,#1A5F6A,#2A8A8A);border-radius:16px;padding:18px 20px;margin-bottom:16px;text-align:center;box-shadow:0 4px 20px rgba(42,138,138,.2)">
       <div style="font-size:24px;font-weight:900;color:#fff;letter-spacing:.3px">Nuova richiesta medica</div>
       <div style="font-size:17px;color:rgba(255,255,255,.85);margin-top:6px;font-weight:600">Compila il modulo. Puoi allegare foto o referti.</div>
     </div>
@@ -588,7 +588,7 @@ textarea{min-height:120px;resize:none}
         <div class="emerg-l">• Dolore toracico o difficoltà respiratoria<br>• Perdita di coscienza o confusione<br>• Deficit neurologici · Sanguinamento importante<br>• Dolore addominale severo · Gravidanza con sintomi acuti</div>
         <div class="emerg-cta">Chiama il 118 o vai al Pronto Soccorso</div>
       </div>
-      <label style="font-size:15px;font-weight:800;color:#5b21b6;display:block;margin-bottom:6px">Seleziona il tipo di richiesta</label>
+      <label style="font-size:15px;font-weight:800;color:#0D4F5C;display:block;margin-bottom:6px">Seleziona il tipo di richiesta</label>
       <select id="requestType">
         <option value="">Seleziona tipo di richiesta</option>
         <option>Rinnovo terapia</option>
@@ -599,7 +599,7 @@ textarea{min-height:120px;resize:none}
         <option>Interpretazione referto</option>
         <option>Altro</option>
       </select>
-      <label style="font-size:15px;font-weight:800;color:#5b21b6;display:block;margin-bottom:6px;margin-top:12px">Descrivi la tua situazione</label>
+      <label style="font-size:15px;font-weight:800;color:#0D4F5C;display:block;margin-bottom:6px;margin-top:12px">Descrivi la tua situazione</label>
       <textarea id="problem" placeholder="Farmaci, allergie, sintomi, durata..."></textarea>
 
       <!-- ALLEGATI subito dopo la descrizione -->
@@ -689,7 +689,7 @@ textarea{min-height:120px;resize:none}
           <button onclick="startStripeSuc()" style="width:100%;background:#fff;color:var(--blu-deep);border:none;border-radius:8px;padding:13px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Attiva ora</button>
           <div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:8px">🔒 Pagamento sicuro con Stripe</div>
         </div>
-        <button onclick="newRequest()" style="width:100%;background:#fff;color:#5b21b6;border:none;border-radius:10px;padding:14px;font-size:16px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Plus Jakarta Sans',sans-serif">📋 Invia nuova richiesta</button>
+        <button onclick="newRequest()" style="width:100%;background:#fff;color:#0D4F5C;border:none;border-radius:10px;padding:14px;font-size:16px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Plus Jakarta Sans',sans-serif">📋 Invia nuova richiesta</button>
       </div>
     </div>
   </div>
@@ -707,12 +707,12 @@ textarea{min-height:120px;resize:none}
 <!-- INFO -->
 <div id="s-info" class="screen">
   <div style="display:flex;height:90px">
-    <div style="flex:1;background:linear-gradient(135deg,#2e1065,#6d28d9);display:flex;align-items:center;gap:10px;padding:0 18px">
+    <div style="flex:1;background:linear-gradient(135deg,#0A3D47,#1A5F6A);display:flex;align-items:center;gap:10px;padding:0 18px">
       <span style="font-size:2.2rem">🩺</span>
       <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:800;color:#fff;letter-spacing:-.3px">Medico <span style="color:#facc15">Subito</span></div>
     </div>
-    <div onclick="showScreen('s-richiesta')" style="flex:1;background:#2d2d2d;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:8px;background:#2e1065">
-      <div style="background:#5b21b6;border:3px solid #facc15;border-radius:8px;padding:12px 14px;width:100%;text-align:center">
+    <div onclick="showScreen('s-richiesta')" style="flex:1;background:#2d2d2d;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:8px;background:#0A3D47">
+      <div style="background:#0D4F5C;border:3px solid #facc15;border-radius:8px;padding:12px 14px;width:100%;text-align:center">
         <div style="font-size:14px;font-weight:900;color:#facc15;letter-spacing:.5px;text-transform:uppercase;line-height:1.5">Torna alla<br>richiesta medica</div>
       </div>
     </div>
@@ -749,19 +749,19 @@ textarea{min-height:120px;resize:none}
 
 <!-- CONTATTI -->
 <div id="s-contatti" class="screen">
-  <div style="background:linear-gradient(135deg,#2e1065,#6d28d9);padding:28px 20px 24px;text-align:center;position:relative">
+  <div style="background:linear-gradient(135deg,#0A3D47,#1A5F6A);padding:28px 20px 24px;text-align:center;position:relative">
     <!-- sinistra: Medico Subito → home -->
     <div onclick="showScreen('s-home')" style="position:absolute;left:16px;top:16px;cursor:pointer;text-align:center">
       <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:800;color:#fff;line-height:1.1">Medico<br><span style="color:#facc15">Subito</span></div>
     </div>
     <!-- destra: Richiesta medica -->
-    <button onclick="vaiARichiesta()" style="background:#5b21b6;border:3px solid #facc15;color:#facc15;font-family:'Plus Jakarta Sans',sans-serif;font-size:9px;font-weight:900;cursor:pointer;position:absolute;right:16px;top:16px;padding:0;border-radius:8px;text-transform:uppercase;letter-spacing:.2px;width:64px;height:64px;line-height:1.4;text-align:center;display:flex;align-items:center;justify-content:center;flex-direction:column">RICHIESTA<br>MEDICA</button>
+    <button onclick="vaiARichiesta()" style="background:#0D4F5C;border:3px solid #facc15;color:#facc15;font-family:'Plus Jakarta Sans',sans-serif;font-size:9px;font-weight:900;cursor:pointer;position:absolute;right:16px;top:16px;padding:0;border-radius:8px;text-transform:uppercase;letter-spacing:.2px;width:64px;height:64px;line-height:1.4;text-align:center;display:flex;align-items:center;justify-content:center;flex-direction:column">RICHIESTA<br>MEDICA</button>
     <div style="font-size:4rem;margin-bottom:10px;margin-top:8px">🩺</div>
     <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:800;color:#fff;letter-spacing:-.5px">Il tuo medico online,<br><span style="color:#facc15">sempre disponibile.</span></div>
     <div style="font-size:19px;color:rgba(255,255,255,.8);margin-top:8px;font-weight:700">Siamo qui per te · 7 giorni su 7</div>
   </div>
   <div style="padding:16px 16px 0;padding-bottom:90px">
-    <div class="info-card" style="cursor:pointer" onclick="window.location.href='mailto:contatti@medicoora.com'"><h3>✉️ Email</h3><p><a href="mailto:contatti@medicoora.com" style="font-size:17px;font-weight:800;color:#7c3aed;text-decoration:none">contatti@medicoora.com</a><br><span style="font-size:17px;color:#374151;font-weight:600">Rispondiamo entro poche ore, 7 giorni su 7</span></p></div>
+    <div class="info-card" style="cursor:pointer" onclick="window.location.href='mailto:contatti@medicoora.com'"><h3>✉️ Email</h3><p><a href="mailto:contatti@medicoora.com" style="font-size:17px;font-weight:800;color:#2A8A8A;text-decoration:none">contatti@medicoora.com</a><br><span style="font-size:17px;color:#374151;font-weight:600">Rispondiamo entro poche ore, 7 giorni su 7</span></p></div>
     <div class="info-card"><h3>🕐 Disponibilità</h3><p>Servizio attivo <strong>24 ore su 24, 7 giorni su 7</strong>, inclusi sabato, domenica e festivi.</p></div>
     <div class="info-card"><h3>🔒 Sicurezza</h3><p>Dati protetti con crittografia GDPR e Linee Guida Telemedicina 2022.</p></div>
     <div class="info-card"><h3>👨‍⚕️ Team medico</h3><p>Medici iscritti all'Ordine dei Medici Chirurghi.</p></div>
@@ -778,17 +778,17 @@ textarea{min-height:120px;resize:none}
 
 <!-- MEDICI -->
 <div id="s-medici" class="screen">
-  <div style="background:linear-gradient(135deg,#2e1065,#6d28d9);padding:36px 20px 30px;text-align:center">
+  <div style="background:linear-gradient(135deg,#0A3D47,#1A5F6A);padding:36px 20px 30px;text-align:center">
     <div style="font-size:4rem;margin-bottom:14px">🩺</div>
     <div style="font-family:'Playfair Display',serif;font-size:30px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:8px">I nostri <span style="color:#facc15">medici</span></div>
     <div style="font-size:16px;color:rgba(255,255,255,.85);font-weight:600;line-height:1.6">Professionisti iscritti all'Ordine dei Medici Chirurghi.<br>Ogni risposta è firmata dal medico responsabile.</div>
   </div>
   <div style="padding:24px 20px;padding-bottom:90px;text-align:center">
-    <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:16px;padding:24px;margin-bottom:20px">
-      <div style="font-size:18px;font-weight:700;color:#5b21b6;margin-bottom:8px">Trasparenza e legalità</div>
+    <div style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:16px;padding:24px;margin-bottom:20px">
+      <div style="font-size:18px;font-weight:700;color:#0D4F5C;margin-bottom:8px">Trasparenza e legalità</div>
       <div style="font-size:16px;color:var(--txt-s);line-height:1.7">Le informazioni complete sui professionisti sanitari che erogano il servizio sono disponibili nei Termini e Condizioni, nel rispetto del D.Lgs. 70/2003 e del GDPR.</div>
     </div>
-    <button onclick="showScreen('s-termini')" style="background:linear-gradient(135deg,#6d28d9,#7c3aed);color:#fff;border:none;padding:16px 32px;border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:16px;cursor:pointer;box-shadow:0 4px 16px rgba(124,58,237,.3);width:100%">Leggi i Termini e Condizioni</button>
+    <button onclick="showScreen('s-termini')" style="background:linear-gradient(135deg,#1A5F6A,#2A8A8A);color:#fff;border:none;padding:16px 32px;border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:16px;cursor:pointer;box-shadow:0 4px 16px rgba(42,138,138,.3);width:100%">Leggi i Termini e Condizioni</button>
     <button onclick="showScreen(prevScr||'s-home')" style="background:none;border:none;color:var(--blu);font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;margin-top:14px;text-decoration:underline">← Torna indietro</button>
   </div>
   <div class="bnav">
@@ -824,7 +824,7 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen(prevScr||'s-home')">← Torna</button><div class="logo-txt" style="margin-left:8px">Blog</div></div>
   <div style="padding:16px 16px 90px">
-    <div class="sez-title serif" style="margin-bottom:14px;color:#5b21b6">Articoli e guide</div>
+    <div class="sez-title serif" style="margin-bottom:14px;color:#0D4F5C">Articoli e guide</div>
 
     <div class="blog-card" onclick="showScreen('s-blog-1')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Cosa fare se il medico di base è chiuso il sabato</div>
@@ -1068,23 +1068,23 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-1" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Cosa fare se il medico di base è chiuso il sabato</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Cosa fare se il medico di base è chiuso il sabato</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Hai bisogno di una ricetta, di un certificato o di un parere medico, ma il tuo medico di base è chiuso. È sabato, o domenica, o è un giorno festivo. La guardia medica risponde per le urgenze, non per le richieste ordinarie. Il pronto soccorso è riservato alle emergenze vere.</p>
     <p style="margin-bottom:14px;line-height:1.7">Molti italiani si trovano ogni settimana in questa situazione. La soluzione esiste, ed è più semplice di quello che pensi.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Il problema reale: gli ambulatori sono aperti poche ore</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Il problema reale: gli ambulatori sono aperti poche ore</h3>
     <p style="margin-bottom:14px;line-height:1.7">In Italia il medico di base riceve mediamente tre o cinque giorni a settimana, per poche ore al giorno. Il sabato mattina alcuni sono disponibili, ma la maggior parte no. La domenica gli ambulatori sono chiusi. Durante le festività la situazione peggiora ulteriormente.</p>
     <p style="margin-bottom:14px;line-height:1.7">Questo significa che per almeno due o tre giorni ogni settimana, senza contare ferie e malattia del medico, non hai accesso al tuo medico di fiducia.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Cosa non devi fare</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Cosa non devi fare</h3>
     <p style="margin-bottom:14px;line-height:1.7">Non andare al Pronto Soccorso per richieste non urgenti. Il pronto soccorso è pensato per emergenze come dolore toracico, difficoltà respiratoria, traumi, perdita di coscienza. Presentarsi al PS per rinnovare una terapia o richiedere esami del sangue significa aspettare ore, intasare un servizio di emergenza e spesso ricevere un ticket per codice bianco.</p>
     <p style="margin-bottom:14px;line-height:1.7">Non chiamare il 118 per lo stesso motivo. Il 118 è per le emergenze vere.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Le alternative legittime</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Le alternative legittime</h3>
     <p style="margin-bottom:14px;line-height:1.7"><strong>La guardia medica.</strong> Copre le ore notturne e i festivi per le situazioni che non possono aspettare ma non sono emergenze. Puoi chiamarla per sintomi acuti, febbre alta, dolori che non migliorano. Non è però il canale giusto per richieste programmate come rinnovo terapie o certificati.</p>
     <p style="margin-bottom:14px;line-height:1.7"><strong>Il medico sostituto.</strong> Se il tuo medico di base è assente per ferie o malattia, di solito indica un sostituto. Controlla il sito della tua ASL o chiama lo studio per trovare il sostituto di riferimento.</p>
     <p style="margin-bottom:14px;line-height:1.7"><strong>La telemedicina.</strong> Per richieste programmate e non urgenti come il rinnovo di una terapia cronica, la richiesta di esami del sangue, un certificato medico o l'interpretazione di un referto, la telemedicina è oggi la soluzione più pratica. Un medico online può valutare la tua situazione e fornirti la documentazione necessaria anche di sabato, domenica e nei giorni festivi.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Cosa puoi richiedere online e cosa no</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Cosa puoi richiedere online e cosa no</h3>
     <p style="margin-bottom:14px;line-height:1.7">Puoi richiedere il rinnovo di terapie croniche in corso, esami del sangue o strumentali di controllo, certificati medici, una seconda opinione su referti o diagnosi, indicazioni su farmaci da banco. Non puoi richiedere visite che necessitano un esame fisico diretto, la gestione di emergenze, o prescrizioni per farmaci a normativa restrittiva.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Come funziona Medico Subito</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Come funziona Medico Subito</h3>
     <p style="margin-bottom:14px;line-height:1.7">Medico Subito è una piattaforma italiana di telemedicina attiva sette giorni su sette, sabato e domenica inclusi. Descrivi la tua situazione nel modulo online, un medico iscritto all'Ordine valuta la tua richiesta, e ricevi la risposta firmata via email entro ventiquattro ore, con eventuale documentazione in PDF.</p>
     <p style="margin-bottom:14px;line-height:1.7">L'abbonamento annuale è di ottanta euro e include fino a tre richieste al mese. Il servizio è rivolto esclusivamente a pazienti adulti residenti in Italia.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">In caso di emergenza chiama il 118 o vai al Pronto Soccorso. La telemedicina non sostituisce il soccorso d'emergenza.</p>
@@ -1096,14 +1096,14 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-2" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Quanto costa una ricetta medica online in Italia</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Quanto costa una ricetta medica online in Italia</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Chi cerca un medico online per la prima volta si pone quasi sempre la stessa domanda: quanto costa davvero. La risposta cambia molto da una piattaforma all'altra, e capire le differenze aiuta a scegliere con consapevolezza.</p>
     <p style="margin-bottom:14px;line-height:1.7">Molti servizi di telemedicina applicano un costo per singola visita, che in Italia oscilla generalmente tra i venti e i quaranta euro a consulto. Significa che ogni volta che hai bisogno di un parere medico, di un rinnovo di terapia o di una richiesta di esami, paghi una cifra separata. Per chi ha patologie croniche e necessita di contatti regolari con un medico, questo modello diventa costoso nel tempo.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Il modello ad abbonamento</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Il modello ad abbonamento</h3>
     <p style="margin-bottom:14px;line-height:1.7">Medico Subito funziona diversamente. L'abbonamento annuale costa ottanta euro, equivalenti a circa sei euro e sessanta al mese, e include fino a tre richieste mediche mensili per tutta la durata dell'anno. Chi utilizza il servizio anche solo due o tre volte al mese ottiene un risparmio netto rispetto al pagamento a consulto singolo.</p>
     <p style="margin-bottom:14px;line-height:1.7">Il prezzo include la valutazione del medico, la documentazione firmata e l'invio della risposta entro ventiquattro ore, sette giorni su sette, sabato e domenica compresi. Non ci sono costi nascosti né pagamenti aggiuntivi per le richieste comprese nel limite mensile.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Per chi conviene di più</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Per chi conviene di più</h3>
     <p style="margin-bottom:20px;line-height:1.7">Per chi deve rinnovare una terapia cronica, richiedere periodicamente esami di controllo o necessita occasionalmente di un certificato medico, l'abbonamento annuale rappresenta la soluzione più conveniente rispetto al pagamento per singola prestazione.</p>
     <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
   </div>
@@ -1113,11 +1113,11 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-3" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Come rinnovare la terapia per la pressione alta senza andare dal medico</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Come rinnovare la terapia per la pressione alta senza andare dal medico</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Chi convive con l'ipertensione sa quanto sia frequente la necessità di rinnovare la terapia. Le visite di controllo per la sola conferma della cura già in corso, quando i valori sono stabili e non ci sono nuovi sintomi, rappresentano spesso una perdita di tempo evitabile.</p>
     <p style="margin-bottom:14px;line-height:1.7">La normativa italiana sulla telemedicina, definita dalle Linee Guida del Ministero della Salute del 2022, consente ai medici di valutare a distanza richieste di questo tipo, quando clinicamente appropriato. Questo significa che per molte terapie croniche stabili non è necessario presentarsi fisicamente in ambulatorio ogni volta.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Come funziona la valutazione a distanza</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Come funziona la valutazione a distanza</h3>
     <p style="margin-bottom:14px;line-height:1.7">Attraverso Medico Subito è possibile descrivere la propria situazione clinica, indicare la terapia in corso e i valori pressori rilevati, e ricevere la valutazione di un medico iscritto all'Ordine entro ventiquattro ore. Se il rinnovo è clinicamente appropriato, il medico fornisce la documentazione necessaria firmata digitalmente.</p>
     <p style="margin-bottom:14px;line-height:1.7">Questo approccio è particolarmente utile per chi lavora con orari rigidi, per chi vive lontano dal proprio medico di base, o semplicemente per chi vuole evitare l'attesa in studio per una pratica di routine.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">In presenza di nuovi sintomi, valori pressori fortemente alterati o cambiamenti significativi delle condizioni di salute è necessaria una valutazione medica diretta e non un consulto a distanza.</p>
@@ -1129,11 +1129,11 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-4" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Medico online per chi vive all'estero</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Medico online per chi vive all'estero</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Vivere all'estero comporta spesso una difficoltà che pochi considerano prima di trasferirsi: trovare un medico che parli italiano e conosca il sistema sanitario nazionale, soprattutto per questioni come il rinnovo di una terapia iniziata in Italia o la richiesta di un certificato in italiano.</p>
     <p style="margin-bottom:14px;line-height:1.7">Gli italiani residenti fuori dal territorio nazionale, sia per lavoro che per studio o vita personale, si trovano spesso a dover gestire la propria salute in un sistema sanitario diverso, con medici che non hanno accesso alla loro storia clinica italiana e che comunicano in una lingua non sempre comprensibile fino in fondo.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Un punto di riferimento italiano</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Un punto di riferimento italiano</h3>
     <p style="margin-bottom:14px;line-height:1.7">Un medico online italiano risolve diversi di questi problemi. Permette di mantenere continuità con la terapia prescritta in Italia, di ottenere certificati medici scritti in italiano riconoscibili dalle istituzioni italiane, e di ricevere un parere medico comprensibile senza barriere linguistiche, indipendentemente dal fuso orario o dal paese di residenza.</p>
     <p style="margin-bottom:20px;line-height:1.7">Medico Subito è accessibile da qualsiasi parte del mondo con una connessione internet. Le richieste vengono valutate da un medico italiano iscritto all'Ordine, e la documentazione viene fornita in italiano, utile sia per la gestione sanitaria personale sia per eventuali necessità burocratiche legate all'Italia.</p>
     <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
@@ -1144,12 +1144,12 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-5" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Ricetta rossa o bianca: differenza e come richiederle online</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Ricetta rossa o bianca: differenza e come richiederle online</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Chi non lavora in ambito sanitario spesso confonde i diversi tipi di prescrizione medica, generando incertezza al momento di rivolgersi a un medico o di recarsi in farmacia.</p>
     <p style="margin-bottom:14px;line-height:1.7">La ricetta rossa, tecnicamente chiamata ricetta del Servizio Sanitario Nazionale, viene utilizzata per prescrivere farmaci e prestazioni a carico parziale o totale del sistema sanitario pubblico. Viene emessa dal medico di base o dallo specialista convenzionato e permette di accedere a farmaci con il ticket previsto o gratuitamente, a seconda della propria situazione.</p>
     <p style="margin-bottom:14px;line-height:1.7">La ricetta bianca, invece, è una prescrizione privata. Viene utilizzata quando il farmaco o la prestazione richiesta non rientrano nei criteri di rimborso del sistema sanitario nazionale, oppure quando il paziente sceglie volontariamente la via privata, ad esempio per maggiore rapidità. Il costo del farmaco o della prestazione, in questo caso, è interamente a carico del paziente.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Il valore legale della ricetta bianca</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Il valore legale della ricetta bianca</h3>
     <p style="margin-bottom:14px;line-height:1.7">I servizi di telemedicina privata come Medico Subito operano attraverso ricette bianche, in quanto il consulto avviene al di fuori del circuito del Servizio Sanitario Nazionale. Questo non significa che la prescrizione abbia minore valore legale: una ricetta bianca emessa da un medico abilitato è a tutti gli effetti un documento medico valido, semplicemente non dà diritto alle agevolazioni del sistema pubblico.</p>
     <p style="margin-bottom:20px;line-height:1.7">Per chi necessita di una prescrizione rapida, senza i tempi di attesa del sistema pubblico, e accetta di sostenere il costo pieno del farmaco, la ricetta bianca ottenuta tramite consulto online rappresenta un'alternativa pratica e legalmente valida.</p>
     <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
@@ -1160,12 +1160,12 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-6" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Perché scegliere Medico Subito</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Perché scegliere Medico Subito</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Quando si sceglie un servizio di telemedicina, due fattori pesano più di ogni altro nella decisione: la velocità con cui si riceve una risposta e il costo complessivo nel tempo.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Tempi di risposta</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Tempi di risposta</h3>
     <p style="margin-bottom:14px;line-height:1.7">Su Medico Subito la risposta del medico arriva entro ventiquattro ore dall'invio della richiesta, sette giorni su sette, inclusi sabato, domenica e giorni festivi. Non esistono orari di chiusura né attese settimanali: una richiesta inviata di sabato sera riceve risposta entro la giornata successiva, senza dover aspettare il lunedì.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Costo nel tempo</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Costo nel tempo</h3>
     <p style="margin-bottom:14px;line-height:1.7">Sul piano economico, l'abbonamento annuale di ottanta euro copre fino a tre richieste mediche al mese per dodici mesi consecutivi. Confrontato con il costo medio di una visita privata in studio, che in Italia si attesta generalmente tra i cinquanta e i cento euro, la differenza è netta già dal primo utilizzo dell'abbonamento.</p>
     <p style="margin-bottom:14px;line-height:1.7">Ogni risposta del medico viene fornita con documentazione firmata digitalmente, pronta per essere utilizzata in farmacia o conservata come riferimento sanitario personale. Non sono richiesti spostamenti, non ci sono sale d'attesa, e l'intero processo si svolge dal proprio telefono o computer.</p>
     <p style="margin-bottom:20px;line-height:1.7">Per chi gestisce terapie croniche, necessita periodicamente di certificati o desidera un secondo parere medico senza i tempi del sistema tradizionale, l'abbonamento rappresenta una soluzione che unisce rapidità e risparmio concreto.</p>
@@ -1178,11 +1178,11 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-7" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Certificato medico online con urgenza: come fare</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Certificato medico online con urgenza: come fare</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Capita spesso di avere bisogno di un certificato medico in tempi stretti, per il lavoro, per un'attività sportiva, per giustificare un'assenza. Quando il medico di base non è disponibile nei tempi richiesti, le opzioni sembrano limitate.</p>
     <p style="margin-bottom:14px;line-height:1.7">Molti certificati medici non richiedono necessariamente una visita fisica, soprattutto quando si tratta di attestare uno stato di salute generale già noto o una condizione che non necessita di nuovi accertamenti. In questi casi la valutazione può avvenire anche a distanza, da parte di un medico abilitato.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Come funziona la richiesta a distanza</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Come funziona la richiesta a distanza</h3>
     <p style="margin-bottom:14px;line-height:1.7">Attraverso un servizio di telemedicina è possibile descrivere la richiesta, indicare lo scopo del certificato, e ricevere la valutazione del medico entro tempi rapidi. Se la richiesta è clinicamente appropriata, il documento viene rilasciato firmato digitalmente, pronto per essere consegnato a chi lo richiede.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Non tutti i certificati possono essere rilasciati a distanza. Alcuni richiedono necessariamente un esame obiettivo diretto, specialmente quando attestano l'idoneità a un'attività fisica specifica o quando la normativa di settore lo impone esplicitamente. Medico Subito valuta ogni richiesta caso per caso, indicando con chiarezza quando è necessaria una visita in presenza.</p>
     <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
@@ -1193,11 +1193,11 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-8" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Quando conviene una seconda opinione medica online</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Quando conviene una seconda opinione medica online</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Ricevere una diagnosi o un piano terapeutico genera spesso il desiderio naturale di avere conferma da un altro medico, soprattutto quando la decisione riguarda una terapia importante o un intervento.</p>
     <p style="margin-bottom:14px;line-height:1.7">In passato, ottenere una seconda opinione significava prenotare una nuova visita, spesso con tempi di attesa lunghi e costi aggiuntivi significativi. Oggi è possibile sottoporre la propria documentazione clinica, referti ed esami già effettuati, a un secondo medico che fornisce la propria valutazione a distanza.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Quando è più utile</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Quando è più utile</h3>
     <p style="margin-bottom:14px;line-height:1.7">Questo approccio è particolarmente utile in alcune situazioni specifiche: quando la diagnosi ricevuta genera dubbi, quando viene proposta una terapia con effetti collaterali rilevanti, quando si desidera semplicemente una conferma prima di procedere con un percorso di cura impegnativo.</p>
     <p style="margin-bottom:14px;line-height:1.7">Una seconda opinione medica online non sostituisce il rapporto con il proprio medico curante, ma offre uno strumento aggiuntivo di consapevolezza. Il medico che fornisce la seconda valutazione esamina la documentazione fornita e offre un parere basato sugli elementi clinici disponibili, con gli stessi limiti di qualsiasi consulto a distanza.</p>
     <p style="margin-bottom:20px;line-height:1.7">Su Medico Subito è possibile caricare referti e documentazione medica insieme alla richiesta, permettendo al medico di fornire una valutazione informata entro tempi rapidi.</p>
@@ -1209,11 +1209,11 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-9" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Telemedicina in Italia: cosa dice la normativa</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Telemedicina in Italia: cosa dice la normativa</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Molte persone si chiedono se i servizi di medicina online siano effettivamente legali e regolamentati in Italia, o se si tratti di una zona grigia normativa.</p>
     <p style="margin-bottom:14px;line-height:1.7">La risposta è chiara: la telemedicina in Italia è regolamentata da specifiche Linee Guida pubblicate dal Ministero della Salute nel settembre 2022, che definiscono con precisione cosa può essere fatto a distanza, quali sono i limiti, e quali responsabilità ricadono sul medico che eroga il servizio.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Cosa prevedono le Linee Guida</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Cosa prevedono le Linee Guida</h3>
     <p style="margin-bottom:14px;line-height:1.7">Le Linee Guida stabiliscono che il consulto a distanza è appropriato per situazioni che non richiedono un esame fisico diretto: rinnovo di terapie croniche stabili, richiesta di esami di controllo, valutazione di referti, certificazioni quando clinicamente appropriate. Allo stesso tempo, la normativa è altrettanto chiara nell'escludere dalla telemedicina le situazioni di emergenza e i casi che necessitano di un esame obiettivo diretto.</p>
     <p style="margin-bottom:14px;line-height:1.7">Anche la Federazione Nazionale degli Ordini dei Medici Chirurghi e degli Odontoiatri, la FNOMCeO, ha fornito indicazioni deontologiche specifiche per i medici che operano in telemedicina, stabilendo che il professionista mantiene piena responsabilità clinica delle proprie decisioni, esattamente come in una visita tradizionale.</p>
     <p style="margin-bottom:20px;line-height:1.7">Un servizio di telemedicina conforme a queste linee guida garantisce che ogni consulto venga gestito da un medico iscritto all'Ordine, nel rispetto delle stesse responsabilità professionali e deontologiche previste per la medicina tradizionale.</p>
@@ -1226,11 +1226,11 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-10" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Come interpretare un referto medico senza aspettare la visita di controllo</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Come interpretare un referto medico senza aspettare la visita di controllo</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Ricevere un referto di esami del sangue o di un accertamento strumentale genera spesso ansia, soprattutto quando contiene valori o terminologia che non si comprendono fino in fondo. La visita di controllo con lo specialista o il medico di base, però, a volte è programmata a distanza di settimane.</p>
     <p style="margin-bottom:14px;line-height:1.7">In questo intervallo di tempo molte persone si trovano a interpretare da sole numeri e sigle, spesso ricorrendo a ricerche online che generano più preoccupazione che chiarezza.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Un punto di riferimento nell'attesa</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Un punto di riferimento nell'attesa</h3>
     <p style="margin-bottom:14px;line-height:1.7">Un consulto medico a distanza permette di sottoporre il referto a un medico, che può fornire una prima lettura dei valori, indicare se rientrano nella norma o richiedono attenzione, e orientare sui passi successivi da seguire. Questo non sostituisce la visita di controllo programmata, ma offre un punto di riferimento nell'attesa, riducendo l'incertezza.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Alcuni referti richiedono necessariamente la valutazione dello specialista che ha richiesto l'esame, soprattutto in percorsi diagnostici complessi o oncologici. In questi casi il consulto a distanza può comunque aiutare a comprendere meglio cosa aspettarsi dalla visita successiva.</p>
     <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
@@ -1241,10 +1241,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-11" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Rinnovare la terapia per la tiroide senza lunghe attese</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Rinnovare la terapia per la tiroide senza lunghe attese</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Chi convive con una patologia tiroidea, sia essa ipotiroidismo o ipertiroidismo, conosce bene la necessità di controlli periodici e rinnovi regolari della terapia. Quando i valori sono stabili da tempo e la cura è ben tollerata, le visite di controllo diventano spesso un appuntamento di routine più che una reale necessità clinica immediata.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Come funziona il rinnovo a distanza</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Come funziona il rinnovo a distanza</h3>
     <p style="margin-bottom:14px;line-height:1.7">La telemedicina, nei limiti previsti dalla normativa, consente di gestire questi rinnovi senza dover necessariamente prenotare una nuova visita in presenza ogni volta. Descrivendo la terapia in corso, gli ultimi valori degli esami ormonali e l'assenza di nuovi sintomi, un medico può valutare se il rinnovo è clinicamente appropriato.</p>
     <p style="margin-bottom:14px;line-height:1.7">Questo approccio è utile soprattutto per chi deve attendere settimane per un appuntamento endocrinologico, o per chi semplicemente necessita di continuità terapeutica senza interruzioni dovute a difficoltà di prenotazione.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Segnala sempre eventuali variazioni dei sintomi, comparsa di nuovi disturbi, o necessità di un nuovo controllo degli esami: situazioni che richiedono una valutazione più approfondita e spesso un consulto in presenza con lo specialista di riferimento.</p>
@@ -1256,11 +1256,11 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-12" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Cosa fare quando il pronto soccorso è troppo affollato</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Cosa fare quando il pronto soccorso è troppo affollato</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Chiunque abbia trascorso ore in una sala d'attesa di pronto soccorso per un problema che, con il senno di poi, non era un'emergenza, conosce bene la frustrazione di questa esperienza, sia per il tempo perso che per il senso di aver occupato una risorsa pensata per altro.</p>
     <p style="margin-bottom:14px;line-height:1.7">Il pronto soccorso applica un sistema di codici di priorità che assegna la precedenza ai casi più gravi. Questo significa che chi si presenta con un disturbo non urgente può attendere diverse ore, anche quando il problema è reale e fastidioso, semplicemente perché non rientra tra le priorità cliniche.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">I percorsi alternativi</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">I percorsi alternativi</h3>
     <p style="margin-bottom:14px;line-height:1.7">Per i disturbi che non mettono a rischio la vita ma necessitano comunque di un parere medico, esistono percorsi alternativi pensati apposta per queste situazioni: la guardia medica per i casi che non possono attendere il giorno successivo, il medico di base quando disponibile, e la telemedicina per le richieste che non necessitano di un esame fisico diretto.</p>
     <p style="margin-bottom:14px;line-height:1.7">Un consulto medico online può fornire orientamento su sintomi lievi o moderati, indicazioni su quando è davvero necessario recarsi in pronto soccorso, e supporto per la gestione di disturbi comuni che non richiedono l'intervento di emergenza.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">In caso di dubbio sulla gravità di un sintomo, è sempre meglio richiedere una valutazione medica piuttosto che attendere. Quando il problema è chiaramente non urgente, la telemedicina rappresenta un'alternativa che evita le lunghe attese del pronto soccorso.</p>
@@ -1272,10 +1272,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-13" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Artrosi dell'anca: gestire i controlli e la terapia del dolore</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Artrosi dell'anca: gestire i controlli e la terapia del dolore</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">L'artrosi dell'anca è una condizione cronica che accompagna molte persone per anni, con fasi più stabili alternate a momenti di riacutizzazione del dolore. La gestione nel tempo richiede spesso controlli periodici, aggiustamenti della terapia antidolorifica e, occasionalmente, richieste di accertamenti di approfondimento.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Quando la telemedicina può aiutare</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Quando la telemedicina può aiutare</h3>
     <p style="margin-bottom:14px;line-height:1.7">Per chi ha già una diagnosi accertata e una terapia avviata, alcune richieste di routine possono essere gestite a distanza: il rinnovo della terapia antidolorifica già prescritta, la richiesta di esami strumentali di controllo come una radiografia di follow-up, o un parere su un peggioramento temporaneo dei sintomi che non richiede necessariamente una visita immediata.</p>
     <p style="margin-bottom:14px;line-height:1.7">Descrivendo la storia clinica, la terapia in corso e l'andamento del dolore, un medico può valutare se la richiesta è gestibile a distanza o se è necessaria una valutazione ortopedica diretta, soprattutto in caso di peggioramento significativo della mobilità o comparsa di nuovi sintomi.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Un dolore acuto e improvviso, l'impossibilità di caricare il peso sull'arto, o segni di infezione richiedono sempre una valutazione medica diretta e tempestiva, non un consulto a distanza.</p>
@@ -1287,10 +1287,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-14" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Ipertensione: monitoraggio e rinnovo della terapia online</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Ipertensione: monitoraggio e rinnovo della terapia online</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">L'ipertensione arteriosa è tra le condizioni croniche più diffuse e richiede un monitoraggio costante nel tempo. Per chi ha una terapia già stabilizzata e valori sotto controllo, le visite di rinnovo rappresentano spesso un appuntamento di routine.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Gestire il rinnovo a distanza</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Gestire il rinnovo a distanza</h3>
     <p style="margin-bottom:14px;line-height:1.7">Quando la pressione è ben controllata dalla terapia in corso e non sono comparsi nuovi sintomi, un medico può valutare a distanza il rinnovo della prescrizione, analizzando i valori pressori registrati dal paziente nel tempo e l'eventuale presenza di effetti collaterali.</p>
     <p style="margin-bottom:14px;line-height:1.7">Questo permette di mantenere la continuità terapeutica senza interruzioni, particolarmente importante per una condizione che richiede costanza nell'assunzione dei farmaci, evitando al contempo i tempi di attesa di una nuova visita per una situazione clinicamente stabile.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Valori pressori molto elevati, comparsa di sintomi come forte mal di testa, vista offuscata o dolore al petto richiedono sempre una valutazione medica immediata, non un consulto a distanza.</p>
@@ -1302,10 +1302,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-15" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Ipercolesterolemia: come gestire la terapia nel tempo</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Ipercolesterolemia: come gestire la terapia nel tempo</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Il colesterolo alto è una condizione che, una volta diagnosticata e impostata la terapia, richiede controlli periodici degli esami del sangue e occasionali rinnovi della prescrizione. Per molte persone questo significa ripetuti appuntamenti per una situazione clinica ormai stabile.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Quando il rinnovo a distanza è appropriato</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Quando il rinnovo a distanza è appropriato</h3>
     <p style="margin-bottom:14px;line-height:1.7">Con valori di colesterolo monitorati regolarmente e una terapia ben tollerata, un medico può valutare a distanza il rinnovo della prescrizione, analizzando gli ultimi esami del sangue disponibili e l'andamento nel tempo dei valori lipidici.</p>
     <p style="margin-bottom:14px;line-height:1.7">È inoltre possibile richiedere a distanza la prescrizione di nuovi esami di controllo, utile per programmare il successivo controllo dei valori senza dover prima prenotare una visita solo per ottenere la richiesta dell'esame.</p>
     <p style="margin-bottom:20px;line-height:1.7">Per chi gestisce una terapia ipocolesterolemizzante da tempo, questo approccio consente di mantenere la continuità della cura riducendo il numero di visite necessarie per le sole pratiche di rinnovo, mantenendo comunque il controllo medico periodico della situazione clinica.</p>
@@ -1318,10 +1318,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-16" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Diabete tipo 2: come gestire i controlli di routine online</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Diabete tipo 2: come gestire i controlli di routine online</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Chi convive con il diabete di tipo 2 sa quanto sia importante la costanza nei controlli: emoglobina glicata, glicemia a digiuno, valutazione periodica della terapia. Quando il compenso glicemico è stabile, molte di queste pratiche diventano appuntamenti ricorrenti più che reali urgenze cliniche.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Cosa si può gestire a distanza</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Cosa si può gestire a distanza</h3>
     <p style="margin-bottom:14px;line-height:1.7">Per chi ha già una diagnosi consolidata e una terapia avviata, un consulto a distanza può essere utile per il rinnovo della prescrizione dei farmaci ipoglicemizzanti, per la richiesta di esami di controllo periodici, o per un parere su lievi oscillazioni dei valori glicemici che non richiedono un intervento immediato.</p>
     <p style="margin-bottom:14px;line-height:1.7">Fornendo lo storico recente dei valori di glicemia, la terapia in corso e l'eventuale comparsa di sintomi, un medico può valutare se il rinnovo è appropriato o se è necessaria una visita diabetologica più approfondita.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Glicemie persistentemente molto elevate, chetoni nelle urine, confusione mentale o difficoltà respiratorie richiedono sempre attenzione medica immediata e non rientrano nell'ambito di un consulto a distanza.</p>
@@ -1333,10 +1333,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-17" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Osteoporosi: rinnovo della terapia e controlli a distanza</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Osteoporosi: rinnovo della terapia e controlli a distanza</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">La gestione dell'osteoporosi richiede generalmente un approccio terapeutico continuativo nel tempo, con controlli periodici della densità ossea e rinnovo regolare della terapia prescritta. Per chi segue questo percorso da tempo, le visite di sola conferma terapeutica possono risultare ripetitive rispetto al reale bisogno clinico.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Come funziona il rinnovo a distanza</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Come funziona il rinnovo a distanza</h3>
     <p style="margin-bottom:14px;line-height:1.7">Quando la terapia è ben tollerata e il quadro clinico è stabile, è possibile richiedere a distanza il rinnovo della prescrizione, fornendo informazioni sulla cura in corso, l'esito dell'ultimo controllo di densitometria ossea, ed eventuali effetti collaterali riscontrati.</p>
     <p style="margin-bottom:20px;line-height:1.7">Questo approccio aiuta a mantenere la continuità di una terapia che richiede costanza nel tempo, riducendo al contempo il numero di visite necessarie per le sole pratiche di rinnovo, mantenendo comunque il controllo medico periodico della situazione.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Dolori ossei improvvisi e significativi, sospetto di fratture o nuovi sintomi richiedono sempre una valutazione medica diretta.</p>
@@ -1348,10 +1348,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-18" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Ansia e disturbi del sonno: quando un consulto online può aiutare</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Ansia e disturbi del sonno: quando un consulto online può aiutare</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">I disturbi d'ansia lieve e i problemi di insonnia occasionale sono tra le condizioni più diffuse, eppure spesso le persone esitano a rivolgersi a un medico per queste difficoltà, sia per il tempo necessario a prenotare una visita, sia per una certa reticenza ad affrontare l'argomento di persona.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Un primo passo accessibile</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Un primo passo accessibile</h3>
     <p style="margin-bottom:14px;line-height:1.7">Un consulto medico a distanza può rappresentare un primo passo accessibile per chi sperimenta ansia lieve, difficoltà ad addormentarsi o risvegli notturni frequenti, permettendo di descrivere la situazione con i propri tempi e ricevere un primo orientamento medico.</p>
     <p style="margin-bottom:14px;line-height:1.7">Il medico può fornire indicazioni generali sulla gestione del problema, valutare se sia appropriato un supporto farmacologico lieve o se sia preferibile un percorso diverso, come la valutazione psicologica o psichiatrica specialistica per le situazioni più complesse.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Ansia severa, pensieri di autolesionismo, o sintomi che compromettono significativamente la vita quotidiana richiedono sempre una valutazione specialistica diretta e tempestiva, non gestibile attraverso un consulto a distanza generico.</p>
@@ -1364,10 +1364,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-19" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Allergie stagionali: come gestire i sintomi con un consulto online</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Allergie stagionali: come gestire i sintomi con un consulto online</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">L'arrivo della primavera porta con sé, per milioni di persone, il fastidio dei sintomi allergici: starnuti, prurito agli occhi, naso che cola, difficoltà respiratorie lievi. Per chi soffre di allergie stagionali da anni, spesso la diagnosi è già nota e la gestione si ripete annualmente con schemi terapeutici simili.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Cosa si può richiedere a distanza</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Cosa si può richiedere a distanza</h3>
     <p style="margin-bottom:14px;line-height:1.7">Un consulto a distanza può essere utile per il rinnovo della terapia antistaminica già utilizzata negli anni precedenti, per un parere su sintomi lievi che si ripresentano stagionalmente, o per indicazioni generali su come affrontare il periodo di maggiore esposizione ai pollini.</p>
     <p style="margin-bottom:20px;line-height:1.7">Per chi ha già effettuato test allergologici e conosce la propria condizione, questo tipo di richiesta è generalmente gestibile a distanza, permettendo di ottenere rapidamente la prescrizione necessaria senza dover attendere un appuntamento specialistico per una situazione già nota.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Sintomi nuovi, reazioni allergiche severe con difficoltà respiratoria importante, gonfiore del viso o della gola richiedono sempre attenzione medica immediata, non un consulto a distanza.</p>
@@ -1379,10 +1379,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-20" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Dermatiti e problemi della pelle: quando un consulto online è utile</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Dermatiti e problemi della pelle: quando un consulto online è utile</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Le dermatiti, sia da contatto che di natura allergica, sono tra i disturbi cutanei più comuni e spesso si ripresentano in modo simile nel tempo per chi ne soffre cronicamente. Una volta nota la natura del problema, molte riacutizzazioni possono essere gestite con la stessa terapia topica già utilizzata in passato.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Come funziona la valutazione a distanza</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Come funziona la valutazione a distanza</h3>
     <p style="margin-bottom:14px;line-height:1.7">Attraverso una fotografia della zona interessata e una descrizione dei sintomi, un medico può fornire un primo orientamento, valutare se la situazione corrisponde a un quadro già noto, e indicare se è appropriato il rinnovo di una terapia precedentemente prescritta.</p>
     <p style="margin-bottom:20px;line-height:1.7">Questo approccio è particolarmente utile per chi soffre di dermatiti croniche ricorrenti, come l'eczema, e necessita periodicamente di rinnovare la stessa terapia topica per gestire le fasi di riacutizzazione.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Lesioni cutanee nuove e non identificate, segni di infezione importante, o cambiamenti significativi di nei esistenti richiedono sempre una valutazione dermatologica diretta, non un consulto a distanza generico.</p>
@@ -1394,10 +1394,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-21" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Reflusso gastroesofageo: gestire la terapia nel lungo periodo</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Reflusso gastroesofageo: gestire la terapia nel lungo periodo</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Il reflusso gastroesofageo è una condizione che, una volta diagnosticata, richiede spesso una gestione terapeutica continuativa, con periodi di terapia attiva e fasi di mantenimento. Per chi conosce già la propria condizione, molte richieste di rinnovo della terapia non necessitano di una nuova visita gastroenterologica ogni volta.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Gestire il rinnovo a distanza</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Gestire il rinnovo a distanza</h3>
     <p style="margin-bottom:14px;line-height:1.7">Un consulto a distanza può essere utile per il rinnovo della terapia con farmaci che riducono l'acidità gastrica, per un parere su una recidiva dei sintomi tipici già conosciuti, o per indicazioni generali sulla gestione alimentare della condizione.</p>
     <p style="margin-bottom:20px;line-height:1.7">Descrivendo la storia clinica, la terapia attualmente seguita e l'andamento dei sintomi, un medico può valutare se il rinnovo è appropriato o se è necessario un approfondimento diagnostico, ad esempio in presenza di sintomi nuovi o persistenti nonostante la terapia.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Difficoltà a deglutire, perdita di peso non intenzionale, sangue nel vomito o nelle feci sono segnali che richiedono sempre una valutazione medica diretta e tempestiva.</p>
@@ -1410,10 +1410,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-22" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Mal di schiena cronico: rinnovo terapia online</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Mal di schiena cronico: rinnovo terapia online</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Il mal di schiena cronico, sia esso di origine muscolare, da ernia discale o da altre cause meccaniche, è una delle condizioni più diffuse e spesso accompagna le persone per anni con fasi alterne di benessere e riacutizzazione. Per chi ha già una diagnosi e un percorso terapeutico avviato, molte richieste possono essere gestite senza necessariamente prenotare una nuova visita ogni volta.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Cosa si può richiedere a distanza</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Cosa si può richiedere a distanza</h3>
     <p style="margin-bottom:14px;line-height:1.7">Un consulto a distanza è utile per il rinnovo della terapia antidolorifica o miorilassante già prescritta in passato, per la richiesta di esami strumentali di controllo come una risonanza di follow-up, o per un parere su una riacutizzazione che segue uno schema già noto e gestito in precedenza.</p>
     <p style="margin-bottom:20px;line-height:1.7">Descrivendo la storia clinica, la terapia abituale e la natura del dolore attuale, un medico può valutare se la situazione è gestibile a distanza o se è necessaria una valutazione fisiatrica od ortopedica diretta.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Dolore acuto e improvviso accompagnato da perdita di forza alle gambe, difficoltà a controllare la vescica o l'intestino, o febbre associata al dolore richiedono sempre una valutazione medica immediata e diretta.</p>
@@ -1425,10 +1425,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-23" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Emicrania e cefalea cronica: gestire la terapia preventiva online</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Emicrania e cefalea cronica: gestire la terapia preventiva online</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Chi soffre di emicrania o cefalea cronica conosce bene l'importanza di una terapia preventiva costante e di farmaci sintomatici sempre disponibili per gli attacchi acuti. La gestione di questa condizione, una volta inquadrata dallo specialista, richiede spesso solo rinnovi periodici della terapia già impostata.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Quando il rinnovo a distanza è appropriato</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Quando il rinnovo a distanza è appropriato</h3>
     <p style="margin-bottom:14px;line-height:1.7">Per chi ha già una diagnosi di emicrania confermata e una terapia stabile, un consulto a distanza può essere utile per il rinnovo dei farmaci sintomatici o preventivi, per un parere sulla frequenza degli attacchi nell'ultimo periodo, o per indicazioni su come gestire una fase di peggioramento temporaneo già simile a episodi precedenti.</p>
     <p style="margin-bottom:20px;line-height:1.7">Fornendo la storia della propria cefalea, la terapia in corso e l'andamento recente degli attacchi, un medico può valutare se il rinnovo è appropriato o se è necessario un approfondimento neurologico, specialmente in caso di cambiamento significativo delle caratteristiche del dolore.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Un mal di testa improvviso e fortissimo mai sperimentato prima, accompagnato da febbre alta, rigidità del collo, confusione o disturbi visivi importanti richiede sempre una valutazione medica di emergenza, non un consulto a distanza.</p>
@@ -1440,10 +1440,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-24" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Gastrite cronica: rinnovo ricetta online</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Gastrite cronica: rinnovo ricetta online</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">La gastrite cronica è una condizione che, una volta diagnosticata tramite gastroscopia o sulla base del quadro clinico, richiede spesso una gestione terapeutica nel tempo con periodi di terapia attiva e fasi di mantenimento, simile per certi versi al reflusso gastroesofageo ma con caratteristiche cliniche proprie.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Cosa si può gestire a distanza</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Cosa si può gestire a distanza</h3>
     <p style="margin-bottom:14px;line-height:1.7">Per chi ha già una diagnosi accertata, un consulto a distanza può essere utile per il rinnovo della terapia gastroprotettiva, per un parere su una riacutizzazione dei sintomi tipici già noti, o per indicazioni generali sulla gestione alimentare della condizione.</p>
     <p style="margin-bottom:20px;line-height:1.7">Descrivendo la diagnosi ricevuta, la terapia attualmente seguita e i sintomi recenti, un medico può valutare se il rinnovo è appropriato o se è necessario un nuovo accertamento diagnostico, soprattutto in presenza di sintomi che non rispondono più alla terapia abituale.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Vomito con sangue, feci scure e catramose, dolore addominale severo e improvviso richiedono sempre una valutazione medica immediata e diretta, non gestibile attraverso un consulto a distanza.</p>
@@ -1456,10 +1456,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-25" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Stipsi cronica: quando un consulto online può essere utile</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Stipsi cronica: quando un consulto online può essere utile</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">La stipsi cronica è un disturbo molto diffuso, spesso vissuto con un certo imbarazzo che porta molte persone a rimandare il momento di parlarne con un medico. Eppure si tratta di una condizione comune che, nella maggior parte dei casi, può essere affrontata con indicazioni pratiche e, quando necessario, un supporto farmacologico mirato.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Il vantaggio della discrezione online</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Il vantaggio della discrezione online</h3>
     <p style="margin-bottom:14px;line-height:1.7">Un consulto a distanza permette di descrivere la situazione con maggiore tranquillità rispetto a una visita in presenza, fornendo informazioni su abitudini alimentari, durata del disturbo e eventuali terapie già provate. Il medico può offrire indicazioni generali sulla gestione del problema o valutare se sia appropriato un supporto farmacologico specifico.</p>
     <p style="margin-bottom:20px;line-height:1.7">Per chi ha già una diagnosi di sindrome dell'intestino irritabile o altre condizioni gastrointestinali croniche note, un consulto a distanza può essere utile anche per il rinnovo di una terapia già impostata in precedenza.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Sangue nelle feci, dolore addominale severo, perdita di peso non intenzionale o un cambiamento improvviso e persistente delle abitudini intestinali richiedono sempre una valutazione medica diretta, non un consulto a distanza.</p>
@@ -1471,10 +1471,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-26" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Vertigini ricorrenti: consulto medico online</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Vertigini ricorrenti: consulto medico online</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Le vertigini e i capogiri occasionali sono sintomi che molte persone sperimentano nel corso della vita, spesso legati a cause benigne come cambi di postura, disidratazione lieve o stanchezza. Quando però diventano ricorrenti, generano comprensibilmente preoccupazione e il desiderio di un parere medico tempestivo.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Quando il consulto a distanza è appropriato</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Quando il consulto a distanza è appropriato</h3>
     <p style="margin-bottom:14px;line-height:1.7">Per episodi lievi e ricorrenti già valutati in passato da un medico, senza nuovi elementi preoccupanti, un consulto a distanza può fornire un primo orientamento, aiutando a capire se la situazione richiede un approfondimento specialistico o se può essere monitorata nel tempo con alcune accortezze pratiche.</p>
     <p style="margin-bottom:20px;line-height:1.7">Descrivendo la frequenza, la durata e le circostanze in cui si verificano le vertigini, insieme alla storia clinica generale, un medico può offrire indicazioni utili e valutare la necessità di ulteriori accertamenti, come una visita otorinolaringoiatrica o neurologica.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Vertigini accompagnate da forte mal di testa improvviso, difficoltà a parlare, debolezza a un lato del corpo, visione doppia o perdita di coscienza richiedono sempre una valutazione medica di emergenza immediata, non un consulto a distanza.</p>
@@ -1486,10 +1486,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-27" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Gestire le terapie multiple negli anziani: il ruolo della telemedicina</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Gestire le terapie multiple negli anziani: il ruolo della telemedicina</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Le persone anziane si trovano spesso a gestire più terapie contemporaneamente per diverse condizioni croniche: pressione, colesterolo, diabete, problemi cardiaci. Il rinnovo periodico di tutte queste prescrizioni può diventare logisticamente complesso, soprattutto quando gli spostamenti sono difficoltosi.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Un aiuto concreto per le famiglie</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Un aiuto concreto per le famiglie</h3>
     <p style="margin-bottom:14px;line-height:1.7">Un consulto a distanza, anche gestito con l'aiuto di un familiare, può semplificare notevolmente il rinnovo di terapie croniche già stabilizzate, evitando spostamenti non sempre agevoli per chi ha difficoltà motorie o vive lontano da un ambulatorio.</p>
     <p style="margin-bottom:14px;line-height:1.7">Fornendo l'elenco completo delle terapie in corso, gli ultimi controlli effettuati e l'assenza di nuovi sintomi, un medico può valutare il rinnovo delle prescrizioni necessarie, mantenendo comunque la raccomandazione di controlli periodici in presenza per il monitoraggio generale dello stato di salute.</p>
     <p style="margin-bottom:20px;line-height:1.7">Questo approccio è pensato come complemento, non sostituto, del rapporto con il medico di base e gli specialisti di riferimento, particolarmente utile per le situazioni di rinnovo di routine quando il quadro clinico è stabile da tempo.</p>
@@ -1503,10 +1503,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-28" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Cistite e infezioni urinarie ricorrenti: come gestirle online</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Cistite e infezioni urinarie ricorrenti: come gestirle online</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">La cistite è uno dei disturbi più frequenti, soprattutto nelle donne, e per chi ne soffre in modo ricorrente la sintomatologia è spesso facilmente riconoscibile fin dai primi segnali: bruciore durante la minzione, necessità frequente di urinare, fastidio nella zona pelvica.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Quando il consulto a distanza è utile</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Quando il consulto a distanza è utile</h3>
     <p style="margin-bottom:14px;line-height:1.7">Per chi ha già avuto episodi simili in passato, diagnosticati e trattati con successo, un consulto a distanza può essere utile per ottenere rapidamente una valutazione e, se appropriato, la prescrizione della terapia antibiotica necessaria, evitando l'attesa di un appuntamento quando i sintomi sono già chiaramente riconoscibili.</p>
     <p style="margin-bottom:20px;line-height:1.7">Descrivendo i sintomi attuali, la frequenza degli episodi precedenti e le terapie che hanno funzionato in passato, un medico può valutare se la situazione corrisponde a un quadro già noto o se sono necessari approfondimenti diagnostici aggiuntivi, come un'urinocoltura.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Febbre alta, dolore lombare intenso, sangue nelle urine in quantità significativa o sintomi che non migliorano dopo l'inizio della terapia richiedono sempre una valutazione medica diretta, poiché potrebbero indicare un'infezione più estesa che necessita di controllo clinico approfondito.</p>
@@ -1518,10 +1518,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-29" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Congiuntivite e problemi oculari lievi: quando un consulto online aiuta</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Congiuntivite e problemi oculari lievi: quando un consulto online aiuta</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Arrossamento, prurito e lacrimazione eccessiva degli occhi sono sintomi comuni che spesso indicano una congiuntivite, sia essa di origine virale, batterica o allergica. Nella maggior parte dei casi si tratta di un disturbo fastidioso ma non grave, gestibile con indicazioni appropriate.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Come funziona la valutazione a distanza</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Come funziona la valutazione a distanza</h3>
     <p style="margin-bottom:14px;line-height:1.7">Un consulto a distanza, accompagnato da una fotografia della zona interessata, può fornire un primo orientamento sulla natura del problema e, quando appropriato, indicazioni terapeutiche o la prescrizione di un collirio specifico, evitando l'attesa per un problema che spesso migliora rapidamente con il trattamento corretto.</p>
     <p style="margin-bottom:20px;line-height:1.7">Per chi ha già avuto episodi simili e riconosce i propri sintomi tipici, questo tipo di richiesta è generalmente gestibile a distanza, mentre situazioni nuove o poco chiare possono richiedere un approfondimento maggiore.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Dolore oculare intenso, importante riduzione della vista, sensibilità estrema alla luce o traumi oculari richiedono sempre una valutazione medica urgente, preferibilmente oculistica diretta, non gestibile attraverso un consulto a distanza.</p>
@@ -1533,10 +1533,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-30" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Mal di gola e tonsillite: gestire i sintomi senza lunghe attese</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Mal di gola e tonsillite: gestire i sintomi senza lunghe attese</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Il mal di gola è uno dei disturbi più comuni, soprattutto nei mesi più freddi, e spesso si presenta con uno schema riconoscibile per chi lo sperimenta periodicamente: dolore alla deglutizione, arrossamento, talvolta febbre lieve.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Gestire il disturbo a distanza</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Gestire il disturbo a distanza</h3>
     <p style="margin-bottom:14px;line-height:1.7">Per chi riconosce i propri sintomi abituali e ha già sperimentato episodi simili in passato, un consulto a distanza può fornire un primo orientamento e, quando clinicamente appropriato, indicazioni terapeutiche per gestire il disturbo, evitando l'attesa per un problema spesso gestibile con terapia sintomatica.</p>
     <p style="margin-bottom:20px;line-height:1.7">Descrivendo i sintomi, la loro durata e l'eventuale presenza di febbre, un medico può valutare se la situazione richiede solo un trattamento sintomatico o se sono necessari ulteriori accertamenti, come un tampone faringeo per escludere un'infezione streptococcica.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Difficoltà respiratoria, impossibilità a deglutire anche i liquidi, febbre molto alta persistente o gonfiore significativo del collo richiedono sempre una valutazione medica diretta e tempestiva, non gestibile attraverso un consulto a distanza.</p>
@@ -1549,10 +1549,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-31" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Acufeni e fischio alle orecchie: quando un consulto online può aiutare</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Acufeni e fischio alle orecchie: quando un consulto online può aiutare</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Gli acufeni, percepiti come un fischio, ronzio o fruscio costante alle orecchie, sono un disturbo molto diffuso che può manifestarsi in modo occasionale o persistente. Spesso la causa è benigna, legata a esposizione a rumori forti, stress o piccoli problemi dell'orecchio, ma la persistenza del sintomo genera comprensibile preoccupazione.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Un primo orientamento a distanza</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Un primo orientamento a distanza</h3>
     <p style="margin-bottom:14px;line-height:1.7">Per chi sperimenta un acufene lieve, di recente comparsa o già indagato in passato senza riscontri preoccupanti, un consulto a distanza può fornire un primo orientamento sulla gestione del disturbo e indicare se sia necessario un approfondimento audiologico od otorinolaringoiatrico.</p>
     <p style="margin-bottom:20px;line-height:1.7">Descrivendo le caratteristiche del sintomo, la sua durata, eventuali fattori scatenanti come l'esposizione a rumori forti, e la storia clinica generale, un medico può offrire indicazioni utili sul percorso da seguire.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Un acufene accompagnato da perdita improvvisa dell'udito, forti vertigini, dolore intenso all'orecchio o comparso dopo un trauma cranico richiede sempre una valutazione medica diretta e tempestiva, non gestibile attraverso un consulto a distanza.</p>
@@ -1564,10 +1564,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-32" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Gestire la sindrome del colon irritabile con il supporto della telemedicina</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Gestire la sindrome del colon irritabile con il supporto della telemedicina</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">La sindrome del colon irritabile è una condizione cronica che si manifesta con sintomi variabili come gonfiore addominale, alterazioni dell'alvo e dolore, spesso influenzata da fattori alimentari e dallo stress. Una volta ricevuta la diagnosi, la gestione richiede generalmente un approccio costante nel tempo.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Cosa si può gestire a distanza</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Cosa si può gestire a distanza</h3>
     <p style="margin-bottom:14px;line-height:1.7">Per chi ha già una diagnosi accertata, un consulto a distanza può essere utile per il rinnovo di una terapia sintomatica già impostata, per un parere su una fase di riacutizzazione con caratteristiche già note, o per indicazioni generali sulla gestione alimentare della condizione.</p>
     <p style="margin-bottom:20px;line-height:1.7">Descrivendo la diagnosi ricevuta, la terapia attuale e l'andamento recente dei sintomi, un medico può valutare se il rinnovo è appropriato o se sono necessari approfondimenti diagnostici aggiuntivi, soprattutto in presenza di sintomi nuovi o diversi da quelli abituali.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Sangue nelle feci, perdita di peso significativa e non intenzionale, febbre persistente o dolore addominale severo richiedono sempre una valutazione medica diretta, non gestibile attraverso un consulto a distanza.</p>
@@ -1579,10 +1579,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-33" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Come richiedere il rinnovo della terapia ormonale in menopausa</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Come richiedere il rinnovo della terapia ormonale in menopausa</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">La gestione dei sintomi della menopausa, quando supportata da una terapia ormonale sostitutiva o da altri trattamenti specifici, richiede generalmente controlli periodici e rinnovi regolari della prescrizione. Per chi segue questo percorso da tempo con una terapia stabile, le visite di sola conferma possono risultare un appuntamento ricorrente più che una reale necessità clinica immediata.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Continuità di cura a distanza</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Continuità di cura a distanza</h3>
     <p style="margin-bottom:14px;line-height:1.7">Un consulto a distanza può essere utile per il rinnovo di una terapia ormonale già impostata da uno specialista, quando il quadro è stabile e i controlli di routine sono aggiornati, fornendo continuità di cura senza dover necessariamente attendere un nuovo appuntamento ginecologico.</p>
     <p style="margin-bottom:20px;line-height:1.7">Descrivendo la terapia in corso, i controlli effettuati e l'eventuale comparsa di nuovi sintomi, un medico può valutare se il rinnovo è clinicamente appropriato o se è necessaria una rivalutazione specialistica più approfondita.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Sanguinamenti anomali, dolore pelvico significativo, o cambiamenti importanti dei sintomi richiedono sempre una valutazione ginecologica diretta, non gestibile attraverso un consulto a distanza generico.</p>
@@ -1595,15 +1595,15 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-34" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Medico di base assente: cosa fare e a chi rivolgersi online</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Medico di base assente: cosa fare e a chi rivolgersi online</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Il medico di base può risultare temporaneamente non disponibile per diversi motivi: ferie programmate, malattia improvvisa, o un periodo di transizione dopo un trasferimento o un pensionamento. In questi casi molte persone non sanno esattamente a chi rivolgersi per le necessità sanitarie ordinarie.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Il medico sostituto</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Il medico sostituto</h3>
     <p style="margin-bottom:14px;line-height:1.7">Quando il medico di base è assente per un periodo limitato, generalmente indica un collega sostituto che riceve presso lo stesso studio o un ambulatorio indicato dalla ASL di competenza. Le informazioni sul sostituto sono solitamente affisse sulla porta dello studio o reperibili contattando la ASL territoriale.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Quando il sostituto non è facilmente reperibile</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Quando il sostituto non è facilmente reperibile</h3>
     <p style="margin-bottom:14px;line-height:1.7">In alcune situazioni, soprattutto in caso di assenze improvvise o di breve durata, individuare rapidamente il sostituto può risultare complicato, lasciando temporaneamente scoperte le necessità di routine come il rinnovo di una terapia cronica o la richiesta di un certificato.</p>
     <p style="margin-bottom:14px;line-height:1.7">In questi casi, per le richieste che non necessitano di un esame fisico diretto, un consulto medico online può rappresentare una soluzione pratica nell'attesa che il proprio medico di base torni disponibile. Il rinnovo di una terapia già stabilizzata, una richiesta di esami di controllo, o un certificato per cui non è necessaria una visita in presenza sono tutte richieste gestibili a distanza da un medico iscritto all'Ordine.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Cosa fare in caso di trasferimento o cambio medico</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Cosa fare in caso di trasferimento o cambio medico</h3>
     <p style="margin-bottom:14px;line-height:1.7">Per chi si è trasferito da poco e non ha ancora scelto un nuovo medico di base, o sta attendendo l'attivazione della scelta presso la nuova ASL, un consulto online può fornire continuità per le necessità più immediate, in attesa che il rapporto con il nuovo medico curante sia formalmente avviato.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Per sintomi nuovi, dolore acuto, o qualsiasi situazione che richieda un esame fisico diretto, è sempre necessario rivolgersi alla guardia medica o, in caso di urgenza, al pronto soccorso, indipendentemente dalla disponibilità del medico di base abituale. In caso di emergenza chiamare sempre il 118.</p>
     <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
@@ -1615,14 +1615,14 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-35" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Medico online economico: confronto tra i costi reali della sanità privata</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Medico online economico: confronto tra i costi reali della sanità privata</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Chi ha bisogno di un parere medico al di fuori del Servizio Sanitario Nazionale si trova spesso davanti a costi che, sommati nel tempo, diventano significativi. Capire le differenze tra le varie opzioni disponibili aiuta a scegliere la soluzione più sostenibile per le proprie esigenze.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">I costi della sanità privata tradizionale</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">I costi della sanità privata tradizionale</h3>
     <p style="margin-bottom:14px;line-height:1.7">Una visita specialistica privata in Italia costa generalmente tra gli ottanta e i centocinquanta euro, a seconda della specializzazione e della città. Una visita dal medico di base in regime privato, per chi non è assistito dal Servizio Sanitario Nazionale o necessita di una prestazione non coperta, può variare tra i cinquanta e gli ottanta euro a consulto.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Telemedicina a consulto singolo</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Telemedicina a consulto singolo</h3>
     <p style="margin-bottom:14px;line-height:1.7">I servizi di telemedicina che applicano una tariffa per singolo consulto si collocano generalmente tra i venti e i quaranta euro a visita. Per chi necessita di un solo consulto occasionale, questa può sembrare l'opzione più economica, ma il costo cresce rapidamente per chi ha bisogno di contatti regolari con un medico, come accade per le patologie croniche.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Il modello ad abbonamento</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Il modello ad abbonamento</h3>
     <p style="margin-bottom:14px;line-height:1.7">Medico Subito funziona con un modello differente: un abbonamento annuale di ottanta euro totali, che include fino a tre richieste mediche al mese per dodici mesi consecutivi. Per chi utilizza il servizio anche solo una o due volte al mese, il costo per singola richiesta scende sotto i sette euro, una cifra nettamente inferiore rispetto a qualsiasi alternativa privata sul mercato, sia in presenza che online a pagamento singolo.</p>
     <p style="margin-bottom:20px;line-height:1.7">Per fare un confronto concreto: chi necessita di tre rinnovi di terapia all'anno con un servizio a pagamento singolo spenderebbe tra i sessanta e i centoventi euro. Con l'abbonamento di Medico Subito, lo stesso numero di richieste, distribuite anche su un solo mese, rientra nei già pagati ottanta euro annuali, lasciando margine per ulteriori richieste durante il resto dell'anno.</p>
     <p style="margin-bottom:20px;line-height:1.7">Questo rende l'abbonamento particolarmente conveniente per chi gestisce condizioni croniche che richiedono controlli e rinnovi regolari, mentre rimane comunque accessibile anche per chi prevede di utilizzarlo solo occasionalmente, dato che il prezzo annuale resta comunque inferiore al costo di una singola visita specialistica privata.</p>
@@ -1635,12 +1635,12 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-36" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Ricetta medica online senza visita: è possibile in Italia?</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Ricetta medica online senza visita: è possibile in Italia?</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Una delle domande più frequenti che chi si avvicina alla telemedicina si pone è se sia possibile ottenere una prescrizione medica senza dover effettuare una visita fisica in studio. La risposta è sì, in determinati casi e nel rispetto della normativa vigente.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Cosa prevede la normativa</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Cosa prevede la normativa</h3>
     <p style="margin-bottom:14px;line-height:1.7">Le Linee Guida sulla Telemedicina del Ministero della Salute del 2022 prevedono espressamente che un medico possa valutare determinate richieste a distanza e, ove clinicamente appropriato, emettere la relativa documentazione senza che il paziente si rechi fisicamente in ambulatorio. Ciò che cambia con un servizio di telemedicina strutturato è che il processo è formalizzato, tracciabile, e la documentazione emessa è firmata digitalmente dal medico, con piena valenza legale.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Ricetta bianca, non rossa</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Ricetta bianca, non rossa</h3>
     <p style="margin-bottom:14px;line-height:1.7">Le prescrizioni emesse tramite telemedicina sono prescrizioni private, dette ricette bianche, che il paziente porta in farmacia per acquistare il farmaco al costo pieno, senza le agevolazioni del Servizio Sanitario Nazionale. Questo è un aspetto importante da conoscere prima di richiedere il servizio.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Non tutte le prescrizioni possono essere emesse a distanza. I farmaci soggetti a normativa restrittiva, gli stupefacenti, e le terapie che richiedono necessariamente un esame fisico preventivo non rientrano nelle prestazioni erogabili tramite telemedicina. Il medico valuta caso per caso.</p>
     <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
@@ -1651,12 +1651,12 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-37" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Telemedicina vs visita in presenza: quando scegliere l'una o l'altra</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Telemedicina vs visita in presenza: quando scegliere l'una o l'altra</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Chi si avvicina alla telemedicina per la prima volta si chiede spesso quando è davvero appropriato usarla e quando invece è necessario recarsi fisicamente dal medico. Avere chiarezza su questo aiuta a usare il servizio in modo efficace e responsabile.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Quando la telemedicina è la scelta giusta</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Quando la telemedicina è la scelta giusta</h3>
     <p style="margin-bottom:14px;line-height:1.7">La telemedicina è appropriata per le situazioni in cui il problema è già noto, stabile e non richiede un esame fisico diretto: rinnovo di una terapia cronica già diagnosticata, richiesta di esami di controllo periodici, interpretazione di un referto già disponibile, richiesta di un certificato, e seconda opinione su una diagnosi già formulata.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Quando serve la visita in presenza</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Quando serve la visita in presenza</h3>
     <p style="margin-bottom:14px;line-height:1.7">La visita in presenza rimane necessaria quando il medico deve osservare, ascoltare o palpare direttamente il paziente. Sintomi nuovi e non ancora inquadrati diagnosticamente, dolori acuti, sospette infezioni con febbre, e tutte le emergenze mediche richiedono sempre una valutazione diretta.</p>
     <p style="margin-bottom:20px;line-height:1.7">La regola pratica è semplice: se la risposta alla domanda "il medico ha bisogno di vedermi, toccarmi o ascoltarmi per rispondermi?" è no, allora la telemedicina è appropriata. Se la risposta è sì, serve una visita in presenza.</p>
     <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
@@ -1667,10 +1667,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-38" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Medico online senza ricetta SSN: cosa posso fare davvero</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Medico online senza ricetta SSN: cosa posso fare davvero</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Chi si rivolge a un servizio di telemedicina privato deve sapere con chiarezza cosa può aspettarsi in termini di documentazione, per non avere sorprese al momento di recarsi in farmacia o di presentare il documento a terzi.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Ricetta bianca: piena valenza legale</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Ricetta bianca: piena valenza legale</h3>
     <p style="margin-bottom:14px;line-height:1.7">Il medico che opera tramite una piattaforma di telemedicina privata emette esclusivamente prescrizioni private, le cosiddette ricette bianche. Queste hanno piena valenza legale come documento medico e vengono accettate da tutte le farmacie italiane, ma non danno diritto alle agevolazioni del Servizio Sanitario Nazionale. Il farmaco va quindi pagato al prezzo pieno di mercato, senza ticket ridotto.</p>
     <p style="margin-bottom:14px;line-height:1.7">Questo non è un limite esclusivo della telemedicina: anche le visite presso un medico privato o uno specialista in regime privatistico producono ricette bianche, non ricette rosse del SSN.</p>
     <p style="margin-bottom:20px;line-height:1.7">Per chi è già abituato ad acquistare i propri farmaci cronici senza agevolazioni, o per chi utilizza farmaci da banco disponibili senza ricetta rossa, la differenza è minima. Per chi invece beneficia di esenzioni o ticket ridotti per patologie croniche riconosciute dal SSN, è importante valutare questa distinzione prima di scegliere il servizio di telemedicina per il rinnovo della propria terapia.</p>
@@ -1683,10 +1683,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-39" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Come richiedere un certificato medico per lavoro online</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Come richiedere un certificato medico per lavoro online</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Il certificato medico per uso lavorativo è uno dei documenti più richiesti in assoluto: serve per giustificare un'assenza, per attestare l'idoneità a svolgere determinate mansioni in contesti specifici, o per documentare uno stato di salute ai fini contrattuali.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Quando si può fare a distanza</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Quando si può fare a distanza</h3>
     <p style="margin-bottom:14px;line-height:1.7">Non tutti i certificati lavorativi richiedono necessariamente una visita fisica. Quando si tratta di attestare uno stato di salute già noto, o di fornire una dichiarazione medica su una condizione già documentata clinicamente, un medico può valutare la richiesta a distanza e, se appropriato, emettere il documento richiesto.</p>
     <p style="margin-bottom:14px;line-height:1.7">Descrivendo la finalità del certificato, la propria storia clinica e la documentazione già disponibile, un medico online può valutare se il documento richiesto è emettibile a distanza o se è necessaria una visita in presenza, orientando il paziente verso il percorso corretto.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Alcuni certificati lavorativi specifici, come quelli richiesti dalla medicina del lavoro per l'idoneità alla mansione in ambienti regolamentati, richiedono obbligatoriamente una visita diretta da parte del medico competente aziendale. Per questi casi il consulto online non è sostitutivo.</p>
@@ -1698,10 +1698,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-40" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Richiesta di esami del sangue online: come funziona</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Richiesta di esami del sangue online: come funziona</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Gli esami del sangue di routine sono tra le prestazioni diagnostiche più comuni e, per chi li ripete periodicamente per monitorare una condizione cronica, la richiesta della prescrizione può diventare un appuntamento ricorrente che occupa tempo e richiede disponibilità del medico.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Come si richiede online</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Come si richiede online</h3>
     <p style="margin-bottom:14px;line-height:1.7">Attraverso un consulto medico online è possibile richiedere la prescrizione degli esami del sangue di controllo necessari, descrivendo la condizione monitorata, la frequenza abituale dei controlli e gli esami da ripetere. Il medico valuta se la richiesta è appropriata rispetto alla storia clinica descritta e, se lo è, emette la prescrizione che il paziente porta poi al laboratorio di analisi scelto.</p>
     <p style="margin-bottom:14px;line-height:1.7">Questo vale per gli esami di routine generali come l'emocromo o il profilo biochimico completo, sia per i controlli specifici legati a patologie croniche: monitoraggio della funzionalità tiroidea, valori lipidici per il colesterolo, emoglobina glicata per il diabete, o valori renali per chi assume determinati farmaci nel lungo periodo.</p>
     <p style="margin-bottom:20px;line-height:1.7">La prescrizione emessa è privata, quindi gli esami vengono eseguiti a pagamento presso laboratori privati o, in alcuni casi, anche presso i laboratori del Servizio Sanitario Nazionale con pagamento del ticket, a seconda della normativa regionale.</p>
@@ -1713,10 +1713,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-41" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Medico online per anziani: come aiutare i propri familiari</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Medico online per anziani: come aiutare i propri familiari</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Molte persone che si avvicinano ai servizi di telemedicina non lo fanno per se stesse, ma per aiutare un genitore anziano o un familiare che fatica a gestire autonomamente i propri appuntamenti medici, gli spostamenti in ambulatorio, o il rinnovo delle terapie multiple che spesso caratterizzano questa fase della vita.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Come funziona l'assistenza da remoto</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Come funziona l'assistenza da remoto</h3>
     <p style="margin-bottom:14px;line-height:1.7">Un figlio o un familiare può assistere il proprio caro nella compilazione del modulo di richiesta online, inserendo i dati clinici necessari e allegando la documentazione disponibile, permettendo così di ottenere il rinnovo di una terapia o una richiesta di esami senza dover organizzare uno spostamento che per una persona anziana può essere faticoso o complicato.</p>
     <p style="margin-bottom:14px;line-height:1.7">Questo approccio è particolarmente utile per chi vive lontano dai propri genitori anziani e vuole garantire loro continuità terapeutica anche a distanza, soprattutto nei periodi in cui il medico di base non è immediatamente disponibile o quando gli appuntamenti richiedono tempi di attesa significativi.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Il servizio rimane rivolto esclusivamente a pazienti adulti. Per situazioni che richiedono una valutazione clinica diretta, rimane sempre necessario il coinvolgimento del medico curante o dello specialista di riferimento.</p>
@@ -1729,10 +1729,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-42" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Medico subito: come avere una risposta medica in 24 ore</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Medico subito: come avere una risposta medica in 24 ore</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Tra le frustrazioni più comuni di chi ha bisogno di assistenza medica fuori dal pronto soccorso c'è l'attesa: giorni per un appuntamento con il medico di base, settimane per uno specialista, code in ambulatorio anche per le richieste più semplici. La necessità di avere una risposta medica rapida, senza sacrificare la qualità, è reale e diffusa.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Come funziona la risposta in 24 ore</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Come funziona la risposta in 24 ore</h3>
     <p style="margin-bottom:14px;line-height:1.7">La telemedicina risponde esattamente a questo bisogno: la possibilità di inviare una richiesta medica in qualsiasi momento, anche di sera o nel weekend, e ricevere una risposta da un medico iscritto all'Ordine entro ventiquattro ore, senza dover attendere la riapertura dell'ambulatorio o la disponibilità di un appuntamento.</p>
     <p style="margin-bottom:14px;line-height:1.7">Con Medico Subito la richiesta si invia compilando un modulo online in pochi minuti, descrivendo la situazione clinica e allegando eventuale documentazione. Il medico valuta, risponde e, se appropriato, fornisce la documentazione necessaria firmata digitalmente, che arriva direttamente via email entro il giorno successivo.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Le emergenze richiedono sempre il pronto soccorso e il 118. Ma per le richieste di routine che non possono aspettare settimane, avere una risposta qualificata entro ventiquattro ore cambia concretamente la gestione quotidiana della propria salute.</p>
@@ -1744,10 +1744,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-43" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Rinnovo ricetta subito: come non restare senza farmaci cronici</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Rinnovo ricetta subito: come non restare senza farmaci cronici</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Restare senza farmaci per una terapia cronica è una situazione che molti pazienti hanno vissuto almeno una volta: la ricetta è scaduta, il medico non è disponibile nei giorni immediatamente successivi, e la farmacia non può dispensare il farmaco senza una nuova prescrizione. Il risultato è un'interruzione della terapia che, per alcune patologie, può avere conseguenze negative.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Come evitare l'interruzione della cura</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Come evitare l'interruzione della cura</h3>
     <p style="margin-bottom:14px;line-height:1.7">Un servizio di telemedicina permette di inviare la richiesta di rinnovo in qualsiasi momento e ricevere la prescrizione entro ventiquattro ore, senza dover aspettare la riapertura dell'ambulatorio. Descrivi la terapia in corso, indica il farmaco da rinnovare e fornisci le informazioni cliniche necessarie: il medico valuta e, se appropriato, emette la ricetta privata necessaria per acquistare il farmaco in farmacia senza interruzione della cura.</p>
     <p style="margin-bottom:20px;line-height:1.7">La prescrizione ottenuta tramite telemedicina è una ricetta bianca privata, valida in tutte le farmacie italiane. Per i farmaci che richiedono ricetta rossa del SSN con agevolazioni, è comunque necessario contattare il proprio medico di base alla prima occasione utile.</p>
     <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
@@ -1758,10 +1758,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-44" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Consulto medico urgente online: quando non puoi aspettare il lunedì</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Consulto medico urgente online: quando non puoi aspettare il lunedì</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Il lunedì mattina gli studi medici si riempiono di persone che hanno aspettato il fine settimana per rivolgersi al proprio medico, raccogliendo dubbi, preoccupazioni e piccoli problemi che si sono manifestati nei due giorni precedenti. Per molte di queste persone l'attesa è stata inutilmente ansiosa, perché il problema avrebbe potuto essere affrontato già il sabato con un semplice consulto medico a distanza.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Cosa puoi fare nel weekend</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Cosa puoi fare nel weekend</h3>
     <p style="margin-bottom:14px;line-height:1.7">La telemedicina è utile anche quando si ha un dubbio concreto che richiede un parere medico qualificato nel fine settimana. Descrivere i propri sintomi, allegare una fotografia se si tratta di un problema visibile, o chiedere un parere su un referto appena ricevuto sono tutte situazioni che non richiedono necessariamente una visita fisica e possono essere gestite da un medico online entro ventiquattro ore, sette giorni su sette, inclusi sabato e domenica.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Dolore toracico, difficoltà respiratorie, confusione improvvisa, perdita di coscienza o qualsiasi sintomo che spaventa richiedono sempre e immediatamente il 118 o il pronto soccorso, non un consulto online. Per tutto il resto, avere un medico disponibile nel weekend fa una differenza concreta.</p>
     <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
@@ -1773,10 +1773,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-45" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Stranieri in Italia senza medico di base: come ottenere assistenza medica online</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Stranieri in Italia senza medico di base: come ottenere assistenza medica online</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Chi vive in Italia senza essere iscritto al Servizio Sanitario Nazionale, come molti cittadini stranieri con permesso di soggiorno in fase di rinnovo, lavoratori autonomi non iscritti, o semplicemente chi non ha ancora completato le pratiche per la scelta del medico di base, si trova spesso in una situazione di vuoto assistenziale per le necessità mediche ordinarie.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Assistenza senza tessera sanitaria</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Assistenza senza tessera sanitaria</h3>
     <p style="margin-bottom:14px;line-height:1.7">Un servizio di telemedicina privata come Medico Subito è accessibile a chiunque si trovi in Italia, indipendentemente dall'iscrizione al Servizio Sanitario Nazionale, dalla cittadinanza o dalla situazione burocratica. Non è richiesta la tessera sanitaria né la scelta di un medico di base: basta compilare il modulo con i propri dati e descrivere la situazione clinica.</p>
     <p style="margin-bottom:20px;line-height:1.7">Questo rende il servizio particolarmente utile per chi è in attesa di regolarizzare la propria posizione sanitaria, per chi vive in Italia temporaneamente per lavoro o studio, o per chi ha un vuoto assistenziale per qualsiasi ragione burocratica. La risposta arriva entro ventiquattro ore, sette giorni su sette, con documentazione firmata da un medico italiano iscritto all'Ordine.</p>
     <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
@@ -1787,10 +1787,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-46" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Non ho il medico di base: a chi mi rivolgo per una ricetta o un certificato</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Non ho il medico di base: a chi mi rivolgo per una ricetta o un certificato</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">In Italia non avere un medico di base assegnato è una situazione più comune di quanto si pensi. Può succedere per diversi motivi: trasferimento in una nuova città con le pratiche ancora in corso, cambio di residenza, scadenza dell'iscrizione al SSN, o semplicemente perché il medico precedente ha smesso di ricevere e si è ancora in attesa di assegnarne uno nuovo.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">La soluzione nell'attesa</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">La soluzione nell'attesa</h3>
     <p style="margin-bottom:14px;line-height:1.7">In queste situazioni, per le necessità mediche non urgenti come un certificato, il rinnovo di una terapia già in corso, o una richiesta di esami di controllo, non è necessario aspettare che la situazione burocratica si risolva. Un medico online può valutare la richiesta a distanza e, se clinicamente appropriato, emettere la documentazione necessaria come prescrizione privata, valida in tutte le farmacie italiane.</p>
     <p style="margin-bottom:20px;line-height:1.7">Descrivendo la propria situazione, la storia clinica e la richiesta specifica, è possibile ricevere una risposta medica qualificata entro ventiquattro ore, senza dover dimostrare l'iscrizione al Servizio Sanitario Nazionale né attendere l'assegnazione di un nuovo medico di base.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Per le emergenze e i casi che richiedono un esame fisico diretto, rimane sempre necessario rivolgersi al pronto soccorso o alla guardia medica, indipendentemente dalla propria situazione con il medico di base.</p>
@@ -1802,10 +1802,10 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog-47" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-blog')">← Torna al blog</button></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
-    <h2 style="color:#5b21b6;font-size:22px;margin-bottom:4px">Turista o visitatore in Italia: come trovare un medico online rapidamente</h2>
+    <h2 style="color:#0D4F5C;font-size:22px;margin-bottom:4px">Turista o visitatore in Italia: come trovare un medico online rapidamente</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:18px">Redazione Medico Subito</p>
     <p style="margin-bottom:14px;line-height:1.7">Chi visita l'Italia per turismo, per lavoro o per altri motivi e si trova ad avere bisogno di un parere medico durante il soggiorno si trova spesso in difficoltà: trovare un medico disponibile in tempi brevi in un paese straniero, superare la barriera linguistica con i professionisti locali, e orientarsi in un sistema sanitario sconosciuto sono ostacoli reali.</p>
-    <h3 style="color:#5b21b6;margin:20px 0 8px">Un riferimento medico accessibile</h3>
+    <h3 style="color:#0D4F5C;margin:20px 0 8px">Un riferimento medico accessibile</h3>
     <p style="margin-bottom:14px;line-height:1.7">Per i visitatori che non necessitano di un intervento fisico urgente ma hanno bisogno di un parere medico qualificato, di indicazioni su un sintomo, o di sapere se una situazione richiede attenzione immediata, un servizio di telemedicina in italiano con risposta entro ventiquattro ore rappresenta un punto di riferimento accessibile e comprensibile.</p>
     <p style="margin-bottom:14px;line-height:1.7">Medico Subito è accessibile da qualsiasi dispositivo connesso a internet, senza necessità di registrazione burocratica o di documenti italiani specifici. Il servizio è erogato in italiano, quindi è particolarmente adatto a visitatori italofoni, italiani residenti all'estero in visita, o chiunque si trovi temporaneamente in Italia con una necessità medica non urgente.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Per sintomi gravi, dolore acuto, difficoltà respiratorie o qualsiasi situazione che possa richiedere un intervento immediato, in Italia il numero di emergenza è il 118, operativo ventiquattro ore su ventiquattro.</p>
@@ -1818,16 +1818,16 @@ textarea{min-height:120px;resize:none}
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-info')">← Torna</button><div class="logo-txt" style="margin-left:8px">Carta dei Servizi</div></div>
   <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
 
-    <h2 style="color:#5b21b6;font-family:'Playfair Display',serif;font-size:22px;margin-bottom:4px">Carta dei Servizi</h2>
+    <h2 style="color:#0D4F5C;font-family:'Playfair Display',serif;font-size:22px;margin-bottom:4px">Carta dei Servizi</h2>
     <p style="font-size:12px;color:#94a3b8;margin-bottom:20px">Medico Subito · medicoora.com</p>
 
-    <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:14px;padding:16px;margin-bottom:14px">
-      <h3 style="color:#5b21b6;font-size:16px;font-weight:800;margin-bottom:8px">Chi eroga il servizio</h3>
+    <div style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:14px;padding:16px;margin-bottom:14px">
+      <h3 style="color:#0D4F5C;font-size:16px;font-weight:800;margin-bottom:8px">Chi eroga il servizio</h3>
       <p style="font-size:14px;color:#374151;line-height:1.6">Dott.ssa Anna Maria Ferri, Medico Chirurgo e Ginecologa, iscritta all'Ordine dei Medici di Frosinone n. 3363, Master in Management delle Strutture Sanitarie e Socio-Sanitarie. P.IVA IT17215181003.</p>
     </div>
 
-    <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:14px;padding:16px;margin-bottom:14px">
-      <h3 style="color:#5b21b6;font-size:16px;font-weight:800;margin-bottom:8px">Prestazioni erogabili</h3>
+    <div style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:14px;padding:16px;margin-bottom:14px">
+      <h3 style="color:#0D4F5C;font-size:16px;font-weight:800;margin-bottom:8px">Prestazioni erogabili</h3>
       <p style="font-size:14px;color:#374151;line-height:1.6">Prescrizioni mediche private (ricetta bianca), richiesta di esami del sangue e strumentali, certificati medici, rinnovo terapie croniche stabili, valutazioni mediche scritte, consulti medici scritti, seconda opinione medica su referti e diagnosi già formulate.</p>
     </div>
 
@@ -1836,33 +1836,33 @@ textarea{min-height:120px;resize:none}
       <p style="font-size:14px;color:#374151;line-height:1.6">Emergenze mediche (chiamare il 118), prima visita per patologie non ancora diagnosticate che richiedono esame fisico, prescrizione di farmaci stupefacenti o a normativa restrittiva, certificati di idoneità sportiva, certificati di morte, visite per dipendenti pubblici.</p>
     </div>
 
-    <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:14px;padding:16px;margin-bottom:14px">
-      <h3 style="color:#5b21b6;font-size:16px;font-weight:800;margin-bottom:8px">Tempi di risposta</h3>
+    <div style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:14px;padding:16px;margin-bottom:14px">
+      <h3 style="color:#0D4F5C;font-size:16px;font-weight:800;margin-bottom:8px">Tempi di risposta</h3>
       <p style="font-size:14px;color:#374151;line-height:1.6">Entro 24 ore dall'invio della richiesta, 7 giorni su 7, inclusi sabato, domenica e giorni festivi.</p>
     </div>
 
-    <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:14px;padding:16px;margin-bottom:14px">
-      <h3 style="color:#5b21b6;font-size:16px;font-weight:800;margin-bottom:8px">Costo</h3>
+    <div style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:14px;padding:16px;margin-bottom:14px">
+      <h3 style="color:#0D4F5C;font-size:16px;font-weight:800;margin-bottom:8px">Costo</h3>
       <p style="font-size:14px;color:#374151;line-height:1.6">Abbonamento annuale €200. Include fino a 3 richieste al mese per 12 mesi.</p>
     </div>
 
-    <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:14px;padding:16px;margin-bottom:14px">
-      <h3 style="color:#5b21b6;font-size:16px;font-weight:800;margin-bottom:8px">Modalità di accesso</h3>
+    <div style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:14px;padding:16px;margin-bottom:14px">
+      <h3 style="color:#0D4F5C;font-size:16px;font-weight:800;margin-bottom:8px">Modalità di accesso</h3>
       <p style="font-size:14px;color:#374151;line-height:1.6">Tramite il sito medicoora.com o l'app Medico Subito. Il servizio è rivolto esclusivamente a pazienti adulti (18 anni compiuti).</p>
     </div>
 
-    <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:14px;padding:16px;margin-bottom:14px">
-      <h3 style="color:#5b21b6;font-size:16px;font-weight:800;margin-bottom:8px">Documentazione</h3>
+    <div style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:14px;padding:16px;margin-bottom:14px">
+      <h3 style="color:#0D4F5C;font-size:16px;font-weight:800;margin-bottom:8px">Documentazione</h3>
       <p style="font-size:14px;color:#374151;line-height:1.6">Ogni risposta è firmata digitalmente dalla Dott.ssa Ferri e inviata via email in formato PDF.</p>
     </div>
 
-    <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:14px;padding:16px;margin-bottom:14px">
-      <h3 style="color:#5b21b6;font-size:16px;font-weight:800;margin-bottom:8px">Normativa di riferimento</h3>
+    <div style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:14px;padding:16px;margin-bottom:14px">
+      <h3 style="color:#0D4F5C;font-size:16px;font-weight:800;margin-bottom:8px">Normativa di riferimento</h3>
       <p style="font-size:14px;color:#374151;line-height:1.6">Linee Guida Telemedicina Ministero della Salute, settembre 2022. Legge Gelli-Bianco n. 24/2017. D.Lgs. 196/2003 e GDPR UE 679/2016.</p>
     </div>
 
-    <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:14px;padding:16px;margin-bottom:14px">
-      <h3 style="color:#5b21b6;font-size:16px;font-weight:800;margin-bottom:8px">Reclami e segnalazioni</h3>
+    <div style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:14px;padding:16px;margin-bottom:14px">
+      <h3 style="color:#0D4F5C;font-size:16px;font-weight:800;margin-bottom:8px">Reclami e segnalazioni</h3>
       <p style="font-size:14px;color:#374151;line-height:1.6">contatti@medicoora.com</p>
     </div>
 
@@ -2693,7 +2693,7 @@ function toggleConsenso(){
   const box = document.getElementById('tr-check-box');
   cb.checked = !cb.checked;
   if(cb.checked){
-    btn.style.background='#faf5ff';
+    btn.style.background='#F0FAFA';
     btn.style.borderColor='var(--blu)';
     box.style.background='var(--blu)';
     box.style.borderColor='var(--blu)';
@@ -2839,7 +2839,7 @@ function vaiARichiesta(){
 </script>
 
 <!-- COOKIE BANNER GDPR -->
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#5b21b6;color:#fff;padding:16px 20px;z-index:9999;box-shadow:0 -4px 20px rgba(0,0,0,.3);font-family:'Plus Jakarta Sans',sans-serif">
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0D4F5C;color:#fff;padding:16px 20px;z-index:9999;box-shadow:0 -4px 20px rgba(0,0,0,.3);font-family:'Plus Jakarta Sans',sans-serif">
   <div style="max-width:600px;margin:0 auto">
     <p style="margin:0 0 12px;font-size:13px;line-height:1.5">🍪 <strong>Questo sito utilizza cookie tecnici</strong> necessari al funzionamento del servizio. Non utilizziamo cookie di profilazione né cediamo dati a terzi per scopi pubblicitari. Per maggiori informazioni consulta la nostra <a onclick="showScreen('s-privacy')" style="color:#93c5fd;cursor:pointer;text-decoration:underline">Privacy Policy</a>.</p>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
@@ -2871,11 +2871,11 @@ function rifiutaCookie(){
 </a>
 
 <!-- COOKIE BANNER -->
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#5b21b6;color:#fff;padding:14px 16px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,.2)">
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0D4F5C;color:#fff;padding:14px 16px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,.2)">
   <div style="max-width:600px;margin:0 auto">
     <p style="font-size:13px;margin-bottom:10px;line-height:1.5">🍪 Questo sito usa cookie tecnici necessari al funzionamento. Nessun dato sanitario viene condiviso con inserzionisti. <a href="#" onclick="showScreen('s-privacy');hideCookieBanner();return false" style="color:#fde047;text-decoration:underline">Privacy Policy</a></p>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <button onclick="acceptCookies()" style="background:#fde047;color:#5b21b6;border:none;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:800;cursor:pointer">Accetta</button>
+      <button onclick="acceptCookies()" style="background:#fde047;color:#0D4F5C;border:none;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:800;cursor:pointer">Accetta</button>
       <button onclick="hideCookieBanner()" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:8px;padding:8px 18px;font-size:13px;font-weight:600;cursor:pointer">Solo necessari</button>
     </div>
   </div>
