@@ -722,6 +722,7 @@ textarea{min-height:120px;resize:none}
     <div class="info-card"><h3>Quando NON utilizzare</h3><p>Dolore toracico, difficoltà respiratoria, perdita di coscienza, febbre alta: chiama il <strong>118</strong> o vai al Pronto Soccorso. Questo servizio <strong>non sostituisce il medico di base</strong> né la visita medica in presenza (Linee Guida Telemedicina Min. Salute 2022 · FNOMCeO).</p></div>
     <div class="info-card"><h3>A chi è rivolto</h3><p>Servizio rivolto esclusivamente a pazienti adulti (18 anni compiuti). Per i minori rivolgiti al pediatra.</p></div>
     <div class="info-card" onclick="showScreen('s-blog')" style="cursor:pointer"><h3>Blog e guide</h3><p>Articoli su telemedicina, prescrizioni e salute. Tocca per leggere le guide complete.</p></div>
+    <div class="info-card" onclick="showScreen('s-carta')" style="cursor:pointer"><h3>📋 Carta dei Servizi</h3><p>Prestazioni erogabili, tempi di risposta, costi e normativa di riferimento.</p></div>
     <div class="info-card"><h3>Tariffe</h3><p><strong>€80/anno</strong> (€6,60/mese). Fino a 3 richieste al mese per 12 mesi, soggette a valutazione clinica.</p></div>
     <div class="info-card"><h3>Tempi di risposta</h3><p>Il medico si impegna a rispondere il prima possibile, indicativamente entro 24 ore, 7 giorni su 7 inclusi sabato e domenica. In caso di impossibilità temporanea verrà data comunicazione via email.</p></div>
     <div class="info-card"><h3>Consenso informato</h3><p>Ai sensi della L. 219/2017, inviando la richiesta medica dichiari di aver letto e accettato i Termini di servizio e l'Informativa Privacy, e di prestare consenso informato alla prestazione sanitaria telematica. Il consenso è revocabile in qualsiasi momento scrivendo a info@medicoora.com.</p></div>
@@ -1804,6 +1805,62 @@ textarea{min-height:120px;resize:none}
     <p style="margin-bottom:14px;line-height:1.7">Medico Subito è accessibile da qualsiasi dispositivo connesso a internet, senza necessità di registrazione burocratica o di documenti italiani specifici. Il servizio è erogato in italiano, quindi è particolarmente adatto a visitatori italofoni, italiani residenti all'estero in visita, o chiunque si trovi temporaneamente in Italia con una necessità medica non urgente.</p>
     <p style="margin-bottom:20px;line-height:1.7;background:#fffbeb;border:1px solid #fde047;border-radius:10px;padding:12px;font-size:13px">Per sintomi gravi, dolore acuto, difficoltà respiratorie o qualsiasi situazione che possa richiedere un intervento immediato, in Italia il numero di emergenza è il 118, operativo ventiquattro ore su ventiquattro.</p>
     <button class="btn btn-p" onclick="showScreen('s-richiesta')" style="width:100%">Invia una richiesta al medico</button>
+  </div>
+</div>
+
+<!-- CARTA DEI SERVIZI -->
+<div id="s-carta" class="screen">
+  <div class="hdr"><button class="btn-back" onclick="showScreen('s-info')">← Torna</button><div class="logo-txt" style="margin-left:8px">Carta dei Servizi</div></div>
+  <div style="padding:16px 16px 90px;max-width:600px;margin:0 auto">
+
+    <h2 style="color:#5b21b6;font-family:'Playfair Display',serif;font-size:22px;margin-bottom:4px">Carta dei Servizi</h2>
+    <p style="font-size:12px;color:#94a3b8;margin-bottom:20px">Medico Subito · medicoora.com</p>
+
+    <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:14px;padding:16px;margin-bottom:14px">
+      <h3 style="color:#5b21b6;font-size:16px;font-weight:800;margin-bottom:8px">Chi eroga il servizio</h3>
+      <p style="font-size:14px;color:#374151;line-height:1.6">Dott.ssa Anna Maria Ferri, Medico Chirurgo e Ginecologa, iscritta all'Ordine dei Medici di Frosinone n. 3363, Master in Management delle Strutture Sanitarie e Socio-Sanitarie. P.IVA IT17215181003.</p>
+    </div>
+
+    <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:14px;padding:16px;margin-bottom:14px">
+      <h3 style="color:#5b21b6;font-size:16px;font-weight:800;margin-bottom:8px">Prestazioni erogabili</h3>
+      <p style="font-size:14px;color:#374151;line-height:1.6">Prescrizioni mediche private (ricetta bianca), richiesta di esami del sangue e strumentali, certificati medici, rinnovo terapie croniche stabili, valutazioni mediche scritte, consulti medici scritti, seconda opinione medica su referti e diagnosi già formulate.</p>
+    </div>
+
+    <div style="background:#fff1f2;border:1px solid #fecdd3;border-radius:14px;padding:16px;margin-bottom:14px">
+      <h3 style="color:#9f1239;font-size:16px;font-weight:800;margin-bottom:8px">Prestazioni non erogabili</h3>
+      <p style="font-size:14px;color:#374151;line-height:1.6">Emergenze mediche (chiamare il 118), prima visita per patologie non ancora diagnosticate che richiedono esame fisico, prescrizione di farmaci stupefacenti o a normativa restrittiva, certificati di idoneità sportiva, certificati di morte, visite per dipendenti pubblici.</p>
+    </div>
+
+    <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:14px;padding:16px;margin-bottom:14px">
+      <h3 style="color:#5b21b6;font-size:16px;font-weight:800;margin-bottom:8px">Tempi di risposta</h3>
+      <p style="font-size:14px;color:#374151;line-height:1.6">Entro 24 ore dall'invio della richiesta, 7 giorni su 7, inclusi sabato, domenica e giorni festivi.</p>
+    </div>
+
+    <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:14px;padding:16px;margin-bottom:14px">
+      <h3 style="color:#5b21b6;font-size:16px;font-weight:800;margin-bottom:8px">Costo</h3>
+      <p style="font-size:14px;color:#374151;line-height:1.6">Abbonamento annuale €80. Include fino a 3 richieste al mese per 12 mesi.</p>
+    </div>
+
+    <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:14px;padding:16px;margin-bottom:14px">
+      <h3 style="color:#5b21b6;font-size:16px;font-weight:800;margin-bottom:8px">Modalità di accesso</h3>
+      <p style="font-size:14px;color:#374151;line-height:1.6">Tramite il sito medicoora.com o l'app Medico Subito. Il servizio è rivolto esclusivamente a pazienti adulti (18 anni compiuti).</p>
+    </div>
+
+    <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:14px;padding:16px;margin-bottom:14px">
+      <h3 style="color:#5b21b6;font-size:16px;font-weight:800;margin-bottom:8px">Documentazione</h3>
+      <p style="font-size:14px;color:#374151;line-height:1.6">Ogni risposta è firmata digitalmente dalla Dott.ssa Ferri e inviata via email in formato PDF.</p>
+    </div>
+
+    <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:14px;padding:16px;margin-bottom:14px">
+      <h3 style="color:#5b21b6;font-size:16px;font-weight:800;margin-bottom:8px">Normativa di riferimento</h3>
+      <p style="font-size:14px;color:#374151;line-height:1.6">Linee Guida Telemedicina Ministero della Salute, settembre 2022. Legge Gelli-Bianco n. 24/2017. D.Lgs. 196/2003 e GDPR UE 679/2016.</p>
+    </div>
+
+    <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:14px;padding:16px;margin-bottom:14px">
+      <h3 style="color:#5b21b6;font-size:16px;font-weight:800;margin-bottom:8px">Reclami e segnalazioni</h3>
+      <p style="font-size:14px;color:#374151;line-height:1.6">contatti@medicoora.com</p>
+    </div>
+
   </div>
 </div>
 
