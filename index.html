@@ -522,7 +522,7 @@ textarea{min-height:120px;resize:none}
     </div>
     <div style="font-size:10px;opacity:.4;line-height:1.7;margin-bottom:70px">
       Servizio conforme alle Linee Guida Telemedicina Min. Salute 2022 · GDPR · FNOMCeO<br>
-      Dott.ssa Anna Maria Ferri · Iscritta all'Ordine dei Medici di Frosinone n. 3363 · P.IVA IT17215181003<br>
+      Dott.ssa Anna Maria Ferri · Medico Chirurgo e Ginecologa · Master in Management Strutture Sanitarie<br>Iscritta all'Ordine dei Medici di Frosinone n. 3363 · P.IVA IT17215181003<br>
       © 2026 Medico Subito · medicoora.com<br>
       <span id="public-visit-count" style="opacity:.7"></span>
     </div>
@@ -662,6 +662,11 @@ textarea{min-height:120px;resize:none}
         <div class="con-box" style="margin-bottom:10px">
           <div class="con-tit">1. Trattamento dati sanitari (GDPR art. 9) *</div>
           <div class="con-txt">Acconsento al trattamento dei miei dati sanitari <strong>esclusivamente</strong> per l'erogazione del servizio medico richiesto, come da <a onclick="prevScr='s-richiesta';showScreen('s-privacy')">Privacy Policy</a> e <a onclick="prevScr='s-richiesta';showScreen('s-termini')">Termini</a>. I dati NON possono essere ceduti a terzi. Non sostituisce il medico di base.</div>
+
+      <div class="con-row" style="margin-top:10px;display:flex;align-items:flex-start;gap:10px">
+        <input type="checkbox" id="cons-tele" required style="width:18px;height:18px;accent-color:var(--blu);flex-shrink:0;margin-top:3px">
+        <div class="con-txt">Dichiaro di aver compreso che il presente servizio è un <strong>consulto medico a distanza</strong> con i limiti propri della telemedicina: il medico non può effettuare un esame fisico diretto. In caso di emergenza chiamerò il <strong>118</strong> o mi recherò al Pronto Soccorso. Il consulto non sostituisce la visita medica in presenza (Linee Guida Telemedicina Min. Salute 2022).</div>
+      </div>
           <div class="tog-grid"><button type="button" id="consenso-no" class="tog-btn" onclick="setConsenso(false)">✗ Non accetto</button><button type="button" id="consenso-si" class="tog-btn" onclick="setConsenso(true)">✓ Accetto</button></div>
         </div>
         <div class="con-box" style="margin-bottom:14px">
