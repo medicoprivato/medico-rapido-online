@@ -614,14 +614,14 @@ textarea{min-height:120px;resize:none}
   </div>
   <div style="padding:16px 16px 0">
     <div style="background:linear-gradient(135deg,#1A5F6A,#2A8A8A);border-radius:16px;padding:18px 20px;margin-bottom:16px;text-align:center;box-shadow:0 4px 20px rgba(42,138,138,.2)">
-      <div style="font-size:24px;font-weight:900;color:#fff;letter-spacing:.3px">Nuova richiesta medica</div>
-      <div style="font-size:17px;color:rgba(255,255,255,.85);margin-top:6px;font-weight:600">Compila il modulo. Puoi allegare foto o referti.</div>
+      <div style="font-size:24px;font-weight:900;color:#fff;letter-spacing:.3px">Scrivi al medico</div>
+      <div style="font-size:15px;color:rgba(255,255,255,.85);margin-top:6px;font-weight:600">Descrivi liberamente la tua situazione. Nessun formulario, nessuna video call. Allega referti o foto se vuoi.</div>
     </div>
     <div class="card" id="main-form">
       
       <div class="emerg">
         <div class="emerg-t">🚨 NON usare se hai:</div>
-        <div class="emerg-l">• Dolore toracico o difficoltà respiratoria<br>• Perdita di coscienza o confusione<br>• Deficit neurologici · Sanguinamento importante<br>• Dolore addominale severo · Gravidanza con sintomi acuti</div>
+        <div class="emerg-l">Dolore toracico o difficoltà respiratoria<br>Perdita di coscienza o confusione<br>Deficit neurologici, sanguinamento importante<br>Dolore addominale severo, gravidanza con sintomi acuti</div>
         <div class="emerg-cta">Chiama il 118 o vai al Pronto Soccorso</div>
       </div>
       <label style="font-size:15px;font-weight:800;color:#0D4F5C;display:block;margin-bottom:6px">Seleziona il tipo di richiesta</label>
@@ -648,11 +648,11 @@ textarea{min-height:120px;resize:none}
       </div>
       <input type="file" id="file-input-pre" multiple accept="image/*,.pdf" style="display:none" onchange="handleFilesPre(this.files)"/>
 
-      <div style="background:#fffbeb;border:2px solid #f59e0b;border-radius:12px;padding:16px 18px;margin-bottom:16px;font-size:15px;color:#92400e">
-        ⚠️ <strong>Abbonamento richiesto:</strong> La risposta medica viene erogata solo agli abbonati (€150/anno).<br>
-        <a onclick="prevScr='s-richiesta';showScreen('s-payment')" style="color:#dc2626;font-weight:800;cursor:pointer;font-size:17px;text-decoration:underline;display:inline-block;margin-top:8px">Abbonati ora</a>
+      <div style="background:#f0fdf4;border:2px solid #16a34a;border-radius:12px;padding:16px 18px;margin-bottom:16px;font-size:15px;color:#14532d">
+        <strong>Sei abbonato? Questa richiesta è inclusa nel tuo piano.</strong><br>
+        <span style="font-size:13px;color:#166534">Non ancora abbonato?</span> <a onclick="prevScr='s-richiesta';showScreen('s-payment')" style="color:#f97316;font-weight:800;cursor:pointer;font-size:14px;text-decoration:underline;display:inline-block;margin-top:4px">Abbonati ora a €150/anno</a>
       </div>
-      <button class="btn btn-p" onclick="sendRequest()">Invia al medico</button>
+      <button class="btn btn-p" onclick="sendRequest()" style="font-size:20px;font-weight:900">Invia al medico</button>
 
       <div id="loading" class="loader-box hidden">
         <div style="font-size:1.5rem;margin-bottom:8px">⏳</div>
