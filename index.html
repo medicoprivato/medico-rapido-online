@@ -632,11 +632,6 @@ textarea{min-height:120px;resize:none}
     </div>
     <div class="card" id="main-form">
       
-      <div class="emerg">
-        <div class="emerg-t">🚨 NON usare se hai:</div>
-        <div class="emerg-l">Dolore toracico o difficoltà respiratoria<br>Perdita di coscienza o confusione<br>Deficit neurologici, sanguinamento importante<br>Dolore addominale severo, gravidanza con sintomi acuti</div>
-        <div class="emerg-cta">Chiama il 118 o vai al Pronto Soccorso</div>
-      </div>
       <label style="font-size:15px;font-weight:800;color:#0D4F5C;display:block;margin-bottom:6px">Seleziona il tipo di richiesta</label>
       <select id="requestType">
         <option value="">Seleziona tipo di richiesta</option>
@@ -664,6 +659,11 @@ textarea{min-height:120px;resize:none}
       <div style="background:#f0fdf4;border:2px solid #16a34a;border-radius:12px;padding:16px 18px;margin-bottom:16px;font-size:15px;color:#14532d">
         <strong>Sei abbonato? Questa richiesta è inclusa nel tuo piano.</strong><br>
         <span style="font-size:13px;color:#166534">Non ancora abbonato?</span> <a onclick="prevScr='s-richiesta';showScreen('s-payment')" style="color:#f97316;font-weight:800;cursor:pointer;font-size:14px;text-decoration:underline;display:inline-block;margin-top:4px">Abbonati ora a €150/anno</a>
+      </div>
+      <div class="emerg" style="margin-bottom:14px">
+        <div class="emerg-t">🚨 NON usare se hai:</div>
+        <div class="emerg-l">Dolore toracico o difficoltà respiratoria<br>Perdita di coscienza o confusione<br>Deficit neurologici, sanguinamento importante<br>Dolore addominale severo, gravidanza con sintomi acuti</div>
+        <div class="emerg-cta">Chiama il 118 o vai al Pronto Soccorso</div>
       </div>
       <button class="btn btn-p" onclick="sendRequest()" style="font-size:20px;font-weight:900">Invia al medico</button>
 
