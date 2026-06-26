@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.medicoora.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://www.medicoora.com/prescrizione-medica-online</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.medicoora.com/rinnovo-terapia-online</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.medicoora.com/richiesta-esami-online</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.medicoora.com/consulto-medico-online</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.medicoora.com/certificato-medico-online</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.medicoora.com/medico-online-italiani-estero</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
   <url><loc>https://www.medicoora.com/#s-blog</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.medicoora.com/#s-blog-1</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.medicoora.com/#s-blog-2</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
