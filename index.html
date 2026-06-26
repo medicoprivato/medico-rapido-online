@@ -484,7 +484,7 @@ textarea{min-height:120px;resize:none}
   <div class="pcard">
     <div style="display:block;text-align:center;background:#fff;color:#0D4F5C;font-size:20px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:10px 20px;border-radius:20px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.15);-webkit-text-stroke:0.5px #0D4F5C">Abbonamento</div>
     <div class="p-vs"><div class="p-save">Risparmi €138</div><div style="font-size:17px;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:1px;flex-shrink:0">rispetto a</div><div class="p-vs-txt">Piattaforme mediche concorrenti e studi medici privati <s style="color:rgba(255,255,255,.5)">€288/anno</s></div></div>
-    <button class="btn-hp" onclick="showScreen('s-payment')" style="margin-top:4px;width:100%">Attiva ora · Pagamento sicuro 🔒</button>
+    <button class="btn-hp" onclick="showScreen('s-payment')" style="margin-top:4px;width:100%;font-size:26px;font-weight:900;letter-spacing:.5px">Attiva ora</button>
   </div>
 
   <div class="trust-wrap">
@@ -549,7 +549,7 @@ textarea{min-height:120px;resize:none}
   <div style="padding:16px 16px 0">
     <div class="card">
       <input id="stripe-email" type="email" placeholder="La tua email *" autocomplete="email"/>
-      <button class="btn btn-p" onclick="startStripe()" style="margin-top:0">Attiva ora · Pagamento sicuro 🔒</button>
+      <button class="btn btn-p" onclick="startStripe()" style="margin-top:0;font-size:24px;font-weight:900;letter-spacing:.5px">Attiva ora</button>
       <div style="margin-top:10px;font-size:12px;color:var(--txt-l);text-align:center;line-height:1.5">🔒 Pagamento sicuro con Stripe · Ricevuta fiscale per detrazione IRPEF 730</div>
     </div>
     <div class="card" style="margin-top:12px">
@@ -2521,8 +2521,8 @@ async function startStripe(){
     const r=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
     const d=await r.json();
     if(d.url)window.location.href=d.url;
-    else{alert('Errore: '+(d.error||'Riprova'));if(btn){btn.textContent='Attiva ora · Pagamento sicuro 🔒';btn.disabled=false;}}
-  }catch(e){alert('Errore di connessione.');if(btn){btn.textContent='Attiva ora · Pagamento sicuro 🔒';btn.disabled=false;}}
+    else{alert('Errore: '+(d.error||'Riprova'));if(btn){btn.textContent='Attiva ora';btn.disabled=false;}}
+  }catch(e){alert('Errore di connessione.');if(btn){btn.textContent='Attiva ora';btn.disabled=false;}}
 }
 
 async function startStripeSuc(){
