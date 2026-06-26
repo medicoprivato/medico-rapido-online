@@ -712,11 +712,10 @@ textarea{min-height:120px;resize:none}
           <div class="con-tit">1. Trattamento dati sanitari (GDPR art. 9) *</div>
           <div class="con-txt">Acconsento al trattamento dei miei dati sanitari <strong>esclusivamente</strong> per l'erogazione del servizio medico richiesto, come da <a onclick="prevScr='s-richiesta';showScreen('s-privacy')">Privacy Policy</a> e <a onclick="prevScr='s-richiesta';showScreen('s-termini')">Termini</a>. I dati NON possono essere ceduti a terzi. Non sostituisce il medico di base.</div>
 
-      <label for="cons-tele" style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;margin-top:10px">
-        <input type="checkbox" id="cons-tele" required style="position:absolute;opacity:0;width:0;height:0">
-        <span id="cons-tele-box" style="width:20px;height:20px;min-width:20px;border:2px solid #2A8A8A;border-radius:4px;display:flex;align-items:center;justify-content:center;margin-top:2px;background:#fff;transition:all .2s" onclick="this.parentElement.querySelector('input').click();this.style.background=this.parentElement.querySelector('input').checked?'#2A8A8A':'#fff';this.innerHTML=this.parentElement.querySelector('input').checked?'<svg width=12 height=12 viewBox=\'0 0 12 12\'><path d=\'M2 6l3 3 5-5\' stroke=\'#fff\' stroke-width=\'2\' fill=\'none\' stroke-linecap=\'round\'/></svg>':''"></span>
-        <div class="con-txt">Dichiaro di aver compreso che il presente servizio è un <strong>consulto medico a distanza</strong> con i limiti propri della telemedicina: il medico non può effettuare un esame fisico diretto. In caso di emergenza chiamerò il <strong>118</strong> o mi recherò al Pronto Soccorso. Il consulto non sostituisce la visita medica in presenza (Linee Guida Telemedicina Min. Salute 2022).</div>
-      </label>
+      <div style="margin-top:10px">
+        <input type="checkbox" id="cons-tele" checked style="display:none">
+        <div class="con-txt" style="background:#f0fdf4;border:1px solid #16a34a;border-radius:8px;padding:10px 12px">Dichiaro di aver compreso che il presente servizio è un <strong>consulto medico a distanza</strong> con i limiti propri della telemedicina: il medico non può effettuare un esame fisico diretto. In caso di emergenza chiamerò il <strong>118</strong> o mi recherò al Pronto Soccorso. Il consulto non sostituisce la visita medica in presenza (Linee Guida Telemedicina Min. Salute 2022).</div>
+      </div>
           <div class="tog-grid"><button type="button" id="consenso-no" class="tog-btn" onclick="setConsenso(false)">✗ Non accetto</button><button type="button" id="consenso-si" class="tog-btn" onclick="setConsenso(true)">✓ Accetto</button></div>
         </div>
         <div class="con-box" style="margin-bottom:14px">
