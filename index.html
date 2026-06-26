@@ -726,18 +726,19 @@ textarea{min-height:120px;resize:none}
         <button class="btn btn-o" onclick="hideDoctorForm()" style="margin-top:8px;height:44px;font-size:14px">Annulla</button>
       </div>
       <div id="success-box" class="suc-box hidden">
-        <div style="font-size:2rem;margin-bottom:8px">✅</div>
-        <div style="font-size:18px;font-weight:700;color:var(--ok);margin-bottom:6px">Richiesta inviata!</div>
-        <p style="font-size:14px;color:#166534;line-height:1.6;margin-bottom:14px">Il medico ha ricevuto la tua richiesta. Riceverai la risposta via email. Servizio attivo 7 giorni su 7.</p>
-        <div class="stripe-up">
-          <div style="color:#93c5fd;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Abbonamento annuale</div>
-          <div style="color:#fff;font-size:22px;font-weight:700;margin-bottom:4px">€150/anno</div>
-          <div style="color:rgba(255,255,255,.7);font-size:13px;margin-bottom:14px">Fino a 3 richieste al mese · 7 giorni su 7</div>
-          <input id="stripe-email-suc" type="email" placeholder="La tua email" autocomplete="email" style="width:100%;border-radius:8px;border:none;padding:12px;font-size:15px;margin-bottom:10px;font-family:'Plus Jakarta Sans',sans-serif"/>
-          <button onclick="startStripeSuc()" style="width:100%;background:#fff;color:var(--blu-deep);border:none;border-radius:8px;padding:13px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Abbonati ora</button>
-          <div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:8px">🔒 Pagamento sicuro con Stripe</div>
+        <div style="background:#f0fdf4;border:2px solid #16a34a;border-radius:14px;padding:18px;margin-bottom:16px;text-align:center">
+          <div style="font-size:20px;font-weight:900;color:#14532d;margin-bottom:6px">Richiesta inviata!</div>
+          <p style="font-size:14px;color:#166534;line-height:1.6;margin:0">Il medico ha ricevuto la tua richiesta e risponderà via email entro 24 ore, anche sabato e domenica.</p>
         </div>
-        <button onclick="newRequest()" style="width:100%;background:#fff;color:#0D4F5C;border:none;border-radius:10px;padding:14px;font-size:16px;font-weight:800;cursor:pointer;margin-top:14px;font-family:'Plus Jakarta Sans',sans-serif">📋 Invia nuova richiesta</button>
+        <div style="background:linear-gradient(135deg,#0D4F5C,#1A5F6A);border-radius:14px;padding:18px;margin-bottom:14px">
+          <div style="color:#5BBFB5;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Non sei ancora abbonato?</div>
+          <div style="color:#fff;font-size:20px;font-weight:900;margin-bottom:4px">€150/anno</div>
+          <div style="color:rgba(255,255,255,.75);font-size:13px;margin-bottom:14px">Fino a 3 richieste al mese, 7 giorni su 7. Meno di €4,20 a consulto.</div>
+          <input id="stripe-email-suc" type="email" placeholder="La tua email" autocomplete="email" style="width:100%;border-radius:8px;border:none;padding:12px;font-size:15px;margin-bottom:10px;font-family:'Plus Jakarta Sans',sans-serif;box-sizing:border-box"/>
+          <button onclick="startStripeSuc()" style="width:100%;background:#f97316;color:#fff;border:none;border-radius:8px;padding:13px;font-size:17px;font-weight:900;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Abbonati ora</button>
+          <div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:8px;text-align:center">Pagamento sicuro con Stripe. Detraibile al 19% nel modello 730.</div>
+        </div>
+        <button onclick="newRequest()" style="width:100%;background:#fff;color:#0D4F5C;border:2px solid #B2E0DC;border-radius:10px;padding:14px;font-size:16px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Invia una nuova richiesta</button>
       </div>
     </div>
   </div>
