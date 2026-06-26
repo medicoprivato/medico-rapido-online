@@ -575,30 +575,42 @@ textarea{min-height:120px;resize:none}
 
 <!-- ABBONAMENTO -->
 <div id="s-payment" class="screen">
-  <div class="hdr"><button class="btn-back" onclick="showScreen('s-home')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg> Torna</button><div class="logo-txt" style="margin-left:8px">Abbonamento</div></div>
+  <div class="hdr"><button class="btn-back" onclick="showScreen('s-home')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg> Torna</button><div class="logo-txt" style="margin-left:8px">Abbonati a Medico Subito</div></div>
   <div class="pay-hero">
-    <div style="display:inline-block;background:#fff;color:#0D4F5C;font-size:14px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:6px 18px;border-radius:20px;margin-bottom:12px;-webkit-text-stroke:.5px #0D4F5C">Offerta lancio</div>
+    <div style="display:inline-block;background:#fff;color:#0D4F5C;font-size:14px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:6px 18px;border-radius:20px;margin-bottom:12px">Prezzo di lancio</div>
     <div class="p-pay">€150</div>
-    <div style="font-size:14px;color:rgba(255,255,255,.8);margin:4px 0 10px">all'anno · primi 2.000 iscritti</div>
-    <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:8px 12px;font-size:13px;color:rgba(255,255,255,.85)">Meno di €4,20 a consulto · Niente video call</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.8);margin:4px 0 10px">all'anno, per i primi 2.000 iscritti</div>
+    <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:8px 12px;font-size:13px;color:rgba(255,255,255,.85)">Meno di €4,20 a consulto. Niente video call.</div>
   </div>
   <div style="padding:16px 16px 0">
+
+    <div style="background:#faf5ff;border:2px solid #f97316;border-radius:14px;padding:14px 16px;margin-bottom:14px">
+      <div style="font-size:14px;font-weight:800;color:#0D4F5C;margin-bottom:10px">Quello che Serenis non ti dà:</div>
+      <div style="font-size:13px;color:#374151;line-height:1.8">
+        Scrivi quando vuoi, anche di notte, senza prenotare<br>
+        Risposta scritta firmata dal medico in PDF<br>
+        Valida in farmacia, laboratorio e da qualsiasi specialista<br>
+        Medico con specializzazione in Ginecologia e Ostetricia
+      </div>
+    </div>
+
     <div class="card">
       <input id="stripe-email" type="email" placeholder="La tua email *" autocomplete="email"/>
       <button class="btn btn-p" onclick="startStripe()" style="margin-top:0;font-size:24px;font-weight:900;letter-spacing:.5px">Abbonati ora</button>
-      <div style="margin-top:10px;font-size:12px;color:var(--txt-l);text-align:center;line-height:1.5">🔒 Pagamento sicuro con Stripe · Ricevuta fiscale per detrazione IRPEF 730</div>
+      <div style="margin-top:10px;font-size:12px;color:var(--txt-l);text-align:center;line-height:1.5">Pagamento sicuro con Stripe. Detraibile al 19% nel modello 730.</div>
     </div>
+
     <div class="card" style="margin-top:12px">
-      <div style="font-size:15px;font-weight:700;margin-bottom:12px">Incluso nell'abbonamento</div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:12px">Incluso nel piano</div>
       <div style="display:flex;flex-direction:column;gap:10px">
-        <div class="inc-item">Richieste mediche fino a 3 al mese</div>
+        <div class="inc-item">Fino a 3 richieste mediche al mese</div>
         <div class="inc-item">Prescrizioni farmacologiche (se clinicamente appropriate)</div>
         <div class="inc-item">Richieste esami e accertamenti</div>
         <div class="inc-item">Certificati medici</div>
         <div class="inc-item">Seconda opinione medica</div>
-        <div class="inc-item">Valutazione foto e referti allegati</div>
-        <div class="inc-item">Risposta firmata · 7 giorni su 7</div>
-        <div class="inc-item">Ricevuta fiscale per detrazione IRPEF (modello 730/Unico)</div>
+        <div class="inc-item">Valutazione di foto e referti allegati</div>
+        <div class="inc-item">Risposta firmata, 7 giorni su 7</div>
+        <div class="inc-item">Ricevuta fiscale per detrazione IRPEF 730</div>
       </div>
     </div>
   </div>
