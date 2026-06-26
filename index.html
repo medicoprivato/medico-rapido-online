@@ -859,239 +859,254 @@ textarea{min-height:120px;resize:none}
 <div id="s-blog" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen(prevScr||'s-home')">← Torna</button><div class="logo-txt" style="margin-left:8px">Blog</div></div>
   <div style="padding:16px 16px 90px">
+    <div style="background:#f97316;border-radius:14px;padding:16px 18px;margin-bottom:18px;text-align:center">
+      <div style="color:#fff;font-size:17px;font-weight:900;margin-bottom:6px">Hai bisogno del medico adesso?</div>
+      <div style="color:rgba(255,255,255,.85);font-size:13px;margin-bottom:12px">Non aspettare. Scrivi la tua richiesta in 2 minuti.</div>
+      <button onclick="showScreen('s-richiesta')" style="background:#fff;color:#f97316;border:none;border-radius:10px;padding:10px 24px;font-size:15px;font-weight:900;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Scrivi al medico</button>
+    </div>
+
+    <div style="display:flex;gap:8px;overflow-x:auto;margin-bottom:16px;padding-bottom:4px;scrollbar-width:none">
+      <button onclick="filtraBlog('')" id="cat-tutti" style="background:#0D4F5C;color:#fff;border:none;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:'Plus Jakarta Sans',sans-serif">Tutti</button>
+      <button onclick="filtraBlog('prescrizioni')" id="cat-prescrizioni" style="background:#fff;color:#0D4F5C;border:1.5px solid #B2E0DC;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:'Plus Jakarta Sans',sans-serif">Prescrizioni</button>
+      <button onclick="filtraBlog('terapie')" id="cat-terapie" style="background:#fff;color:#0D4F5C;border:1.5px solid #B2E0DC;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:'Plus Jakarta Sans',sans-serif">Terapie croniche</button>
+      <button onclick="filtraBlog('certificati')" id="cat-certificati" style="background:#fff;color:#0D4F5C;border:1.5px solid #B2E0DC;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:'Plus Jakarta Sans',sans-serif">Certificati</button>
+      <button onclick="filtraBlog('estero')" id="cat-estero" style="background:#fff;color:#0D4F5C;border:1.5px solid #B2E0DC;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:'Plus Jakarta Sans',sans-serif">Italiani all'estero</button>
+      <button onclick="filtraBlog('telemedicina')" id="cat-telemedicina" style="background:#fff;color:#0D4F5C;border:1.5px solid #B2E0DC;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:'Plus Jakarta Sans',sans-serif">Telemedicina</button>
+    </div>
+
     <div class="sez-title serif" style="margin-bottom:14px;color:#0D4F5C">Articoli e guide</div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-1')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-1')" data-cat="prescrizioni" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Cosa fare se il medico di base è chiuso il sabato</div>
       <div style="font-size:13px;color:#64748b">Le alternative legittime quando l'ambulatorio è chiuso e non si tratta di un'emergenza.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-2')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-2')" data-cat="prescrizioni" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Quanto costa una ricetta medica online in Italia</div>
       <div style="font-size:13px;color:#64748b">Confronto tra pagamento a consulto singolo e abbonamento annuale.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-3')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-3')" data-cat="terapie" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Come rinnovare la terapia per la pressione alta senza andare dal medico</div>
       <div style="font-size:13px;color:#64748b">Cosa prevede la normativa sulla telemedicina per le terapie croniche stabili.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-4')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-4')" data-cat="estero" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Medico online per chi vive all'estero</div>
       <div style="font-size:13px;color:#64748b">Come gli italiani fuori dall'Italia possono mantenere un riferimento medico italiano.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-5')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-5')" data-cat="prescrizioni" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Ricetta rossa o bianca: differenza e come richiederle online</div>
       <div style="font-size:13px;color:#64748b">Quando serve l'una o l'altra e qual è il valore legale di ciascuna.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-6')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-6')" data-cat="telemedicina" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Perché scegliere Medico Subito</div>
       <div style="font-size:13px;color:#64748b">Tempi di risposta e vantaggi dell'abbonamento annuale.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-7')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-7')" data-cat="certificati" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Certificato medico online con urgenza: come fare</div>
       <div style="font-size:13px;color:#64748b">Quando un certificato può essere valutato a distanza e quando serve la visita in presenza.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-8')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-8')" data-cat="telemedicina" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Quando conviene una seconda opinione medica online</div>
       <div style="font-size:13px;color:#64748b">Come ottenere una valutazione aggiuntiva su una diagnosi o terapia già ricevuta.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-9')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-9')" data-cat="telemedicina" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Telemedicina in Italia: cosa dice la normativa</div>
       <div style="font-size:13px;color:#64748b">Le Linee Guida del Ministero della Salute e il quadro normativo di riferimento.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-10')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-10')" data-cat="telemedicina" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Come interpretare un referto medico senza aspettare la visita di controllo</div>
       <div style="font-size:13px;color:#64748b">Un punto di riferimento nell'attesa tra un esame e la visita successiva.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-11')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-11')" data-cat="terapie" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Rinnovare la terapia per la tiroide senza lunghe attese</div>
       <div style="font-size:13px;color:#64748b">Gestire la continuità terapeutica quando i valori sono stabili.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-12')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-12')" data-cat="telemedicina" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Cosa fare quando il pronto soccorso è troppo affollato</div>
       <div style="font-size:13px;color:#64748b">Le alternative per i disturbi non urgenti che necessitano comunque di un parere medico.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-13')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-13')" data-cat="terapie" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Artrosi dell'anca: gestire i controlli e la terapia del dolore</div>
       <div style="font-size:13px;color:#64748b">Come affrontare i rinnovi di terapia e i momenti di riacutizzazione.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-14')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-14')" data-cat="terapie" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Ipertensione: monitoraggio e rinnovo della terapia online</div>
       <div style="font-size:13px;color:#64748b">Come gestire la pressione alta con controlli regolari a distanza.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-15')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-15')" data-cat="terapie" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Ipercolesterolemia: come gestire la terapia nel tempo</div>
       <div style="font-size:13px;color:#64748b">Controlli periodici e rinnovo della cura per il colesterolo alto.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-16')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-16')" data-cat="terapie" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Diabete tipo 2: come gestire i controlli di routine online</div>
       <div style="font-size:13px;color:#64748b">Rinnovo terapia ed esami periodici per chi ha un compenso glicemico stabile.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-17')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-17')" data-cat="terapie" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Osteoporosi: rinnovo della terapia e controlli a distanza</div>
       <div style="font-size:13px;color:#64748b">Mantenere la continuità terapeutica riducendo le visite di sola conferma.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-18')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-18')" data-cat="telemedicina" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Ansia e disturbi del sonno: quando un consulto online può aiutare</div>
       <div style="font-size:13px;color:#64748b">Un primo passo accessibile per ansia lieve e difficoltà di sonno occasionali.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-19')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-19')" data-cat="terapie" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Allergie stagionali: come gestire i sintomi con un consulto online</div>
       <div style="font-size:13px;color:#64748b">Rinnovo della terapia antistaminica per chi conosce già la propria allergia.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-20')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-20')" data-cat="terapie" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Dermatiti e problemi della pelle: quando un consulto online è utile</div>
       <div style="font-size:13px;color:#64748b">Gestire le riacutizzazioni di dermatiti croniche già diagnosticate.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-21')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-21')" data-cat="terapie" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Reflusso gastroesofageo: gestire la terapia nel lungo periodo</div>
       <div style="font-size:13px;color:#64748b">Rinnovo della terapia per chi convive da tempo con questa condizione.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-22')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-22')" data-cat="terapie" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Mal di schiena cronico: rinnovo terapia online</div>
       <div style="font-size:13px;color:#64748b">Rinnovo terapia antidolorifica per chi ha già un percorso terapeutico avviato.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-23')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-23')" data-cat="terapie" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Emicrania e cefalea cronica: gestire la terapia preventiva online</div>
       <div style="font-size:13px;color:#64748b">Rinnovo della terapia per chi ha già una diagnosi confermata.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-24')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-24')" data-cat="terapie" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Gastrite cronica: rinnovo ricetta online</div>
       <div style="font-size:13px;color:#64748b">Rinnovo della terapia gastroprotettiva per chi ha già una diagnosi.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-25')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-25')" data-cat="terapie" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Stipsi cronica: quando un consulto online può essere utile</div>
       <div style="font-size:13px;color:#64748b">Affrontare un disturbo comune con discrezione e indicazioni pratiche.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-26')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-26')" data-cat="telemedicina" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Vertigini ricorrenti: consulto medico online</div>
       <div style="font-size:13px;color:#64748b">Un primo orientamento per episodi lievi già valutati in passato.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-27')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-27')" data-cat="terapie" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Gestire le terapie multiple negli anziani: il ruolo della telemedicina</div>
       <div style="font-size:13px;color:#64748b">Semplificare il rinnovo di più terapie croniche evitando spostamenti difficoltosi.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-28')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-28')" data-cat="terapie" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Cistite e infezioni urinarie ricorrenti: come gestirle online</div>
       <div style="font-size:13px;color:#64748b">Valutazione rapida per chi riconosce i sintomi di episodi già vissuti.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-29')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-29')" data-cat="telemedicina" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Congiuntivite e problemi oculari lievi: quando un consulto online aiuta</div>
       <div style="font-size:13px;color:#64748b">Un primo orientamento per disturbi oculari comuni e non gravi.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-30')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-30')" data-cat="telemedicina" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Mal di gola e tonsillite: gestire i sintomi senza lunghe attese</div>
       <div style="font-size:13px;color:#64748b">Orientamento per un disturbo comune con schema sintomatico riconoscibile.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-31')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-31')" data-cat="telemedicina" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Acufeni e fischio alle orecchie: quando un consulto online può aiutare</div>
       <div style="font-size:13px;color:#64748b">Un primo orientamento per un disturbo diffuso e spesso benigno.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-32')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-32')" data-cat="terapie" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Gestire la sindrome del colon irritabile con il supporto della telemedicina</div>
       <div style="font-size:13px;color:#64748b">Rinnovo della terapia per chi ha già una diagnosi accertata.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-33')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-33')" data-cat="terapie" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Come richiedere il rinnovo della terapia ormonale in menopausa</div>
       <div style="font-size:13px;color:#64748b">Continuità di cura per chi segue già un percorso terapeutico stabile.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-34')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-34')" data-cat="telemedicina" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Medico di base assente: cosa fare e a chi rivolgersi online</div>
       <div style="font-size:13px;color:#64748b">Ferie, malattia o trasferimento: le alternative quando il medico curante non è disponibile.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-35')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-35')" data-cat="prescrizioni" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Medico online economico: confronto tra i costi reali della sanità privata</div>
       <div style="font-size:13px;color:#64748b">Quanto costano davvero visite, consulti singoli e abbonamenti a confronto.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-36')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-36')" data-cat="prescrizioni" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Ricetta medica online senza visita: è possibile in Italia?</div>
       <div style="font-size:13px;color:#64748b">Cosa prevede la normativa e in quali casi è legalmente appropriato.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-37')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-37')" data-cat="telemedicina" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Telemedicina vs visita in presenza: quando scegliere l'una o l'altra</div>
       <div style="font-size:13px;color:#64748b">La regola pratica per capire quando la telemedicina è appropriata.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-38')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-38')" data-cat="prescrizioni" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Medico online senza ricetta SSN: cosa posso fare davvero</div>
       <div style="font-size:13px;color:#64748b">Ricetta bianca vs ricetta rossa: cosa cambia e cosa aspettarsi dal servizio.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-39')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-39')" data-cat="certificati" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Come richiedere un certificato medico per lavoro online</div>
       <div style="font-size:13px;color:#64748b">Quando il certificato lavorativo può essere emesso a distanza e quando serve la visita.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-40')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-40')" data-cat="prescrizioni" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Richiesta di esami del sangue online: come funziona</div>
       <div style="font-size:13px;color:#64748b">Come ottenere la prescrizione degli esami di controllo periodici senza andare in studio.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-41')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-41')" data-cat="terapie" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Medico online per anziani: come aiutare i propri familiari</div>
       <div style="font-size:13px;color:#64748b">Come assistere un genitore anziano nel rinnovo delle terapie senza spostamenti.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-42')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-42')" data-cat="prescrizioni" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Medico subito: come avere una risposta medica in 24 ore</div>
       <div style="font-size:13px;color:#64748b">Come ottenere una risposta qualificata senza code e senza attese.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-43')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-43')" data-cat="prescrizioni" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Rinnovo ricetta subito: come non restare senza farmaci cronici</div>
       <div style="font-size:13px;color:#64748b">Cosa fare quando la ricetta scade e il medico non è disponibile.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-44')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-44')" data-cat="prescrizioni" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Consulto medico urgente online: quando non puoi aspettare il lunedì</div>
       <div style="font-size:13px;color:#64748b">Come gestire i dubbi medici del weekend senza pronto soccorso.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-45')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-45')" data-cat="estero" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Stranieri in Italia senza medico di base: come ottenere assistenza medica online</div>
       <div style="font-size:13px;color:#64748b">Assistenza medica accessibile senza iscrizione al SSN né tessera sanitaria.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-46')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-46')" data-cat="prescrizioni" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Non ho il medico di base: a chi mi rivolgo per una ricetta o un certificato</div>
       <div style="font-size:13px;color:#64748b">Cosa fare quando non si ha ancora un medico assegnato per qualsiasi ragione.</div>
     </div>
 
-    <div class="blog-card" onclick="showScreen('s-blog-47')" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
+    <div class="blog-card" onclick="showScreen('s-blog-47')" data-cat="estero" style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer">
       <div style="font-weight:800;color:#16a34a;font-size:16px;margin-bottom:6px">Turista o visitatore in Italia: come trovare un medico online rapidamente</div>
       <div style="font-size:13px;color:#64748b">Assistenza medica in italiano per chi è in Italia temporaneamente.</div>
     </div>
@@ -2151,6 +2166,17 @@ const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 const THIRTY_DAYS=30*24*60*60*1000;
 
 let pazCorrente=null,conversazione=[],tipoRichiesta='',allCases=[],currentCaseId=null,uploadedFiles=[],prevScr='s-home',consensoOk=false,archivioOk=false;
+
+function filtraBlog(cat){
+  document.querySelectorAll('[id^="cat-"]').forEach(b=>{
+    b.style.background=b.id==='cat-'+(cat||'tutti')?'#0D4F5C':'#fff';
+    b.style.color=b.id==='cat-'+(cat||'tutti')?'#fff':'#0D4F5C';
+  });
+  if(!cat){document.querySelectorAll('[id^="cat-tutti"]').forEach(b=>{b.style.background='#0D4F5C';b.style.color='#fff';});}
+  document.querySelectorAll('.blog-card').forEach(c=>{
+    c.style.display=(!cat||c.dataset.cat===cat)?'block':'none';
+  });
+}
 
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{
