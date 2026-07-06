@@ -2762,7 +2762,11 @@ async function loadCases(filter){
   try{
     const r=await fetch('/api/submit-medical-request',{headers:{'Authorization':'Bearer '+DOC_PWD}});
     allCases=await r.json();
-    if(!Array.isArray(allCases))allCases=[];
+    if(!Array.isArray(allCases)){
+      const msg=(allCases&&allCases.error)?allCases.error:'Risposta non valida dal server';
+      cont.innerHTML='<div style="padding:16px;color:var(--err);font-size:15px">Errore caricamento: '+msg+'. Riprova tra un minuto.</div>';
+      return;
+    }
     const pending=allCases.filter(c=>!c.risposta_medico);
     document.getElementById('doc-count').textContent=pending.length+' in attesa';
     let filtered=filter==='pending'?pending:allCases;

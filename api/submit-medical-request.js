@@ -14,7 +14,7 @@ function isRateLimited(ip) {
   const now = Date.now();
   const entry = rateMap.get(ip) || { count: 0, start: now };
   if (now - entry.start > 60000) { rateMap.set(ip, { count: 1, start: now }); return false; }
-  if (entry.count >= 10) return true;
+  if (entry.count >= 30) return true;
   entry.count++; rateMap.set(ip, entry); return false;
 }
 
