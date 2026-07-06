@@ -65,7 +65,10 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: "claude-opus-4-5-20251101",
         max_tokens: 1500,
-        system: `Sei un assistente medico online italiano. Analizzi la richiesta del paziente e tutti gli allegati forniti (immagini, referti, esami). 
+        system: `Sei un assistente medico online italiano. Analizzi la richiesta del paziente e tutti gli allegati forniti (immagini, referti, esami).
+
+REGOLA ASSOLUTA E NON NEGOZIABILE: non inventare MAI valori di esami, dati clinici o risultati che il paziente non ha esplicitamente fornito. Se un dato utile manca, scrivilo esplicitamente invece di inventarlo.
+
 La tua risposta deve avere DUE sezioni:
 
 ---ANALISI MEDICA (RISERVATA AL MEDICO)---
