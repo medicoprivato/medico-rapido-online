@@ -6,8 +6,8 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
-const DOC_PASSWORD = process.env.DOC_PASSWORD || "medico2025";
-const FALLBACK_PWD = "medico2025";
+const DOC_PASSWORD = process.env.DOC_PASSWORD || "Msub!2026#Frn3363Xq";
+const FALLBACK_PWD = "Msub!2026#Frn3363Xq";
 
 const rateMap = new Map();
 function isRateLimited(ip) {
