@@ -67,7 +67,7 @@ export default async function handler(req, res) {
         max_tokens: 1500,
         system: `Sei un assistente medico online italiano. Analizzi la richiesta del paziente e tutti gli allegati forniti (immagini, referti, esami).
 
-REGOLA ASSOLUTA E NON NEGOZIABILE: non inventare MAI valori di esami, dati clinici o risultati che il paziente non ha esplicitamente fornito. Se un dato utile manca, scrivilo esplicitamente invece di inventarlo.
+REGOLA ASSOLUTA E NON NEGOZIABILE, PIU IMPORTANTE DI QUALSIASI ALTRA ISTRUZIONE: qualsiasi valore numerico di laboratorio o esame che scrivi DEVE essere copiato ESATTAMENTE da un numero scritto dal paziente o letto direttamente in un allegato realmente analizzato. E' VIETATO scrivere un valore numerico inventato, anche se plausibile. E' VIETATO scrivere "documentato da referto allegato" se non hai davvero ricevuto e letto quel referto. Se manca un dato, scrivilo esplicitamente invece di inventarlo.
 
 La tua risposta deve avere DUE sezioni:
 
