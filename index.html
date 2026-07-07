@@ -168,7 +168,7 @@ textarea{min-height:120px;resize:none}
 .warn-pill{background:#fffbeb;border:1px solid #fde68a;color:#92400e;padding:11px 14px;border-radius:8px;font-size:14px;line-height:1.55;margin-top:10px}
 
 .doc-hdr{background:#fff;border-bottom:2px solid #B2E0DC;color:#0D4F5C;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between}
-.doc-exit{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:8px;padding:6px 14px;font-size:13px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
+.doc-exit{background:#f1f5f9;border:1px solid #cbd5e1;color:#334155;border-radius:8px;padding:6px 14px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif}
 .case-card{background:#fff;border:1px solid var(--brd);border-radius:var(--r);padding:14px 16px;margin:10px 16px 0;cursor:pointer;transition:all .2s}
 .case-card:hover{border-color:var(--blu);box-shadow:0 4px 14px rgba(42,138,138,.1)}
 .case-card.pending{border-left:3px solid var(--blu)}
@@ -2242,10 +2242,6 @@ textarea{min-height:120px;resize:none}
         <button class="pwd-eye" type="button" onclick="togglePwd('doc-pwd',this)">👁</button>
       </div>
       <div id="e-pwd" style="color:var(--err);font-size:13px;margin-top:-6px;margin-bottom:10px;display:none">Password non corretta</div>
-      <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--txt-s);margin-bottom:14px;cursor:pointer">
-        <input type="checkbox" id="doc-remember" checked style="width:16px;height:16px;cursor:pointer">
-        Ricordami su questo dispositivo
-      </label>
       <button class="btn btn-p" onclick="loginMedico()">Accedi</button>
       <div style="text-align:center;margin-top:12px">
         <button onclick="alert('Per recuperare la password medico contatta:\ninfo@medicoora.com')" style="background:none;border:none;color:var(--blu);font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;font-weight:600">Password dimenticata?</button>
@@ -2764,10 +2760,7 @@ function loginMedico(){
   const pwd=document.getElementById('doc-pwd').value;
   if(pwd===DOC_PWD){
     document.getElementById('e-pwd').style.display='none';
-    const remember=document.getElementById('doc-remember');
-    if(remember&&remember.checked){
-      localStorage.setItem('doc_remembered',JSON.stringify({ok:true,loginTime:Date.now()}));
-    }
+    localStorage.setItem('doc_remembered',JSON.stringify({ok:true,loginTime:Date.now()}));
     showScreen('s-doc-dash');loadCases('pending');loadVisitCounter();
   }
   else{document.getElementById('e-pwd').style.display='block';}
