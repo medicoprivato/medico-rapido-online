@@ -2242,6 +2242,10 @@ textarea{min-height:120px;resize:none}
         <button class="pwd-eye" type="button" onclick="togglePwd('doc-pwd',this)">👁</button>
       </div>
       <div id="e-pwd" style="color:var(--err);font-size:13px;margin-top:-6px;margin-bottom:10px;display:none">Password non corretta</div>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--txt-s);margin-bottom:14px;cursor:pointer">
+        <input type="checkbox" id="doc-remember" checked style="width:16px;height:16px;cursor:pointer">
+        Ricordami su questo dispositivo
+      </label>
       <button class="btn btn-p" onclick="loginMedico()">Accedi</button>
       <div style="text-align:center;margin-top:12px">
         <button onclick="alert('Per recuperare la password medico contatta:\ninfo@medicoora.com')" style="background:none;border:none;color:var(--blu);font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;font-weight:600">Password dimenticata?</button>
@@ -2254,7 +2258,7 @@ textarea{min-height:120px;resize:none}
 <div id="s-doc-dash" class="screen">
   <div class="doc-hdr">
     <div style="font-size:14px;font-weight:700">Richieste pazienti <span id="doc-count" style="background:rgba(255,255,255,.15);border-radius:100px;padding:2px 10px;font-size:11px;margin-left:6px"></span></div>
-    <button class="doc-exit" onclick="showScreen('s-home')">Esci</button>
+    <button class="doc-exit" onclick="logoutMedico()">Esci</button>
   </div>
   <div style="display:flex;gap:8px;padding:12px 16px 0">
     <button onclick="loadCases('pending')" style="background:var(--blu);color:#fff;border:none;border-radius:100px;padding:7px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">In attesa</button>
@@ -2406,7 +2410,19 @@ window.addEventListener('load',function(){
       }
     }
   }catch(e){}
-  if(window.location.hash==='#medico') showScreen('s-doc-login');
+  let docRemembered=false;
+  try{
+    const dr=localStorage.getItem('doc_remembered');
+    if(dr){
+      const obj=JSON.parse(dr);
+      if(obj&&obj.ok&&Date.now()-obj.loginTime<THIRTY_DAYS){docRemembered=true;}
+      else{localStorage.removeItem('doc_remembered');}
+    }
+  }catch(e){}
+  if(window.location.hash==='#medico'){
+    if(docRemembered){showScreen('s-doc-dash');loadCases('pending');loadVisitCounter();}
+    else{showScreen('s-doc-login');}
+  }
   else if(pazCorrente) entraPaziente();
   else if(window.location.hash==='#area') showScreen('s-paz-login');
   const p=new URLSearchParams(window.location.search);
@@ -2746,8 +2762,21 @@ async function startStripeSuc(){
 
 function loginMedico(){
   const pwd=document.getElementById('doc-pwd').value;
-  if(pwd===DOC_PWD){document.getElementById('e-pwd').style.display='none';showScreen('s-doc-dash');loadCases('pending');loadVisitCounter();}
+  if(pwd===DOC_PWD){
+    document.getElementById('e-pwd').style.display='none';
+    const remember=document.getElementById('doc-remember');
+    if(remember&&remember.checked){
+      localStorage.setItem('doc_remembered',JSON.stringify({ok:true,loginTime:Date.now()}));
+    }
+    showScreen('s-doc-dash');loadCases('pending');loadVisitCounter();
+  }
   else{document.getElementById('e-pwd').style.display='block';}
+}
+function logoutMedico(){
+  localStorage.removeItem('doc_remembered');
+  const pwdField=document.getElementById('doc-pwd');
+  if(pwdField)pwdField.value='';
+  showScreen('s-home');
 }
 
 async function loadVisitCounter(){
