@@ -3081,22 +3081,6 @@ function rifiutaCookie(){
   <span style="color:#fff;font-size:11px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif">Teleconsulto</span>
   <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-1.732-.866-2.868-1.546-4.01-3.507-.302-.522.302-.483.864-1.614.099-.198.05-.371-.05-.519-.099-.149-.62-1.493-.847-2.013-.227-.52-.456-.45-.654-.45-.198 0-.347-.034-.547.34-.198.371-.755.964-1.075 1.474-.32.512-.643 1.025-.643 1.745 0 .719.396 1.539.892 2.245.495.706 1.087 1.391 1.926 2.117.838.727 1.59 1.193 2.51 1.624.92.43 1.755.367 2.41-.07.654-.439 1.198-1.052 1.404-1.756.108-.37.108-.69 0-.99z"/><path d="M12.004 2.003c-5.514 0-9.997 4.483-9.997 9.997 0 1.766.464 3.428 1.273 4.872l-1.349 4.928 5.06-1.328c1.394.762 2.987 1.198 4.682 1.198h.005c5.514 0 9.997-4.483 9.997-9.997 0-2.673-1.04-5.183-2.93-7.072-1.89-1.89-4.4-2.93-7.073-2.93l-.668.332zm0 18.302h-.004c-1.469 0-2.913-.395-4.166-1.143l-.298-.177-3.005.789.802-2.93-.194-.302c-.823-1.31-1.258-2.823-1.258-4.39 0-4.554 3.706-8.26 8.26-8.26 2.205 0 4.278.86 5.838 2.42 1.56 1.56 2.42 3.633 2.42 5.838 0 4.554-3.706 8.26-8.26 8.26z"/></svg>
 </a>
-
-<!-- COOKIE BANNER -->
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#0D4F5C;color:#fff;padding:14px 16px;z-index:9999;box-shadow:0 -2px 10px rgba(0,0,0,.2)">
-  <div style="max-width:600px;margin:0 auto">
-    <p style="font-size:13px;margin-bottom:10px;line-height:1.5">🍪 Questo sito usa cookie tecnici necessari al funzionamento. Nessun dato sanitario viene condiviso con inserzionisti. <a href="#" onclick="showScreen('s-privacy');hideCookieBanner();return false" style="color:#fde047;text-decoration:underline">Privacy Policy</a></p>
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <button onclick="acceptCookies()" style="background:#fde047;color:#0D4F5C;border:none;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:800;cursor:pointer">Accetta</button>
-      <button onclick="hideCookieBanner()" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:8px;padding:8px 18px;font-size:13px;font-weight:600;cursor:pointer">Solo necessari</button>
-    </div>
-  </div>
-</div>
-<script>
-function hideCookieBanner(){document.getElementById('cookie-banner').style.display='none';localStorage.setItem('cookie-consent','done');}
-function acceptCookies(){hideCookieBanner();localStorage.setItem('cookie-consent','accepted');}
-if(!localStorage.getItem('cookie-consent')){document.getElementById('cookie-banner').style.display='block';}
-</script>
 <script>
 try{fetch('/api/track-visit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({page:location.pathname})}).catch(()=>{});}catch(e){}
 fetch('/api/track-visit?public=1').then(r=>r.json()).then(d=>{
