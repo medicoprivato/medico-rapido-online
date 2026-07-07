@@ -65,6 +65,9 @@ export default async function handler(req, res) {
 
     if (!isDocAuth && !isPazAuth) return res.status(401).json({ error: "Non autorizzato" });
 
+    res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+    res.setHeader("Pragma", "no-cache");
+
     let query = supabase.from("consults").select("*").order("created_at", { ascending: false });
     if (emailFilter) query = query.ilike("email", emailFilter.trim());
     const { data, error } = await query;

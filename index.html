@@ -2760,7 +2760,7 @@ async function loadVisitCounter(){
 async function loadCases(filter){
   const cont=document.getElementById('cases-container');cont.innerHTML='<div class="loader-box" style="margin:16px">Caricamento richieste...</div>';
   try{
-    const r=await fetch('/api/submit-medical-request',{headers:{'Authorization':'Bearer '+DOC_PWD}});
+    const r=await fetch('/api/submit-medical-request',{headers:{'Authorization':'Bearer '+DOC_PWD},cache:'no-store'});
     allCases=await r.json();
     if(!Array.isArray(allCases)){
       const msg=(allCases&&allCases.error)?allCases.error:'Risposta non valida dal server';
