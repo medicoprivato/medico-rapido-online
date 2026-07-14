@@ -2442,7 +2442,7 @@ window.addEventListener('load',function(){
   if(p.get('pagamento')==='ok'){
     setTimeout(()=>{showScreen('s-home');const m=document.createElement('div');m.style.cssText='position:fixed;top:70px;left:16px;right:16px;background:var(--blu);color:#fff;border-radius:14px;padding:18px;z-index:200;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.2)';m.innerHTML='<div style="font-size:20px;margin-bottom:6px">✅ Abbonamento attivato!</div><div style="font-size:14px;opacity:.9">Benvenuta su Medico Subito.</div>';document.body.appendChild(m);setTimeout(()=>m.remove(),5000);localStorage.setItem('abbonamento_attivo','si');window.history.replaceState({},'','/');},300);
   }
-  if(p.get('pagamento')==='annullato'){setTimeout(()=>{showScreen('s-payment');localStorage.setItem('abbonamento_attivo','si');window.history.replaceState({},'','/');},300);}
+  if(p.get('pagamento')==='annullato'){setTimeout(()=>{showScreen('s-payment');window.history.replaceState({},'','/');},300);}
 });
 
 function showPazLogin(){document.getElementById('paz-form-login').style.display='block';document.getElementById('paz-form-reg').style.display='none';}
