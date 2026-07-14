@@ -2360,6 +2360,9 @@ function showScreen(id){
   document.getElementById(id).classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
   window.location.hash=id;
+  if(id==='s-payment' && typeof gtag==='function'){
+    gtag('event','view_abbonati_page');
+  }
   // Pre-compila form richiesta se paziente loggato
   if(id==='s-richiesta' && pazCorrente){
     const n=document.getElementById('patient-name');
@@ -2440,6 +2443,7 @@ window.addEventListener('load',function(){
   else if(window.location.hash==='#area') showScreen('s-paz-login');
   const p=new URLSearchParams(window.location.search);
   if(p.get('pagamento')==='ok'){
+    if(typeof gtag==='function')gtag('event','abbonamento_completato',{value:150,currency:'EUR'});
     setTimeout(()=>{showScreen('s-home');const m=document.createElement('div');m.style.cssText='position:fixed;top:70px;left:16px;right:16px;background:var(--blu);color:#fff;border-radius:14px;padding:18px;z-index:200;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.2)';m.innerHTML='<div style="font-size:20px;margin-bottom:6px">✅ Abbonamento attivato!</div><div style="font-size:14px;opacity:.9">Benvenuta su Medico Subito.</div>';document.body.appendChild(m);setTimeout(()=>m.remove(),5000);localStorage.setItem('abbonamento_attivo','si');window.history.replaceState({},'','/');},300);
   }
   if(p.get('pagamento')==='annullato'){setTimeout(()=>{showScreen('s-payment');window.history.replaceState({},'','/');},300);}
@@ -2753,10 +2757,11 @@ async function startStripe(){
   const ei=document.getElementById('stripe-email'),email=ei?ei.value.trim():'';
   if(!email||!email.includes('@')){alert('Inserisci la tua email');if(ei)ei.focus();return;}
   const btn=document.querySelector('#s-payment .btn-p');if(btn){btn.textContent='Caricamento...';btn.disabled=true;}
+  if(typeof gtag==='function')gtag('event','click_abbonati_ora');
   try{
     const r=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
     const d=await r.json();
-    if(d.url)window.location.href=d.url;
+    if(d.url){if(typeof gtag==='function')gtag('event','inizio_checkout_stripe');window.location.href=d.url;}
     else{alert('Errore: '+(d.error||'Riprova'));if(btn){btn.textContent='Abbonati ora';btn.disabled=false;}}
   }catch(e){alert('Errore di connessione.');if(btn){btn.textContent='Abbonati ora';btn.disabled=false;}}
 }
@@ -2765,10 +2770,11 @@ async function startStripeSuc(){
   const ei=document.getElementById('stripe-email-suc'),email=ei?ei.value.trim():'';
   if(!email||!email.includes('@')){alert('Inserisci la tua email');return;}
   const btn=document.querySelector('.stripe-up button');if(btn){btn.textContent='Caricamento...';btn.disabled=true;}
+  if(typeof gtag==='function')gtag('event','click_abbonati_ora');
   try{
     const r=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
     const d=await r.json();
-    if(d.url)window.location.href=d.url;
+    if(d.url){if(typeof gtag==='function')gtag('event','inizio_checkout_stripe');window.location.href=d.url;}
     else{alert('Errore: '+(d.error||'Riprova'));if(btn){btn.textContent='Abbonati ora';btn.disabled=false;}}
   }catch(e){alert('Errore di connessione.');if(btn){btn.textContent='Abbonati ora';btn.disabled=false;}}
 }
@@ -2928,10 +2934,11 @@ async function startStripePaywall(){
   if(!email || !email.includes('@')){alert('Inserisci la tua email');return;}
   const btn = document.querySelector('#paywall-modal button');
   btn.textContent = 'Caricamento...'; btn.disabled = true;
+  if(typeof gtag==='function')gtag('event','click_abbonati_ora');
   try{
     const r = await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
     const d = await r.json();
-    if(d.url) window.location.href = d.url;
+    if(d.url){if(typeof gtag==='function')gtag('event','inizio_checkout_stripe');window.location.href = d.url;}
     else{alert('Errore: '+(d.error||'Riprova'));btn.textContent='Abbonati ora — Pagamento sicuro';btn.disabled=false;}
   }catch(e){alert('Errore di connessione.');btn.textContent='Abbonati ora — Pagamento sicuro';btn.disabled=false;}
 }
