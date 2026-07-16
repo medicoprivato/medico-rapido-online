@@ -676,7 +676,7 @@ textarea{min-height:120px;resize:none}
       <div id="doctor-form" class="hidden" style="margin-top:14px">
         <div style="background:#fffbeb;border:1px solid #fde047;border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:13px;color:#92400e;font-weight:600">Servizio rivolto a pazienti adulti (18+)</div><div class="ftit">👤 I tuoi dati</div>
         <input id="patient-name" placeholder="Nome e cognome *" autocomplete="name"/>
-        <input id="patient-cf" placeholder="Codice fiscale *" style="text-transform:uppercase"/>
+        <input id="patient-cf" placeholder="Codice fiscale (se posseduto)" style="text-transform:uppercase"/>
         <input id="patient-dob" placeholder="Data di nascita (es: 15/03/1975) *"/>
         <input id="patient-email" type="email" placeholder="Email per ricevere la risposta *" autocomplete="email"/>
         <input id="patient-phone" placeholder="Telefono (opzionale)" autocomplete="tel"/>
@@ -2670,7 +2670,6 @@ function hideDoctorForm(){document.getElementById('doctor-form').classList.add('
 async function submitToDoctor(){
   const nome=document.getElementById('patient-name').value.trim(),email=document.getElementById('patient-email').value.trim(),cf=document.getElementById('patient-cf').value.trim();
   if(!nome){alert('Inserisci nome e cognome');return;}
-  if(!cf){alert('Inserisci il codice fiscale');return;}
   if(!email||!email.includes('@')){alert('Inserisci un\'email valida');return;}
   if(!consensoOk){alert('Devi accettare il consenso al trattamento dati sanitari');return;}
   const btn=document.querySelector('#doctor-form .btn-p');btn.textContent='Invio in corso...';btn.disabled=true;
@@ -3062,26 +3061,23 @@ function checkTriage(){
 }
 
 function vaiARichiesta(){
-  if(!checkTriage()){
-    // Carica dati triage se paziente loggato
-    if(pazCorrente){
-      const n=document.getElementById('tr-nome');
-      const e=document.getElementById('tr-cf');
-      if(n&&!n.value)n.value=pazCorrente.nome||'';
-    }
-    showScreen('s-triage');
-  } else {
-    // Triage già fatto, pre-compila e vai
-    const t=JSON.parse(localStorage.getItem('triage'));
-    const n=document.getElementById('patient-name');
-    const pcf=document.getElementById('patient-cf');
-    const pdob=document.getElementById('patient-dob');
-    if(n)n.value=t.nome||'';
-    if(pcf)pcf.value=t.cf||'';
-    if(pdob)pdob.value=t.dob||'';
-    if(pazCorrente){const e=document.getElementById('patient-email');if(e)e.value=pazCorrente.email||'';}
-    showScreen('s-richiesta');
+  // Se il paziente è già loggato o ha dati salvati, pre-compila; altrimenti vai diretto
+  if(pazCorrente){
+    const e=document.getElementById('patient-email');if(e)e.value=pazCorrente.email||'';
   }
+  const t=localStorage.getItem('triage');
+  if(t){
+    try{
+      const td=JSON.parse(t);
+      const n=document.getElementById('patient-name');
+      const pcf=document.getElementById('patient-cf');
+      const pdob=document.getElementById('patient-dob');
+      if(n&&td.nome)n.value=td.nome;
+      if(pcf&&td.cf)pcf.value=td.cf;
+      if(pdob&&td.dob)pdob.value=td.dob;
+    }catch(e){}
+  }
+  showScreen('s-richiesta');
 }
 
 </script>
