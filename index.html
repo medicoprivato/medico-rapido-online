@@ -2624,7 +2624,7 @@ async function caricaStorico(){
 function logoutPaz(){pazCorrente=null;localStorage.removeItem('paziente');localStorage.removeItem('abbonamento_attivo');showScreen('s-home');}
 
 function quickStart(tipo){
-  if(!checkTriage()){showScreen('s-triage');return;}document.getElementById('requestType').value=tipo;showScreen('s-richiesta');setTimeout(()=>document.getElementById('problem').focus(),300);}
+  document.getElementById('requestType').value=tipo;showScreen('s-richiesta');setTimeout(()=>document.getElementById('problem').focus(),300);}
 
 function stripMd(t){return t.replace(/\*\*(.*?)\*\*/g,'$1').replace(/\*(.*?)\*/g,'$1').replace(/#{1,6}\s/g,'').replace(/`(.*?)`/g,'$1').trim();}
 
