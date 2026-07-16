@@ -723,6 +723,12 @@ textarea{min-height:120px;resize:none}
         </div>
       </div>
       <div id="warning" style="display:none" class="warn-pill">La richiesta sarà valutata dal medico. Se clinicamente appropriato, la risposta potrà includere prescrizione, certificato o richiesta esami.</div>
+      <div id="email-gate" class="hidden" style="margin-top:14px">
+        <div style="background:#f0fdf4;border:2px solid #16a34a;border-radius:12px;padding:16px 18px;margin-bottom:14px;font-size:14px;color:#14532d">Un'ultima cosa prima del modulo sanitario: verifichiamo il tuo abbonamento con l'email, così non compili i dati clinici se non è ancora attivo.</div>
+        <div class="ftit">📧 La tua email</div>
+        <input id="gate-email" type="email" placeholder="La tua email *" autocomplete="email"/>
+        <button class="btn btn-p" id="gate-btn" onclick="checkSubscriptionAndProceed()">Continua</button>
+      </div>
       <div id="doctor-form" class="hidden" style="margin-top:14px">
         <div style="background:#fffbeb;border:1px solid #fde047;border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:13px;color:#92400e;font-weight:600">Servizio rivolto a pazienti adulti (18+)</div><div class="ftit">👤 I tuoi dati</div>
         <input id="patient-name" placeholder="Nome e cognome *" autocomplete="name"/>
@@ -2662,8 +2668,12 @@ async function callAI(){
     document.getElementById('rx-section').classList.add('hidden');
     document.getElementById('warning').style.display='none';
     document.getElementById('success-box').classList.add('hidden');
-    document.getElementById('doctor-form').classList.remove('hidden');
-    document.getElementById('doctor-form').scrollIntoView({behavior:'smooth'});
+    if(pazCorrente && pazCorrente.email){
+      checkSubscriptionAndProceed(pazCorrente.email);
+    } else {
+      document.getElementById('email-gate').classList.remove('hidden');
+      document.getElementById('email-gate').scrollIntoView({behavior:'smooth'});
+    }
   }catch(e){
     document.getElementById('loading').classList.add('hidden');
     alert('Errore di connessione. Controlla la connessione internet e riprova.');
@@ -2676,8 +2686,41 @@ function showLoading(){
   document.getElementById('rx-section').classList.add('hidden');
   document.getElementById('warning').style.display='none';
   document.getElementById('doctor-form').classList.add('hidden');
+  document.getElementById('email-gate').classList.add('hidden');
 }
 function showDoctorForm(){document.getElementById('doctor-form').classList.remove('hidden');document.getElementById('doctor-form').scrollIntoView({behavior:'smooth'});}
+
+async function checkSubscriptionAndProceed(prefillEmail){
+  const gate=document.getElementById('email-gate');
+  const email=(prefillEmail||document.getElementById('gate-email').value.trim());
+  if(!email||!email.includes('@')){alert('Inserisci un\'email valida');return;}
+  const btn=document.getElementById('gate-btn');
+  const goToForm=()=>{
+    gate.classList.add('hidden');
+    const e=document.getElementById('patient-email');if(e)e.value=email;
+    document.getElementById('doctor-form').classList.remove('hidden');
+    document.getElementById('doctor-form').scrollIntoView({behavior:'smooth'});
+  };
+  if(!prefillEmail){btn.textContent='Verifica in corso...';btn.disabled=true;}
+  try{
+    const r=await fetch('/api/check-subscription',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    const d=await r.json();
+    if(btn){btn.textContent='Continua';btn.disabled=false;}
+    if(d.subscribed===false){
+      gate.classList.add('hidden');
+      document.getElementById('paywall-email').value=email;
+      document.getElementById('paywall-modal').style.display='flex';
+      return;
+    }
+    // subscribed===true, or null (check unavailable, fail-open) -> proceed
+    goToForm();
+  }catch(e){
+    if(btn){btn.textContent='Continua';btn.disabled=false;}
+    // Fail open on network error: don't block the patient here, the
+    // final submit still enforces the real check server-side.
+    goToForm();
+  }
+}
 function hideDoctorForm(){document.getElementById('doctor-form').classList.add('hidden');}
 
 async function submitToDoctor(){
@@ -2731,7 +2774,7 @@ async function submitToDoctor(){
 function newRequest(){
   document.getElementById('problem').value='';document.getElementById('requestType').value='';document.getElementById('followup').value='';
   uploadedFiles=[];renderFilesPreview();setConsenso(false);
-  ['response','rx-section','doctor-form','success-box','loading'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.add('hidden');});
+  ['response','rx-section','doctor-form','email-gate','success-box','loading'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.add('hidden');});
   document.getElementById('warning').style.display='none';
   conversazione=[];tipoRichiesta='';
   const btn=document.querySelector('#doctor-form .btn-p');if(btn){btn.textContent='Invia al medico';btn.disabled=false;}
