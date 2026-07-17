@@ -2922,6 +2922,9 @@ async function inviaRisposta(){
     setTimeout(()=>{showScreen('s-doc-dash');loadCases('pending');loadVisitCounter();},1500);
   }catch(e){btn.textContent='❌ Errore';btn.disabled=false;}
 }
+function chiudiPaywall(){
+  document.getElementById('paywall-modal').style.display='none';
+}
 async function startStripePaywall(){
   const email = document.getElementById('paywall-email').value.trim();
   if(!email || !email.includes('@')){alert('Inserisci la tua email');return;}
