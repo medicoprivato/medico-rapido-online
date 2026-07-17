@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Medico Subito: prescrizioni e consulti medici online in 24 ore</title>
+<title>Medico Subito: prescrizioni e consulti online in 24 ore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
 <meta name="google-site-verification" content="up75EGRkxnJKhr60hBd0ZXuB1TsHeZqYiN9y5fCc-Dc" />
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#2A8A8A">
@@ -240,7 +243,7 @@ textarea{min-height:120px;resize:none}
 .empty{text-align:center;padding:46px 20px;color:var(--txt-l)}
 .detail-wrap{padding:16px;padding-bottom:40px}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.2)}}</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-P05LWCSB82"></script>
 <script>
@@ -2856,7 +2859,7 @@ async function openCase(id){
   if(c.allegati&&c.allegati.length>0){
     document.getElementById('dc-att-block').style.display='block';
     document.getElementById('dc-att').innerHTML=c.allegati.map(a=>{
-      if(a.type&&a.type.startsWith('image/'))return`<div style="margin-bottom:8px"><img src="${a.data}" style="max-width:100%;border-radius:8px;border:1px solid var(--brd)"/><div style="font-size:11px;color:var(--txt-l);margin-top:3px">${a.name}</div></div>`;
+      if(a.type&&a.type.startsWith('image/'))return`<div style="margin-bottom:8px"><img src="${a.data}" alt="Allegato caricato dal paziente: ${a.name}" style="max-width:100%;border-radius:8px;border:1px solid var(--brd)"/><div style="font-size:11px;color:var(--txt-l);margin-top:3px">${a.name}</div></div>`;
       return`<div style="background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:8px 10px;font-size:12px;margin-bottom:5px">📄 ${a.name}</div>`;
     }).join('');
   }
