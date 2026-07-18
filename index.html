@@ -2913,7 +2913,7 @@ async function generaAI(caso){
     const formatoBase = `
 Dott.ssa Anna Maria Ferri
 Medico Chirurgo - Specialista in Ginecologia e Ostetricia
-Ordine dei Medici di Frosinone n. 3363 - P.IVA IT17215181003
+Ordine dei Medici Chirurghi e degli Odontoiatri di Frosinone (n. 3363) - P.IVA IT17215181003
 Via Gaetano Marzotto 16 Int. 3, 00133 Roma (RM)
 medicosubitoitalia.com - supportomedicosubito@gmail.com
 `;
@@ -3024,7 +3024,7 @@ function generaPDFBrowser(patientName, tipo, risposta) {
   doc.text('Dott.ssa Anna Maria Ferri', lm, y); y += 7;
   doc.setFontSize(9); doc.setFont('helvetica','normal');
   doc.text('Medico Chirurgo - Specialista in Ginecologia e Ostetricia', lm, y); y += 5;
-  doc.text('Ordine dei Medici di Frosinone n. 3363', lm, y); y += 5;
+  doc.text('Ordine dei Medici Chirurghi e Odontoiatri di Frosinone (n. 3363)', lm, y); y += 5;
   doc.text('P.IVA IT17215181003', lm, y); y += 5;
   doc.text('Via Gaetano Marzotto 16 Int.3, 00133 Roma', lm, y); y += 5;
   doc.text('medicosubitoitalia.com', lm, y); y += 6;
@@ -3059,7 +3059,7 @@ function generaPDFBrowser(patientName, tipo, risposta) {
   doc.setFontSize(9); doc.setFont('helvetica','normal');
   doc.text('Dott.ssa Anna Maria Ferri', lm, y); y += 5;
   doc.text('Medico Chirurgo - Specialista in Ginecologia e Ostetricia', lm, y); y += 5;
-  doc.text('Ordine dei Medici di Frosinone n. 3363 - P.IVA IT17215181003', lm, y); y += 5;
+  doc.text('Ordine dei Medici Chirurghi e Odontoiatri di Frosinone (n. 3363) - P.IVA IT17215181003', lm, y); y += 5;
   doc.text('Data: ' + oggi + ' ore ' + ora, lm, y); y += 5;
   doc.text('Firmato digitalmente ai sensi del D.Lgs. 82/2005 (CAD)', lm, y); y += 5;
   doc.text('e Linee Guida Telemedicina Min. Salute 2022', lm, y); y += 8;
