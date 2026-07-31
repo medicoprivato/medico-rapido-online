@@ -2434,11 +2434,9 @@ window.addEventListener('load',function(){
       else{localStorage.removeItem('doc_remembered');}
     }
   }catch(e){}
-  if(window.location.hash==='#medico'){
-    if(docRemembered){showScreen('s-doc-dash');loadCases('pending');loadVisitCounter();}
-    else{showScreen('s-doc-login');}
-  }
-  else if(pazCorrente) entraPaziente();
+  checkMedicoHash(docRemembered);
+  if(window.location.hash!=='#medico'){
+  if(pazCorrente) entraPaziente();
   else if(window.location.hash==='#area') showScreen('s-paz-login');
   const p=new URLSearchParams(window.location.search);
   if(p.get('pagamento')==='ok'){
@@ -2446,7 +2444,23 @@ window.addEventListener('load',function(){
     setTimeout(()=>{showScreen('s-home');const m=document.createElement('div');m.style.cssText='position:fixed;top:70px;left:16px;right:16px;background:var(--blu);color:#fff;border-radius:14px;padding:18px;z-index:200;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.2)';m.innerHTML='<div style="font-size:20px;margin-bottom:6px">✅ Abbonamento attivato!</div><div style="font-size:14px;opacity:.9">Benvenuta su Medico Subito.</div>';document.body.appendChild(m);setTimeout(()=>m.remove(),5000);localStorage.setItem('abbonamento_attivo','si');window.history.replaceState({},'','/');},300);
   }
   if(p.get('pagamento')==='annullato'){setTimeout(()=>{showScreen('s-payment');window.history.replaceState({},'','/');},300);}
+  }
 });
+
+function checkMedicoHash(remembered){
+  if(window.location.hash==='#medico'){
+    let docRemembered=remembered;
+    if(docRemembered===undefined){
+      try{
+        const dr=localStorage.getItem('doc_remembered');
+        if(dr){const obj=JSON.parse(dr);docRemembered=obj&&obj.ok&&Date.now()-obj.loginTime<THIRTY_DAYS;}
+      }catch(e){}
+    }
+    if(docRemembered){showScreen('s-doc-dash');loadCases('pending');loadVisitCounter();}
+    else{showScreen('s-doc-login');}
+  }
+}
+window.addEventListener('hashchange',()=>{checkMedicoHash();});
 
 function showPazLogin(){document.getElementById('paz-form-login').style.display='block';document.getElementById('paz-form-reg').style.display='none';}
 function showPazReg(){document.getElementById('paz-form-login').style.display='none';document.getElementById('paz-form-reg').style.display='block';}
@@ -2642,12 +2656,12 @@ function compressImage(file, maxDim, quality){
 }
 async function handleFilesPre(files){
   for(let f of files){
-    if(uploadedFiles.length>=4){alert('Massimo 4 allegati, per garantire l\\'invio corretto della richiesta');break;}
+    if(uploadedFiles.length>=4){alert('Massimo 4 allegati, per garantire l\'invio corretto della richiesta');break;}
     if(f.type.startsWith('image/')){
       f=await compressImage(f,1600,0.7);
       if(f.size>3*1024*1024){alert(f.name+' è ancora troppo grande dopo la compressione. Prova a scattare la foto con qualità inferiore.');continue;}
     } else if(f.size>3*1024*1024){
-      alert(f.name+' è troppo grande (max 3MB per documenti non immagine, per garantire l\\'invio)');continue;
+      alert(f.name+' è troppo grande (max 3MB per documenti non immagine, per garantire l\'invio)');continue;
     }
     uploadedFiles.push(f);
   }
