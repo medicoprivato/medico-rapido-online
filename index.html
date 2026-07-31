@@ -2618,10 +2618,37 @@ function quickStart(tipo){
 function stripMd(t){return t.replace(/\*\*(.*?)\*\*/g,'$1').replace(/\*(.*?)\*/g,'$1').replace(/#{1,6}\s/g,'').replace(/`(.*?)`/g,'$1').trim();}
 
 // Gestione allegati (PRE-invio)
-function handleFilesPre(files){
-  for(const f of files){
-    if(uploadedFiles.length>=5){alert('Massimo 5 allegati');break;}
-    if(f.size>10*1024*1024){alert(f.name+' è troppo grande (max 10MB)');continue;}
+function compressImage(file, maxDim, quality){
+  return new Promise((resolve)=>{
+    if(!file.type.startsWith('image/')){resolve(file);return;}
+    const img=new Image();
+    const url=URL.createObjectURL(file);
+    img.onload=()=>{
+      URL.revokeObjectURL(url);
+      let w=img.width,h=img.height;
+      if(w>h && w>maxDim){h=Math.round(h*maxDim/w);w=maxDim;}
+      else if(h>maxDim){w=Math.round(w*maxDim/h);h=maxDim;}
+      const canvas=document.createElement('canvas');
+      canvas.width=w;canvas.height=h;
+      canvas.getContext('2d').drawImage(img,0,0,w,h);
+      canvas.toBlob((blob)=>{
+        if(!blob){resolve(file);return;}
+        resolve(new File([blob], file.name.replace(/\.[^.]+$/,'')+'.jpg', {type:'image/jpeg'}));
+      },'image/jpeg',quality);
+    };
+    img.onerror=()=>resolve(file);
+    img.src=url;
+  });
+}
+async function handleFilesPre(files){
+  for(let f of files){
+    if(uploadedFiles.length>=4){alert('Massimo 4 allegati, per garantire l\\'invio corretto della richiesta');break;}
+    if(f.type.startsWith('image/')){
+      f=await compressImage(f,1600,0.7);
+      if(f.size>3*1024*1024){alert(f.name+' è ancora troppo grande dopo la compressione. Prova a scattare la foto con qualità inferiore.');continue;}
+    } else if(f.size>3*1024*1024){
+      alert(f.name+' è troppo grande (max 3MB per documenti non immagine, per garantire l\\'invio)');continue;
+    }
     uploadedFiles.push(f);
   }
   renderFilesPreview();
