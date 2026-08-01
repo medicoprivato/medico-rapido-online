@@ -400,7 +400,7 @@ textarea{min-height:120px;resize:none}
     <button onclick="showScreen('s-richiesta')" style="width:100%;background:#f97316;color:#fff;border:none;border-radius:16px;padding:20px;font-size:24px;font-weight:900;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:18px;box-shadow:0 4px 20px rgba(249,115,22,.4)">Scrivi al medico SUBITO</button>
 
     <button onclick="showScreen('s-blog')" style="width:100%;margin-bottom:18px;background:#fff;color:#4E79A7;border:2px solid #4E79A7;border-radius:14px;padding:16px;font-size:16px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px">
-      Leggi le guide sul Blog
+      Leggi gli articoli sul Blog
     </button>
 
     <div class="hero-serv">
@@ -485,13 +485,13 @@ textarea{min-height:120px;resize:none}
     <div style="font-size:11px;color:#94a3b8;margin-top:10px">*Solo rinnovo terapie già stabili e diagnosticate, non gestione di crisi o nuove diagnosi psichiatriche.</div>
   </div>
 
-  <div class="card" style="margin:16px 16px 0;background:linear-gradient(135deg,#0D4F5C,#1A5F6A);color:#fff">
+  <div class="card" style="margin:16px 16px 0;background:#81D4FA;color:#0D4F5C">
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px">
-      <img src="/assets/dott-ferri.jpg" alt="Dott.ssa Anna Maria Ferri, Medico Chirurgo e Ginecologa" width="64" height="64" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.5);flex-shrink:0" />
+      <img src="/assets/dott-ferri.jpg" alt="Dott.ssa Anna Maria Ferri, Medico Chirurgo e Ginecologa" width="64" height="64" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.7);flex-shrink:0" />
       <div style="font-family:'Playfair Display',serif;font-size:21px;font-weight:700">Dott.ssa Anna Maria Ferri</div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:8px;font-size:14px;color:rgba(255,255,255,.9)">
-      <div>Medico Chirurgo – Specialista in Ginecologia e Ostetricia</div>
+    <div style="display:flex;flex-direction:column;gap:8px;font-size:14px;color:#0D4F5C">
+      <div>Medico Chirurgo, Specialista in Ginecologia e Ostetricia</div>
       <div>Master in Management delle Strutture Sanitarie e Socio-Sanitarie</div>
       <div>Iscritta all'Ordine dei Medici Chirurghi e degli Odontoiatri di Frosinone (n. 3363)</div>
     </div>
@@ -909,6 +909,11 @@ textarea{min-height:120px;resize:none}
       <div style="color:#fff;font-size:17px;font-weight:900;margin-bottom:6px">Hai bisogno del medico adesso?</div>
       <div style="color:rgba(255,255,255,.85);font-size:13px;margin-bottom:12px">Non aspettare. Scrivi la tua richiesta in 2 minuti.</div>
       <button onclick="showScreen('s-richiesta')" style="background:#fff;color:#f97316;border:none;border-radius:10px;padding:10px 24px;font-size:15px;font-weight:900;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Scrivi al medico</button>
+    </div>
+
+    <div style="display:flex;align-items:center;background:#fff;border:1.5px solid #B2E0DC;border-radius:100px;padding:10px 16px;margin-bottom:14px">
+      <span style="font-size:17px;margin-right:8px;flex-shrink:0">🔍</span>
+      <input id="blog-search" type="text" placeholder="Cerca un argomento, es. endometriosi..." style="flex:1;border:none;outline:none;font-size:14px;font-family:'Plus Jakarta Sans',sans-serif;color:#0D4F5C;background:transparent;min-width:0" oninput="cercaBlog(this.value)">
     </div>
 
     <div style="display:flex;gap:8px;overflow-x:auto;margin-bottom:16px;padding-bottom:4px;scrollbar-width:none">
@@ -2323,7 +2328,18 @@ const THIRTY_DAYS=30*24*60*60*1000;
 
 let pazCorrente=null,conversazione=[],tipoRichiesta='',allCases=[],currentCaseId=null,uploadedFiles=[],prevScr='s-home',consensoOk=false,archivioOk=false;
 
+function cercaBlog(testo){
+  const q=testo.trim().toLowerCase();
+  if(!q){filtraBlog('');return;}
+  document.querySelectorAll('[id^="cat-"]').forEach(b=>{b.style.background='#fff';b.style.color='#0D4F5C';});
+  document.querySelectorAll('.blog-card').forEach(c=>{
+    const testoCard=c.textContent.toLowerCase();
+    c.style.display=testoCard.includes(q)?'block':'none';
+  });
+}
+
 function filtraBlog(cat){
+  const si=document.getElementById('blog-search');if(si)si.value='';
   document.querySelectorAll('[id^="cat-"]').forEach(b=>{
     b.style.background=b.id==='cat-'+(cat||'tutti')?'#0D4F5C':'#fff';
     b.style.color=b.id==='cat-'+(cat||'tutti')?'#fff':'#0D4F5C';
