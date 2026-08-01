@@ -2836,6 +2836,12 @@ function selectPlan(plan){
 async function startStripe(){
   const ei=document.getElementById('stripe-email'),email=ei?ei.value.trim():'';
   if(!email||!email.includes('@')){alert('Inserisci la tua email');if(ei)ei.focus();return;}
+  if(selectedPlan==='annual'){
+    if(typeof gtag==='function')gtag('event','click_abbonati_ora');
+    if(typeof gtag==='function')gtag('event','inizio_checkout_stripe');
+    window.location.href='https://buy.stripe.com/dRm9AUdk89Gh3mGbXxc3m01?prefilled_email='+encodeURIComponent(email);
+    return;
+  }
   const btn=document.querySelector('#s-payment .btn-p');if(btn){btn.textContent='Caricamento...';btn.disabled=true;}
   if(typeof gtag==='function')gtag('event','click_abbonati_ora');
   try{
@@ -2849,6 +2855,12 @@ async function startStripe(){
 async function startStripeSuc(){
   const ei=document.getElementById('stripe-email-suc'),email=ei?ei.value.trim():'';
   if(!email||!email.includes('@')){alert('Inserisci la tua email');return;}
+  if(selectedPlan==='annual'){
+    if(typeof gtag==='function')gtag('event','click_abbonati_ora');
+    if(typeof gtag==='function')gtag('event','inizio_checkout_stripe');
+    window.location.href='https://buy.stripe.com/dRm9AUdk89Gh3mGbXxc3m01?prefilled_email='+encodeURIComponent(email);
+    return;
+  }
   const btn=document.querySelector('.stripe-up button');if(btn){btn.textContent='Caricamento...';btn.disabled=true;}
   if(typeof gtag==='function')gtag('event','click_abbonati_ora');
   try{
