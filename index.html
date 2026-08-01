@@ -96,15 +96,15 @@ textarea{min-height:120px;resize:none}
 
 .spacer{height:90px}
 
-.hero{background:linear-gradient(145deg,#0D4F5C 0%,#1A5F6A 30%,#2A8A8A 65%,#5BBFB5 100%);padding:40px 20px 40px;position:relative;overflow:hidden}
+.hero{background:#fff;padding:40px 20px 40px;position:relative;overflow:hidden}
 
 .hero-badge{display:flex;align-items:center;justify-content:center;gap:8px;background:#5BBFB5;border:none;border-radius:24px;padding:12px 24px;font-size:18px;font-weight:900;color:#0D4F5C;margin-bottom:18px;letter-spacing:.6px;text-transform:uppercase;box-shadow:0 4px 20px rgba(56,189,248,.3);width:100%;text-align:center}
 .hero-badge::before{content:'';width:11px;height:11px;background:#16a34a;border-radius:50%;display:inline-block;flex-shrink:0}
-.hero h1{font-family:'Playfair Display',serif;font-size:44px;line-height:1.1;color:#fff;margin-bottom:22px;letter-spacing:-1px;font-weight:700;text-align:center;width:100%}
+.hero h1{font-family:'Playfair Display',serif;font-size:44px;line-height:1.1;color:#0D4F5C;margin-bottom:22px;letter-spacing:-1px;font-weight:700;text-align:center;width:100%}
 .hero h1 em{font-style:italic;color:#f97316;font-weight:800}
 
-.hero-serv{background:linear-gradient(135deg,rgba(15,23,42,.6),rgba(26,95,106,.4));backdrop-filter:blur(10px);border:1px solid rgba(249,115,22,.25);border-radius:18px;padding:22px 22px;margin-bottom:16px;box-shadow:0 8px 32px rgba(0,0,0,.2)}
-.hero-serv-lbl{font-size:18px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:#fff;margin-bottom:14px}
+.hero-serv{background:linear-gradient(135deg,#F0FAFA,#E4F3F1);border:1px solid rgba(249,115,22,.25);border-radius:18px;padding:22px 22px;margin-bottom:16px;box-shadow:0 8px 24px rgba(13,79,92,.08)}
+.hero-serv-lbl{font-size:18px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:#0D4F5C;margin-bottom:14px}
 .hero-serv-list{font-size:18px;font-weight:800;color:#f97316;line-height:1.9;letter-spacing:.3px;text-transform:uppercase}
 .hero-serv-list .so{color:#f97316;font-weight:900;font-size:20px;display:block;margin-top:4px}
 .hero-nota{font-size:13px;color:rgba(255,255,255,.85);margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1);line-height:1.6;font-weight:600;text-transform:none;letter-spacing:.2px}
@@ -367,12 +367,12 @@ textarea{min-height:120px;resize:none}
     <!-- LOGO -->
     <div onclick="showScreen('s-richiesta')" style="text-align:center;margin-bottom:24px;padding-top:4px;cursor:pointer">
       <img src="/assets/dott-ferri.jpg" alt="Dott.ssa Anna Maria Ferri" style="width:120px;height:120px;margin:0 auto 18px;border-radius:50%;object-fit:cover;display:block;box-shadow:0 4px 16px rgba(0,0,0,.25);border:3px solid #fff">
-      <div style="font-family:'Playfair Display',serif;font-size:42px;font-weight:800;color:#fff;letter-spacing:-1px;line-height:1.05">
-        Medico <span style="color:#f97316">Subito</span>
+      <div style="font-family:'Playfair Display',serif;font-size:42px;font-weight:800;color:#0D4F5C;letter-spacing:-1px;line-height:1.05">
+        Medico <span style="color:#2A8A8A">Subito</span>
       </div>
     </div>
 
-    <div onclick="showScreen('s-payment')" style="display:inline-block;background:#fff;border-radius:100px;padding:10px 24px;margin:0 auto 18px;text-align:center;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.15);width:100%;box-sizing:border-box">
+    <div onclick="showScreen('s-payment')" style="display:inline-block;background:#fff;border:1.5px solid #B2E0DC;border-radius:100px;padding:10px 24px;margin:0 auto 18px;text-align:center;cursor:pointer;box-shadow:0 4px 16px rgba(13,79,92,.1);width:100%;box-sizing:border-box">
       <span style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:#0D4F5C">€15</span><span style="font-size:16px;font-weight:700;color:#0D4F5C">/mese</span><br><span style="font-size:14px;font-weight:800;color:#2A8A8A">Richieste illimitate per te e la tua famiglia</span><br><span style="font-size:26px;font-weight:900;color:#f97316">Vuoi risparmiare? €150/anno →</span>
     </div>
 
@@ -404,10 +404,10 @@ textarea{min-height:120px;resize:none}
     </div>
 
 
-    <div style="background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.5);border-radius:18px;padding:22px 20px;margin:18px 0">
+    <div style="background:#F0FAFA;border:1.5px solid #B2E0DC;border-radius:18px;padding:22px 20px;margin:18px 0">
       <div style="font-size:24px;font-weight:900;letter-spacing:1px;color:#f97316;margin-bottom:12px;line-height:1.25">MEDICO DI BASE IRRAGGIUNGIBILE?</div>
-      <div style="font-size:20px;line-height:1.55;color:#fff;font-weight:700;margin-bottom:14px">Weekend, vacanze, festivi, liste d'attesa per lo specialista: scrivi in 2 minuti dalla app e ricevi la risposta scritta del medico entro 24h, 7 giorni su 7.</div>
-      <div onclick="showScreen('s-richiesta')" style="display:inline-flex;align-items:center;gap:8px;background:#fff;color:#16a34a;font-size:16px;font-weight:900;padding:8px 16px;border-radius:30px;cursor:pointer"><span style="font-size:18px">✓</span> Nessuna sala d'attesa</div>
+      <div style="font-size:20px;line-height:1.55;color:#0D4F5C;font-weight:700;margin-bottom:14px">Weekend, vacanze, festivi, liste d'attesa per lo specialista: scrivi in 2 minuti dalla app e ricevi la risposta scritta del medico entro 24h, 7 giorni su 7.</div>
+      <div onclick="showScreen('s-richiesta')" style="display:inline-flex;align-items:center;gap:8px;background:#16a34a;color:#fff;font-size:16px;font-weight:900;padding:8px 16px;border-radius:30px;cursor:pointer"><span style="font-size:18px">✓</span> Nessuna sala d'attesa</div>
     </div>
 
     <div style="background:#fff;border:2px solid #B2E0DC;border-radius:16px;padding:18px 20px;margin:18px 0">
