@@ -597,17 +597,9 @@ textarea{min-height:120px;resize:none}
     </div>
 
     <div class="p-pay" id="p-pay-amount">€15</div>
-    <div style="font-size:14px;color:rgba(255,255,255,.8);margin:4px 0 10px" id="p-pay-sub">al mese, disdici quando vuoi</div>
-    <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:8px 12px;font-size:13px;color:rgba(255,255,255,.85)">Consulti illimitati per te, uso personale.</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.8);margin:4px 0 10px" id="p-pay-sub">al mese</div>
   </div>
   <div style="padding:16px 16px 0">
-
-    <div style="background:#fff;border:2px solid #f97316;border-radius:14px;padding:14px 16px;margin-bottom:14px">
-      <div style="display:flex;flex-direction:column;gap:10px">
-        <div style="display:flex;align-items:flex-start;gap:10px"><span style="color:#f97316;font-size:18px;font-weight:900;flex-shrink:0">✓</span><span style="font-size:13px;color:#374151">Scrivi dal telefono quando vuoi, ricevi la risposta entro 24 ore.</span></div>
-        <div style="display:flex;align-items:flex-start;gap:10px"><span style="color:#f97316;font-size:18px;font-weight:900;flex-shrink:0">✓</span><span style="font-size:13px;color:#374151">Risponde un medico qualificato, non un call center.</span></div>
-      </div>
-    </div>
 
     <div class="card">
       <input id="stripe-email" type="email" placeholder="La tua email *" autocomplete="email"/>
@@ -2901,12 +2893,12 @@ function selectPlan(plan){
     if(mBtn){mBtn.style.background='transparent';mBtn.style.color='#fff';}
     if(aBtn){aBtn.style.background='#fff';aBtn.style.color='#0D4F5C';}
     if(amt)amt.textContent='€150';
-    if(sub)sub.textContent="all'anno, disdici quando vuoi";
+    if(sub)sub.textContent="all'anno";
   } else {
     if(mBtn){mBtn.style.background='#fff';mBtn.style.color='#0D4F5C';}
     if(aBtn){aBtn.style.background='transparent';aBtn.style.color='#fff';}
     if(amt)amt.textContent='€15';
-    if(sub)sub.textContent='al mese, disdici quando vuoi';
+    if(sub)sub.textContent='al mese';
   }
 }
 
