@@ -596,8 +596,10 @@ textarea{min-height:120px;resize:none}
       <button id="plan-btn-annual" onclick="selectPlan('annual')" style="flex:1;background:transparent;color:#fff;border:none;border-radius:10px;padding:10px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Annuale · risparmi €30</button>
     </div>
 
-    <div class="p-pay" id="p-pay-amount">€15</div>
-    <div style="font-size:14px;color:rgba(255,255,255,.8);margin:4px 0 10px" id="p-pay-sub">al mese</div>
+    <div style="display:flex;align-items:baseline;gap:8px;margin:4px 0 10px">
+      <div class="p-pay" id="p-pay-amount" style="margin:0">€15</div>
+      <div style="font-size:14px;color:rgba(255,255,255,.8)" id="p-pay-sub">al mese</div>
+    </div>
   </div>
   <div style="padding:16px 16px 0">
 
