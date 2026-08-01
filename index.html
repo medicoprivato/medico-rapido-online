@@ -599,20 +599,22 @@ textarea{min-height:120px;resize:none}
 <div id="s-payment" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen('s-home')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg> Torna</button><div class="logo-txt" style="margin-left:8px">Abbonati a Medico Subito</div></div>
   <div class="pay-hero">
-    <div style="font-size:17px;font-weight:800;color:#fff;margin-bottom:14px;line-height:1.4">Al costo di un caffè al giorno,<br>ti seguo sempre, per te e la tua famiglia.</div>
-    <div style="display:inline-block;background:#fff;color:#0D4F5C;font-size:14px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:6px 18px;border-radius:20px;margin-bottom:12px">Prezzo di lancio</div>
-    <div class="p-pay">€15</div>
-    <div style="font-size:14px;color:rgba(255,255,255,.8);margin:4px 0 10px">al mese, disdici quando vuoi</div>
-    <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:8px 12px;font-size:13px;color:rgba(255,255,255,.85)">Consulti illimitati per te e la tua famiglia. Teleconsulto al bisogno.</div>
+    <div style="font-size:17px;font-weight:800;color:#fff;margin-bottom:14px;line-height:1.4">Ti seguo sempre, per te e la tua famiglia.</div>
+
+    <div style="display:flex;gap:8px;background:rgba(255,255,255,.15);border-radius:14px;padding:4px;margin-bottom:16px">
+      <button id="plan-btn-monthly" onclick="selectPlan('monthly')" style="flex:1;background:#fff;color:#0D4F5C;border:none;border-radius:10px;padding:10px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Mensile</button>
+      <button id="plan-btn-annual" onclick="selectPlan('annual')" style="flex:1;background:transparent;color:#fff;border:none;border-radius:10px;padding:10px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Annuale · risparmi €30</button>
+    </div>
+
+    <div class="p-pay" id="p-pay-amount">€15</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.8);margin:4px 0 10px" id="p-pay-sub">al mese, disdici quando vuoi</div>
+    <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:8px 12px;font-size:13px;color:rgba(255,255,255,.85)">Consulti illimitati per te e la tua famiglia.</div>
   </div>
   <div style="padding:16px 16px 0">
 
     <div style="background:#fff;border:2px solid #f97316;border-radius:14px;padding:14px 16px;margin-bottom:14px">
-      <div style="font-size:14px;font-weight:800;color:#0D4F5C;margin-bottom:12px">Quello che ottieni con Medico Subito:</div>
       <div style="display:flex;flex-direction:column;gap:10px">
         <div style="display:flex;align-items:flex-start;gap:10px"><span style="color:#f97316;font-size:18px;font-weight:900;flex-shrink:0">✓</span><span style="font-size:13px;color:#374151">Scrivi dal telefono quando vuoi, ricevi la risposta entro 24 ore.</span></div>
-        <div style="display:flex;align-items:flex-start;gap:10px"><span style="color:#f97316;font-size:18px;font-weight:900;flex-shrink:0">✓</span><span style="font-size:13px;color:#374151">Niente prenotazione fissa, teleconsulto al bisogno, niente sala d'attesa.</span></div>
-        <div style="display:flex;align-items:flex-start;gap:10px"><span style="color:#f97316;font-size:18px;font-weight:900;flex-shrink:0">✓</span><span style="font-size:13px;color:#374151">Ogni risposta è un documento PDF firmato, valido in farmacia e dal tuo specialista.</span></div>
         <div style="display:flex;align-items:flex-start;gap:10px"><span style="color:#f97316;font-size:18px;font-weight:900;flex-shrink:0">✓</span><span style="font-size:13px;color:#374151">Risponde un medico qualificato, non un call center.</span></div>
       </div>
     </div>
@@ -627,13 +629,8 @@ textarea{min-height:120px;resize:none}
       <div style="font-size:15px;font-weight:700;margin-bottom:12px">Incluso nel piano</div>
       <div style="display:flex;flex-direction:column;gap:10px">
         <div class="inc-item">Richieste mediche illimitate, per te e la tua famiglia</div>
-        <div class="inc-item">Prescrizioni farmacologiche (se clinicamente appropriate)</div>
-        <div class="inc-item">Richieste esami e accertamenti</div>
-        <div class="inc-item">Certificati medici</div>
-        <div class="inc-item">Seconda opinione medica</div>
-        <div class="inc-item">Valutazione di foto e referti allegati</div>
-        <div class="inc-item">Risposta firmata, 7 giorni su 7</div>
-        <div class="inc-item">Ricevuta fiscale per detrazione IRPEF 730</div>
+        <div class="inc-item">Prescrizioni, esami, certificati, seconda opinione</div>
+        <div class="inc-item">Risposta scritta, 7 giorni su 7</div>
       </div>
     </div>
   </div>
@@ -801,7 +798,7 @@ textarea{min-height:120px;resize:none}
     <div class="info-card"><h3>Un medico legge la tua richiesta</h3><p>Un medico esamina la tua situazione e risponde per iscritto entro 24 ore, anche sabato e domenica.</p></div>
     <div class="info-card"><h3>Risposta firmata via email</h3><p>Prescrizione medica, richiesta esami, certificati medici e indicazioni mediche, firmati dal medico il prima possibile.</p></div>
     <div class="info-card"><h3>Prestazioni disponibili</h3><p>Rinnovo terapia · Prescrizione esami · Certificati medici · Valutazione sintomi · Secondo parere medico · Interpretazione referti</p></div>
-    <div class="info-card" style="border-color:#f97316;border-width:2px"><h3 style="color:#f97316">Perché scegliere il consulto scritto</h3><p>Niente prenotazione, niente attesa di un orario, niente telecamera. Scrivi quando vuoi, anche alle 23 di domenica, e ricevi la risposta scritta del medico entro 24 ore. Un documento PDF firmato, valido in farmacia e da qualsiasi specialista.</p></div>
+    <div class="info-card" style="border-color:#f97316;border-width:2px"><h3 style="color:#f97316">Perché scegliere il consulto scritto</h3><p>Niente prenotazione, niente attesa di un orario, niente telecamera. Scrivi quando vuoi, anche alle 23 di domenica, e ricevi la risposta scritta del medico entro 24 ore, valida in farmacia e da qualsiasi specialista.</p></div>
     <div class="info-card"><h3>Quando NON utilizzare</h3><p>Dolore toracico, difficoltà respiratoria, perdita di coscienza, febbre alta: chiama il <strong>118</strong> o vai al Pronto Soccorso. Questo servizio <strong>non sostituisce il medico di base</strong> né la visita medica in presenza (Linee Guida Telemedicina Min. Salute 2022 · FNOMCeO).</p></div>
     <div class="info-card"><h3>A chi è rivolto</h3><p>Servizio rivolto esclusivamente a pazienti adulti (18 anni compiuti). Per i minori rivolgiti al pediatra.</p></div>
     <div class="info-card" onclick="showScreen('s-blog')" style="cursor:pointer"><h3>Blog e guide</h3><p>Articoli su telemedicina, prescrizioni e salute. Tocca per leggere le guide complete.</p></div>
@@ -2825,13 +2822,31 @@ function setArchivio(val){
   if(val){si.classList.add('si');no.classList.remove('si');}else{no.classList.add('no');si.classList.remove('si');}
 }
 
+let selectedPlan='monthly';
+function selectPlan(plan){
+  selectedPlan=plan;
+  const mBtn=document.getElementById('plan-btn-monthly'),aBtn=document.getElementById('plan-btn-annual');
+  const amt=document.getElementById('p-pay-amount'),sub=document.getElementById('p-pay-sub');
+  if(plan==='annual'){
+    if(mBtn){mBtn.style.background='transparent';mBtn.style.color='#fff';}
+    if(aBtn){aBtn.style.background='#fff';aBtn.style.color='#0D4F5C';}
+    if(amt)amt.textContent='€150';
+    if(sub)sub.textContent="all'anno, disdici quando vuoi";
+  } else {
+    if(mBtn){mBtn.style.background='#fff';mBtn.style.color='#0D4F5C';}
+    if(aBtn){aBtn.style.background='transparent';aBtn.style.color='#fff';}
+    if(amt)amt.textContent='€15';
+    if(sub)sub.textContent='al mese, disdici quando vuoi';
+  }
+}
+
 async function startStripe(){
   const ei=document.getElementById('stripe-email'),email=ei?ei.value.trim():'';
   if(!email||!email.includes('@')){alert('Inserisci la tua email');if(ei)ei.focus();return;}
   const btn=document.querySelector('#s-payment .btn-p');if(btn){btn.textContent='Caricamento...';btn.disabled=true;}
   if(typeof gtag==='function')gtag('event','click_abbonati_ora');
   try{
-    const r=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    const r=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,plan:selectedPlan})});
     const d=await r.json();
     if(d.url){if(typeof gtag==='function')gtag('event','inizio_checkout_stripe');window.location.href=d.url;}
     else{alert('Errore: '+(d.error||'Riprova'));if(btn){btn.textContent='Abbonati ora';btn.disabled=false;}}
@@ -2844,7 +2859,7 @@ async function startStripeSuc(){
   const btn=document.querySelector('.stripe-up button');if(btn){btn.textContent='Caricamento...';btn.disabled=true;}
   if(typeof gtag==='function')gtag('event','click_abbonati_ora');
   try{
-    const r=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    const r=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,plan:selectedPlan})});
     const d=await r.json();
     if(d.url){if(typeof gtag==='function')gtag('event','inizio_checkout_stripe');window.location.href=d.url;}
     else{alert('Errore: '+(d.error||'Riprova'));if(btn){btn.textContent='Abbonati ora';btn.disabled=false;}}
@@ -3025,7 +3040,7 @@ async function startStripePaywall(){
   btn.textContent = 'Caricamento...'; btn.disabled = true;
   if(typeof gtag==='function')gtag('event','click_abbonati_ora');
   try{
-    const r = await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    const r = await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,plan:selectedPlan})});
     const d = await r.json();
     if(d.url){if(typeof gtag==='function')gtag('event','inizio_checkout_stripe');window.location.href = d.url;}
     else{alert('Errore: '+(d.error||'Riprova'));btn.textContent='Abbonati ora — Pagamento sicuro';btn.disabled=false;}
