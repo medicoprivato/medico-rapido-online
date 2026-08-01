@@ -917,9 +917,10 @@ textarea{min-height:120px;resize:none}
       <button onclick="showScreen('s-richiesta')" style="background:#fff;color:#f97316;border:none;border-radius:10px;padding:10px 24px;font-size:15px;font-weight:900;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Scrivi al medico</button>
     </div>
 
-    <div style="display:flex;align-items:center;background:#fff;border:1.5px solid #B2E0DC;border-radius:100px;padding:10px 16px;margin-bottom:14px">
+    <div style="display:flex;align-items:center;background:#fff;border:1.5px solid #B2E0DC;border-radius:100px;padding:6px 8px 6px 20px;margin-bottom:14px">
       <span style="font-size:17px;margin-right:8px;flex-shrink:0">🔍</span>
-      <input id="blog-search" type="text" placeholder="Cerca un argomento, es. endometriosi..." style="flex:1;border:none;outline:none;font-size:14px;font-family:'Plus Jakarta Sans',sans-serif;color:#0D4F5C;background:transparent;min-width:0" oninput="cercaBlog(this.value)">
+      <input id="blog-search" type="text" placeholder="Cerca un argomento, es. endometriosi..." style="flex:1;border:none;outline:none;font-size:14px;font-family:'Plus Jakarta Sans',sans-serif;color:#0D4F5C;background:transparent;min-width:0" oninput="cercaBlog(this.value)" onkeydown="if(event.key==='Enter')cercaBlog(this.value)">
+      <button onclick="cercaBlog(document.getElementById('blog-search').value)" style="flex-shrink:0;background:#0D4F5C;color:#fff;border:none;border-radius:100px;padding:10px 18px;font-size:13px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Cerca</button>
     </div>
 
     <div style="display:flex;gap:8px;overflow-x:auto;margin-bottom:16px;padding-bottom:4px;scrollbar-width:none">
