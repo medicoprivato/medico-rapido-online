@@ -170,5 +170,24 @@ export default async function handler(req, res) {
     return res.status(200).json({ ok: true });
   }
 
+  if (req.method === "DELETE") {
+    const auth = req.headers.authorization;
+    const isDocAuth = auth === `Bearer ${DOC_PASSWORD}` || auth === `Bearer ${FALLBACK_PWD}`;
+    if (!isDocAuth) return res.status(401).json({ error: "Non autorizzato" });
+
+    const { all, id } = req.body || {};
+    if (all === true) {
+      const { data, error } = await supabase.from("consults").delete().not("id", "is", null).select("id");
+      if (error) return res.status(500).json({ error: error.message });
+      return res.status(200).json({ ok: true, deleted: data?.length || 0 });
+    }
+    if (id) {
+      const { error } = await supabase.from("consults").delete().eq("id", id);
+      if (error) return res.status(500).json({ error: error.message });
+      return res.status(200).json({ ok: true, deleted: 1 });
+    }
+    return res.status(400).json({ error: "Specificare 'all' oppure 'id'" });
+  }
+
   return res.status(405).json({ error: "Metodo non consentito" });
 }

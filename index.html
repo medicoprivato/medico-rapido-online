@@ -2272,6 +2272,7 @@ textarea{min-height:120px;resize:none}
   <div style="display:flex;gap:8px;padding:12px 16px 0">
     <button onclick="loadCases('pending')" style="background:var(--blu);color:#fff;border:none;border-radius:100px;padding:7px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">In attesa</button>
     <button onclick="loadCases('all')" style="background:#fff;color:var(--txt-s);border:1px solid var(--brd);border-radius:100px;padding:7px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Tutte</button>
+    <button onclick="deleteAllTestCases()" style="background:#fff;color:#dc2626;border:1px solid #fecaca;border-radius:100px;padding:7px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-left:auto">🗑️ Elimina tutte</button>
   </div>
   <div id="visit-counter-box" style="margin:12px 16px 0;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between">
     <div style="font-size:13px;color:#166534;font-weight:700">Visite totali sito</div>
@@ -2878,6 +2879,20 @@ async function loadVisitCounter(){
     const el=document.getElementById('visit-counter-num');
     if(el) el.textContent=(d.totalViews!==undefined)?d.totalViews:'—';
   }catch(e){}
+}
+
+async function deleteAllTestCases(){
+  if(!confirm('⚠️ Stai per eliminare TUTTE le richieste presenti nel database. Questa azione non si può annullare. Continuare?'))return;
+  if(!confirm('Ultima conferma: eliminare davvero tutte le richieste? Scrivi OK nella prossima finestra per procedere.'))return;
+  const conferma=prompt('Digita ELIMINA per confermare in modo definitivo:');
+  if(conferma!=='ELIMINA'){alert('Operazione annullata.');return;}
+  try{
+    const r=await fetch('/api/submit-medical-request',{method:'DELETE',headers:{'Authorization':'Bearer '+DOC_PWD,'Content-Type':'application/json'},body:JSON.stringify({all:true})});
+    const d=await r.json();
+    if(!r.ok)throw new Error(d.error||'Errore server');
+    alert('✅ Eliminate '+(d.deleted||0)+' richieste.');
+    loadCases('all');loadVisitCounter();
+  }catch(e){alert('Errore durante l\'eliminazione: '+e.message);}
 }
 
 async function loadCases(filter){
