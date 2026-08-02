@@ -105,6 +105,22 @@ export default async function handler(req, res) {
     // Verifica limite 5 richieste al mese per CF
     const emailNorm = email.trim().toLowerCase();
     const cfBypass = codiceFiscale && (codiceFiscale.toUpperCase().startsWith('BLZ') || codiceFiscale.toUpperCase().startsWith('FRR'));
+
+    if (!bypassEmails.includes(emailNormCheck) && !cfBypass) {
+      if (!codiceFiscale || codiceFiscale.trim().length !== 16) {
+        return res.status(400).json({ error: "Codice fiscale obbligatorio (16 caratteri), per verificare che la richiesta provenga dal titolare dell'abbonamento." });
+      }
+      const cfNorm = codiceFiscale.trim().toUpperCase();
+      const { data: prevConsults } = await supabase.from("consults")
+        .select("codice_fiscale")
+        .eq("email", emailNorm)
+        .not("codice_fiscale", "is", null)
+        .limit(1);
+      if (prevConsults && prevConsults.length > 0 && prevConsults[0].codice_fiscale && prevConsults[0].codice_fiscale !== cfNorm) {
+        return res.status(403).json({ error: "Il codice fiscale inserito non corrisponde a quello usato in precedenza con questo abbonamento. L'abbonamento è strettamente personale: non è possibile richiedere prestazioni per conto di terzi (vedi Termini di Servizio, art. 7-bis)." });
+      }
+    }
+
     if (codiceFiscale && !cfBypass) {
       const inizioMese = new Date();
       inizioMese.setDate(1); inizioMese.setHours(0,0,0,0);
