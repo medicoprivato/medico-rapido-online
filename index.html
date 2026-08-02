@@ -729,8 +729,8 @@ textarea{min-height:120px;resize:none}
           <div class="con-txt">Acconsento al trattamento dei miei dati sanitari <strong>esclusivamente</strong> per l'erogazione del servizio medico richiesto, come da <a onclick="prevScr='s-richiesta';showScreen('s-privacy')">Privacy Policy</a> e <a onclick="prevScr='s-richiesta';showScreen('s-termini')">Termini</a>. I dati NON possono essere ceduti a terzi. Non sostituisce il medico di base.</div>
 
       <div style="margin-top:10px">
-        <input type="checkbox" id="cons-tele" checked style="display:none">
-        <div class="con-txt" style="background:#f0fdf4;border:1px solid #16a34a;border-radius:8px;padding:10px 12px">Dichiaro di aver compreso che il presente servizio è un <strong>consulto medico a distanza</strong> con i limiti propri della telemedicina: il medico non può effettuare un esame fisico diretto. In caso di emergenza chiamerò il <strong>118</strong> o mi recherò al Pronto Soccorso. Il consulto non sostituisce la visita medica in presenza (Linee Guida Telemedicina Min. Salute 2022).<br><br><strong>Richiedo espressamente l'esecuzione immediata del servizio</strong> prima della scadenza dei 14 giorni previsti per il diritto di recesso, e sono consapevole che, una volta che il medico avrà erogato la prestazione richiesta, perderò il diritto di recesso ai sensi dell'art. 59, comma 1, lett. a) del Codice del Consumo (D.Lgs. 206/2005).<br><span style="font-size:12px;color:#166534;font-style:italic;margin-top:6px;display:block">Inviando la richiesta dichiari di aver letto e accettato quanto sopra.</span></div>
+        <div class="con-txt" style="background:#f0fdf4;border:1px solid #16a34a;border-radius:8px;padding:10px 12px">Dichiaro di aver compreso che il presente servizio è un <strong>consulto medico a distanza</strong> con i limiti propri della telemedicina: il medico non può effettuare un esame fisico diretto. In caso di emergenza chiamerò il <strong>118</strong> o mi recherò al Pronto Soccorso. Il consulto non sostituisce la visita medica in presenza (Linee Guida Telemedicina Min. Salute 2022).<br><br><strong>Richiedo espressamente l'esecuzione immediata del servizio</strong> prima della scadenza dei 14 giorni previsti per il diritto di recesso, e sono consapevole che, una volta che il medico avrà erogato la prestazione richiesta, perderò il diritto di recesso ai sensi dell'art. 59, comma 1, lett. a) del Codice del Consumo (D.Lgs. 206/2005).</div>
+        <div class="tog-grid"><button type="button" id="tele-consenso-no" class="tog-btn" onclick="setTeleConsenso(false)">✗ Non accetto</button><button type="button" id="tele-consenso-si" class="tog-btn" onclick="setTeleConsenso(true)">✓ Accetto</button></div>
       </div>
           <div class="tog-grid"><button type="button" id="consenso-no" class="tog-btn" onclick="setConsenso(false)">✗ Non accetto</button><button type="button" id="consenso-si" class="tog-btn" onclick="setConsenso(true)">✓ Accetto</button></div>
         </div>
@@ -2203,6 +2203,11 @@ textarea{min-height:120px;resize:none}
     <h3>8. Diritto di recesso</h3>
     <p>Ai sensi dell'art. 52 D.Lgs. 206/2005 (Codice del Consumo), hai diritto di recedere dal contratto entro <strong>14 giorni</strong> dalla stipula senza alcuna penale. Il diritto di recesso si estingue nel momento in cui il medico eroga la prestazione sanitaria richiesta, a condizione che tu abbia dato consenso espresso all'esecuzione immediata del servizio: tale consenso viene raccolto al momento dell'invio di ogni richiesta medica, tramite dichiarazione esplicita che accetti spuntando l'apposita casella prima dell'invio. Se non hai ancora inviato alcuna richiesta medica, il diritto di recesso resta pienamente valido per i 14 giorni. Per esercitare il recesso: supportomedicosubito@gmail.com.</p>
 
+    <h3>8-bis. Disdetta dell'abbonamento e rimborsi</h3>
+    <p>Si distinguono due situazioni distinte:</p>
+    <p><strong>Consulto già erogato</strong>: se il medico ha già risposto a una richiesta inviata con consenso espresso all'esecuzione immediata (art. 8), quella prestazione non è rimborsabile, salvo che ricorrano i presupposti di legge per il recesso (ad esempio, consenso non validamente raccolto).</p>
+    <p><strong>Disdetta dell'abbonamento</strong>: puoi disdire l'abbonamento in qualsiasi momento, con effetto sui rinnovi futuri. La disdetta non comporta automaticamente il rimborso delle prestazioni mediche già erogate nel periodo di abbonamento in corso, né del canone già versato per il periodo corrente, salvo quanto previsto dall'art. 8 per il diritto di recesso nei 14 giorni.</p>
+
     <h3>9. Detrazioni fiscali</h3>
     <p>I servizi medici erogati tramite Medico Subito possono essere detraibili ai sensi dell'art. 15 TUIR (detrazione IRPEF del 19% su spese sanitarie). Viene emessa ricevuta fiscale utilizzabile per il modello 730/Unico. Consultare il proprio commercialista per la situazione specifica.</p>
 
@@ -2353,7 +2358,7 @@ const SUPA_URL='https://dxfvdqtgsgnrjahlabga.supabase.co';
 const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4ZnZkcXRnc2ducmphaGxhYmdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyNzY3OTIsImV4cCI6MjA5Mzg1Mjc5Mn0.D9OPao1QZHHsy-mpA3DUYYUwotwdTepTRO4ah8uZpiU';
 const THIRTY_DAYS=30*24*60*60*1000;
 
-let pazCorrente=null,conversazione=[],tipoRichiesta='',allCases=[],currentCaseId=null,uploadedFiles=[],prevScr='s-home',consensoOk=false,archivioOk=false;
+let pazCorrente=null,conversazione=[],tipoRichiesta='',allCases=[],currentCaseId=null,uploadedFiles=[],prevScr='s-home',consensoOk=false,archivioOk=false,teleConsensoOk=false;
 
 function cercaBlog(testo){
   const q=testo.trim().toLowerCase();
@@ -2824,6 +2829,8 @@ async function submitToDoctor(){
   if(!nome){alert('Inserisci nome e cognome');return;}
   if(!email||!email.includes('@')){alert('Inserisci un\'email valida');return;}
   if(!consensoOk){alert('Devi accettare il consenso al trattamento dati sanitari');return;}
+  if(!teleConsensoOk){alert('Devi accettare le condizioni sul consulto a distanza e sull\'esecuzione immediata del servizio per poter inviare la richiesta');return;}
+  const consensoTimestamp=new Date().toISOString();
   const btn=document.querySelector('#doctor-form .btn-p');btn.textContent='Invio in corso...';btn.disabled=true;
   const ulr=conversazione.filter(m=>m.role==='assistant').pop()?.content||'';
   let allegati=[];
@@ -2841,7 +2848,7 @@ async function submitToDoctor(){
         document.getElementById('p-sg')?.value?'Gruppo sangue: '+document.getElementById('p-sg').value:'',
       ].filter(Boolean).join(' | '),
       aiResponse:ulr,conversazione:conversazione.map(m=>m.role+': '+m.content).join('\n\n'),
-      allegati,consenso:true,archivioReferti:archivioOk
+      allegati,consenso:true,consensoTimestamp,archivioReferti:archivioOk
     })});
     if(r.status===429){
       const d=await r.json();
@@ -2886,6 +2893,12 @@ function togSan(campo,val){
 
 function setConsenso(val){
   consensoOk=val;const si=document.getElementById('consenso-si'),no=document.getElementById('consenso-no');
+  if(val){si.classList.add('si');no.classList.remove('si');no.style.background='';no.style.color='';no.style.borderColor='';}
+  else{no.style.background='#dc2626';no.style.color='#fff';no.style.borderColor='#dc2626';si.classList.remove('si');}
+}
+
+function setTeleConsenso(val){
+  teleConsensoOk=val;const si=document.getElementById('tele-consenso-si'),no=document.getElementById('tele-consenso-no');
   if(val){si.classList.add('si');no.classList.remove('si');no.style.background='';no.style.color='';no.style.borderColor='';}
   else{no.style.background='#dc2626';no.style.color='#fff';no.style.borderColor='#dc2626';si.classList.remove('si');}
 }
