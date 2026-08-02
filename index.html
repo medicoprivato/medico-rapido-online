@@ -739,7 +739,7 @@ textarea{min-height:120px;resize:none}
         <div class="con-box" style="margin-bottom:10px">
           <div class="con-tit">1. Trattamento dati sanitari</div>
           <div class="con-txt">Il trattamento dei tuoi dati sanitari, strettamente necessari alla valutazione clinica e alla risposta alla tua richiesta, avviene sulla base giuridica prevista dall'art. 9, par. 2, lett. h) del GDPR (finalità di medicina, previo obbligo di segreto professionale del medico), come da <a onclick="prevScr='s-richiesta';showScreen('s-privacy')">Privacy Policy</a> e <a onclick="prevScr='s-richiesta';showScreen('s-termini')">Termini</a>. I dati NON vengono ceduti a terzi. Il servizio non sostituisce il medico di base.<br><br>Confermando di aver letto questa informativa, prendi atto delle modalità di trattamento sopra descritte.</div>
-          <div class="tog-grid"><button type="button" id="consenso-no" class="tog-btn" onclick="setConsenso(false)">✗ Non accetto</button><button type="button" id="consenso-si" class="tog-btn" onclick="setConsenso(true)">✓ Ho letto e accetto</button></div>
+          <div class="tog-grid"><button type="button" id="consenso-no" class="tog-btn" onclick="setConsenso(false)">✗ Non ho letto</button><button type="button" id="consenso-si" class="tog-btn" onclick="setConsenso(true)">✓ Ho letto l'informativa</button></div>
         </div>
 
         <div class="con-box" style="margin-bottom:10px">
@@ -2851,7 +2851,7 @@ async function submitToDoctor(){
     cf='';
   }
   if(!email||!email.includes('@')){alert('Inserisci un\'email valida');return;}
-  if(!consensoOk){alert('Devi accettare il consenso al trattamento dati sanitari');return;}
+  if(!consensoOk){alert('Devi confermare di aver letto l\'informativa sul trattamento dei dati sanitari');return;}
   if(!teleConsensoOk){alert('Devi accettare le condizioni sul consulto a distanza e sull\'esecuzione immediata del servizio per poter inviare la richiesta');return;}
   const consensoTimestamp=new Date().toISOString();
   const btn=document.querySelector('#doctor-form .btn-p');btn.textContent='Invio in corso...';btn.disabled=true;
