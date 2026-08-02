@@ -743,15 +743,21 @@ textarea{min-height:120px;resize:none}
         </div>
 
         <div class="con-box" style="margin-bottom:10px">
-          <div class="con-tit">2. Consulto a distanza e diritto di recesso</div>
-          <div class="con-txt">Dichiaro di aver compreso che il presente servizio è un <strong>consulto medico a distanza</strong> con i limiti propri della telemedicina: il medico non può effettuare un esame fisico diretto. In caso di emergenza chiamerò il <strong>118</strong> o mi recherò al Pronto Soccorso. Il consulto non sostituisce la visita medica in presenza (Linee Guida Telemedicina Min. Salute 2022).<br><br><strong>Richiedo espressamente che l'esecuzione del servizio inizi</strong> prima della scadenza del periodo di recesso di 14 giorni. Sono consapevole che, qualora il contratto venga interamente eseguito, perderò il diritto di recesso nei casi previsti dalla legge, e che, in caso di recesso dopo l'inizio dell'esecuzione, potrà essere dovuto un importo proporzionale alle prestazioni già erogate (artt. 57 e 59, comma 1, lett. a, Codice del Consumo, D.Lgs. 206/2005).</div>
+          <div class="con-tit">2. Consulto a distanza</div>
+          <div class="con-txt">Dichiaro di aver compreso che il presente servizio è un <strong>consulto medico a distanza</strong> con i limiti propri della telemedicina: il medico non può effettuare un esame fisico diretto. In caso di emergenza chiamerò il <strong>118</strong> o mi recherò al Pronto Soccorso. Il consulto non sostituisce la visita medica in presenza (Linee Guida Telemedicina Min. Salute 2022).</div>
           <div class="tog-grid"><button type="button" id="tele-consenso-no" class="tog-btn" onclick="setTeleConsenso(false)">✗ Non accetto</button><button type="button" id="tele-consenso-si" class="tog-btn" onclick="setTeleConsenso(true)">✓ Accetto</button></div>
         </div>
+        <div class="con-box" style="margin-bottom:10px">
+          <div class="con-tit">3. Esecuzione immediata del servizio</div>
+          <div class="con-txt"><strong>Richiedo espressamente che l'esecuzione del servizio inizi</strong> prima della scadenza del periodo di recesso di 14 giorni. Sono consapevole che, qualora il contratto venga interamente eseguito, perderò il diritto di recesso nei casi previsti dalla legge, e che, in caso di recesso dopo l'inizio dell'esecuzione, potrà essere dovuto un importo proporzionale alle prestazioni già erogate (artt. 57 e 59, comma 1, lett. a, Codice del Consumo, D.Lgs. 206/2005).</div>
+          <div class="tog-grid"><button type="button" id="esec-consenso-no" class="tog-btn" onclick="setEsecConsenso(false)">✗ Non accetto</button><button type="button" id="esec-consenso-si" class="tog-btn" onclick="setEsecConsenso(true)">✓ Accetto</button></div>
+        </div>
         <div class="con-box" style="margin-bottom:14px">
-          <div class="con-tit">3. Archivio digitale referti (opzionale)</div>
+          <div class="con-tit">4. Archivio digitale referti (opzionale)</div>
           <div class="con-txt">Acconsento alla conservazione digitale delle mie richieste e risposte nella piattaforma Medico Subito.</div>
           <div class="tog-grid"><button type="button" id="archivio-no" class="tog-btn" onclick="setArchivio(false)">No</button><button type="button" id="archivio-si" class="tog-btn" onclick="setArchivio(true)">Sì</button></div>
         </div>
+        <div style="font-size:12.5px;color:var(--txt-l);line-height:1.6;text-align:center;margin-bottom:10px">Con l'invio della richiesta dichiaro di aver letto e compreso quanto sopra e confermo le scelte effettuate.</div>
         <button class="btn btn-p" onclick="submitToDoctor()">Invia la richiesta</button>
         <button class="btn btn-o" onclick="hideDoctorForm()" style="margin-top:8px;height:44px;font-size:14px">Annulla</button>
       </div>
@@ -2371,7 +2377,7 @@ const SUPA_URL='https://dxfvdqtgsgnrjahlabga.supabase.co';
 const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4ZnZkcXRnc2ducmphaGxhYmdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyNzY3OTIsImV4cCI6MjA5Mzg1Mjc5Mn0.D9OPao1QZHHsy-mpA3DUYYUwotwdTepTRO4ah8uZpiU';
 const THIRTY_DAYS=30*24*60*60*1000;
 
-let pazCorrente=null,conversazione=[],tipoRichiesta='',allCases=[],currentCaseId=null,uploadedFiles=[],prevScr='s-home',consensoOk=false,archivioOk=false,teleConsensoOk=false;
+let pazCorrente=null,conversazione=[],tipoRichiesta='',allCases=[],currentCaseId=null,uploadedFiles=[],prevScr='s-home',consensoOk=false,archivioOk=false,teleConsensoOk=false,esecConsensoOk=false;
 
 function cercaBlog(testo){
   const q=testo.trim().toLowerCase();
@@ -2852,7 +2858,8 @@ async function submitToDoctor(){
   }
   if(!email||!email.includes('@')){alert('Inserisci un\'email valida');return;}
   if(!consensoOk){alert('Devi confermare di aver letto l\'informativa sul trattamento dei dati sanitari');return;}
-  if(!teleConsensoOk){alert('Devi accettare le condizioni sul consulto a distanza e sull\'esecuzione immediata del servizio per poter inviare la richiesta');return;}
+  if(!teleConsensoOk){alert('Devi accettare le condizioni sul consulto a distanza per poter inviare la richiesta');return;}
+  if(!esecConsensoOk){alert('Devi accettare l\'esecuzione immediata del servizio per poter inviare la richiesta');return;}
   const consensoTimestamp=new Date().toISOString();
   const btn=document.querySelector('#doctor-form .btn-p');btn.textContent='Invio in corso...';btn.disabled=true;
   const ulr=conversazione.filter(m=>m.role==='assistant').pop()?.content||'';
@@ -2931,6 +2938,12 @@ function setHasCF(val){
 
 function setTeleConsenso(val){
   teleConsensoOk=val;const si=document.getElementById('tele-consenso-si'),no=document.getElementById('tele-consenso-no');
+  if(val){si.classList.add('si');no.classList.remove('si');no.style.background='';no.style.color='';no.style.borderColor='';}
+  else{no.style.background='#dc2626';no.style.color='#fff';no.style.borderColor='#dc2626';si.classList.remove('si');}
+}
+
+function setEsecConsenso(val){
+  esecConsensoOk=val;const si=document.getElementById('esec-consenso-si'),no=document.getElementById('esec-consenso-no');
   if(val){si.classList.add('si');no.classList.remove('si');no.style.background='';no.style.color='';no.style.borderColor='';}
   else{no.style.background='#dc2626';no.style.color='#fff';no.style.borderColor='#dc2626';si.classList.remove('si');}
 }
