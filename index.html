@@ -2844,7 +2844,7 @@ async function submitToDoctor(){
   if(!nome){alert('Inserisci nome e cognome');return;}
   if(hasCF===null){alert('Indica se possiedi un codice fiscale italiano');return;}
   if(hasCF){
-    const cfPattern=/^[A-Z]{6}[0-9LMNPQRSTUV]{2}[A-EHLMPR-T]{2}[0-9LMNPQRSTUV]{2}[A-Z][0-9LMNPQRSTUV]{3}[A-Z]$/;
+    const cfPattern=/^[A-Z]{6}[0-9LMNPQRSTUV]{2}[A-EHLMPRST][0-9LMNPQRSTUV]{2}[A-Z][0-9LMNPQRSTUV]{3}[A-Z]$/;
     if(!cf||!cfPattern.test(cf)){alert('Il codice fiscale inserito non sembra nel formato corretto. Controllalo e riprova.');return;}
   } else {
     if(!docType||!docNumber){alert('Inserisci tipo e numero del documento d\'identità');return;}
