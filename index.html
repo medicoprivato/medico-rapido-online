@@ -702,7 +702,19 @@ textarea{min-height:120px;resize:none}
       <div id="doctor-form" class="hidden" style="margin-top:14px">
         <div style="background:#fffbeb;border:1px solid #fde047;border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:13px;color:#92400e;font-weight:600">Servizio rivolto a pazienti adulti (18+)</div><div class="ftit">👤 I tuoi dati</div>
         <input id="patient-name" placeholder="Nome e cognome *" autocomplete="name"/>
-        <input id="patient-cf" placeholder="Codice fiscale *" style="text-transform:uppercase"/>
+        <div style="font-size:13px;font-weight:700;color:#0D4F5C;margin:10px 0 6px">Possiedi un codice fiscale italiano? *</div>
+        <div class="tog-grid"><button type="button" id="hascf-no" class="tog-btn" onclick="setHasCF(false)">No</button><button type="button" id="hascf-si" class="tog-btn" onclick="setHasCF(true)">Sì</button></div>
+        <input id="patient-cf" placeholder="Codice fiscale *" style="text-transform:uppercase;display:none;margin-top:8px"/>
+        <div id="patient-doc-wrap" style="display:none;margin-top:8px">
+          <select id="patient-doc-type" style="margin-bottom:8px">
+            <option value="">Tipo di documento *</option>
+            <option value="Passaporto">Passaporto</option>
+            <option value="Carta d'identità">Carta d'identità</option>
+            <option value="Permesso di soggiorno">Permesso di soggiorno</option>
+            <option value="Patente">Patente</option>
+          </select>
+          <input id="patient-doc-number" placeholder="Numero documento *"/>
+        </div>
         <input id="patient-dob" placeholder="Data di nascita (es: 15/03/1975) *"/>
         <input id="patient-email" type="email" placeholder="Email per ricevere la risposta *" autocomplete="email"/>
         <input id="patient-phone" placeholder="Telefono (opzionale)" autocomplete="tel"/>
@@ -2826,9 +2838,18 @@ async function checkSubscriptionAndProceed(prefillEmail){
 function hideDoctorForm(){document.getElementById('doctor-form').classList.add('hidden');}
 
 async function submitToDoctor(){
-  const nome=document.getElementById('patient-name').value.trim(),email=document.getElementById('patient-email').value.trim(),cf=document.getElementById('patient-cf').value.trim().toUpperCase();
+  const nome=document.getElementById('patient-name').value.trim(),email=document.getElementById('patient-email').value.trim();
+  let cf=document.getElementById('patient-cf').value.trim().toUpperCase().replace(/\s+/g,'');
+  const docType=document.getElementById('patient-doc-type').value,docNumber=document.getElementById('patient-doc-number').value.trim();
   if(!nome){alert('Inserisci nome e cognome');return;}
-  if(!cf||cf.length!==16){alert('Inserisci un codice fiscale valido (16 caratteri). È obbligatorio per verificare che la richiesta provenga dal titolare dell\'abbonamento.');return;}
+  if(hasCF===null){alert('Indica se possiedi un codice fiscale italiano');return;}
+  if(hasCF){
+    const cfPattern=/^[A-Z]{6}[0-9LMNPQRSTUV]{2}[A-EHLMPR-T]{2}[0-9LMNPQRSTUV]{2}[A-Z][0-9LMNPQRSTUV]{3}[A-Z]$/;
+    if(!cf||!cfPattern.test(cf)){alert('Il codice fiscale inserito non sembra nel formato corretto. Controllalo e riprova.');return;}
+  } else {
+    if(!docType||!docNumber){alert('Inserisci tipo e numero del documento d\'identità');return;}
+    cf='';
+  }
   if(!email||!email.includes('@')){alert('Inserisci un\'email valida');return;}
   if(!consensoOk){alert('Devi accettare il consenso al trattamento dati sanitari');return;}
   if(!teleConsensoOk){alert('Devi accettare le condizioni sul consulto a distanza e sull\'esecuzione immediata del servizio per poter inviare la richiesta');return;}
@@ -2840,6 +2861,7 @@ async function submitToDoctor(){
   try{
     const r=await fetch('/api/submit-medical-request',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
       tipo:tipoRichiesta,patientText:document.getElementById('problem').value,patientName:nome,codiceFiscale:cf,
+      docType,docNumber,
       dateOfBirth:document.getElementById('patient-dob').value,email,phone:document.getElementById('patient-phone').value,
       clinicalData:[
         document.getElementById('allergie-det')?.style.display!=='none'?'Allergie: '+document.getElementById('allergie-det').value:'',
@@ -2897,6 +2919,14 @@ function setConsenso(val){
   consensoOk=val;const si=document.getElementById('consenso-si'),no=document.getElementById('consenso-no');
   if(val){si.classList.add('si');no.classList.remove('si');no.style.background='';no.style.color='';no.style.borderColor='';}
   else{no.style.background='#dc2626';no.style.color='#fff';no.style.borderColor='#dc2626';si.classList.remove('si');}
+}
+
+let hasCF=null;
+function setHasCF(val){
+  hasCF=val;const si=document.getElementById('hascf-si'),no=document.getElementById('hascf-no');
+  const cfInput=document.getElementById('patient-cf'),docWrap=document.getElementById('patient-doc-wrap');
+  if(val){si.classList.add('si');no.classList.remove('si');cfInput.style.display='block';docWrap.style.display='none';}
+  else{no.classList.add('si');si.classList.remove('si');cfInput.style.display='none';docWrap.style.display='block';}
 }
 
 function setTeleConsenso(val){

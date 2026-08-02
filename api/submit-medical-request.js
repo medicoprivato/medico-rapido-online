@@ -77,7 +77,7 @@ export default async function handler(req, res) {
 
   if (req.method === "POST") {
     const { tipo, patientText, patientName, dateOfBirth, email, phone, clinicalData,
-            aiResponse, conversazione, allegati, consenso, codiceFiscale } = req.body;
+            aiResponse, conversazione, allegati, consenso, codiceFiscale, docType, docNumber } = req.body;
 
     if (!patientName || !email) return res.status(400).json({ error: "Nome e email obbligatori" });
     if (!consenso) return res.status(400).json({ error: "Consenso obbligatorio" });
@@ -102,40 +102,51 @@ export default async function handler(req, res) {
       }
     }
 
-    // Verifica limite 5 richieste al mese per CF
     const emailNorm = email.trim().toLowerCase();
-    const cfBypass = codiceFiscale && (codiceFiscale.toUpperCase().startsWith('BLZ') || codiceFiscale.toUpperCase().startsWith('FRR'));
+    const cfNorm = codiceFiscale ? codiceFiscale.trim().toUpperCase().replace(/\s+/g, '') : null;
+    const cfBypass = cfNorm && (cfNorm.startsWith('BLZ') || cfNorm.startsWith('FRR'));
 
-    if (!bypassEmails.includes(emailNormCheck) && !cfBypass) {
-      if (!codiceFiscale || codiceFiscale.trim().length !== 16) {
-        return res.status(400).json({ error: "Codice fiscale obbligatorio (16 caratteri), per verificare che la richiesta provenga dal titolare dell'abbonamento." });
-      }
-      const cfNorm = codiceFiscale.trim().toUpperCase();
+    // Verifica coerenza dell'identità per lo stesso abbonamento (email): solo segnalazione, MAI blocco automatico.
+    // Un blocco automatico rischierebbe di negare una richiesta legittima per un semplice errore di battitura.
+    // Nota: il confronto usa solo il codice fiscale (unico campo identità già presente nello schema attuale);
+    // le richieste con solo documento d'identità (senza CF) non vengono confrontate automaticamente.
+    let identitaDaVerificare = false;
+    if (!bypassEmails.includes(emailNormCheck) && !cfBypass && cfNorm) {
       const { data: prevConsults } = await supabase.from("consults")
         .select("codice_fiscale")
         .eq("email", emailNorm)
         .not("codice_fiscale", "is", null)
-        .limit(1);
-      if (prevConsults && prevConsults.length > 0 && prevConsults[0].codice_fiscale && prevConsults[0].codice_fiscale !== cfNorm) {
-        return res.status(403).json({ error: "Il codice fiscale inserito non corrisponde a quello usato in precedenza con questo abbonamento. L'abbonamento è strettamente personale: non è possibile richiedere prestazioni per conto di terzi (vedi Termini di Servizio, art. 7-bis)." });
+        .limit(5);
+      if (prevConsults && prevConsults.length > 0) {
+        const cfPrecedenti = prevConsults.map(p => p.codice_fiscale).filter(Boolean);
+        if (cfPrecedenti.length > 0 && !cfPrecedenti.includes(cfNorm)) {
+          identitaDaVerificare = true; // il medico lo vedrà evidenziato in dashboard, decide lei caso per caso
+        }
       }
     }
 
-    if (codiceFiscale && !cfBypass) {
+    // Limite richieste mensili, solo se abbiamo un codice fiscale su cui contarle
+    if (cfNorm && !cfBypass) {
       const inizioMese = new Date();
       inizioMese.setDate(1); inizioMese.setHours(0,0,0,0);
       const { count } = await supabase.from("consults")
         .select("*", { count: "exact", head: true })
-        .eq("codice_fiscale", codiceFiscale.toUpperCase())
+        .eq("codice_fiscale", cfNorm)
         .gte("created_at", inizioMese.toISOString());
       if (count >= 3) {
-        return res.status(429).json({ error: "Hai raggiunto il limite di 3 richieste mensili per questo codice fiscale. Il limite si rinnova il primo del mese." });
+        return res.status(429).json({ error: "Hai raggiunto il limite di 3 richieste mensili. Il limite si rinnova il primo del mese." });
       }
     }
     const { error } = await supabase.from("consults").insert({
       tipo, patient_text: patientText, patient_name: patientName, date_of_birth: dateOfBirth,
-      email: emailNorm, phone, clinical_data: clinicalData, ai_response: aiResponse,
-      conversazione, allegati: allegati || [], consenso: true, codice_fiscale: codiceFiscale,
+      email: emailNorm, phone,
+      clinical_data: [
+        clinicalData,
+        (!cfNorm && docType && docNumber) ? `Documento identità: ${docType} ${docNumber.trim().toUpperCase()}` : '',
+        identitaDaVerificare ? '⚠️ IDENTITÀ DA VERIFICARE: dati anagrafici diversi da una richiesta precedente con questa email' : ''
+      ].filter(Boolean).join(' | '),
+      ai_response: aiResponse,
+      conversazione, allegati: allegati || [], consenso: true, codice_fiscale: cfNorm,
       stato: "in_attesa", ip_address: ip
     });
     if (error) return res.status(500).json({ error: error.message });
