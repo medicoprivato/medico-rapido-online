@@ -371,30 +371,23 @@ textarea{min-height:120px;resize:none}
       </div>
     </div>
 
-    <div style="background:linear-gradient(135deg,#0D4F5C,#1A5F6A);border-radius:16px;padding:22px 20px;margin-bottom:20px;text-align:center">
-      <div style="font-size:13px;font-weight:800;color:#81D4FA;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Per farmacie</div>
-      <div style="font-size:19px;font-weight:800;color:#fff;line-height:1.35;margin-bottom:14px">Un medico disponibile quando il medico di base o la guardia medica non ci sono</div>
-      <a href="/per-farmacie-partner" style="display:inline-block;background:#f97316;color:#fff;font-size:15px;font-weight:900;padding:12px 24px;border-radius:100px;text-decoration:none">Scopri il programma partner</a>
+    <div style="text-align:center;margin-bottom:18px">
+      <a href="/per-farmacie-partner" style="font-size:13px;font-weight:700;color:#2A8A8A;text-decoration:underline">Sei una farmacia? Scopri il Programma Partner</a>
     </div>
 
-    <div style="text-align:center;font-size:13px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Un cliente ha bisogno di una prescrizione e nessun medico è reperibile?</div>
+    <div style="text-align:center;font-size:13px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Hai bisogno di una prescrizione medica?</div>
 
     <div style="margin-bottom:18px" onclick="event.stopPropagation()">
       <div style="display:flex;align-items:center;background:#fff;border:2px solid #B2E0DC;border-radius:100px;padding:6px 8px 6px 20px;box-shadow:0 4px 16px rgba(13,79,92,.1)">
         <span style="font-size:20px;margin-right:10px;flex-shrink:0">🔍</span>
-        <input id="home-search" type="text" placeholder="Descrivi il caso clinico, es. tampone streptococco positivo" style="flex:1;border:none;outline:none;font-size:16px;font-family:'Plus Jakarta Sans',sans-serif;color:#4E79A7;background:transparent;min-width:0" onkeydown="if(event.key==='Enter')searchStart()">
+        <input id="home-search" type="text" placeholder="Descrivi il tuo problema di salute" style="flex:1;border:none;outline:none;font-size:16px;font-family:'Plus Jakarta Sans',sans-serif;color:#4E79A7;background:transparent;min-width:0" onkeydown="if(event.key==='Enter')searchStart()">
         <button onclick="searchStart()" style="flex-shrink:0;background:#f97316;color:#fff;border:none;border-radius:100px;padding:12px 20px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Scrivi</button>
       </div>
     </div>
 
 
-    <div onclick="window.location.href='/per-farmacie-partner'" style="background:#fff;border:1.5px solid #B2E0DC;border-radius:16px;padding:20px 22px;margin:0 auto 18px;cursor:pointer;box-shadow:0 4px 16px rgba(13,79,92,.1);width:100%;box-sizing:border-box">
-      <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:8px">
-        <span style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#0D4F5C">Da €199</span>
-        <span style="font-size:15px;font-weight:700;color:#64748b">/mese</span>
-      </div>
-      <div style="font-size:15px;color:#374151;line-height:1.5;margin-bottom:14px">Prescrizioni e consulti scritti per i tuoi clienti, entro 24 ore. Fascia in base al numero di pazienti previsti.</div>
-      <div style="display:flex;align-items:center;gap:6px;font-size:14px;font-weight:800;color:#2A8A8A">Scopri i piani</div>
+    <div onclick="showScreen('s-payment')" style="display:inline-block;background:#fff;border:1.5px solid #B2E0DC;border-radius:100px;padding:10px 24px;margin:0 auto 18px;text-align:center;cursor:pointer;box-shadow:0 4px 16px rgba(13,79,92,.1);width:100%;box-sizing:border-box">
+      <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:#f97316">€15</span><span style="font-size:20px;font-weight:700;color:#f97316">/mese</span><br><span style="font-size:16px;font-weight:800;color:#81D4FA">Valutazioni e prescrizioni multiple per te, nell'ambito di un utilizzo normale (fair use)</span><br><span style="font-size:16px;font-weight:900;color:#f97316">Vuoi risparmiare? €150/anno</span>
     </div>
 
 
@@ -432,8 +425,26 @@ textarea{min-height:120px;resize:none}
       <button onclick="searchBlogFromHome()" style="flex-shrink:0;background:#4E79A7;color:#fff;border:none;border-radius:100px;padding:10px 18px;font-size:13px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Cerca</button>
     </div>
 
+    <div class="hero-serv">
+      <div class="hero-serv-lbl">Cosa puoi richiedere</div>
+      <div class="hero-serv-list">
+        PRESCRIZIONI MEDICHE<br>
+        RICHIESTE ESAMI &middot; CERTIFICATI MEDICI<br>
+        RINNOVO TERAPIA &middot; VALUTAZIONI MEDICHE<br>
+        CONSULTI MEDICI SCRITTI<br>
+        <span class="so">SECONDA OPINIONE MEDICA</span>
+      </div>
+    </div>
+
+
+    <div style="background:#F0FAFA;border:1.5px solid #B2E0DC;border-radius:18px;padding:22px 20px;margin:18px 0">
+      <div style="font-size:24px;font-weight:900;letter-spacing:1px;color:#f97316;margin-bottom:12px;line-height:1.25">MEDICO DI BASE IRRAGGIUNGIBILE?</div>
+      <div style="font-size:20px;line-height:1.55;color:#4E79A7;font-weight:700;margin-bottom:14px">Weekend, vacanze, festivi, liste d'attesa per lo specialista: scrivi in 2 minuti dalla app e ricevi la risposta scritta del medico entro 24h, 7 giorni su 7.</div>
+      <div onclick="showScreen('s-richiesta')" style="display:inline-flex;align-items:center;gap:8px;background:#4E79A7;color:#fff;font-size:16px;font-weight:900;padding:8px 16px;border-radius:30px;cursor:pointer"><span style="font-size:18px">✓</span> Nessuna sala d'attesa</div>
+    </div>
+
     <div style="background:#fff;border:2px solid #B2E0DC;border-radius:16px;padding:18px 20px;margin:18px 0">
-      <div style="color:#4E79A7;font-size:22px;font-weight:900;margin-bottom:16px;text-align:center">Perché il consulto scritto è meglio</div>
+      <div style="color:#4E79A7;font-size:22px;font-weight:900;margin-bottom:16px;text-align:center">I vantaggi del consulto scritto</div>
       <div style="display:flex;flex-direction:column;gap:14px">
         <div style="display:flex;align-items:flex-start;gap:10px"><span style="color:#f97316;font-size:24px;font-weight:900;line-height:1.3">•</span><span style="color:#4E79A7;font-size:18px;font-weight:700">Scrivi dal telefono in qualsiasi momento, anche di notte</span></div>
         <div style="display:flex;align-items:flex-start;gap:10px"><span style="color:#f97316;font-size:24px;font-weight:900;line-height:1.3">•</span><span style="color:#4E79A7;font-size:18px;font-weight:700">Niente video, niente microfono</span></div>
@@ -442,14 +453,111 @@ textarea{min-height:120px;resize:none}
       </div>
     </div>
 
-  <div style="margin:20px 16px 0">
-    <div onclick="quickStart('Rinnovo terapia')" style="background:#2A8A8A;border-radius:18px;padding:18px 20px;cursor:pointer;display:flex;align-items:center;gap:16px;box-shadow:0 4px 16px rgba(0,0,0,.08)">
-      <span style="font-size:2.2rem;flex-shrink:0">💊</span>
-      <div style="flex:1">
-        <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:.8;color:#fff">Farmaci</div>
-        <div style="font-size:19px;font-weight:900;color:#fff;margin-top:2px">Rinnovo terapia</div>
+    <button onclick="vaiARichiesta()" style="width:100%;margin:16px 0;background:#f97316;color:#fff;border:none;border-radius:16px;padding:18px;font-size:20px;font-weight:900;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">
+      Invia SUBITO la tua richiesta al medico
+    </button>
+  </div>
+
+  <div class="serv-grid">
+    <div class="serv-card" onclick="quickStart('Rinnovo terapia')" style="background:#2A8A8A">
+      <span class="serv-card-emoji">💊</span>
+      <div class="serv-card-sub">Farmaci</div>
+      <div class="serv-card-nm">Rinnovo<br>terapia</div>
+    </div>
+    <div class="serv-card" onclick="quickStart('Richiesta esami')" style="background:linear-gradient(135deg,#065f46,#059669)">
+      <span class="serv-card-emoji">🔬</span>
+      <div class="serv-card-sub">Diagnostica</div>
+      <div class="serv-card-nm">Richiesta<br>esami</div>
+    </div>
+    <div class="serv-card" onclick="quickStart('Certificato medico')" style="background:linear-gradient(135deg,#0D4F5C,#2A8A8A)">
+      <span class="serv-card-emoji">📋</span>
+      <div class="serv-card-sub">Documenti</div>
+      <div class="serv-card-nm">Certificato<br>medico</div>
+    </div>
+    <div class="serv-card" onclick="quickStart('Seconda opinione')" style="background:linear-gradient(135deg,#9d174d,#db2777)">
+      <span class="serv-card-emoji">💬</span>
+      <div class="serv-card-sub">Parere medico</div>
+      <div class="serv-card-nm">Seconda<br>opinione</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin:4px 16px 0">
+    <div class="sez-lbl" style="color:#f97316;background:#fff1e8">Alcune delle richieste più comuni</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <a href="/consulto-ginecologico-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Ginecologia e ostetricia</a>
+      <a href="/prescrizione-medica-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Medicina generale</a>
+      <a href="/menopausa-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Menopausa e TOS</a>
+      <a href="/hpv-papilloma-virus-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">HPV e follow-up</a>
+      <a href="/medico-di-base-non-disponibile-ricetta-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Malattie croniche</a>
+      <a href="/certificato-medico-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Certificati medici</a>
+      <a href="/certificato-idoneita-sportiva-non-agonistica-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Idoneità sportiva</a>
+      <a href="/medico-online-per-viaggiatori-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Medicina di viaggio</a>
+      <a href="/second-opinion-oncologica-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Second opinion oncologica</a>
+      <a href="/supporto-psicologico-orientamento-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Supporto salute mentale*</a>
+      <a href="/interpretazione-risonanza-magnetica-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Interpretazione referti</a>
+      <span onclick="quickStart('Rinnovo terapia')" style="cursor:pointer;background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600">Rinnovo terapie</span>
+      <span style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600">Teleconsulto telefonico</span>
+      <a href="/adenomiosi-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Adenomiosi</a>
+      <a href="/vulvodinia-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Vulvodinia</a>
+      <a href="/sindrome-colon-irritabile-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Colon irritabile</a>
+      <a href="/helicobacter-pylori-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Helicobacter Pylori</a>
+      <a href="/allergia-nichel-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Allergia al Nichel</a>
+      <a href="/vaginosi-batterica-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Vaginosi batterica</a>
+      <a href="/amenorrea-ciclo-assente-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Amenorrea</a>
+      <a href="/vampate-di-calore-menopausa-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Vampate di calore</a>
+      <a href="/cisti-ovariche-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Cisti ovariche</a>
+      <a href="/rinnovo-ricetta-farmaci-dimagranti-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Farmaci per il peso</a>
+      <a href="/caduta-capelli-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Caduta capelli</a>
+      <a href="/cardiologia-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Cardiologia</a>
+      <a href="/disturbi-prostata-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Prostata</a>
+      <a href="/vie-urinarie-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Vie urinarie</a>
+      <a href="/noduli-tiroidei-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Noduli tiroidei</a>
+      <a href="/vaccinazione-antinfluenzale-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Vaccino antinfluenzale</a>
+      <a href="/psoriasi-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Psoriasi</a>
+      <a href="/asma-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Asma</a>
+      <a href="/malattie-polmonari-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Malattie polmonari</a>
+      <a href="/cefalea-tensiva-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Cefalea tensiva</a>
+      <a href="/artrosi-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Artrosi</a>
+      <a href="/epatite-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Epatite</a>
+      <a href="/ernia-iatale-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Ernia iatale</a>
+      <a href="/ipercolesterolemia-familiare-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Ipercolesterolemia familiare</a>
+      <a href="/monitoraggio-pressione-arteriosa-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Monitoraggio pressione</a>
+    </div>
+    <div style="font-size:11px;color:#94a3b8;margin-top:10px">*Solo rinnovo terapie già stabili e diagnosticate, non gestione di crisi o nuove diagnosi psichiatriche.</div>
+  </div>
+
+  <div class="how-sec">
+    <div class="card">
+      <div class="sez-lbl">Come funziona</div>
+      <div class="sez-title serif">Quattro passi, risposta firmata.</div>
+      <div class="step"><div class="step-n">1</div><div><div class="step-t">Abbonati</div><div class="step-d">Un solo piano, nessun costo aggiuntivo, nessuna sorpresa.</div></div></div>
+      <div class="step"><div class="step-n">2</div><div><div class="step-t">Scrivi la tua richiesta quando vuoi</div><div class="step-d">Niente prenotazione fissa, teleconsulto al bisogno. Dal telefono, in 2 minuti, a qualsiasi ora del giorno.</div></div></div>
+      <div class="step"><div class="step-n">3</div><div><div class="step-t">Il medico risponde entro 24 ore</div><div class="step-d">Un medico esamina la tua richiesta e ti risponde per iscritto, anche sabato, domenica e festivi.</div></div></div>
+      <div class="step" style="border-bottom:none"><div class="step-n">4</div><div><div class="step-t">Ricevi la risposta via email</div><div class="step-d">Parere medico scritto, o se opportuno prescrizione secondo le procedure di legge. Quando clinicamente appropriato, valida per la dispensazione in farmacia.</div></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px">
+        <div class="trust-item"><strong>📋 Conforme alla normativa</strong>Linee Guida Telemedicina Min. Salute 2022.</div>
+        <div class="trust-item"><strong>📱 Funziona ovunque</strong>Dal browser o dall'app Medico Subito. Scegli tu.</div>
       </div>
-      
+      <div id="public-visit-count" style="text-align:center;font-size:12px;color:#94a3b8;margin-top:14px;font-weight:600"></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin:16px 16px 0;background:#F0FAFA">
+    <div class="sez-lbl">🌍 Non parli italiano?</div>
+    <div class="sez-title serif" style="margin-bottom:10px">Disponibile nella tua lingua</div>
+    <p style="font-size:14px;color:#374151;line-height:1.6;margin-bottom:10px">Scrivi la tua richiesta nella tua lingua e ricevi la risposta del medico sia nella tua lingua che in italiano.</p>
+    <a href="/online-doctor-italy-english" style="color:#2A8A8A;font-weight:700;font-size:14px">Read in English</a>
+  </div>
+
+
+  <div class="pcard">
+    <button class="btn-hp" onclick="showScreen('s-payment')" style="margin-top:4px;width:100%;font-size:22px;font-weight:900;letter-spacing:.5px">Scegli: €15/mese o €150/anno</button>
+  </div>
+
+  <div class="trust-wrap">
+    <div class="trust-grid">
+      <div class="trust-item" onclick="prevScr='s-home';showScreen('s-termini')" style="cursor:pointer"><strong>📋 Conforme alle norme</strong>Linee Guida Telemedicina Min. Salute 2022 e FNOMCeO. <span style="color:var(--blu);font-size:12px">Leggi i termini</span></div>
+      <div class="trust-item" onclick="prevScr='s-home';showScreen('s-termini')" style="cursor:pointer;border-color:#f97316;border-width:2px"><strong style="color:#f97316;font-size:15px">💶 Detraibile al 19% nel modello 730</strong>Con il piano annuale a €150, sommando altre spese sanitarie dell'anno puoi recuperare fino a circa €28. <span style="color:var(--blu);font-size:12px">Dettagli</span></div>
     </div>
   </div>
 
