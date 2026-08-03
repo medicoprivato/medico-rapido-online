@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Medico Subito Aziende: supporto clinico per farmacie e RSA</title>
-<meta name="description" content="Un medico specialista a disposizione della tua farmacia o RSA: teleconsulenza medico-sanitaria per il personale, orientamento clinico e second opinion. Abbonamento mensile su misura.">
-<meta property="og:title" content="Medico Subito Aziende: supporto clinico per farmacie e RSA">
-<meta property="og:description" content="Un medico specialista a disposizione della tua farmacia o RSA: teleconsulenza medico-sanitaria per il personale, orientamento clinico e second opinion. Abbonamento mensile su misura.">
+<title>Medico Subito Aziende: supporto clinico per farmacie</title>
+<meta name="description" content="Un medico specialista a disposizione della tua farmacia: teleconsulenza medico-sanitaria per il personale, orientamento clinico e second opinion. Abbonamento mensile su misura.">
+<meta property="og:title" content="Medico Subito Aziende: supporto clinico per farmacie">
+<meta property="og:description" content="Un medico specialista a disposizione della tua farmacia: teleconsulenza medico-sanitaria per il personale, orientamento clinico e second opinion. Abbonamento mensile su misura.">
 <meta property="og:url" content="https://www.medicosubitoitalia.com/aziende">
 <link rel="canonical" href="https://www.medicosubitoitalia.com/aziende">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -54,7 +54,7 @@ a{color:#2A8A8A}
   <div class="logo"><div class="logo-box">🩺</div><div class="logo-txt">Medico Subito</div></div>
   <div class="badge">Per aziende, non per pazienti</div>
   <h1>Un medico specialista a disposizione della tua attività</h1>
-  <p class="sub">Teleconsulenza medico-sanitaria per farmacie e RSA: il tuo personale scrive quando ha un dubbio clinico, un medico specialista risponde con un orientamento chiaro su come procedere.</p>
+  <p class="sub">Teleconsulenza medico-sanitaria per farmacie: il tuo personale scrive quando ha un dubbio clinico, un medico specialista risponde con un orientamento chiaro su come procedere.</p>
   <a href="mailto:supportomedicosubito@gmail.com?subject=Richiesta%20informazioni%20Medico%20Subito%20Aziende" class="cta">Richiedi informazioni</a>
 </div>
 
@@ -67,41 +67,21 @@ a{color:#2A8A8A}
   <h2>Cosa include</h2>
   <div class="item"><div class="dot"></div><div>Canale dedicato per il vostro personale, riservato ai dubbi clinici quotidiani</div></div>
   <div class="item"><div class="dot"></div><div>Orientamento su livello di urgenza: "serve il Pronto Soccorso o si può aspettare?"</div></div>
-  <div class="item"><div class="dot"></div><div>Interpretazione di base di referti ed esami portati dal cliente/ospite</div></div>
+  <div class="item"><div class="dot"></div><div>Interpretazione di base di referti ed esami portati dal cliente</div></div>
   <div class="item"><div class="dot"></div><div>Second opinion su terapie già in corso</div></div>
   <div class="item"><div class="dot"></div><div>Focus distintivo in area ginecologica e ostetrica</div></div>
 </div>
 
 <div class="section">
-  <div class="tabs">
-    <div class="tab active" id="tab-farmacia" onclick="showTab('farmacia')">Per farmacie</div>
-    <div class="tab" id="tab-rsa" onclick="showTab('rsa')">Per RSA</div>
+  <div class="plan">
+    <div class="plan-name">Base</div>
+    <div class="plan-price">€150-200<span> /mese</span></div>
+    <div class="plan-note">Fino a 15 richieste/mese · risposta entro 30 minuti in orario di apertura</div>
   </div>
-
-  <div id="content-farmacia">
-    <div class="plan">
-      <div class="plan-name">Base</div>
-      <div class="plan-price">€150-200<span> /mese</span></div>
-      <div class="plan-note">Fino a 15 richieste/mese · risposta entro 30 minuti in orario di apertura</div>
-    </div>
-    <div class="plan plus">
-      <div class="plan-name">Plus</div>
-      <div class="plan-price">€300-400<span> /mese</span></div>
-      <div class="plan-note">Richieste illimitate · risposta entro 15 minuti · reperibilità estesa · report mensile sui temi ricorrenti</div>
-    </div>
-  </div>
-
-  <div id="content-rsa" style="display:none">
-    <div class="plan">
-      <div class="plan-name">Base</div>
-      <div class="plan-price">€400-500<span> /mese</span></div>
-      <div class="plan-note">Fino a 10 richieste/mese sugli ospiti · risposta entro 24 ore</div>
-    </div>
-    <div class="plan plus">
-      <div class="plan-name">Plus</div>
-      <div class="plan-price">€700-900<span> /mese</span></div>
-      <div class="plan-note">Richieste illimitate · risposta entro 12 ore · incontro mensile con il personale infermieristico · nota scritta per la cartella clinica</div>
-    </div>
+  <div class="plan plus">
+    <div class="plan-name">Plus</div>
+    <div class="plan-price">€300-400<span> /mese</span></div>
+    <div class="plan-note">Richieste illimitate · risposta entro 15 minuti · reperibilità estesa · report mensile sui temi ricorrenti</div>
   </div>
 
   <div style="font-size:12px;color:#94a3b8;text-align:center;margin-top:6px">I prezzi indicati sono un punto di partenza per la conversazione, non un listino fisso: la struttura del piano viene definita insieme a voi.</div>
@@ -124,12 +104,4 @@ a{color:#2A8A8A}
   <a href="https://www.medicosubitoitalia.com">medicosubitoitalia.com</a>
 </div>
 
-<script>
-function showTab(tipo){
-  document.getElementById('content-farmacia').style.display = tipo==='farmacia' ? 'block' : 'none';
-  document.getElementById('content-rsa').style.display = tipo==='rsa' ? 'block' : 'none';
-  document.getElementById('tab-farmacia').classList.toggle('active', tipo==='farmacia');
-  document.getElementById('tab-rsa').classList.toggle('active', tipo==='rsa');
-}
-</script>
 </body></html>
