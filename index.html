@@ -437,92 +437,11 @@ textarea{min-height:120px;resize:none}
       </div>
     </div>
 
-    <button onclick="vaiARichiesta()" style="width:100%;margin:16px 0;background:#f97316;color:#fff;border:none;border-radius:16px;padding:18px;font-size:20px;font-weight:900;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">
-      Invia SUBITO la tua richiesta al medico
-    </button>
-  </div>
-
   <div class="serv-grid">
     <div class="serv-card" onclick="quickStart('Rinnovo terapia')" style="background:#2A8A8A">
       <span class="serv-card-emoji">💊</span>
       <div class="serv-card-sub">Farmaci</div>
       <div class="serv-card-nm">Rinnovo<br>terapia</div>
-    </div>
-    <div class="serv-card" onclick="quickStart('Richiesta esami')" style="background:linear-gradient(135deg,#065f46,#059669)">
-      <span class="serv-card-emoji">🔬</span>
-      <div class="serv-card-sub">Diagnostica</div>
-      <div class="serv-card-nm">Richiesta<br>esami</div>
-    </div>
-    <div class="serv-card" onclick="quickStart('Certificato medico')" style="background:linear-gradient(135deg,#0D4F5C,#2A8A8A)">
-      <span class="serv-card-emoji">📋</span>
-      <div class="serv-card-sub">Documenti</div>
-      <div class="serv-card-nm">Certificato<br>medico</div>
-    </div>
-    <div class="serv-card" onclick="quickStart('Seconda opinione')" style="background:linear-gradient(135deg,#9d174d,#db2777)">
-      <span class="serv-card-emoji">💬</span>
-      <div class="serv-card-sub">Parere medico</div>
-      <div class="serv-card-nm">Seconda<br>opinione</div>
-    </div>
-  </div>
-
-  <div class="card" style="margin:4px 16px 0">
-    <div class="sez-lbl" style="color:#f97316;background:#fff1e8">Alcune delle richieste più comuni</div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px">
-      <a href="/consulto-ginecologico-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Ginecologia e ostetricia</a>
-      <a href="/prescrizione-medica-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Medicina generale</a>
-      <a href="/menopausa-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Menopausa e TOS</a>
-      <a href="/hpv-papilloma-virus-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">HPV e follow-up</a>
-      <a href="/medico-di-base-non-disponibile-ricetta-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Malattie croniche</a>
-      <a href="/certificato-medico-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Certificati medici</a>
-      <a href="/certificato-idoneita-sportiva-non-agonistica-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Idoneità sportiva</a>
-      <a href="/medico-online-per-viaggiatori-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Medicina di viaggio</a>
-      <a href="/second-opinion-oncologica-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Second opinion oncologica</a>
-      <a href="/supporto-psicologico-orientamento-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Supporto salute mentale*</a>
-      <a href="/interpretazione-risonanza-magnetica-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Interpretazione referti</a>
-      <span onclick="quickStart('Rinnovo terapia')" style="cursor:pointer;background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600">Rinnovo terapie</span>
-      <span style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600">Teleconsulto telefonico</span>
-      <a href="/adenomiosi-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Adenomiosi</a>
-      <a href="/vulvodinia-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Vulvodinia</a>
-      <a href="/sindrome-colon-irritabile-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Colon irritabile</a>
-      <a href="/helicobacter-pylori-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Helicobacter Pylori</a>
-      <a href="/allergia-nichel-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Allergia al Nichel</a>
-      <a href="/vaginosi-batterica-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Vaginosi batterica</a>
-      <a href="/amenorrea-ciclo-assente-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Amenorrea</a>
-      <a href="/vampate-di-calore-menopausa-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Vampate di calore</a>
-      <a href="/cisti-ovariche-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Cisti ovariche</a>
-      <a href="/rinnovo-ricetta-farmaci-dimagranti-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Farmaci per il peso</a>
-      <a href="/caduta-capelli-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Caduta capelli</a>
-      <a href="/cardiologia-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Cardiologia</a>
-      <a href="/disturbi-prostata-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Prostata</a>
-      <a href="/vie-urinarie-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Vie urinarie</a>
-      <a href="/noduli-tiroidei-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Noduli tiroidei</a>
-      <a href="/vaccinazione-antinfluenzale-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Vaccino antinfluenzale</a>
-      <a href="/psoriasi-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Psoriasi</a>
-      <a href="/asma-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Asma</a>
-      <a href="/malattie-polmonari-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Malattie polmonari</a>
-      <a href="/cefalea-tensiva-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Cefalea tensiva</a>
-      <a href="/artrosi-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Artrosi</a>
-      <a href="/epatite-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Epatite</a>
-      <a href="/ernia-iatale-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Ernia iatale</a>
-      <a href="/ipercolesterolemia-familiare-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Ipercolesterolemia familiare</a>
-      <a href="/monitoraggio-pressione-arteriosa-online" style="background:#F0FAFA;border:1px solid #B2E0DC;border-radius:100px;padding:7px 14px;font-size:12.5px;color:#0D4F5C;font-weight:600;text-decoration:none">Monitoraggio pressione</a>
-    </div>
-    <div style="font-size:11px;color:#94a3b8;margin-top:10px">*Solo rinnovo terapie già stabili e diagnosticate, non gestione di crisi o nuove diagnosi psichiatriche.</div>
-  </div>
-
-  <div class="how-sec">
-    <div class="card">
-      <div class="sez-lbl">Come funziona</div>
-      <div class="sez-title serif">Quattro passi, risposta firmata.</div>
-      <div class="step"><div class="step-n">1</div><div><div class="step-t">Abbonati</div><div class="step-d">Un solo piano, nessun costo aggiuntivo, nessuna sorpresa.</div></div></div>
-      <div class="step"><div class="step-n">2</div><div><div class="step-t">Scrivi la tua richiesta quando vuoi</div><div class="step-d">Niente prenotazione fissa, teleconsulto al bisogno. Dal telefono, in 2 minuti, a qualsiasi ora del giorno.</div></div></div>
-      <div class="step"><div class="step-n">3</div><div><div class="step-t">Il medico risponde entro 24 ore</div><div class="step-d">Un medico esamina la tua richiesta e ti risponde per iscritto, anche sabato, domenica e festivi.</div></div></div>
-      <div class="step" style="border-bottom:none"><div class="step-n">4</div><div><div class="step-t">Ricevi la risposta via email</div><div class="step-d">Parere medico scritto, o se opportuno prescrizione secondo le procedure di legge. Valida in farmacia, in laboratorio, da qualsiasi specialista.</div></div></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px">
-        <div class="trust-item"><strong>📋 Conforme alla normativa</strong>Linee Guida Telemedicina Min. Salute 2022.</div>
-        <div class="trust-item"><strong>📱 Funziona ovunque</strong>Dal browser o dall'app Medico Subito. Scegli tu.</div>
-      </div>
-      <div id="public-visit-count" style="text-align:center;font-size:12px;color:#94a3b8;margin-top:14px;font-weight:600"></div>
     </div>
   </div>
 
