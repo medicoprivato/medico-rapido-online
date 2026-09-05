@@ -3125,12 +3125,12 @@ medicosubitoitalia.com - supportomedicosubito@gmail.com
     document.getElementById('dc-ai').textContent=analisi;
     document.getElementById('dc-ai').className='ai-txt';
     document.getElementById('dc-reply').value=documento;
-    btn.disabled=false;btn.textContent='✍️ Firma e Invia al paziente';
+    btn.disabled=false;btn.textContent='📄 Invia documento al paziente';
   }catch(e){
     document.getElementById('dc-ai').textContent='Analisi AI non disponibile. Scrivi la risposta manualmente.';
     document.getElementById('dc-ai').className='ai-txt';
     document.getElementById('dc-reply').value='';
-    btn.disabled=false;btn.textContent='✍️ Firma e Invia al paziente';
+    btn.disabled=false;btn.textContent='📄 Invia documento al paziente';
   }
 }
 
@@ -3237,16 +3237,15 @@ function generaPDFBrowser(patientName, tipo, risposta) {
   doc.setDrawColor(30, 58, 138); doc.setLineWidth(0.5);
   doc.line(lm, y, rm, y); y += 6;
 
-  // Timbro e firma digitale
+  // Firma del medico
   doc.setFontSize(10); doc.setFont('helvetica','bold');
-  doc.text('TIMBRO E FIRMA DIGITALE DEL MEDICO', lm, y); y += 6;
+  doc.text('DOCUMENTO REDATTO E VALIDATO DAL MEDICO', lm, y); y += 6;
   doc.setFontSize(9); doc.setFont('helvetica','normal');
   doc.text('Dott.ssa Anna Maria Ferri', lm, y); y += 5;
   doc.text('Medico Chirurgo - Specialista in Ginecologia e Ostetricia', lm, y); y += 5;
   doc.text('Ordine dei Medici Chirurghi e Odontoiatri di Frosinone (n. 3363) - P.IVA IT17215181003', lm, y); y += 5;
   doc.text('Data: ' + oggi + ' ore ' + ora, lm, y); y += 5;
-  doc.text('Firmato digitalmente ai sensi del D.Lgs. 82/2005 (CAD)', lm, y); y += 5;
-  doc.text('e Linee Guida Telemedicina Min. Salute 2022', lm, y); y += 8;
+  doc.text('Documento emesso secondo le Linee Guida Telemedicina Min. Salute 2022', lm, y); y += 8;
 
   // Footer
   doc.setFontSize(7); doc.setTextColor(120,120,120);

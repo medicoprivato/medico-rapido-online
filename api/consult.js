@@ -76,7 +76,7 @@ La tua risposta deve avere DUE sezioni:
 
 ---DOCUMENTO PER IL PAZIENTE---
 [Il documento medico completo nel formato professionale richiesto: prescrizione, richiesta esami, certificato o consulto. 
-Intestazione con dati medico, dati paziente, corpo del documento, timbro e firma digitale in fondo.]
+Intestazione con dati medico, dati paziente, corpo del documento, e in fondo nome e qualifica del medico. NON scrivere frasi che dichiarino una firma digitale qualificata o riferimenti a normative sulla firma digitale (es. D.Lgs. 82/2005): quella dicitura viene aggiunta automaticamente dal sistema solo se e quando è realmente applicabile.]
 
 Analizza SEMPRE gli allegati se presenti — sono referti, esami o immagini cliniche rilevanti per la diagnosi.
 NON usare markdown. Solo testo pulito.`,
