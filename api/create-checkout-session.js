@@ -6,15 +6,14 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Metodo non consentito" });
   }
 
-  const { email, plan } = req.body;
+  const { email } = req.body;
   if (!email || !email.includes("@")) {
     return res.status(400).json({ error: "Email non valida" });
   }
 
   const secretKey = process.env.STRIPE_SECRET_KEY;
-  const PRICE_MONTHLY = 'price_1TwyWsL97xjKYys54YncWf7r';
   const PRICE_ANNUAL = 'price_1Ttm2sL97xjKYys5XHo2bwHQ';
-  const priceId = process.env.STRIPE_PRICE_ID || (plan === 'annual' ? PRICE_ANNUAL : PRICE_MONTHLY);
+  const priceId = PRICE_ANNUAL;
 
   if (!secretKey) {
     return res.status(500).json({ error: "Stripe non configurato" });
