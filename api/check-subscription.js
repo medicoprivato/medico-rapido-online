@@ -1,6 +1,9 @@
-// Lightweight endpoint: checks Stripe subscription status by email only.
-// Used to gate the health questionnaire BEFORE the patient fills in
-// sensitive clinical data, instead of only failing at final submit time.
+// Checks access before asking the patient to complete the medical questionnaire.
+// New payments: one paid Stripe Checkout Session grants exactly one consultation.
+// Historical annual subscribers retain access under their existing agreement.
+import { createClient } from "@supabase/supabase-js";
+
+const bypassEmails = ['ferriam78@gmail.com', 'abolzon05@gmail.com', 'amprime888@gmail.com', 'bolzonaldo280@gmail.com', 'medicosubito2026@gmail.com', 'mia087595@gmail.com', 'mr0639442@gmail.com', 'prime01x2025@gmail.com', 'snoopymia570@gmail.com', 'supportomedicosubito@gmail.com', 'tittybaci744@gmail.com'];
 
 const rateMap = new Map();
 function isRateLimited(ip) {
@@ -10,39 +13,47 @@ function isRateLimited(ip) {
   if (entry.count >= 30) return true;
   entry.count++; rateMap.set(ip, entry); return false;
 }
-
-const bypassEmails = ['ferriam78@gmail.com', 'abolzon05@gmail.com', 'amprime888@gmail.com', 'bolzonaldo280@gmail.com', 'medicosubito2026@gmail.com', 'mia087595@gmail.com', 'mr0639442@gmail.com', 'prime01x2025@gmail.com', 'snoopymia570@gmail.com', 'supportomedicosubito@gmail.com', 'tittybaci744@gmail.com'];
+const normal = s => String(s || "").trim().toLowerCase();
 
 export default async function handler(req, res) {
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("X-Frame-Options", "DENY");
+  res.setHeader("Cache-Control", "no-store");
   const ip = req.headers["x-forwarded-for"]?.split(",")[0] || "unknown";
   if (isRateLimited(ip)) return res.status(429).json({ error: "Troppe richieste." });
-
   if (req.method !== "POST") return res.status(405).json({ error: "Metodo non consentito" });
 
-  const { email } = req.body || {};
-  if (!email || !email.includes("@")) return res.status(400).json({ error: "Email non valida" });
-
-  const emailNorm = email.trim().toLowerCase();
-
-  if (bypassEmails.includes(emailNorm)) {
-    return res.status(200).json({ subscribed: true });
-  }
+  const email = normal(req.body?.email);
+  const paymentSessionId = String(req.body?.paymentSessionId || "");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return res.status(400).json({ error: "Email non valida" });
+  if (bypassEmails.includes(email)) return res.status(200).json({ subscribed: true, access: "staff" });
 
   try {
     const stripe = (await import("stripe")).default(process.env.STRIPE_SECRET_KEY);
-    const customers = await stripe.customers.list({ email: emailNorm, limit: 1 });
-    let hasActiveSub = false;
-    if (customers.data.length > 0) {
-      const subs = await stripe.subscriptions.list({ customer: customers.data[0].id, status: "active", limit: 1 });
-      hasActiveSub = subs.data.length > 0;
+    // A paid session cannot be reused: look for the receipt marker in prior consults.
+    if (/^cs_(test_|live_)[a-zA-Z0-9]+$/.test(paymentSessionId)) {
+      const session = await stripe.checkout.sessions.retrieve(paymentSessionId);
+      if (session.mode === "payment" && session.payment_status === "paid" &&
+          session.amount_total === 3000 && session.currency === "eur" &&
+          session.metadata?.servizio === "consulto_singolo_30" &&
+          normal(session.metadata?.email_paziente) === email) {
+        const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
+        const { count, error } = await supabase.from("consults")
+          .select("id", { count: "exact", head: true })
+          .ilike("clinical_data", `%Pagamento Stripe: ${paymentSessionId}%`);
+        if (error) throw error;
+        if (!count) return res.status(200).json({ subscribed: true, access: "single" });
+      }
     }
-    return res.status(200).json({ subscribed: hasActiveSub });
-  } catch (stripeErr) {
-    console.error("Stripe check error:", stripeErr.message);
-    // Fail open: if Stripe is unreachable, don't block the patient here —
-    // the final submit endpoint still enforces the real check server-side.
+    // Existing annual subscriptions are honored until their own expiry.
+    const customers = await stripe.customers.list({ email, limit: 10 });
+    for (const customer of customers.data) {
+      const subs = await stripe.subscriptions.list({ customer: customer.id, status: "active", limit: 1 });
+      if (subs.data.length > 0) return res.status(200).json({ subscribed: true, access: "legacy_annual" });
+    }
+    return res.status(200).json({ subscribed: false });
+  } catch (error) {
+    console.error("Access check error:", error.message);
     return res.status(200).json({ subscribed: null, error: "check_unavailable" });
   }
 }
