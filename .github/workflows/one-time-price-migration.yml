@@ -1,0 +1,34 @@
+name: Publish EUR30 consultation pricing across all pages
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/one-time-price-migration.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reprice:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Apply audited pricing migration
+        run: node scripts/reprice-all-pages.js
+      - name: Validate output
+        run: |
+          git diff --check
+          test "$(git diff --name-only | wc -l)" -ge 400
+          ! git diff --name-only | grep -vE '(^index[.]html$|/index[.]html$)'
+      - name: Commit and publish corrected pages
+        run: |
+          git config user.name "Medico Subito pricing maintenance"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -u
+          git commit -m "Update 438 site pages and articles to EUR30 per single consultation"
+          git push origin HEAD:main
