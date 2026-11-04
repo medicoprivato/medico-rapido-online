@@ -4,8 +4,8 @@
  * Deliberately excludes separate B2B business/pharmacy packages.
  * Does not touch Stripe subscription records for existing customers.
  */
-const fs=require("fs");
-const cp=require("child_process");
+import fs from "node:fs";
+import cp from "node:child_process";
 
 const all=cp.execFileSync("git",["ls-files"],{encoding:"utf8"}).trim().split("\n").filter(p=>p.endsWith(".html"));
 let changed=0;
