@@ -33,6 +33,11 @@ export default async function handler(req, res) {
   });
   const numeroRicevuta = `MS-${Date.now()}`;
   const annoCorrente = new Date().getFullYear();
+  const isSingle = session.metadata?.servizio === "consulto_singolo_30";
+  const descrizione = isSingle ? "Consulto medico scritto Medico Subito" : "Abbonamento Medico Subito";
+  const periodo = isSingle ? "Singolo consulto" : `${annoCorrente}–${annoCorrente + 1}`;
+  const tipoAcquisto = isSingle ? "consulto" : "abbonamento";
+
 
   if (!email) {
     console.error("Email paziente non trovata nel webhook");
@@ -90,8 +95,8 @@ export default async function handler(req, res) {
       <th>Importo</th>
     </tr>
     <tr>
-      <td>Abbonamento Medico Subito<br><small>Servizio di telemedicina · Consulti medici online</small></td>
-      <td>${annoCorrente}–${annoCorrente + 1}</td>
+      <td>${descrizione}<br><small>Servizio di telemedicina · Valutazione medica online</small></td>
+      <td>${periodo}</td>
       <td>€ ${importo}</td>
     </tr>
   </table>
@@ -119,7 +124,7 @@ export default async function handler(req, res) {
     const emailContent = [
       `From: Medico Subito <${gmailUser}>`,
       `To: ${email}`,
-      `Subject: Ricevuta fiscale abbonamento Medico Subito n. ${numeroRicevuta}`,
+      `Subject: Ricevuta fiscale ${tipoAcquisto} Medico Subito n. ${numeroRicevuta}`,
       `MIME-Version: 1.0`,
       `Content-Type: multipart/mixed; boundary="${boundary}"`,
       ``,
@@ -128,7 +133,7 @@ export default async function handler(req, res) {
       ``,
       `Gentile paziente,`,
       ``,
-      `grazie per aver attivato l'abbonamento a Medico Subito.`,
+      `grazie per aver acquistato il servizio di Medico Subito.`,
       `In allegato trova la ricevuta fiscale n. ${numeroRicevuta} per il pagamento di € ${importo}.`,
       ``,
       `La ricevuta è valida per la detrazione IRPEF del 19% sulle spese sanitarie (art. 15 TUIR).`,
