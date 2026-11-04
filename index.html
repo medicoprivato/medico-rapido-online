@@ -2529,16 +2529,32 @@ window.addEventListener('load',function(){
   const p=new URLSearchParams(window.location.search);
   if(p.get('pagamento')==='ok'){
     const sid=p.get('session_id');
-    if(sid&&/^cs_(test_|live_)[a-zA-Z0-9]+$/.test(sid))localStorage.setItem('medico_subito_checkout_session',sid);
-    if(typeof gtag==='function')gtag('event','acquisto_consulto',{value:30,currency:'EUR'});
-    setTimeout(()=>{
-      showScreen('s-home');
-      const m=document.createElement('div');
-      m.style.cssText='position:fixed;top:70px;left:16px;right:16px;background:var(--blu);color:#fff;border-radius:14px;padding:18px;z-index:200;text-align:center';
-      m.textContent='Pagamento ricevuto. Ora puoi inviare il tuo consulto medico.';
-      document.body.appendChild(m);setTimeout(()=>m.remove(),7000);
-      window.history.replaceState({},'','/');
-    },300);
+    if(!sid||!/^cs_(test_|live_)[a-zA-Z0-9]+$/.test(sid)){
+      showScreen('s-payment');
+      alert('Impossibile verificare il pagamento. Non effettuare un nuovo acquisto se sei già stato addebitato; contatta l\'assistenza.');
+    } else {
+      fetch('/api/checkout-receipt',{
+        method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:sid})
+      }).then(async response=>{
+        const data=await response.json();
+        if(!response.ok||data.paid!==true){
+          showScreen('s-payment');
+          alert('Il pagamento non risulta ancora verificato. Se è stato addebitato, non pagare di nuovo: contatta l\'assistenza.');
+          return;
+        }
+        localStorage.setItem('medico_subito_checkout_session',sid);
+        if(typeof gtag==='function')gtag('event','acquisto_consulto',{value:30,currency:'EUR'});
+        showScreen('s-home');
+        const m=document.createElement('div');
+        m.style.cssText='position:fixed;top:70px;left:16px;right:16px;background:var(--blu);color:#fff;border-radius:14px;padding:18px;z-index:200;text-align:center';
+        m.textContent=data.receiptSent ? 'Pagamento di €30 confermato. Ricevuta inviata via email. Ora puoi inviare il consulto.' : 'Pagamento di €30 confermato. Ora puoi inviare il consulto. Per la ricevuta contatta l\'assistenza.';
+        document.body.appendChild(m);setTimeout(()=>m.remove(),8000);
+        window.history.replaceState({},'','/');
+      }).catch(()=>{
+        showScreen('s-payment');
+        alert('Verifica temporaneamente non disponibile. Se hai già pagato non effettuare un secondo addebito; contatta l\'assistenza.');
+      });
+    }
   }
   if(p.get('pagamento')==='annullato'){setTimeout(()=>{showScreen('s-payment');window.history.replaceState({},'','/');},300);}
   }
