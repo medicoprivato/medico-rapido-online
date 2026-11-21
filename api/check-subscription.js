@@ -1,5 +1,5 @@
 // Payment status is checked by the server. Verification errors must block access.
-import { verifyConsultAccess } from "./_verify-consult-access.js";
+import { verifyConsultAccess } from "../lib/verify-consult-access.js";
 
 const limit = new Map();
 export default async function handler(req, res) {
