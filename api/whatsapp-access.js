@@ -57,8 +57,8 @@ export default async function handler(req, res) {
 
     // Existing annual customers: require authenticated account AND an active,
     // previously paid subscription. Merely entering an email is not enough.
-    if (!paid && authToken && process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY) {
-      const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
+    if (!paid && authToken && process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
       const { data, error } = await supabase.auth.getUser(authToken);
       const email = norm(data?.user?.email);
       if (!error && isEmail(email)) {
