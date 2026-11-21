@@ -1,6 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import nodemailer from "nodemailer";
-import { verifyConsultAccess } from "./_verify-consult-access.js";
+import { verifyConsultAccess } from "../lib/verify-consult-access.js";
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
