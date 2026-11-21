@@ -610,7 +610,16 @@ textarea{min-height:120px;resize:none}
       <div style="font-size:24px;font-weight:900;color:#fff;letter-spacing:.3px">🩺 Richiedi una valutazione medica</div>
       <div style="font-size:15px;color:rgba(255,255,255,.85);margin-top:6px;font-weight:600">Descrivi la tua situazione clinica. Il medico valuterà la tua richiesta e, quando clinicamente appropriato, potrà emettere una prescrizione privata, richiedere ulteriori informazioni oppure consigliarti un diverso percorso assistenziale.</div>
     </div>
-    <div class="card" id="main-form">
+    <div id="request-payment-gate" class="card" style="padding:22px 18px;text-align:center;border:2px solid #B2E0DC">
+      <div style="font-weight:900;color:#0D4F5C;font-size:20px;margin-bottom:10px">Pagamento necessario prima della richiesta</div>
+      <p style="font-size:15px;line-height:1.65;color:#374151;margin-bottom:16px">Prima di descrivere la situazione medica, acquista il consulto da €30. Solo dopo la conferma del pagamento potrai compilare e inviare il modulo.</p>
+      <button class="btn btn-p" type="button" onclick="showScreen('s-payment')" style="background:#f97316;font-size:19px;font-weight:900">Acquista un consulto — €30</button>
+      <div style="font-size:13px;color:#64748b;margin-top:16px">Hai già pagato? Inserisci l'email utilizzata per l'acquisto oppure accedi al tuo account con abbonamento già pagato.</div>
+      <input id="request-payment-email" type="email" placeholder="Email utilizzata per il pagamento" autocomplete="email" style="margin:12px 0 8px">
+      <button type="button" class="btn btn-o" onclick="refreshRequestAccess(true)">Verifica il pagamento</button>
+      <p id="request-payment-status" style="font-size:12px;color:#64748b;margin-top:10px"></p>
+    </div>
+    <div class="card" id="main-form" style="display:none">
       
       <label style="font-size:15px;font-weight:800;color:#0D4F5C;display:block;margin-bottom:6px">Tipo di richiesta</label>
       <select id="requestType">
@@ -640,9 +649,7 @@ textarea{min-height:120px;resize:none}
 
       <button class="btn btn-p" onclick="sendRequest()" style="font-size:20px;font-weight:900">Invia la richiesta al medico</button>
       <div style="background:#F0FAFA;border:1.5px solid #B2E0DC;border-radius:12px;padding:14px 16px;margin-top:14px;font-size:13.5px;color:#374151;line-height:1.6">La valutazione è sempre effettuata da un medico. L'emissione di una prescrizione non è automatica ed è possibile solo quando clinicamente appropriata e consentita dalla normativa vigente.</div>
-      <div style="background:#f0fdf4;border:2px solid #16a34a;border-radius:12px;padding:16px 18px;margin-top:14px;font-size:15px;color:#14532d">
-        <span style="font-size:13px;color:#166534">Non hai ancora pagato?</span> <a onclick="prevScr='s-richiesta';showScreen('s-payment')" style="color:#f97316;font-weight:800;cursor:pointer;font-size:14px;text-decoration:underline;display:inline-block;margin-top:4px">Paga il consulto — €30</a>
-      </div>
+      <div style="font-size:13px;color:#166534;margin-top:12px;text-align:center;font-weight:700">Pagamento verificato: puoi completare una richiesta medica.</div>
 
       <div id="loading" class="loader-box hidden">
         <div style="font-size:1.5rem;margin-bottom:8px">⏳</div>
@@ -2449,6 +2456,7 @@ function showScreen(id){
   document.getElementById(id).classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
   window.location.hash=id;
+  if(id==='s-richiesta') refreshRequestAccess();
   if(id==='s-payment' && typeof gtag==='function'){
     gtag('event','view_abbonati_page');
   }
@@ -2546,6 +2554,7 @@ window.addEventListener('load',function(){
         }
         localStorage.setItem('medico_subito_checkout_session',sid);
         refreshWhatsAppAccess();
+        refreshRequestAccess();
         if(typeof gtag==='function')gtag('event','acquisto_consulto',{value:30,currency:'EUR'});
         showScreen('s-home');
         const m=document.createElement('div');
@@ -2562,6 +2571,7 @@ window.addEventListener('load',function(){
   if(p.get('pagamento')==='annullato'){setTimeout(()=>{showScreen('s-payment');window.history.replaceState({},'','/');},300);}
   }
   refreshWhatsAppAccess();
+  refreshRequestAccess();
 });
 
 function checkMedicoHash(remembered){
@@ -2705,6 +2715,7 @@ function entraPaziente(){
   showScreen('s-paz-area');
   caricaStorico();
   refreshWhatsAppAccess();
+  refreshRequestAccess();
 }
 
 async function caricaStorico(){
@@ -2819,10 +2830,63 @@ function renderFileList(){renderFilesPreview();}
 function removeFile(i){uploadedFiles.splice(i,1);renderFilesPreview();}
 function toBase64(f){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(f);});}
 
+
+// The clinical form stays invisible until a fresh server-side payment check succeeds.
+let requestAccessEmail = "";
+let requestAccessSequence = 0;
+async function refreshRequestAccess(showError = false) {
+  const sequence = ++requestAccessSequence;
+  const form = document.getElementById("main-form");
+  const gate = document.getElementById("request-payment-gate");
+  const status = document.getElementById("request-payment-status");
+  const emailField = document.getElementById("request-payment-email");
+  if (!form || !gate) return false;
+  form.style.display = "none";
+  gate.style.display = "block";
+  requestAccessEmail = "";
+  const sessionId = localStorage.getItem("medico_subito_checkout_session") || "";
+  const enteredEmail = emailField?.value.trim() || "";
+  const email = (enteredEmail || localStorage.getItem("medico_subito_checkout_email") || pazCorrente?.email || "").trim().toLowerCase();
+  const token = pazCorrente?.token || "";
+  if (!email || (!sessionId && !token)) {
+    if (showError && status) status.textContent = "Prima acquista il consulto oppure accedi con un abbonamento già pagato.";
+    return false;
+  }
+  if (status) status.textContent = "Verifica del pagamento in corso...";
+  try {
+    const headers = { "Content-Type": "application/json" };
+    if (token) headers.Authorization = "Bearer " + token;
+    const response = await fetch("/api/check-subscription", {
+      method: "POST", headers, cache: "no-store",
+      body: JSON.stringify({ email, paymentSessionId: sessionId })
+    });
+    const data = await response.json();
+    if (sequence !== requestAccessSequence) return false;
+    if (response.ok && data.subscribed === true) {
+      requestAccessEmail = email;
+      form.style.display = "block";
+      gate.style.display = "none";
+      const patientEmail = document.getElementById("patient-email");
+      if (patientEmail) patientEmail.value = email;
+      if (emailField) emailField.value = email;
+      if (status) status.textContent = "";
+      return true;
+    }
+    if (status) status.textContent = showError ? "Pagamento non verificato. Se hai già pagato, usa l'email dell'acquisto; non effettuare un secondo pagamento senza verificare." : "";
+    return false;
+  } catch (error) {
+    if (sequence === requestAccessSequence && status) {
+      status.textContent = "Verifica temporaneamente non disponibile. Nessuna richiesta è stata inviata.";
+    }
+    return false;
+  }
+}
+
 async function sendRequest(){
   const type=document.getElementById('requestType').value,text=document.getElementById('problem').value.trim();
   if(!type){alert('Seleziona il tipo di richiesta');return;}
   if(!text){alert('Descrivi la tua situazione');return;}
+  if(!(await refreshRequestAccess(true))) return;
   tipoRichiesta=type;conversazione=[];showLoading();
   conversazione.push({role:'user',content:'Tipo richiesta: '+type+'\n\nSituazione clinica:\n'+text});
   await callAI();
@@ -2831,20 +2895,24 @@ async function sendFollowup(){const f=document.getElementById('followup').value.
 
 async function callAI(){
   try{
-    const r=await fetch('/api/consult',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:conversazione.map(m=>m.role+': '+m.content).join('\n\n')})});
-    const d=await r.json();const rsp=stripMd(d.answer||d.error||'Errore.');
+    if(!(await refreshRequestAccess(true))) return;
+    const headers={'Content-Type':'application/json'};
+    if(pazCorrente?.token) headers.Authorization='Bearer '+pazCorrente.token;
+    const r=await fetch('/api/consult',{method:'POST',headers,body:JSON.stringify({
+      text:conversazione.map(m=>m.role+': '+m.content).join('\n\n'),
+      email:requestAccessEmail,
+      paymentSessionId:localStorage.getItem('medico_subito_checkout_session')||''
+    })});
+    const d=await r.json();
+    if(!r.ok) throw new Error(d.error||'Verifica del pagamento non disponibile');
+    const rsp=stripMd(d.answer||'Errore.');
     conversazione.push({role:'assistant',content:rsp});
     document.getElementById('loading').classList.add('hidden');
     document.getElementById('response').classList.add('hidden');
     document.getElementById('rx-section').classList.add('hidden');
     document.getElementById('warning').style.display='none';
     document.getElementById('success-box').classList.add('hidden');
-    if(pazCorrente && pazCorrente.email){
-      checkSubscriptionAndProceed(pazCorrente.email);
-    } else {
-      document.getElementById('email-gate').classList.remove('hidden');
-      document.getElementById('email-gate').scrollIntoView({behavior:'smooth'});
-    }
+    checkSubscriptionAndProceed(requestAccessEmail);
   }catch(e){
     document.getElementById('loading').classList.add('hidden');
     alert('Errore di connessione. Controlla la connessione internet e riprova.');
@@ -2862,35 +2930,15 @@ function showLoading(){
 function showDoctorForm(){document.getElementById('doctor-form').classList.remove('hidden');document.getElementById('doctor-form').scrollIntoView({behavior:'smooth'});}
 
 async function checkSubscriptionAndProceed(prefillEmail){
-  const gate=document.getElementById('email-gate');
-  const email=(prefillEmail||document.getElementById('gate-email').value.trim());
-  if(!email||!email.includes('@')){alert('Inserisci un\'email valida');return;}
-  const btn=document.getElementById('gate-btn');
-  const goToForm=()=>{
-    gate.classList.add('hidden');
-    const e=document.getElementById('patient-email');if(e)e.value=email;
-    document.getElementById('doctor-form').classList.remove('hidden');
-    document.getElementById('doctor-form').scrollIntoView({behavior:'smooth'});
-  };
-  if(!prefillEmail){btn.textContent='Verifica in corso...';btn.disabled=true;}
-  try{
-    const r=await fetch('/api/check-subscription',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,paymentSessionId:localStorage.getItem('medico_subito_checkout_session')||''})});
-    const d=await r.json();
-    if(btn){btn.textContent='Continua';btn.disabled=false;}
-    if(d.subscribed===false){
-      gate.classList.add('hidden');
-      document.getElementById('paywall-email').value=email;
-      document.getElementById('paywall-modal').style.display='flex';
-      return;
-    }
-    // subscribed===true, or null (check unavailable, fail-open) -> proceed
-    goToForm();
-  }catch(e){
-    if(btn){btn.textContent='Continua';btn.disabled=false;}
-    // Fail open on network error: don't block the patient here, the
-    // final submit still enforces the real check server-side.
-    goToForm();
+  if(prefillEmail && !document.getElementById('request-payment-email').value){
+    document.getElementById('request-payment-email').value=prefillEmail;
   }
+  if(!(await refreshRequestAccess(true))) return;
+  document.getElementById('email-gate').classList.add('hidden');
+  const patientEmail=document.getElementById('patient-email');
+  if(patientEmail) patientEmail.value=requestAccessEmail;
+  document.getElementById('doctor-form').classList.remove('hidden');
+  document.getElementById('doctor-form').scrollIntoView({behavior:'smooth'});
 }
 function hideDoctorForm(){document.getElementById('doctor-form').classList.add('hidden');}
 
@@ -2908,6 +2956,8 @@ async function submitToDoctor(){
     cf='';
   }
   if(!email||!email.includes('@')){alert('Inserisci un\'email valida');return;}
+  if(!(await refreshRequestAccess(true))) return;
+  if(email.toLowerCase()!==requestAccessEmail){alert('Usa l\'email con cui hai pagato il consulto.');return;}
   if(!consensoOk){alert('Devi confermare di aver letto l\'informativa sul trattamento dei dati sanitari');return;}
   if(!teleConsensoOk){alert('Devi accettare le condizioni sul consulto a distanza per poter inviare la richiesta');return;}
   if(!esecConsensoOk){alert('Devi accettare l\'esecuzione immediata del servizio per poter inviare la richiesta');return;}
@@ -2919,7 +2969,9 @@ async function submitToDoctor(){
   try{
     const paymentSessionId=localStorage.getItem('medico_subito_checkout_session')||'';
     const endpoint=paymentSessionId?'/api/submit-one-time-request':'/api/submit-medical-request';
-    const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+    const headers={'Content-Type':'application/json'};
+    if(pazCorrente?.token) headers.Authorization='Bearer '+pazCorrente.token;
+    const r=await fetch(endpoint,{method:'POST',headers,body:JSON.stringify({
       paymentSessionId,
       tipo:tipoRichiesta,patientText:document.getElementById('problem').value,patientName:nome,codiceFiscale:cf,
       docType,docNumber,
@@ -2966,6 +3018,7 @@ function newRequest(){
   document.getElementById('warning').style.display='none';
   conversazione=[];tipoRichiesta='';
   const btn=document.querySelector('#doctor-form .btn-p');if(btn){btn.textContent='Invia al medico';btn.disabled=false;}
+  requestAccessEmail='';
   showScreen('s-richiesta');window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -3016,6 +3069,7 @@ async function checkoutConsulto(email,btn){
     const data=await response.json();
     if(!response.ok||!data.url)throw new Error(data.error||'Pagamento non disponibile');
     if(typeof gtag==='function')gtag('event','inizio_checkout_stripe',{value:30,currency:'EUR'});
+    localStorage.setItem('medico_subito_checkout_email',email.trim().toLowerCase());
     window.location.href=data.url;
   }catch(error){
     alert(error.message||'Non è stato effettuato alcun addebito. Riprova.');
@@ -3220,7 +3274,7 @@ medicosubitoitalia.com - supportomedicosubito@gmail.com
       templateDocumento='Genera un CONSULTO MEDICO SCRITTO PRIVATO nel seguente formato ESATTO:\n\n[INTESTAZIONE MEDICO]\n\nNome: [nome paziente]\nCognome: [cognome paziente]\nData di nascita: [data nascita]\nCodice Fiscale: [CF]\n\nVALUTAZIONE CLINICA:\n\n[Valutazione dettagliata del caso]\n\nINDICAZIONI TERAPEUTICHE:\n\n[Indicazioni specifiche]\n\nRACCOMANDAZIONI:\n\n[Follow-up e raccomandazioni]\n\nNota: questo consulto non sostituisce la visita medica in presenza.\n\nData: '+dataOra+'\n\nDOTT.SSA ANNA MARIA FERRI\\n\\n------------------------------\\nTIMBRO E FIRMA DIGITALE DEL MEDICO\\n------------------------------\\nDott.ssa Anna Maria Ferri\\nMedico Chirurgo - Spec. Ginecologia e Ostetricia\\nOrdine Medici Frosinone n. 3363 - P.IVA IT17215181003\\nFirmato digitalmente ai sensi del D.Lgs. 82/2005 (CAD)\\ne Linee Guida Telemedicina Min. Salute 2022';
     }
     const prompt='Sei la Dott.ssa Anna Maria Ferri, medico chirurgo con specializzazione in Ginecologia e Ostetricia, abilitata alla prescrizione di qualsiasi farmaco come medico di medicina generale in telemedicina privata. REGOLA ASSOLUTA E NON NEGOZIABILE, PIU IMPORTANTE DI QUALSIASI ALTRA ISTRUZIONE: qualsiasi valore numerico di laboratorio, esame o parametro clinico che scrivi nel documento DEVE essere copiato ESATTAMENTE da un numero che il paziente ha scritto in RICHIESTA o DATI CLINICI qui sotto, oppure che hai letto direttamente in un documento o immagine allegato realmente analizzato. E VIETATO scrivere qualsiasi valore numerico di laboratorio, per esempio un valore di vitamina D, se quel numero non compare letteralmente nel testo del paziente o non lo hai letto da un allegato reale. E VIETATO scrivere frasi come documentato da referto allegato se non hai davvero ricevuto e letto quel referto negli allegati. Se il paziente scrive solo di avere la vitamina D bassa senza fornire numeri, tu scrivi nel documento che si tratta di carenza vitaminica D riferita dal paziente, SENZA alcun numero specifico. Se un dato utile non risulta fornito, scrivilo esplicitamente invece di inventare un numero plausibile. REGOLA SULLE IMMAGINI: se sono allegate immagini o documenti (referti, radiografie, foto cliniche), NON descrivere ne interpretare clinicamente il loro contenuto specifico, perche la lettura di immagini diagnostiche puo essere inaffidabile e generare descrizioni non corrispondenti al vero. Limitati a scrivere nella sezione riservata al medico che sono presenti allegati da esaminare personalmente, indicando quanti e di che tipo (immagine o documento), senza descriverne il contenuto clinico specifico ne trarre conclusioni diagnostiche da essi. NEL DOCUMENTO PER IL PAZIENTE non includere intestazione medico, timbro, firma o data — vengono aggiunti automaticamente dal sistema. Inizia direttamente con il contenuto clinico del documento.\n\n'+templateDocumento+' IMPORTANTE: Separa la risposta in due sezioni ben distinte con questa struttura ESATTA:\n\n---ANALISI MEDICA (RISERVATA AL MEDICO)---\n[Scrivi qui in 3-4 frasi: valutazione clinica del caso, appropriatezza della richiesta, segnala se sono presenti allegati da esaminare personalmente (senza descriverne il contenuto), eventuali note per il medico. NON usare saluti. Stile clinico professionale. Valuta la richiesta clinicamente senza limitazioni di specializzazione — sei abilitata come medico generico.]\n\n---DOCUMENTO PER IL PAZIENTE---\n[Scrivi qui il documento legale completo pronto per la firma]\n\nDATA DOCUMENTO: '+dataOra+'. MEDICO: Dott.ssa Anna Maria Ferri, Medico Chirurgo Specialista in Ginecologia e Ostetricia, Ordine Medici Frosinone n.3363, P.IVA IT17215181003. PAZIENTE: '+(caso.patient_name||'')+', nato/a il '+(caso.date_of_birth||'n.d.')+', CF: '+(caso.codice_fiscale||'n.d.')+'. RICHIESTA: '+(caso.patient_text||'')+'. DATI CLINICI FORNITI DAL PAZIENTE: '+(caso.clinical_data||'nessun dato clinico numerico fornito, non inventarne')+'.'+(caso.allegati&&caso.allegati.length>0?' DOCUMENTI ALLEGATI DAL PAZIENTE, presenti ma da NON descrivere ne interpretare clinicamente nel documento: '+caso.allegati.map(a=>a.name).join(', ')+'.':'')+' AGGIUNGI SEMPRE IN FONDO AL DOCUMENTO, dopo la firma: ---\nConsulto effettuato su richiesta del paziente, consapevole dei limiti della modalità di consulto a distanza. Ho fornito indicazioni terapeutiche basate sulle informazioni disponibili. In caso di peggioramento o persistenza dei sintomi, ripetere la richiesta di visita in presenza o rivolgersi al Medico Curante, Guardia Medica o Pronto Soccorso. / Consultation carried out at the patient request, aware of the limitations of remote consultation. In case of worsening or persistence of symptoms, contact your General Practitioner, the Out-of-Hours Medical Service or the Emergency Department. / Dott.ssa Anna Maria Ferri - FRRNMR78S51I838V - Medico Chirurgo - Ordine Medici Frosinone n.3363 Solo testo, niente markdown.';
-    const r=await fetch('/api/consult',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:prompt, allegati:(caso.allegati||[])})});
+    const r=await fetch('/api/consult',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+DOC_PWD},body:JSON.stringify({text:prompt, allegati:(caso.allegati||[]), doctorCaseId:caso.id})});
     const d=await r.json();const testo=stripMd(d.answer||'Analisi non disponibile.');
     // Separa le due sezioni
     const separatore='---DOCUMENTO PER IL PAZIENTE---';
