@@ -86,7 +86,7 @@ export default async function handler(req, res) {
     // No clinical request is stored or emailed before verifiable payment.
     // This route is reserved for authenticated, previously paid annual subscriptions.
     const emailNormCheck = email.trim().toLowerCase();
-    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(emailNormCheck)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailNormCheck)) {
       return res.status(400).json({ error: "Email non valida" });
     }
     try {
