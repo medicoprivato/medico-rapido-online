@@ -1,10 +1,40 @@
+import { createClient } from "@supabase/supabase-js";
+import { verifyConsultAccess } from "../lib/verify-consult-access.js";
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Metodo non consentito" });
   }
 
+  res.setHeader("Cache-Control", "no-store");
+  res.setHeader("X-Content-Type-Options", "nosniff");
+
+  // An AI request must be tied either to a verified paid consultation or
+  // to a real case opened by the authenticated medical dashboard.
   try {
-    const { text, allegati } = req.body;
+    let allowed = false;
+    const doctorCaseId = String(req.body?.doctorCaseId || "");
+    const auth = String(req.headers.authorization || "");
+    if (doctorCaseId && doctorCaseId.length < 128 &&
+        process.env.DOC_PASSWORD && auth === "Bearer " + process.env.DOC_PASSWORD) {
+      const db = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
+      const { data, error } = await db.from("consults")
+        .select("id").eq("id", doctorCaseId).maybeSingle();
+      allowed = !error && !!data?.id;
+    }
+    if (!allowed && !doctorCaseId) {
+      const entitlement = await verifyConsultAccess({
+        email: req.body?.email,
+        paymentSessionId: String(req.body?.paymentSessionId || ""),
+        bearer: auth,
+        unusedOnly: true
+      });
+      allowed = entitlement.allowed === true;
+    }
+    if (!allowed) {
+      return res.status(402).json({ error: "Pagamento di €30 non verificato. Acquista prima il consulto." });
+    }
+    const { text, allegati } = req.body || {};
     if (!text || text.trim() === "") {
       return res.status(400).json({ error: "Testo mancante" });
     }
