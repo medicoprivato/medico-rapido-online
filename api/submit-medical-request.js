@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import nodemailer from "nodemailer";
+import { verifyConsultAccess } from "./_verify-consult-access.js";
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -82,24 +83,26 @@ export default async function handler(req, res) {
     if (!patientName || !email) return res.status(400).json({ error: "Nome e email obbligatori" });
     if (!consenso) return res.status(400).json({ error: "Consenso obbligatorio" });
 
-    // Verifica abbonamento Stripe attivo
+    // No clinical request is stored or emailed before verifiable payment.
+    // This route is reserved for authenticated, previously paid annual subscriptions.
     const emailNormCheck = email.trim().toLowerCase();
-    const bypassEmails = ['ferriam78@gmail.com', 'abolzon05@gmail.com', 'amprime888@gmail.com', 'bolzonaldo280@gmail.com', 'medicosubito2026@gmail.com', 'mia087595@gmail.com', 'mr0639442@gmail.com', 'prime01x2025@gmail.com', 'snoopymia570@gmail.com', 'supportomedicosubito@gmail.com', 'tittybaci744@gmail.com'];
-    if (!bypassEmails.includes(emailNormCheck)) {
-      try {
-        const stripe = (await import('stripe')).default(process.env.STRIPE_SECRET_KEY);
-        const customers = await stripe.customers.list({ email: emailNormCheck, limit: 1 });
-        let hasActiveSub = false;
-        if (customers.data.length > 0) {
-          const subs = await stripe.subscriptions.list({ customer: customers.data[0].id, status: 'active', limit: 1 });
-          hasActiveSub = subs.data.length > 0;
-        }
-        if (!hasActiveSub) {
-          return res.status(402).json({ error: "Abbonamento non attivo. Abbonati su medicoora.com per ricevere la risposta medica." });
-        }
-      } catch(stripeErr) {
-        console.error('Stripe check error:', stripeErr.message);
+    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(emailNormCheck)) {
+      return res.status(400).json({ error: "Email non valida" });
+    }
+    try {
+      const access = await verifyConsultAccess({
+        email: emailNormCheck,
+        bearer: req.headers.authorization || "",
+        unusedOnly: true
+      });
+      if (!access.allowed || access.access !== "legacy_annual") {
+        return res.status(402).json({
+          error: "Pagamento non verificato. Acquista un consulto da €30 oppure accedi all'account con abbonamento già pagato."
+        });
       }
+    } catch (error) {
+      console.error("Paid consultation access error:", error.message);
+      return res.status(503).json({ error: "Verifica del pagamento temporaneamente non disponibile. Nessuna richiesta è stata inviata." });
     }
 
     const emailNorm = email.trim().toLowerCase();
