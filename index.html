@@ -451,6 +451,7 @@ textarea{min-height:120px;resize:none}
       <p id="request-payment-status" style="font-size:12px;color:#64748b;margin-top:10px"></p>
     </div>
     <div class="card" id="main-form" style="display:none">
+      <div id="doctor-preview-notice" style="display:none;background:#fff7ed;border:2px solid #f97316;border-radius:12px;padding:14px;margin-bottom:16px;color:#7c2d12"><strong>Anteprima riservata al medico</strong><p style="margin:6px 0 10px">Nessun pagamento. Usa solo dati fittizi: nulla verrà inviato o salvato come consulto.</p><button type="button" class="btn btn-o" onclick="closeDoctorPreview()">Torna all’area medico</button></div>
       
       <label style="font-size:15px;font-weight:800;color:#0D4F5C;display:block;margin-bottom:6px">Tipo di richiesta</label>
       <select id="requestType">
@@ -480,7 +481,7 @@ textarea{min-height:120px;resize:none}
 
       <button class="btn btn-p" onclick="sendRequest()" style="font-size:20px;font-weight:900">Completa la richiesta</button>
       <div style="background:#F0FAFA;border:1.5px solid #B2E0DC;border-radius:12px;padding:14px 16px;margin-top:14px;font-size:13.5px;color:#374151;line-height:1.6">La valutazione è sempre effettuata da un medico. L'emissione di una prescrizione non è automatica ed è possibile solo quando clinicamente appropriata e consentita dalla normativa vigente.</div>
-      <div style="font-size:13px;color:#166534;margin-top:12px;text-align:center;font-weight:700">Pagamento verificato: puoi completare una richiesta medica.</div>
+      <div id="paid-confirmation-label" style="font-size:13px;color:#166534;margin-top:12px;text-align:center;font-weight:700">Pagamento verificato: puoi completare una richiesta medica.</div>
 
       <div id="loading" class="loader-box hidden">
         <div style="font-size:1.5rem;margin-bottom:8px">⏳</div>
@@ -563,7 +564,7 @@ textarea{min-height:120px;resize:none}
           <div class="tog-grid"><button type="button" id="archivio-no" class="tog-btn" onclick="setArchivio(false)">No</button><button type="button" id="archivio-si" class="tog-btn" onclick="setArchivio(true)">Sì</button></div>
         </div>
         <div style="font-size:12.5px;color:var(--txt-l);line-height:1.6;text-align:center;margin-bottom:10px">Con l'invio della richiesta dichiaro di aver letto e compreso quanto sopra e confermo le scelte effettuate.</div>
-        <button class="btn btn-p" onclick="submitToDoctor()">Invia la richiesta</button>
+        <button id="request-submit-btn" class="btn btn-p" onclick="submitToDoctor()">Invia la richiesta</button>
         <button class="btn btn-o" onclick="hideDoctorForm()" style="margin-top:8px;height:44px;font-size:14px">Annulla</button>
       </div>
       <div id="success-box" class="suc-box hidden">
@@ -2124,6 +2125,7 @@ textarea{min-height:120px;resize:none}
     <button onclick="loadCases('all')" style="background:#fff;color:var(--txt-s);border:1px solid var(--brd);border-radius:100px;padding:7px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Tutte</button>
     <button onclick="deleteAllTestCases()" style="background:#fff;color:#dc2626;border:1px solid #fecaca;border-radius:100px;padding:7px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-left:auto">🗑️ Elimina tutte</button>
   </div>
+  <div style="padding:12px 16px 0"><button type="button" class="btn btn-p" onclick="openDoctorPreview()">Anteprima anamnesi e consensi (senza pagamento)</button></div>
   <div id="visit-counter-box" style="margin:12px 16px 0;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between">
     <div style="font-size:13px;color:#166534;font-weight:700">Visite totali sito</div>
     <div id="visit-counter-num" style="font-size:20px;color:#16a34a;font-weight:900">-</div>
@@ -2174,6 +2176,7 @@ textarea{min-height:120px;resize:none}
 
 <script>
 let DOC_PWD='';
+let doctorPreviewActive=false;
 const SUPA_URL='https://dxfvdqtgsgnrjahlabga.supabase.co';
 const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4ZnZkcXRnc2ducmphaGxhYmdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyNzY3OTIsImV4cCI6MjA5Mzg1Mjc5Mn0.D9OPao1QZHHsy-mpA3DUYYUwotwdTepTRO4ah8uZpiU';
 const THIRTY_DAYS=30*24*60*60*1000;
@@ -2223,6 +2226,7 @@ if('serviceWorker' in navigator){
 function togglePwd(id,btn){const i=document.getElementById(id);if(i.type==='password'){i.type='text';btn.textContent='🙈';}else{i.type='password';btn.textContent='👁';}}
 
 function showScreen(id){
+  if(doctorPreviewActive && (!DOC_PWD || !['s-richiesta','s-privacy','s-termini','s-carta'].includes(id))) resetDoctorPreview();
   if(id==='s-doc-dash'&&!DOC_PWD)id='s-doc-login';
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -2233,7 +2237,7 @@ function showScreen(id){
     gtag('event','view_abbonati_page');
   }
   // Pre-compila form richiesta se paziente loggato
-  if(id==='s-richiesta' && pazCorrente){
+  if(id==='s-richiesta' && pazCorrente && !doctorPreviewActive){
     const n=document.getElementById('patient-name');
     const e=document.getElementById('patient-email');
     const cf=document.getElementById('patient-cf');
@@ -2275,6 +2279,7 @@ window.addEventListener('load',function(){
 
   // Ripristina schermata da hash URL
   const hash=window.location.hash.replace('#','');
+  if(hash==='s-doc-dash'&&!DOC_PWD){showScreen('s-doc-login');return;}
   const schermate=['s-home','s-richiesta','s-payment','s-contatti','s-paz-login','s-faq','s-privacy','s-termini','s-info','s-doc-login','s-doc-dash','s-triage','s-medici'];
   const isDocHash=hash==='s-doc-login'||hash==='s-doc-dash';
   if(hash && schermate.includes(hash)){
@@ -2554,6 +2559,7 @@ function compressImage(file, maxDim, quality){
   });
 }
 async function handleFilesPre(files){
+  if(doctorPreviewActive){alert('Per proteggere i dati, non allegare documenti reali in anteprima.');return;}
   for(let f of files){
     if(uploadedFiles.length>=3){alert('Massimo 3 allegati, per garantire l\'invio corretto della richiesta');break;}
     if(f.type.startsWith('image/')){
@@ -2582,6 +2588,31 @@ function toBase64(f){return new Promise((res,rej)=>{const r=new FileReader();r.o
 // The clinical form stays invisible until a fresh server-side payment check succeeds.
 let requestAccessEmail = "";
 let requestAccessSequence = 0;
+function clearPreviewFields(){
+  const form=document.getElementById("main-form");
+  form.querySelectorAll("input,textarea,select").forEach(el=>{el.value="";});
+  form.querySelectorAll(".tog-btn").forEach(el=>{el.classList.remove("si","no");el.style.background="";el.style.color="";el.style.borderColor="";});
+  ["patient-cf","patient-doc-wrap","allergie-det","farmaci-det","patologie-det","warning"].forEach(id=>document.getElementById(id).style.display="none");
+  ["response","rx-section","doctor-form","email-gate","success-box","loading"].forEach(id=>document.getElementById(id).classList.add("hidden"));
+  hasCF=null;consensoOk=false;teleConsensoOk=false;esecConsensoOk=false;archivioOk=false;uploadedFiles=[];renderFilesPreview();conversazione=[];tipoRichiesta="";requestAccessEmail="";
+}
+function resetDoctorPreview(){
+  doctorPreviewActive=false;++requestAccessSequence;clearPreviewFields();
+  document.getElementById("doctor-preview-notice").style.display="none";
+  document.getElementById("paid-confirmation-label").style.display="block";
+  const btn=document.getElementById("request-submit-btn");btn.textContent="Invia la richiesta";btn.disabled=false;
+  document.getElementById("main-form").style.display="none";document.getElementById("request-payment-gate").style.display="block";
+}
+function openDoctorPreview(){
+  if(!DOC_PWD){showScreen("s-doc-login");return;}
+  clearPreviewFields();doctorPreviewActive=true;++requestAccessSequence;
+  document.getElementById("doctor-preview-notice").style.display="block";
+  document.getElementById("paid-confirmation-label").style.display="none";
+  document.getElementById("request-submit-btn").textContent="Simula invio (nessun dato trasmesso)";
+  showScreen("s-richiesta");
+  showDoctorForm();window.scrollTo({top:0,behavior:"auto"});
+}
+function closeDoctorPreview(){resetDoctorPreview();showScreen("s-doc-dash");}
 async function refreshRequestAccess(showError = false) {
   const sequence = ++requestAccessSequence;
   const form = document.getElementById("main-form");
@@ -2589,6 +2620,7 @@ async function refreshRequestAccess(showError = false) {
   const status = document.getElementById("request-payment-status");
   const emailField = document.getElementById("request-payment-email");
   if (!form || !gate) return false;
+  if(doctorPreviewActive && DOC_PWD){requestAccessEmail="";form.style.display="block";gate.style.display="none";return false;}
   form.style.display = "none";
   gate.style.display = "block";
   requestAccessEmail = "";
@@ -2631,6 +2663,7 @@ async function refreshRequestAccess(showError = false) {
 }
 
 async function sendRequest(){
+  if(doctorPreviewActive && DOC_PWD){showDoctorForm();return;}
   const type=document.getElementById('requestType').value,text=document.getElementById('problem').value.trim();
   if(!type){alert('Seleziona il tipo di richiesta');return;}
   if(!text){alert('Descrivi la tua situazione');return;}
@@ -2692,6 +2725,7 @@ async function checkSubscriptionAndProceed(prefillEmail){
 function hideDoctorForm(){document.getElementById('doctor-form').classList.add('hidden');}
 
 async function submitToDoctor(){
+  if(doctorPreviewActive && DOC_PWD){alert('Simulazione completata. Nessuna richiesta inviata, nessun pagamento e nessun dato trasmesso.');return;}
   const nome=document.getElementById('patient-name').value.trim(),email=document.getElementById('patient-email').value.trim();
   let cf=document.getElementById('patient-cf').value.trim().toUpperCase().replace(/\s+/g,'');
   const docType=document.getElementById('patient-doc-type').value,docNumber=document.getElementById('patient-doc-number').value.trim();
@@ -2811,6 +2845,7 @@ function setArchivio(val){
 }
 
 async function checkoutConsulto(email,btn){
+  if(doctorPreviewActive)return;
   if(!email||!email.includes('@')){alert('Inserisci una email valida');return;}
   if(btn){btn.disabled=true;btn.textContent='Caricamento...';}
   try{
@@ -2876,6 +2911,7 @@ async function loginMedico(){
   }catch(e){err.style.display='block';}
 }
 function logoutMedico(){
+  if(doctorPreviewActive)resetDoctorPreview();
   DOC_PWD='';
   localStorage.removeItem('doc_remembered');
   const pwdField=document.getElementById('doc-pwd');
