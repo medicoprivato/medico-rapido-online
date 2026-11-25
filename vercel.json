@@ -80,6 +80,11 @@
   ],
   "redirects": [
     {
+      "source": "/condividi-consulto",
+      "destination": "https://www.medicosubitoitalia.com/condividi-consulto.html",
+      "statusCode": 308
+    },
+    {
       "source": "/og-image-v2.png",
       "destination": "https://www.medicosubitoitalia.com/icon-512.png?v=20261125",
       "statusCode": 301
