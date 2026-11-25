@@ -23,10 +23,10 @@ export default async function handler(req, res) {
 
   if (req.method === "GET") {
     const auth = req.headers.authorization;
-    const DOC_PASSWORD = "Msub!2026#Frn3363Xq";
+    const DOC_PASSWORD = process.env.DOC_PASSWORD || '';
     const isPublic = req.query.public === "1";
 
-    if (!isPublic && auth !== `Bearer ${DOC_PASSWORD}`) {
+    if (!isPublic && (!DOC_PASSWORD || auth !== `Bearer ${DOC_PASSWORD}`)) {
       return res.status(401).json({ error: "Non autorizzato" });
     }
     try {

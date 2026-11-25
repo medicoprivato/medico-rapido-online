@@ -88,7 +88,8 @@ textarea{min-height:120px;resize:none}
 .pwd-w{position:relative}.pwd-w input{padding-right:52px}
 .pwd-eye{position:absolute;right:14px;top:50%;transform:translateY(-65%);background:none;border:none;cursor:pointer;font-size:18px;color:var(--txt-l);padding:4px;line-height:1}
 
-.bnav{position:fixed;bottom:0;left:0;right:0;height:68px;background:#fff;border-top:1px solid var(--brd);display:flex;justify-content:space-around;align-items:center;z-index:50;box-shadow:0 -2px 10px rgba(0,0,0,.06)}
+.bnav{position:fixed;bottom:0;left:0;right:0;min-height:72px;padding:7px 2px calc(7px + env(safe-area-inset-bottom,0px));background:#fff;border-top:1px solid var(--brd);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:stretch;z-index:50;box-shadow:0 -2px 10px rgba(0,0,0,.06)}
+.bnav .nav-it{width:100%;min-width:0;min-height:58px;justify-content:flex-start;align-items:center;text-align:center;padding:5px 1px;gap:5px;font-size:clamp(9px,2.55vw,11px);line-height:1.2;letter-spacing:0;overflow-wrap:normal;white-space:normal}.bnav .nav-it svg{flex:none;margin:0 auto}.bnav .nav-it .nav-label{display:flex;align-items:flex-start;justify-content:center;text-align:center;min-height:2.4em;width:100%}.screen:has(.bnav){padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}.hero-price{display:block;background:#fff;border:1.5px solid #B2E0DC;border-radius:20px;padding:18px 14px;margin:0 auto 18px;text-align:center;cursor:pointer;box-shadow:0 4px 16px rgba(13,79,92,.1);width:100%;max-width:640px;line-height:1.45}.hero-price strong{display:block;color:#c2410c;font-size:24px}.hero-price .price-summary{display:block;color:#0D4F5C;font-size:16px;font-weight:800;margin:4px 0 10px}.hero-price p{font-size:13px;color:#475569;font-weight:600;line-height:1.55;margin:0 auto;max-width:36em}.hero-price p+p{margin-top:8px}#home-search{margin-bottom:0;padding:8px 0!important;line-height:1.3;box-shadow:none}#s-home .hero{padding-top:24px}#s-home .hero>div{max-width:850px;margin-left:auto;margin-right:auto}a:focus-visible,button:focus-visible{outline:3px solid #0D4F5C;outline-offset:3px}@media(max-width:360px){.bnav .nav-it{font-size:9px}}
 .nav-it{display:flex;flex-direction:column;align-items:center;font-size:10px;color:var(--txt-l);font-weight:800;cursor:pointer;gap:3px;padding:6px 12px;border-radius:10px;transition:all .15s;letter-spacing:.5px;text-transform:uppercase}
 .nav-it svg{width:22px;height:22px;stroke:var(--txt-l);stroke-width:1.8;fill:none;transition:stroke .15s}
 .nav-it:hover,.nav-it.active{color:var(--blu)}
@@ -249,13 +250,7 @@ textarea{min-height:120px;resize:none}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.2)}}</style>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-P05LWCSB82"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-P05LWCSB82');
-</script>
+<!-- Third-party analytics disabled on the healthcare application pending privacy review. -->
 </head>
 <body>
 
@@ -352,11 +347,11 @@ textarea{min-height:120px;resize:none}
     </div>
   </div>
   <div class="bnav">
-    <div class="nav-it" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
+    <div class="nav-it" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Home</span></div>
     <div class="nav-it active"><span style="font-size:16px;line-height:1">🩺</span>Triage</div>
-    <div class="nav-it" onclick="showScreen('s-info')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-linecap="round"/><path d="M12 16v-4M12 8h.01" stroke-linecap="round"/></svg>Info</div>
-    <div class="nav-it" onclick="showScreen('s-contatti')"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Contatti</div>
-    <div class="nav-it" onclick="showScreen('s-blog')"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/></svg>Blog</div>
+    <div class="nav-it" onclick="showScreen('s-info')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-linecap="round"/><path d="M12 16v-4M12 8h.01" stroke-linecap="round"/></svg><span class="nav-label">Info</span></div>
+    <div class="nav-it" onclick="showScreen('s-contatti')"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Contatti</span></div>
+    <div class="nav-it" onclick="showScreen('s-blog')"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Blog</span></div>
   </div>
 </div>
 
@@ -384,15 +379,13 @@ textarea{min-height:120px;resize:none}
     <div style="margin-bottom:18px" onclick="event.stopPropagation()">
       <div style="display:flex;align-items:center;background:#fff;border:2px solid #B2E0DC;border-radius:100px;padding:6px 8px 6px 20px;box-shadow:0 4px 16px rgba(13,79,92,.1)">
         <span style="font-size:20px;margin-right:10px;flex-shrink:0">🔍</span>
-        <input id="home-search" type="text" placeholder="Descrivi il tuo problema di salute" style="flex:1;border:none;outline:none;font-size:16px;font-family:'Plus Jakarta Sans',sans-serif;color:#4E79A7;background:transparent;min-width:0" onkeydown="if(event.key==='Enter')searchStart()">
+        <input id="home-search" type="text" placeholder="Descrivi il problema" style="flex:1;border:none;outline:none;font-size:16px;font-family:'Plus Jakarta Sans',sans-serif;color:#4E79A7;background:transparent;min-width:0" onkeydown="if(event.key==='Enter')searchStart()">
         <button onclick="searchStart()" style="flex-shrink:0;background:#f97316;color:#fff;border:none;border-radius:100px;padding:12px 20px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Scrivi</button>
       </div>
     </div>
 
 
-    <div onclick="showScreen('s-payment')" style="display:inline-block;background:#fff;border:1.5px solid #B2E0DC;border-radius:100px;padding:10px 24px;margin:0 auto 18px;text-align:center;cursor:pointer;box-shadow:0 4px 16px rgba(13,79,92,.1);width:100%;box-sizing:border-box">
-      <span style="font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:#f97316">€30</span><span style="font-size:20px;font-weight:700;color:#f97316">/consulto</span><br><span style="font-size:16px;font-weight:800;color:#81D4FA">Valutazioni mediche scritte online.</span><br><span style="font-size:16px;font-weight:900;color:#f97316">Una valutazione medica: €30 per consulto</span><br><span style="font-size:12px;color:#64748b;font-weight:600">Il pagamento remunera la valutazione medica professionale, non garantisce l'emissione di una prescrizione.</span><br><span style="font-size:12px;color:#64748b;font-weight:600">Ogni valutazione viene fatta da un medico in persona.</span>
-    </div>
+    <div class="hero-price" role="button" tabindex="0" onclick="showScreen('s-payment')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showScreen('s-payment')}"><strong>30 € per consulto</strong><span class="price-summary">Valutazione medica scritta online</span><p>Il pagamento remunera la valutazione professionale, non garantisce una prescrizione.</p><p>La richiesta viene valutata personalmente da un medico, a distanza.</p></div>
 
 
 
@@ -570,11 +563,11 @@ textarea{min-height:120px;resize:none}
   </div>
 
   <div class="bnav">
-    <div class="nav-it active" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
-    <div class="nav-it" onclick="showScreen('s-richiesta')"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Richiesta</div>
-    <div class="nav-it" onclick="showScreen('s-payment')"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Paga il consulto</div>
-    <div class="nav-it" onclick="showScreen('s-contatti')"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Contatti</div>
-    <div class="nav-it" onclick="showScreen('s-blog')"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/></svg>Blog</div>
+    <div class="nav-it active" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Home</span></div>
+    <div class="nav-it" onclick="showScreen('s-richiesta')"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Richiesta</span></div>
+    <div class="nav-it" onclick="showScreen('s-payment')"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span class="nav-label">Paga</span></div>
+    <div class="nav-it" onclick="showScreen('s-contatti')"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Contatti</span></div>
+    <div class="nav-it" onclick="showScreen('s-blog')"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Blog</span></div>
   </div>
 </div>
 
@@ -642,13 +635,13 @@ textarea{min-height:120px;resize:none}
       <div class="uzone" id="upload-area-pre" onclick="document.getElementById('file-input-pre').click()">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--txt-l)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:6px"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
         <div style="font-size:14px;color:var(--txt-s)">Referti, esami, fotografie o altra documentazione clinica utile</div>
-        <div style="font-size:12px;color:var(--txt-l);margin-top:3px">Massimo 3 file – 10 MB ciascuno</div>
+        <div style="font-size:12px;color:var(--txt-l);margin-top:3px">Massimo 3 file – fino a 3 MB ciascuno; il totale deve rispettare i limiti di invio</div>
         <div id="file-list-pre" style="margin-top:8px"></div>
       </div>
       <input type="file" id="file-input-pre" multiple accept="image/*,.pdf" style="display:none" onchange="handleFilesPre(this.files)"/>
 
 
-      <button class="btn btn-p" onclick="sendRequest()" style="font-size:20px;font-weight:900">Invia la richiesta al medico</button>
+      <button class="btn btn-p" onclick="sendRequest()" style="font-size:20px;font-weight:900">Completa la richiesta</button>
       <div style="background:#F0FAFA;border:1.5px solid #B2E0DC;border-radius:12px;padding:14px 16px;margin-top:14px;font-size:13.5px;color:#374151;line-height:1.6">La valutazione è sempre effettuata da un medico. L'emissione di una prescrizione non è automatica ed è possibile solo quando clinicamente appropriata e consentita dalla normativa vigente.</div>
       <div style="font-size:13px;color:#166534;margin-top:12px;text-align:center;font-weight:700">Pagamento verificato: puoi completare una richiesta medica.</div>
 
@@ -713,7 +706,7 @@ textarea{min-height:120px;resize:none}
         <div class="ftit">📝 Informativa e consensi</div>
         <div class="con-box" style="margin-bottom:10px">
           <div class="con-tit">1. Trattamento dati sanitari</div>
-          <div class="con-txt">Il trattamento dei tuoi dati sanitari, strettamente necessari alla valutazione clinica e alla risposta alla tua richiesta, avviene sulla base giuridica prevista dall'art. 9, par. 2, lett. h) del GDPR (finalità di medicina, previo obbligo di segreto professionale del medico), come da <a onclick="prevScr='s-richiesta';showScreen('s-privacy')">Privacy Policy</a> e <a onclick="prevScr='s-richiesta';showScreen('s-termini')">Termini</a>. I dati NON vengono ceduti a terzi. Il servizio non sostituisce il medico di base.<br><br>Confermando di aver letto questa informativa, prendi atto delle modalità di trattamento sopra descritte.</div>
+          <div class="con-txt">Il trattamento dei tuoi dati sanitari, strettamente necessari alla valutazione clinica e alla risposta alla tua richiesta, avviene sulla base giuridica prevista dall'art. 9, par. 2, lett. h) del GDPR (finalità di medicina, previo obbligo di segreto professionale del medico), come da <a onclick="prevScr='s-richiesta';showScreen('s-privacy')">Privacy Policy</a> e <a onclick="prevScr='s-richiesta';showScreen('s-termini')">Termini</a>. I dati sono trattati per finalità sanitarie; per i fornitori tecnici e i diritti consulta l’informativa. Il servizio non sostituisce il medico di base.<br><br>Confermando di aver letto questa informativa, prendi atto delle modalità di trattamento sopra descritte.</div>
           <div class="tog-grid"><button type="button" id="consenso-no" class="tog-btn" onclick="setConsenso(false)">✗ Non ho letto</button><button type="button" id="consenso-si" class="tog-btn" onclick="setConsenso(true)">✓ Ho letto l'informativa</button></div>
         </div>
 
@@ -757,11 +750,11 @@ textarea{min-height:120px;resize:none}
   <div class="pfoot"><a onclick="prevScr='s-richiesta';showScreen('s-privacy')">Privacy</a> &nbsp;·&nbsp; <a onclick="prevScr='s-richiesta';showScreen('s-termini')">Termini</a> &nbsp;·&nbsp; <a onclick="prevScr='s-richiesta';showScreen('s-carta')">Carta dei Servizi</a></div>
   <div class="spacer"></div>
   <div class="bnav">
-    <div class="nav-it" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
-    <div class="nav-it active" onclick="showScreen('s-richiesta')"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Richiesta</div>
+    <div class="nav-it" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Home</span></div>
+    <div class="nav-it active" onclick="showScreen('s-richiesta')"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Richiesta</span></div>
     <div class="nav-it" onclick="showScreen('s-info')"><span style="font-size:20px;line-height:1">🩺</span>Info</div>
-    <div class="nav-it" onclick="showScreen('s-contatti')"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Contatti</div>
-    <div class="nav-it" onclick="showScreen('s-blog')"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/></svg>Blog</div>
+    <div class="nav-it" onclick="showScreen('s-contatti')"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Contatti</span></div>
+    <div class="nav-it" onclick="showScreen('s-blog')"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Blog</span></div>
   </div>
 </div>
 
@@ -802,11 +795,11 @@ textarea{min-height:120px;resize:none}
     </div>
   </div>
   <div class="bnav">
-    <div class="nav-it" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
-    <div class="nav-it" onclick="showScreen('s-richiesta')"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Richiesta</div>
+    <div class="nav-it" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Home</span></div>
+    <div class="nav-it" onclick="showScreen('s-richiesta')"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Richiesta</span></div>
     <div class="nav-it active" onclick="showScreen('s-info')"><span style="font-size:20px;line-height:1">🩺</span>Info</div>
-    <div class="nav-it" onclick="showScreen('s-contatti')"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Contatti</div>
-    <div class="nav-it" onclick="showScreen('s-blog')"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/></svg>Blog</div>
+    <div class="nav-it" onclick="showScreen('s-contatti')"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Contatti</span></div>
+    <div class="nav-it" onclick="showScreen('s-blog')"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Blog</span></div>
   </div>
 </div>
 
@@ -834,11 +827,11 @@ textarea{min-height:120px;resize:none}
     <button class="btn btn-p" onclick="showScreen('s-payment')" style="margin-top:6px">Acquista il consulto — €30</button>
   </div>
   <div class="bnav">
-    <div class="nav-it" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
-    <div class="nav-it" onclick="showScreen('s-richiesta')"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Richiesta</div>
+    <div class="nav-it" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Home</span></div>
+    <div class="nav-it" onclick="showScreen('s-richiesta')"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Richiesta</span></div>
     <div class="nav-it" onclick="showScreen('s-info')"><span style="font-size:20px;line-height:1">🩺</span>Info</div>
-    <div class="nav-it active" onclick="showScreen('s-contatti')"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Contatti</div>
-    <div class="nav-it" onclick="showScreen('s-blog')"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/></svg>Blog</div>
+    <div class="nav-it active" onclick="showScreen('s-contatti')"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Contatti</span></div>
+    <div class="nav-it" onclick="showScreen('s-blog')"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Blog</span></div>
   </div>
 </div>
 
@@ -858,11 +851,11 @@ textarea{min-height:120px;resize:none}
     <button class="btn-back" onclick="showScreen(prevScr||'s-home')" style="margin-top:14px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg> Torna</button>
   </div>
   <div class="bnav">
-    <div class="nav-it" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
+    <div class="nav-it" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Home</span></div>
     <div class="nav-it" onclick="vaiARichiesta()"><span style="font-size:16px;line-height:1">🩺</span>Richiesta</div>
-    <div class="nav-it" onclick="showScreen('s-info')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-linecap="round"/><path d="M12 16v-4M12 8h.01" stroke-linecap="round"/></svg>Info</div>
-    <div class="nav-it" onclick="showScreen('s-contatti')"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Contatti</div>
-    <div class="nav-it" onclick="showScreen('s-blog')"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/></svg>Blog</div>
+    <div class="nav-it" onclick="showScreen('s-info')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-linecap="round"/><path d="M12 16v-4M12 8h.01" stroke-linecap="round"/></svg><span class="nav-label">Info</span></div>
+    <div class="nav-it" onclick="showScreen('s-contatti')"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Contatti</span></div>
+    <div class="nav-it" onclick="showScreen('s-blog')"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Blog</span></div>
   </div>
 </div>
 
@@ -2177,7 +2170,7 @@ textarea{min-height:120px;resize:none}
     Non è stato nominato un DPO (Data Protection Officer) in quanto il trattamento non rientra nelle ipotesi di cui all'art. 37 GDPR per volume e tipologia di soggetti interessati.</p>
 
     <h3>2. Base giuridica del trattamento</h3>
-    <p>I dati sanitari sono trattati ai sensi dell'art. 9, par. 2, lett. (h) GDPR — trattamento necessario per finalità di medicina preventiva o curativa, diagnosi, assistenza o terapia sanitaria — e previo consenso esplicito dell'interessato ai sensi dell'art. 6, par. 1, lett. (a) e art. 9, par. 2, lett. (a) GDPR.</p>
+    <p>I dati sanitari necessari alla prestazione sono trattati per finalità di assistenza sanitaria ai sensi dell’art. 9, par. 2, lett. h), GDPR, nel rispetto del segreto professionale. La presa visione dell’informativa è distinta dalle eventuali scelte facoltative.</p>
 
     <h3>2b. Destinatari del servizio</h3>
     <p>Il servizio è rivolto esclusivamente a persone maggiorenni (18 anni compiuti). Non vengono erogati consulti pediatrici. Per i minori è necessario rivolgersi al pediatra di libera scelta o al medico di base.</p>
@@ -2310,11 +2303,11 @@ textarea{min-height:120px;resize:none}
     <div id="paz-storico"><div class="loader-box">Caricamento...</div></div>
   </div>
   <div class="bnav">
-    <div class="nav-it active" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</div>
-    <div class="nav-it" onclick="showScreen('s-richiesta')"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Richiesta</div>
-    <div class="nav-it" onclick="prevScr='s-paz-area';showScreen('s-faq')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-linecap="round"/><path d="M12 16v-4M12 8h.01" stroke-linecap="round"/></svg>FAQ</div>
-    <div class="nav-it" onclick="showScreen('s-contatti')"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>Contatti</div>
-    <div class="nav-it" onclick="showScreen('s-blog')"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/></svg>Blog</div>
+    <div class="nav-it active" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Home</span></div>
+    <div class="nav-it" onclick="showScreen('s-richiesta')"><svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Richiesta</span></div>
+    <div class="nav-it" onclick="prevScr='s-paz-area';showScreen('s-faq')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-linecap="round"/><path d="M12 16v-4M12 8h.01" stroke-linecap="round"/></svg><span class="nav-label">FAQ</span></div>
+    <div class="nav-it" onclick="showScreen('s-contatti')"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Contatti</span></div>
+    <div class="nav-it" onclick="showScreen('s-blog')"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Blog</span></div>
   </div>
 </div>
 
@@ -2403,7 +2396,7 @@ textarea{min-height:120px;resize:none}
 </main>
 
 <script>
-const DOC_PWD='Msub!2026#Frn3363Xq';
+let DOC_PWD='';
 const SUPA_URL='https://dxfvdqtgsgnrjahlabga.supabase.co';
 const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4ZnZkcXRnc2ducmphaGxhYmdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyNzY3OTIsImV4cCI6MjA5Mzg1Mjc5Mn0.D9OPao1QZHHsy-mpA3DUYYUwotwdTepTRO4ah8uZpiU';
 const THIRTY_DAYS=30*24*60*60*1000;
@@ -2453,6 +2446,7 @@ if('serviceWorker' in navigator){
 function togglePwd(id,btn){const i=document.getElementById(id);if(i.type==='password'){i.type='text';btn.textContent='🙈';}else{i.type='password';btn.textContent='👁';}}
 
 function showScreen(id){
+  if(id==='s-doc-dash'&&!DOC_PWD)id='s-doc-login';
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
@@ -2524,15 +2518,8 @@ window.addEventListener('load',function(){
       }
     }
   }catch(e){}
+  localStorage.removeItem('doc_remembered');
   let docRemembered=false;
-  try{
-    const dr=localStorage.getItem('doc_remembered');
-    if(dr){
-      const obj=JSON.parse(dr);
-      if(obj&&obj.ok&&Date.now()-obj.loginTime<THIRTY_DAYS){docRemembered=true;}
-      else{localStorage.removeItem('doc_remembered');}
-    }
-  }catch(e){}
   checkMedicoHash(docRemembered);
   if(window.location.hash!=='#medico'){
   if(pazCorrente) entraPaziente();
@@ -2575,16 +2562,9 @@ window.addEventListener('load',function(){
   refreshRequestAccess();
 });
 
-function checkMedicoHash(remembered){
+function checkMedicoHash(){
   if(window.location.hash==='#medico'){
-    let docRemembered=remembered;
-    if(docRemembered===undefined){
-      try{
-        const dr=localStorage.getItem('doc_remembered');
-        if(dr){const obj=JSON.parse(dr);docRemembered=obj&&obj.ok&&Date.now()-obj.loginTime<THIRTY_DAYS;}
-      }catch(e){}
-    }
-    if(docRemembered){showScreen('s-doc-dash');loadCases('pending');loadVisitCounter();}
+    if(DOC_PWD){showScreen('s-doc-dash');loadCases('pending');loadVisitCounter();}
     else{showScreen('s-doc-login');}
   }
 }
@@ -2724,8 +2704,8 @@ async function caricaStorico(){
   if(!pazCorrente){cont.innerHTML='<div style="text-align:center;color:var(--txt-l);padding:20px">Accedi per vedere lo storico</div>';return;}
   cont.innerHTML='<div class="loader-box">Caricamento...</div>';
   try{
-    const url='/api/submit-medical-request?email='+encodeURIComponent(pazCorrente.email)+'&token='+DOC_PWD+'&paztoken='+encodeURIComponent(pazCorrente.token||'');
-    const r=await fetch(url,{headers:{'Authorization':'Bearer '+DOC_PWD,'X-Paz-Token':pazCorrente.token||''}});
+    const url='/api/submit-medical-request?email='+encodeURIComponent(pazCorrente.email);
+    const r=await fetch(url,{headers:{'X-Paz-Token':pazCorrente.token||''},cache:'no-store'});
     const raw=await r.text();
     let d;
     try{d=JSON.parse(raw);}catch(pe){
@@ -2773,7 +2753,7 @@ function searchStart(){
   const val=inp?inp.value.trim():'';
   if(!val){if(inp)inp.focus();return;}
   if(typeof gtag==='function')gtag('event','home_search_used');
-  document.getElementById('requestType').value='Rinnovo terapia';
+  document.getElementById('requestType').value='Valutazione sintomi';
   document.getElementById('problem').value=val;
   showScreen('s-richiesta');
   setTimeout(()=>document.getElementById('problem').focus(),300);
@@ -2890,7 +2870,8 @@ async function sendRequest(){
   if(!(await refreshRequestAccess(true))) return;
   tipoRichiesta=type;conversazione=[];showLoading();
   conversazione.push({role:'user',content:'Tipo richiesta: '+type+'\n\nSituazione clinica:\n'+text});
-  await callAI();
+  document.getElementById('loading').classList.add('hidden');
+  await checkSubscriptionAndProceed(requestAccessEmail);
 }
 async function sendFollowup(){const f=document.getElementById('followup').value.trim();if(!f){alert('Scrivi un dettaglio');return;}document.getElementById('followup').value='';conversazione.push({role:'user',content:f});showLoading();await callAI();}
 
@@ -3115,16 +3096,20 @@ function startStripeSuc(){
   const el=document.getElementById('stripe-email-suc');
   checkoutConsulto(el?.value.trim(),el?.nextElementSibling);
 }
-function loginMedico(){
-  const pwd=document.getElementById('doc-pwd').value;
-  if(pwd===DOC_PWD){
-    document.getElementById('e-pwd').style.display='none';
-    localStorage.setItem('doc_remembered',JSON.stringify({ok:true,loginTime:Date.now()}));
+async function loginMedico(){
+  const field=document.getElementById('doc-pwd');
+  const pwd=field.value;
+  if(!pwd)return;
+  const err=document.getElementById('e-pwd');
+  try{
+    const r=await fetch('/api/submit-medical-request',{method:'GET',headers:{'Authorization':'Bearer '+pwd},cache:'no-store'});
+    if(!r.ok){err.style.display='block';return;}
+    DOC_PWD=pwd;field.value='';err.style.display='none';
     showScreen('s-doc-dash');loadCases('pending');loadVisitCounter();
-  }
-  else{document.getElementById('e-pwd').style.display='block';}
+  }catch(e){err.style.display='block';}
 }
 function logoutMedico(){
+  DOC_PWD='';
   localStorage.removeItem('doc_remembered');
   const pwdField=document.getElementById('doc-pwd');
   if(pwdField)pwdField.value='';
@@ -3506,7 +3491,7 @@ function rifiutaCookie(){
   <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-1.732-.866-2.868-1.546-4.01-3.507-.302-.522.302-.483.864-1.614.099-.198.05-.371-.05-.519-.099-.149-.62-1.493-.847-2.013-.227-.52-.456-.45-.654-.45-.198 0-.347-.034-.547.34-.198.371-.755.964-1.075 1.474-.32.512-.643 1.025-.643 1.745 0 .719.396 1.539.892 2.245.495.706 1.087 1.391 1.926 2.117.838.727 1.59 1.193 2.51 1.624.92.43 1.755.367 2.41-.07.654-.439 1.198-1.052 1.404-1.756.108-.37.108-.69 0-.99z"/><path d="M12.004 2.003c-5.514 0-9.997 4.483-9.997 9.997 0 1.766.464 3.428 1.273 4.872l-1.349 4.928 5.06-1.328c1.394.762 2.987 1.198 4.682 1.198h.005c5.514 0 9.997-4.483 9.997-9.997 0-2.673-1.04-5.183-2.93-7.072-1.89-1.89-4.4-2.93-7.073-2.93l-.668.332zm0 18.302h-.004c-1.469 0-2.913-.395-4.166-1.143l-.298-.177-3.005.789.802-2.93-.194-.302c-.823-1.31-1.258-2.823-1.258-4.39 0-4.554 3.706-8.26 8.26-8.26 2.205 0 4.278.86 5.838 2.42 1.56 1.56 2.42 3.633 2.42 5.838 0 4.554-3.706 8.26-8.26 8.26z"/></svg>
 </a>
 <script>
-try{fetch('/api/track-visit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({page:location.pathname})}).catch(()=>{});}catch(e){}
+// IP-based visit tracking disabled pending privacy review.
 fetch('/api/track-visit?public=1').then(r=>r.json()).then(d=>{
   const el=document.getElementById('public-visit-count');
   if(el && d.totalViews!==undefined) el.textContent='Visite al sito: '+d.totalViews;

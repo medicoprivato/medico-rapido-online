@@ -7,8 +7,7 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
-const DOC_PASSWORD = "Msub!2026#Frn3363Xq";
-const FALLBACK_PWD = "Msub!2026#Frn3363Xq";
+const DOC_PASSWORD = process.env.DOC_PASSWORD || '';
 
 const rateMap = new Map();
 function isRateLimited(ip) {
@@ -49,12 +48,10 @@ export default async function handler(req, res) {
 
   if (req.method === "GET") {
     const auth = req.headers.authorization;
-    const tokenParam = req.query.token;
-    const pazToken = req.query.paztoken || req.headers["x-paz-token"];
+    const pazToken = req.headers["x-paz-token"];
     const emailFilter = req.query.email;
 
-    const isDocAuth = auth === `Bearer ${DOC_PASSWORD}` || tokenParam === DOC_PASSWORD ||
-                      auth === `Bearer ${FALLBACK_PWD}` || tokenParam === FALLBACK_PWD;
+    const isDocAuth = Boolean(DOC_PASSWORD) && auth === `Bearer ${DOC_PASSWORD}`;
 
     let isPazAuth = false;
     if (!isDocAuth && pazToken && emailFilter) {
@@ -70,7 +67,7 @@ export default async function handler(req, res) {
     res.setHeader("Pragma", "no-cache");
 
     let query = supabase.from("consults").select("*").order("created_at", { ascending: false });
-    if (emailFilter) query = query.ilike("email", emailFilter.trim());
+    if (emailFilter) query = query.eq("email", emailFilter.trim().toLowerCase());
     const { data, error } = await query;
     if (error) return res.status(500).json({ error: error.message });
     return res.status(200).json(data || []);
@@ -166,7 +163,7 @@ export default async function handler(req, res) {
 
   if (req.method === "PUT") {
     const auth = req.headers.authorization;
-    const isDocAuth = auth === `Bearer ${DOC_PASSWORD}` || auth === `Bearer ${FALLBACK_PWD}`;
+    const isDocAuth = Boolean(DOC_PASSWORD) && auth === `Bearer ${DOC_PASSWORD}`;
     if (!isDocAuth) return res.status(401).json({ error: "Non autorizzato" });
 
     const { id, risposta_medico, stato, pdfBase64, nomeFile } = req.body;
@@ -202,7 +199,7 @@ export default async function handler(req, res) {
 
   if (req.method === "DELETE") {
     const auth = req.headers.authorization;
-    const isDocAuth = auth === `Bearer ${DOC_PASSWORD}` || auth === `Bearer ${FALLBACK_PWD}`;
+    const isDocAuth = Boolean(DOC_PASSWORD) && auth === `Bearer ${DOC_PASSWORD}`;
     if (!isDocAuth) return res.status(401).json({ error: "Non autorizzato" });
 
     const { all, id } = req.body || {};
