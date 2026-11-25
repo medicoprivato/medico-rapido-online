@@ -12,6 +12,8 @@ export default async function handler(req, res) {
   const secretKey = process.env.STRIPE_SECRET_KEY;
   if (!secretKey) return res.status(503).json({ error: "Stripe non configurato" });
 
+  const host=String(req.headers.host||"").toLowerCase();
+  const returnOrigin=host==="www.medicoora.com"||host==="medicoora.com"?"https://www.medicoora.com":"https://www.medicosubitoitalia.com";
   try {
     const params = new URLSearchParams({
       "payment_method_types[0]": "card",
@@ -23,8 +25,8 @@ export default async function handler(req, res) {
       "line_items[0][price_data][product_data][name]": "Medico Subito - consulto medico scritto",
       "line_items[0][price_data][product_data][description]": "Una valutazione medica scritta individuale, senza abbonamento.",
       "line_items[0][quantity]": "1",
-      "success_url": "https://www.medicoora.com/?pagamento=ok&session_id={CHECKOUT_SESSION_ID}",
-      "cancel_url": "https://www.medicoora.com/?pagamento=annullato",
+      "success_url": returnOrigin+"/?pagamento=ok&session_id={CHECKOUT_SESSION_ID}",
+      "cancel_url": returnOrigin+"/?pagamento=annullato",
       "locale": "it",
       "metadata[servizio]": "consulto_singolo_30",
       "metadata[email_paziente]": email,

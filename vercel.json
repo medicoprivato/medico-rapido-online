@@ -77,5 +77,18 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/:slug((?!api(?:/|$)|index\\.html$|sw\\.js$|manifest\\.json$|assets(?:/|$)|.*\\.[^/]+$).+)",
+      "has": [
+        {
+          "type": "host",
+          "value": "(?:www\\.)?medicoora\\.com"
+        }
+      ],
+      "destination": "https://www.medicosubitoitalia.com/:slug",
+      "statusCode": 301
+    }
   ]
 }
