@@ -511,16 +511,7 @@ textarea{min-height:120px;resize:none}
         <div style="font-size:13px;font-weight:700;color:#0D4F5C;margin:10px 0 6px">Possiedi un codice fiscale italiano? *</div>
         <div class="tog-grid"><button type="button" id="hascf-no" class="tog-btn" onclick="setHasCF(false)">No</button><button type="button" id="hascf-si" class="tog-btn" onclick="setHasCF(true)">Sì</button></div>
         <input id="patient-cf" placeholder="Codice fiscale *" style="text-transform:uppercase;display:none;margin-top:8px"/>
-        <div id="patient-doc-wrap" style="display:none;margin-top:8px">
-          <p style="font-size:13px;color:#475569;line-height:1.5;margin:0 0 10px">Se non hai un codice fiscale italiano, puoi identificarti con un passaporto o un documento d’identità valido, anche rilasciato all’estero. Non è necessario un permesso di soggiorno.</p>
-          <label for="patient-doc-type" style="font-size:13px;font-weight:700;color:#0D4F5C">Documento d’identità *</label><select id="patient-doc-type" style="margin-bottom:8px">
-            <option value="">Tipo di documento *</option>
-            <option value="Passaporto">Passaporto</option>
-            <option value="Carta d'identità">Carta d’identità italiana o estera</option>
-            <option value="Altro documento d’identità valido">Altro documento d’identità valido</option>
-          </select>
-          <input id="patient-doc-number" placeholder="Numero documento *"/>
-        </div>
+        <div id="patient-doc-wrap" style="display:none;margin-top:8px"><p style="font-size:13px;color:#475569;line-height:1.5;margin:0 0 10px">Puoi proseguire anche senza codice fiscale italiano. Il medico potrà richiedere ulteriori dati identificativi, se necessari per la prestazione.</p></div>
         <label for="patient-dob" style="font-size:13px;font-weight:700;color:#0D4F5C">Data di nascita *</label><input id="patient-dob" type="date" autocomplete="bday" required/>
         <label for="patient-email" style="font-size:13px;font-weight:700;color:#0D4F5C">Email per ricevere la risposta *</label><input id="patient-email" type="email" placeholder="Email" autocomplete="email"/>
         <input id="patient-phone" placeholder="Telefono (opzionale)" autocomplete="tel"/>
@@ -2753,7 +2744,6 @@ async function submitToDoctor(){
   if(doctorPreviewActive && !patientPreviewActive && DOC_PWD){alert('Simulazione completata. Nessuna richiesta inviata, nessun pagamento e nessun dato trasmesso.');return;}
   const nome=document.getElementById('patient-name').value.trim(),email=document.getElementById('patient-email').value.trim();
   let cf=document.getElementById('patient-cf').value.trim().toUpperCase().replace(/\s+/g,'');
-  const docType=document.getElementById('patient-doc-type').value,docNumber=document.getElementById('patient-doc-number').value.trim();
   if(!nome||nome.split(/\s+/).length<2){alert("Inserisci nome e cognome");return;}
   const dob=document.getElementById("patient-dob").value;
   const age=patientAge(dob);
@@ -2765,7 +2755,6 @@ async function submitToDoctor(){
     const cfPattern=/^[A-Z]{6}[0-9LMNPQRSTUV]{2}[A-EHLMPRST][0-9LMNPQRSTUV]{2}[A-Z][0-9LMNPQRSTUV]{3}[A-Z]$/;
     if(!cf||!cfPattern.test(cf)){alert('Il codice fiscale inserito non sembra nel formato corretto. Controllalo e riprova.');return;}
   } else {
-    if(!docType||!docNumber){alert('Inserisci tipo e numero del documento d\'identità');return;}
     cf='';
   }
   if(!email||!email.includes('@')){alert('Inserisci un\'email valida');return;}
@@ -2790,7 +2779,6 @@ async function submitToDoctor(){
     const r=await fetch(endpoint,{method:'POST',headers,body:JSON.stringify({
       paymentSessionId,
       tipo:tipoRichiesta,patientText:document.getElementById('problem').value,patientName:nome,codiceFiscale:cf,
-      docType,docNumber,
       dateOfBirth:dob,age,anamnesis,email,phone:document.getElementById('patient-phone').value,
       clinicalData:[
         'Età: '+age+' anni',
