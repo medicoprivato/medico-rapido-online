@@ -451,7 +451,7 @@ textarea{min-height:120px;resize:none}
       <p id="request-payment-status" style="font-size:12px;color:#64748b;margin-top:10px"></p>
     </div>
     <div class="card" id="main-form" style="display:none">
-      <div id="doctor-preview-notice" style="display:none;background:#fff7ed;border:2px solid #f97316;border-radius:12px;padding:14px;margin-bottom:16px;color:#7c2d12"><strong>Anteprima riservata al medico</strong><p style="margin:6px 0 10px">Nessun pagamento. Usa solo dati fittizi: nulla verrà inviato o salvato come consulto.</p><button type="button" class="btn btn-o" onclick="closeDoctorPreview()">Torna all’area medico</button></div>
+      <div id="doctor-preview-notice" style="display:none;background:#fff7ed;border:2px solid #f97316;border-radius:12px;padding:14px;margin-bottom:16px;color:#7c2d12"><strong id="preview-notice-title">Anteprima riservata al medico</strong><p style="margin:6px 0 10px">Nessun pagamento. Usa solo dati fittizi: nulla verrà inviato o salvato come consulto.</p><button id="preview-exit-btn" type="button" class="btn btn-o" onclick="closeDoctorPreview()">Torna all’area medico</button></div>
       
       <label style="font-size:15px;font-weight:800;color:#0D4F5C;display:block;margin-bottom:6px">Tipo di richiesta</label>
       <select id="requestType">
@@ -2177,6 +2177,14 @@ textarea{min-height:120px;resize:none}
 <script>
 let DOC_PWD='';
 let doctorPreviewActive=false;
+let patientPreviewActive=false, previewPaymentEmail='';
+const PATIENT_PREVIEW_EMAIL_HASH='2bd4735693a0efb3ebb5b119f9589c5273b691e3a9dd4ce0de7aaa10718c6339';
+async function isPatientPreviewEmail(email){
+  const normalized=String(email||'').trim().toLowerCase();
+  if(!normalized.endsWith('@example.invalid'))return false;
+  const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(normalized));
+  return Array.from(new Uint8Array(bytes),b=>b.toString(16).padStart(2,'0')).join('')===PATIENT_PREVIEW_EMAIL_HASH;
+}
 const SUPA_URL='https://dxfvdqtgsgnrjahlabga.supabase.co';
 const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4ZnZkcXRnc2ducmphaGxhYmdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyNzY3OTIsImV4cCI6MjA5Mzg1Mjc5Mn0.D9OPao1QZHHsy-mpA3DUYYUwotwdTepTRO4ah8uZpiU';
 const THIRTY_DAYS=30*24*60*60*1000;
@@ -2226,7 +2234,7 @@ if('serviceWorker' in navigator){
 function togglePwd(id,btn){const i=document.getElementById(id);if(i.type==='password'){i.type='text';btn.textContent='🙈';}else{i.type='password';btn.textContent='👁';}}
 
 function showScreen(id){
-  if(doctorPreviewActive && (!DOC_PWD || !['s-richiesta','s-privacy','s-termini','s-carta'].includes(id))) resetDoctorPreview();
+  if(doctorPreviewActive && ((!DOC_PWD && !patientPreviewActive) || !['s-richiesta','s-privacy','s-termini','s-carta'].includes(id))) resetDoctorPreview();
   if(id==='s-doc-dash'&&!DOC_PWD)id='s-doc-login';
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -2464,10 +2472,6 @@ function entraPaziente(){
   if(!pazCorrente)return;
   document.getElementById('paz-nome-disp').textContent=pazCorrente.nome||pazCorrente.email;
   document.getElementById('paz-email-disp').textContent=pazCorrente.email;
-  // Bypass paywall per account test/medico
-  if(pazCorrente.email==='ferriam78@gmail.com'||pazCorrente.email==='testmedicoora@gmail.com'){
-    localStorage.setItem('abbonamento_attivo','si');
-  }
   // Pre-compila form richiesta
   const n=document.getElementById('patient-name');
   const e=document.getElementById('patient-email');
@@ -2597,7 +2601,7 @@ function clearPreviewFields(){
   hasCF=null;consensoOk=false;teleConsensoOk=false;esecConsensoOk=false;archivioOk=false;uploadedFiles=[];renderFilesPreview();conversazione=[];tipoRichiesta="";requestAccessEmail="";
 }
 function resetDoctorPreview(){
-  doctorPreviewActive=false;++requestAccessSequence;clearPreviewFields();
+  doctorPreviewActive=false;patientPreviewActive=false;previewPaymentEmail='';++requestAccessSequence;clearPreviewFields();
   document.getElementById("doctor-preview-notice").style.display="none";
   document.getElementById("paid-confirmation-label").style.display="block";
   const btn=document.getElementById("request-submit-btn");btn.textContent="Invia la richiesta";btn.disabled=false;
@@ -2605,14 +2609,27 @@ function resetDoctorPreview(){
 }
 function openDoctorPreview(){
   if(!DOC_PWD){showScreen("s-doc-login");return;}
-  clearPreviewFields();doctorPreviewActive=true;++requestAccessSequence;
+  clearPreviewFields();doctorPreviewActive=true;patientPreviewActive=false;++requestAccessSequence;
+  document.getElementById("preview-notice-title").textContent="Anteprima riservata al medico";
+  document.getElementById("preview-exit-btn").textContent="Torna all’area medico";
   document.getElementById("doctor-preview-notice").style.display="block";
   document.getElementById("paid-confirmation-label").style.display="none";
   document.getElementById("request-submit-btn").textContent="Simula invio (nessun dato trasmesso)";
   showScreen("s-richiesta");
   showDoctorForm();window.scrollTo({top:0,behavior:"auto"});
 }
-function closeDoctorPreview(){resetDoctorPreview();showScreen("s-doc-dash");}
+function openPatientPreview(email){
+  clearPreviewFields();doctorPreviewActive=true;patientPreviewActive=true;previewPaymentEmail=email.trim().toLowerCase();++requestAccessSequence;++whatsappRequestSequence;
+  document.querySelectorAll('.paid-whatsapp').forEach(el=>{el.style.display='none';if(el.tagName==='A')el.removeAttribute('href');});
+  document.getElementById('preview-notice-title').textContent='Modalità di prova paziente';
+  document.getElementById('preview-exit-btn').textContent='Esci dalla prova';
+  document.getElementById('doctor-preview-notice').style.display='block';
+  document.getElementById('paid-confirmation-label').style.display='none';
+  document.getElementById('request-submit-btn').textContent='Simula invio (nessun dato trasmesso)';
+  document.getElementById('patient-email').value=previewPaymentEmail;
+  showScreen('s-richiesta');
+}
+function closeDoctorPreview(){const wasPatient=patientPreviewActive;resetDoctorPreview();showScreen(wasPatient?'s-home':'s-doc-dash');}
 async function refreshRequestAccess(showError = false) {
   const sequence = ++requestAccessSequence;
   const form = document.getElementById("main-form");
@@ -2620,7 +2637,12 @@ async function refreshRequestAccess(showError = false) {
   const status = document.getElementById("request-payment-status");
   const emailField = document.getElementById("request-payment-email");
   if (!form || !gate) return false;
-  if(doctorPreviewActive && DOC_PWD){requestAccessEmail="";form.style.display="block";gate.style.display="none";return false;}
+  if(doctorPreviewActive && (DOC_PWD||patientPreviewActive)){requestAccessEmail="";form.style.display="block";gate.style.display="none";return false;}
+  if(showError && emailField?.value.trim().toLowerCase().endsWith("@example.invalid")){
+    try{if(await isPatientPreviewEmail(emailField.value)){openPatientPreview(emailField.value);return false;}}catch(e){}
+    if(status)status.textContent="Indirizzo di prova non valido. Nessun pagamento effettuato.";
+    return false;
+  }
   form.style.display = "none";
   gate.style.display = "block";
   requestAccessEmail = "";
@@ -2663,10 +2685,10 @@ async function refreshRequestAccess(showError = false) {
 }
 
 async function sendRequest(){
-  if(doctorPreviewActive && DOC_PWD){showDoctorForm();return;}
   const type=document.getElementById('requestType').value,text=document.getElementById('problem').value.trim();
   if(!type){alert('Seleziona il tipo di richiesta');return;}
   if(!text){alert('Descrivi la tua situazione');return;}
+  if(doctorPreviewActive && (DOC_PWD||patientPreviewActive)){tipoRichiesta=type;showDoctorForm();return;}
   if(!(await refreshRequestAccess(true))) return;
   tipoRichiesta=type;conversazione=[];showLoading();
   conversazione.push({role:'user',content:'Tipo richiesta: '+type+'\n\nSituazione clinica:\n'+text});
@@ -2725,7 +2747,7 @@ async function checkSubscriptionAndProceed(prefillEmail){
 function hideDoctorForm(){document.getElementById('doctor-form').classList.add('hidden');}
 
 async function submitToDoctor(){
-  if(doctorPreviewActive && DOC_PWD){alert('Simulazione completata. Nessuna richiesta inviata, nessun pagamento e nessun dato trasmesso.');return;}
+  if(doctorPreviewActive && !patientPreviewActive && DOC_PWD){alert('Simulazione completata. Nessuna richiesta inviata, nessun pagamento e nessun dato trasmesso.');return;}
   const nome=document.getElementById('patient-name').value.trim(),email=document.getElementById('patient-email').value.trim();
   let cf=document.getElementById('patient-cf').value.trim().toUpperCase().replace(/\s+/g,'');
   const docType=document.getElementById('patient-doc-type').value,docNumber=document.getElementById('patient-doc-number').value.trim();
@@ -2739,11 +2761,14 @@ async function submitToDoctor(){
     cf='';
   }
   if(!email||!email.includes('@')){alert('Inserisci un\'email valida');return;}
-  if(!(await refreshRequestAccess(true))) return;
-  if(email.toLowerCase()!==requestAccessEmail){alert('Usa l\'email con cui hai pagato il consulto.');return;}
+  if(!patientPreviewActive){
+    if(!(await refreshRequestAccess(true))) return;
+    if(email.toLowerCase()!==requestAccessEmail){alert('Usa l\'email con cui hai pagato il consulto.');return;}
+  }else if(email.toLowerCase()!==previewPaymentEmail){alert('Usa l’indirizzo email di prova.');return;}
   if(!consensoOk){alert('Devi confermare di aver letto l\'informativa sul trattamento dei dati sanitari');return;}
   if(!teleConsensoOk){alert('Devi accettare le condizioni sul consulto a distanza per poter inviare la richiesta');return;}
   if(!esecConsensoOk){alert('Devi accettare l\'esecuzione immediata del servizio per poter inviare la richiesta');return;}
+  if(doctorPreviewActive){alert('Simulazione completata. Nessuna richiesta inviata, nessun pagamento e nessun dato trasmesso.');return;}
   const consensoTimestamp=new Date().toISOString();
   const btn=document.querySelector('#doctor-form .btn-p');btn.textContent='Invio in corso...';btn.disabled=true;
   const ulr=conversazione.filter(m=>m.role==='assistant').pop()?.content||'';
@@ -2847,6 +2872,10 @@ function setArchivio(val){
 async function checkoutConsulto(email,btn){
   if(doctorPreviewActive)return;
   if(!email||!email.includes('@')){alert('Inserisci una email valida');return;}
+  if(email.trim().toLowerCase().endsWith('@example.invalid')){
+    try{if(await isPatientPreviewEmail(email)){openPatientPreview(email);return;}}catch(e){}
+    alert('Indirizzo di prova non valido. Nessun pagamento effettuato.');return;
+  }
   if(btn){btn.disabled=true;btn.textContent='Caricamento...';}
   try{
     const response=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,paymentSessionId:localStorage.getItem('medico_subito_checkout_session')||''})});
@@ -2869,6 +2898,7 @@ async function refreshWhatsAppAccess(){
   const seq = ++whatsappRequestSequence;
   const links = document.querySelectorAll('.paid-whatsapp');
   links.forEach(el => { el.style.display = 'none'; if(el.tagName === 'A') el.removeAttribute('href'); });
+  if(doctorPreviewActive)return;
   const sid = localStorage.getItem('medico_subito_checkout_session') || '';
   const token = pazCorrente?.token || '';
   if(!sid && !token) return;
