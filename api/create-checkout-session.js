@@ -12,8 +12,7 @@ export default async function handler(req, res) {
   const secretKey = process.env.STRIPE_SECRET_KEY;
   if (!secretKey) return res.status(503).json({ error: "Stripe non configurato" });
 
-  const host=String(req.headers.host||"").toLowerCase();
-  const returnOrigin=host==="www.medicoora.com"||host==="medicoora.com"?"https://www.medicoora.com":"https://www.medicosubitoitalia.com";
+  const returnOrigin="https://www.medicosubitoitalia.com";
   try {
     const params = new URLSearchParams({
       "payment_method_types[0]": "card",
