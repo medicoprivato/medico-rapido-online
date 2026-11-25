@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Medico Subito – Consulto medico online in 24 ore</title>
+<title>Medico Subito: consulto medico online in 24 ore</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -438,7 +438,7 @@ textarea{min-height:120px;resize:none}
     <div id="request-payment-gate" class="card" style="padding:22px 18px;text-align:center;border:2px solid #B2E0DC">
       <div style="font-weight:900;color:#0D4F5C;font-size:20px;margin-bottom:10px">Pagamento necessario prima della richiesta</div>
       <p style="font-size:15px;line-height:1.65;color:#374151;margin-bottom:16px">Prima di descrivere la situazione medica, acquista il consulto da €30. Solo dopo la conferma del pagamento potrai compilare e inviare il modulo.</p>
-      <button class="btn btn-p" type="button" onclick="showScreen('s-payment')" style="background:#f97316;font-size:19px;font-weight:900">Acquista un consulto — €30</button>
+      <button class="btn btn-p" type="button" onclick="showScreen('s-payment')" style="background:#f97316;font-size:19px;font-weight:900">Acquista un consulto a 30 €</button>
       <div style="font-size:13px;color:#64748b;margin-top:16px">Hai già pagato? Inserisci l'email utilizzata per l'acquisto oppure accedi al tuo account con abbonamento già pagato.</div>
       <input id="request-payment-email" type="email" placeholder="Email utilizzata per il pagamento" autocomplete="email" style="margin:12px 0 8px">
       <button type="button" class="btn btn-o" onclick="refreshRequestAccess(true)">Verifica il pagamento</button>
@@ -522,7 +522,7 @@ textarea{min-height:120px;resize:none}
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px">
             <div><div style="font-size:12px;color:var(--txt-s);font-weight:600;margin-bottom:4px">Altezza (cm)</div><input id="p-alt" placeholder="170" style="margin-bottom:0;padding:10px;font-size:14px"/></div>
             <div><div style="font-size:12px;color:var(--txt-s);font-weight:600;margin-bottom:4px">Peso (kg)</div><input id="p-peso" placeholder="70" style="margin-bottom:0;padding:10px;font-size:14px"/></div>
-            <div><div style="font-size:12px;color:var(--txt-s);font-weight:600;margin-bottom:4px">Gruppo sg.</div><select id="p-sg" style="margin-bottom:0;padding:10px;font-size:13px"><option value="">—</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>0+</option><option>0-</option><option>AB+</option><option>AB-</option></select></div>
+            <div><div style="font-size:12px;color:var(--txt-s);font-weight:600;margin-bottom:4px">Gruppo sg.</div><select id="p-sg" style="margin-bottom:0;padding:10px;font-size:13px"><option value="">-</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>0+</option><option>0-</option><option>AB+</option><option>AB-</option></select></div>
           </div>
           <div style="font-size:14px;font-weight:700;color:var(--txt);margin-bottom:7px">Allergie?</div>
           <div class="tog-grid"><button type="button" id="allergie-no" class="tog-btn" onclick="togSan('allergie',false)">No</button><button type="button" id="allergie-si" class="tog-btn" onclick="togSan('allergie',true)">Sì</button></div>
@@ -655,7 +655,7 @@ textarea{min-height:120px;resize:none}
       <p>Canale riservato ai clienti che hanno acquistato un consulto da €30 o hanno un abbonamento già pagato e attivo. Un pagamento consente una sola richiesta medica.</p>
       <a class="paid-whatsapp" target="_blank" rel="noopener noreferrer" style="display:none;align-items:center;justify-content:center;background:#25D366;color:white;padding:14px 16px;border-radius:10px;font-weight:800;text-decoration:none">Apri WhatsApp</a>
     </div>
-    <button class="btn btn-p" onclick="showScreen('s-payment')" style="margin-top:6px">Acquista il consulto — €30</button>
+    <button class="btn btn-p" onclick="showScreen('s-payment')" style="margin-top:6px">Acquista il consulto a 30 €</button>
   </div>
   <div class="bnav">
     <div class="nav-it" onclick="showScreen('s-home')"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Home</span></div>
@@ -1935,7 +1935,7 @@ textarea{min-height:120px;resize:none}
     <p>Medico Subito tratta i dati sanitari in conformità al <strong>Regolamento UE 2016/679 (GDPR)</strong>, al D.Lgs. 196/2003 come modificato dal D.Lgs. 101/2018, e alle Linee Guida sulla Telemedicina del Ministero della Salute (21 settembre 2022).</p>
 
     <h3>1. Titolare del trattamento</h3>
-    <p><strong>Dott.ssa Anna Maria Ferri</strong> — Medico Chirurgo, Iscritta all'Ordine dei Medici Chirurghi e degli Odontoiatri di Frosinone (n. 3363), P.IVA IT17215181003<br>
+    <p><strong>Dott.ssa Anna Maria Ferri</strong>, Medico Chirurgo, Iscritta all'Ordine dei Medici Chirurghi e degli Odontoiatri di Frosinone (n. 3363), P.IVA IT17215181003<br>
     Via Gaetano Marzotto 16 Int. 3, 00133 Roma (RM)<br>
     Email: supportomedicosubito@gmail.com<br>
     Non è stato nominato un DPO (Data Protection Officer) in quanto il trattamento non rientra nelle ipotesi di cui all'art. 37 GDPR per volume e tipologia di soggetti interessati.</p>
@@ -1972,18 +1972,18 @@ textarea{min-height:120px;resize:none}
     <p>I dati sanitari sono conservati per <strong>10 anni</strong> dall'ultima prestazione, in conformità all'art. 22 D.Lgs. 502/1992 e alle norme deontologiche. I dati di contatto sono conservati per la durata del rapporto contrattuale e fino a 2 anni successivi.</p>
 
     <h3>8. Subfornitori (sub-responsabili)</h3>
-    <p>Supabase Inc. — database e autenticazione (DPA conforme GDPR)<br>
-    Vercel Inc. — hosting e CDN (DPA conforme GDPR)<br>
-    Google LLC / Gmail — comunicazioni email (DPA conforme GDPR)<br>
-    Stripe Inc. — elaborazione pagamenti (PCI-DSS + DPA GDPR)</p>
+    <p>Supabase Inc.: database e autenticazione (DPA conforme GDPR)<br>
+    Vercel Inc.: hosting e CDN (DPA conforme GDPR)<br>
+    Google LLC / Gmail: comunicazioni email (DPA conforme GDPR)<br>
+    Stripe Inc.: elaborazione pagamenti (PCI-DSS + DPA GDPR)</p>
 
     <h3>9. Diritti dell'interessato</h3>
     <p>Ai sensi degli artt. 15-22 GDPR, hai diritto di: <strong>accesso</strong> ai tuoi dati (art. 15), <strong>rettifica</strong> (art. 16), <strong>cancellazione</strong> (art. 17), <strong>limitazione</strong> del trattamento (art. 18), <strong>portabilità</strong> (art. 20), <strong>opposizione</strong> al trattamento (art. 21), e di <strong>revocare il consenso</strong> in qualsiasi momento senza pregiudizio per la liceità del trattamento precedente.<br>
-    Per esercitare i tuoi diritti: <strong>supportomedicosubito@gmail.com</strong> — risposta garantita entro 30 giorni.</p>
+    Per esercitare i tuoi diritti: <strong>supportomedicosubito@gmail.com</strong>, risposta garantita entro 30 giorni.</p>
 
     <h3>10. Reclami</h3>
     <p>Hai il diritto di proporre reclamo al <strong>Garante per la Protezione dei Dati Personali</strong>:<br>
-    www.garanteprivacy.it — Piazza Venezia 11, 00187 Roma — Tel. 06.69677.1</p>
+    www.garanteprivacy.it, Piazza Venezia 11, 00187 Roma, Tel. 06.69677.1</p>
   </div>
 </div>
 
@@ -2032,7 +2032,7 @@ textarea{min-height:120px;resize:none}
     <p>Il contratto è regolato dal diritto italiano. Per i consumatori, il foro competente è quello della residenza o domicilio del consumatore, ai sensi dell'art. 33 D.Lgs. 206/2005 (Codice del Consumo), norma inderogabile.</p>
 
     <h3>12. Reclami e controversie</h3>
-    <p>Per reclami scrivi a supportomedicosubito@gmail.com — risposta garantita entro 14 giorni. Per controversie non risolte puoi accedere alla piattaforma europea ODR: <strong>ec.europa.eu/consumers/odr</strong> (Reg. UE 524/2013).</p>
+    <p>Per reclami scrivi a supportomedicosubito@gmail.com, risposta garantita entro 14 giorni. Per controversie non risolte puoi accedere alla piattaforma europea ODR: <strong>ec.europa.eu/consumers/odr</strong> (Reg. UE 524/2013).</p>
 
     <h3>13. Professionisti sanitari</h3>
     <p>I medici che operano su Medico Subito sono professionisti iscritti all'Ordine dei Medici Chirurghi e Odontoiatri, abilitati alla professione medica in Italia. Ogni risposta è firmata dal professionista responsabile, che si assume piena responsabilità clinica e deontologica.</p>
@@ -2041,7 +2041,7 @@ textarea{min-height:120px;resize:none}
     <p>supportomedicosubito@gmail.com</p>
 
     <h3>15. Soggetto erogante</h3>
-    <p><strong>Dott.ssa Anna Maria Ferri</strong> — Medico Chirurgo specialista in Ginecologia e Ostetricia. P.IVA: IT17215181003. Iscrizione Ordine dei Medici Chirurghi e degli Odontoiatri di Frosinone (n. 3363). Indirizzo professionale: Via Gaetano Marzotto 16 Int. 3, 00133 Roma (RM). Email: supportomedicosubito@gmail.com. Titolare del trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR).</p>
+    <p><strong>Dott.ssa Anna Maria Ferri</strong>, Medico Chirurgo specialista in Ginecologia e Ostetricia. P.IVA: IT17215181003. Iscrizione Ordine dei Medici Chirurghi e degli Odontoiatri di Frosinone (n. 3363). Indirizzo professionale: Via Gaetano Marzotto 16 Int. 3, 00133 Roma (RM). Email: supportomedicosubito@gmail.com. Titolare del trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR).</p>
   </div>
 </div>
 
@@ -2084,7 +2084,7 @@ textarea{min-height:120px;resize:none}
 
 <!-- LOGIN MEDICO -->
 <div id="s-doc-login" class="screen">
-  <div class="doc-hdr"><div style="font-size:14px;font-weight:700">Accesso Riservato — Area Medico</div><button class="doc-exit" onclick="showScreen('s-home')">Esci</button></div>
+  <div class="doc-hdr"><div style="font-size:14px;font-weight:700">Accesso riservato all’area medico</div><button class="doc-exit" onclick="showScreen('s-home')">Esci</button></div>
   <div style="max-width:380px;margin:40px auto;padding:0 16px">
     <div class="card">
       <div style="text-align:center;margin-bottom:20px">
@@ -2120,7 +2120,7 @@ textarea{min-height:120px;resize:none}
   </div>
   <div id="visit-counter-box" style="margin:12px 16px 0;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between">
     <div style="font-size:13px;color:#166534;font-weight:700">Visite totali sito</div>
-    <div id="visit-counter-num" style="font-size:20px;color:#16a34a;font-weight:900">—</div>
+    <div id="visit-counter-num" style="font-size:20px;color:#16a34a;font-weight:900">-</div>
   </div>
   <div id="cases-container" style="padding-bottom:20px"><div class="loader-box" style="margin:16px">Caricamento richieste...</div></div>
 </div>
@@ -2133,15 +2133,15 @@ textarea{min-height:120px;resize:none}
   </div>
   <div class="detail-wrap">
     <div class="paz-block">
-      <h3 id="dc-nome" style="font-family:'Playfair Display',serif;font-size:18px;margin-bottom:3px">—</h3>
-      <div id="dc-sub" style="font-size:11px;opacity:.6;margin-bottom:10px">—</div>
+      <h3 id="dc-nome" style="font-family:'Playfair Display',serif;font-size:18px;margin-bottom:3px">-</h3>
+      <div id="dc-sub" style="font-size:11px;opacity:.6;margin-bottom:10px">-</div>
       <div id="dc-info"></div>
     </div>
-    <div class="compl-block"><div class="blk-lbl">Descrizione del paziente</div><div id="dc-complaint">—</div></div>
+    <div class="compl-block"><div class="blk-lbl">Descrizione del paziente</div><div id="dc-complaint">-</div></div>
     <div id="dc-att-block" style="display:none;margin-bottom:10px"><div class="compl-block"><div class="blk-lbl">Allegati</div><div id="dc-att"></div></div></div>
     
-    <div class="ai-block"><div class="blk-lbl">📋 Analisi clinica AI — riservata al medico</div><div id="dc-ai" class="ai-load">Preparazione analisi clinica...</div></div>
-    <div class="card" style="margin-bottom:10px"><div class="blk-lbl" style="color:var(--txt-s)">Risposta medica — modifica se necessario</div><textarea class="reply-area" id="dc-reply" placeholder="La bozza AI apparirà automaticamente. Modifica prima di firmare."></textarea></div>
+    <div class="ai-block"><div class="blk-lbl">📋 Analisi clinica AI (riservata al medico)</div><div id="dc-ai" class="ai-load">Preparazione analisi clinica...</div></div>
+    <div class="card" style="margin-bottom:10px"><div class="blk-lbl" style="color:var(--txt-s)">Risposta medica (modifica se necessario)</div><textarea class="reply-area" id="dc-reply" placeholder="La bozza AI apparirà automaticamente. Modifica prima di firmare."></textarea></div>
     <button class="sign-btn" id="sign-btn" onclick="inviaRisposta()" disabled>⏳ Preparazione bozza...</button>
     <button class="btn btn-o" style="height:44px;font-size:14px;margin-bottom:20px" onclick="showScreen('s-doc-dash')">← Torna alla lista</button>
     <div class="sent-ok" id="dc-sent"><div style="font-size:1.2rem;margin-bottom:4px">✅</div><div style="color:var(--ok);font-weight:700;font-size:14px;margin-bottom:3px">Risposta inviata!</div><p id="dc-sent-msg" style="font-size:13px;color:#166534"></p></div>
@@ -2159,7 +2159,7 @@ textarea{min-height:120px;resize:none}
       <div style="font-size:12.5px;color:#0D4F5C;line-height:1.7">✓ Risposta firmata (PDF) entro 24 ore<br>✓ Consulto esclusivamente scritto<br>✓ Potenzialmente detraibile come spesa sanitaria</div>
     </div>
     <input id="paywall-email" type="email" placeholder="La tua email *" autocomplete="email" style="width:100%;border:1.5px solid var(--brd);border-radius:10px;padding:14px 16px;font-size:16px;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:12px"/>
-    <button onclick="startStripePaywall()" style="width:100%;background:var(--blu);color:#fff;border:none;border-radius:10px;padding:15px;font-size:16px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:10px">Paga €30 ora — Pagamento sicuro</button>
+    <button onclick="startStripePaywall()" style="width:100%;background:var(--blu);color:#fff;border:none;border-radius:10px;padding:15px;font-size:16px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:10px">Paga 30 € ora (pagamento sicuro)</button>
     <div style="font-size:12px;color:var(--txt-l);margin-bottom:14px">🔒 Stripe · Detraibilità fiscale subordinata ai requisiti di legge</div>
     <button onclick="chiudiPaywall()" style="background:none;border:none;color:var(--txt-l);font-size:13px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Annulla</button>
   </div>
@@ -2349,7 +2349,7 @@ async function resetPwd(){
   if(!email){alert('Inserisci prima la tua email nel campo sopra.');return;}
   try{
     const r=await fetch(SUPA_URL+'/auth/v1/recover',{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPA_KEY},body:JSON.stringify({email,redirect_to:'https://www.medicosubitoitalia.com'})});
-    if(r.ok) alert('✅ Email inviata a '+email+'\n\nCONTROLLA INBOX E SPAM.\n\nClicca il link nell\'email — si aprirà medicosubitoitalia.com dove potrai inserire la nuova password.');
+    if(r.ok) alert('✅ Email inviata a '+email+'\n\nCONTROLLA INBOX E SPAM.\n\nClicca il link nell\'email. Si aprirà medicosubitoitalia.com dove potrai inserire la nuova password.');
     else alert('Errore. Verifica che l\'email sia corretta.');
   }catch(e){alert('Errore di connessione.');}
 }
@@ -2498,7 +2498,7 @@ async function caricaStorico(){
       </div>
       <div style="font-size:13px;color:var(--txt-s);margin-bottom:8px">${(c.patient_text||'').slice(0,120)}...</div>
       ${c.risposta_medico
-        ?'<div style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 12px;font-size:13px;color:var(--ok);font-weight:700">✅ Risposta ricevuta — controlla la tua email</div>'
+        ?'<div style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:10px 12px;font-size:13px;color:var(--ok);font-weight:700">✅ Risposta ricevuta: controlla la tua email</div>'
         :'<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 12px;font-size:13px;color:var(--warn);font-weight:700">⏳ In attesa di risposta dal medico</div>'
       }
     </div>`).join('');
@@ -2882,7 +2882,7 @@ async function loadVisitCounter(){
     const r=await fetch('/api/track-visit',{headers:{'Authorization':'Bearer '+DOC_PWD}});
     const d=await r.json();
     const el=document.getElementById('visit-counter-num');
-    if(el) el.textContent=(d.totalViews!==undefined)?d.totalViews:'—';
+    if(el) el.textContent=(d.totalViews!==undefined)?d.totalViews:'-';
   }catch(e){}
 }
 
@@ -2920,7 +2920,7 @@ async function loadCases(filter){
     cont.innerHTML=filtered.map(c=>{
       const done=!!c.risposta_medico,hf=c.allegati&&c.allegati.length>0;
       return `<div class="case-card ${!done?'pending':''}" onclick="openCase('${c.id}')">
-        <div class="case-nm">${c.patient_name||'—'} ${hf?'📎':''}</div>
+        <div class="case-nm">${c.patient_name||'-'} ${hf?'📎':''}</div>
         <div class="case-meta">${c.tipo||'consulto'} · ${new Date(c.created_at).toLocaleDateString('it-IT')} · ${c.email||''}</div>
         <div class="case-prev">${(c.patient_text||'').slice(0,110)}...</div>
         <div class="${done?'bdg-ok':'bdg-att'}">${done?'✅ Risposta inviata':'⏳ In attesa di risposta'}</div>
@@ -2939,14 +2939,14 @@ async function openCase(id){
   document.getElementById('dc-att-block').style.display='none';
   showScreen('s-doc-case');
   const c=allCases.find(x=>x.id==id);if(!c)return;
-  document.getElementById('dc-nome').textContent=c.patient_name||'—';
+  document.getElementById('dc-nome').textContent=c.patient_name||'-';
   document.getElementById('dc-sub').textContent=(c.tipo||'consulto')+' · '+new Date(c.created_at).toLocaleDateString('it-IT');
   document.getElementById('dc-info').innerHTML=`
-    <div class="paz-row"><span class="paz-lbl">Email</span><span class="paz-val">${c.email||'—'}</span></div>
-    <div class="paz-row"><span class="paz-lbl">Telefono</span><span class="paz-val">${c.phone||'—'}</span></div>
-    <div class="paz-row"><span class="paz-lbl">Nato il</span><span class="paz-val">${c.date_of_birth||'—'}</span></div>
-    <div class="paz-row"><span class="paz-lbl">C.F.</span><span class="paz-val">${c.codice_fiscale||'—'}</span></div>`;
-  let txt=c.patient_text||'—';if(c.clinical_data)txt+='\n\nDati clinici: '+c.clinical_data;
+    <div class="paz-row"><span class="paz-lbl">Email</span><span class="paz-val">${c.email||'-'}</span></div>
+    <div class="paz-row"><span class="paz-lbl">Telefono</span><span class="paz-val">${c.phone||'-'}</span></div>
+    <div class="paz-row"><span class="paz-lbl">Nato il</span><span class="paz-val">${c.date_of_birth||'-'}</span></div>
+    <div class="paz-row"><span class="paz-lbl">C.F.</span><span class="paz-val">${c.codice_fiscale||'-'}</span></div>`;
+  let txt=c.patient_text||'-';if(c.clinical_data)txt+='\n\nDati clinici: '+c.clinical_data;
   document.getElementById('dc-complaint').textContent=txt;
   if(c.allegati&&c.allegati.length>0){
     document.getElementById('dc-att-block').style.display='block';
