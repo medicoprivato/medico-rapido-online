@@ -2900,15 +2900,19 @@ function startStripeSuc(){
 }
 async function loginMedico(){
   const field=document.getElementById('doc-pwd');
-  const pwd=field.value;
+  const pwd=field.value.trim();
   if(!pwd)return;
   const err=document.getElementById('e-pwd');
+  err.style.display='none';
+  const fail=(message)=>{err.textContent=message;err.style.display='block';};
   try{
-    const r=await fetch('/api/submit-medical-request',{method:'GET',headers:{'Authorization':'Bearer '+pwd},cache:'no-store'});
-    if(!r.ok){err.style.display='block';return;}
+    const r=await fetch('/api/doctor-login',{method:'POST',headers:{'Authorization':'Bearer '+pwd},cache:'no-store'});
+    if(r.status===401){fail('Password non corretta');return;}
+    if(r.status===429){fail('Troppi tentativi. Riprova tra poco.');return;}
+    if(r.status!==204){fail('Accesso temporaneamente non disponibile. Riprova.');return;}
     DOC_PWD=pwd;field.value='';err.style.display='none';
     showScreen('s-doc-dash');loadCases('pending');loadVisitCounter();
-  }catch(e){err.style.display='block';}
+  }catch(e){fail('Errore di connessione. Riprova.');}
 }
 function logoutMedico(){
   if(doctorPreviewActive)resetDoctorPreview();
