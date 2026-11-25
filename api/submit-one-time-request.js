@@ -1,3 +1,4 @@
+import { validateAnamnesis } from "../lib/validate-anamnesis.js";
 import { createClient } from "@supabase/supabase-js";
 import nodemailer from "nodemailer";
 
@@ -15,6 +16,8 @@ export default async function handler(req, res) {
 
   const { tipo, patientText, patientName, dateOfBirth, phone, clinicalData,
     aiResponse, conversazione, allegati, consenso, codiceFiscale, docType, docNumber } = req.body || {};
+  const anamnesisError = validateAnamnesis(req.body);
+  if (anamnesisError) return res.status(400).json({error:anamnesisError});
   const email = normal(req.body?.email);
   const paymentSessionId = String(req.body?.paymentSessionId || "");
   if (!patientName || !patientText || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !consenso) {
@@ -73,7 +76,7 @@ export default async function handler(req, res) {
         from: `Medico Subito <${process.env.GMAIL_USER}>`,
         to: email,
         subject: "Medico Subito - richiesta ricevuta",
-        html: `<p>Gentile ${escapeHtml(patientName)}, la tua richiesta è stata ricevuta. Un medico la valuterà e risponderà normalmente entro 24 ore.</p><p>Per le emergenze chiama il 118.</p>`
+        html: `<p>Gentile ${escapeHtml(patientName)}, la tua richiesta è stata ricevuta. Un medico la valuterà e risponderà entro 24 ore.</p><p>Per le emergenze chiama il 118.</p>`
       });
     } catch (mailError) { console.error("Email delivery:", mailError.message); }
     return res.status(200).json({ ok: true });

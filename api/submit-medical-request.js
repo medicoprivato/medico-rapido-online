@@ -1,3 +1,4 @@
+import { validateAnamnesis } from "../lib/validate-anamnesis.js";
 import { createClient } from "@supabase/supabase-js";
 import nodemailer from "nodemailer";
 import { verifyConsultAccess } from "../lib/verify-consult-access.js";
@@ -77,6 +78,8 @@ export default async function handler(req, res) {
     const { tipo, patientText, patientName, dateOfBirth, email, phone, clinicalData,
             aiResponse, conversazione, allegati, consenso, codiceFiscale, docType, docNumber } = req.body;
 
+    const anamnesisError = validateAnamnesis(req.body);
+    if (anamnesisError) return res.status(400).json({error:anamnesisError});
     if (!patientName || !email) return res.status(400).json({ error: "Nome e email obbligatori" });
     if (!consenso) return res.status(400).json({ error: "Consenso obbligatorio" });
 

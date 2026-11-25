@@ -466,7 +466,7 @@ textarea{min-height:120px;resize:none}
         <option>Altro</option>
       </select>
       <label style="font-size:15px;font-weight:800;color:#0D4F5C;display:block;margin-bottom:6px;margin-top:12px">Descrivi la tua situazione</label>
-      <textarea id="problem" placeholder="Farmaci, allergie, sintomi, durata..."></textarea>
+      <textarea id="problem" required placeholder="Qual è il problema? Da quanto tempo? Come è iniziato e come sta andando? Hai già fatto cure o esami? Per rinnovi o referti indica ciò che ti serve."></textarea>
 
       <!-- ALLEGATI subito dopo la descrizione -->
       <div class="ftit">📎 Allega documenti (facoltativo)</div>
@@ -507,7 +507,7 @@ textarea{min-height:120px;resize:none}
       </div>
       <div id="doctor-form" class="hidden" style="margin-top:14px">
         <div style="background:#fffbeb;border:1px solid #fde047;border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:13px;color:#92400e;font-weight:600">Servizio rivolto a pazienti adulti (18+)</div><div class="ftit">👤 I tuoi dati</div>
-        <input id="patient-name" placeholder="Nome e cognome *" autocomplete="name"/>
+        <label for="patient-name" style="font-size:13px;font-weight:700;color:#0D4F5C">Nome e cognome *</label><input id="patient-name" placeholder="Nome e cognome" autocomplete="name" required/>
         <div style="font-size:13px;font-weight:700;color:#0D4F5C;margin:10px 0 6px">Possiedi un codice fiscale italiano? *</div>
         <div class="tog-grid"><button type="button" id="hascf-no" class="tog-btn" onclick="setHasCF(false)">No</button><button type="button" id="hascf-si" class="tog-btn" onclick="setHasCF(true)">Sì</button></div>
         <input id="patient-cf" placeholder="Codice fiscale *" style="text-transform:uppercase;display:none;margin-top:8px"/>
@@ -521,27 +521,22 @@ textarea{min-height:120px;resize:none}
           </select>
           <input id="patient-doc-number" placeholder="Numero documento *"/>
         </div>
-        <input id="patient-dob" placeholder="Data di nascita (es: 15/03/1975) *"/>
+        <label for="patient-dob" style="font-size:13px;font-weight:700;color:#0D4F5C">Data di nascita *</label><input id="patient-dob" type="date" autocomplete="bday" required oninput="updatePatientAge()"/><div id="patient-age-display" style="font-size:14px;color:#0D4F5C;font-weight:700;margin:0 0 12px" aria-live="polite">Età: calcolata dalla data di nascita</div>
         <input id="patient-email" type="email" placeholder="Email per ricevere la risposta *" autocomplete="email"/>
         <input id="patient-phone" placeholder="Telefono (opzionale)" autocomplete="tel"/>
         <div class="ftit">🏥 Dati sanitari</div>
         <div class="card" style="padding:14px;margin-bottom:12px">
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px">
-            <div><div style="font-size:12px;color:var(--txt-s);font-weight:600;margin-bottom:4px">Altezza (cm)</div><input id="p-alt" placeholder="170" style="margin-bottom:0;padding:10px;font-size:14px"/></div>
-            <div><div style="font-size:12px;color:var(--txt-s);font-weight:600;margin-bottom:4px">Peso (kg)</div><input id="p-peso" placeholder="70" style="margin-bottom:0;padding:10px;font-size:14px"/></div>
-            <div><div style="font-size:12px;color:var(--txt-s);font-weight:600;margin-bottom:4px">Gruppo sg.</div><select id="p-sg" style="margin-bottom:0;padding:10px;font-size:13px"><option value="">-</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>0+</option><option>0-</option><option>AB+</option><option>AB-</option></select></div>
-          </div>
-          <div style="font-size:14px;font-weight:700;color:var(--txt);margin-bottom:7px">Allergie?</div>
+          <p style="font-size:14px;color:#475569;margin:0 0 12px">Rispondi a tre brevi domande per aiutare il medico a valutare la richiesta in sicurezza.</p><div style="font-size:14px;font-weight:700;color:var(--txt);margin-bottom:7px">Hai allergie note, soprattutto a farmaci? *</div>
           <div class="tog-grid"><button type="button" id="allergie-no" class="tog-btn" onclick="togSan('allergie',false)">No</button><button type="button" id="allergie-si" class="tog-btn" onclick="togSan('allergie',true)">Sì</button></div>
-          <textarea id="allergie-det" placeholder="Specifica allergie..." style="display:none;min-height:60px;margin-bottom:0"></textarea>
-          <div style="font-size:14px;font-weight:700;color:var(--txt);margin:10px 0 7px">Farmaci abituali?</div>
+          <textarea id="allergie-det" placeholder="Indica a cosa sei allergico e, se la ricordi, quale reazione hai avuto" style="display:none;min-height:60px;margin-bottom:0"></textarea>
+          <div style="font-size:14px;font-weight:700;color:var(--txt);margin:10px 0 7px">Assumi farmaci o integratori, anche occasionalmente? *</div>
           <div class="tog-grid"><button type="button" id="farmaci-no" class="tog-btn" onclick="togSan('farmaci',false)">No</button><button type="button" id="farmaci-si" class="tog-btn" onclick="togSan('farmaci',true)">Sì</button></div>
-          <textarea id="farmaci-det" placeholder="Elenca i farmaci..." style="display:none;min-height:60px;margin-bottom:0"></textarea>
-          <div style="font-size:14px;font-weight:700;color:var(--txt);margin:10px 0 7px">Patologie importanti?</div>
+          <textarea id="farmaci-det" placeholder="Nome, dose e frequenza dei farmaci, se li conosci" style="display:none;min-height:60px;margin-bottom:0"></textarea>
+          <div style="font-size:14px;font-weight:700;color:var(--txt);margin:10px 0 7px">Hai malattie, interventi o condizioni di salute rilevanti? *</div>
           <div class="tog-grid"><button type="button" id="patologie-no" class="tog-btn" onclick="togSan('patologie',false)">No</button><button type="button" id="patologie-si" class="tog-btn" onclick="togSan('patologie',true)">Sì</button></div>
-          <textarea id="patologie-det" placeholder="Specifica patologie..." style="display:none;min-height:60px;margin-bottom:0"></textarea>
+          <textarea id="patologie-det" placeholder="Indica le condizioni rilevanti, anche pregresse" style="display:none;min-height:60px;margin-bottom:0"></textarea>
         </div>
-        <div class="ftit">📝 Informativa e consensi</div>
+        <details style="border:1px solid #bddede;border-radius:12px;padding:12px;margin:0 0 16px"><summary style="cursor:pointer;font-weight:700;color:#0D4F5C">Altri dati utili (facoltativi)</summary><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px"><div><label for="p-alt" style="font-size:12px;font-weight:600">Altezza (cm)</label><input id="p-alt" type="number" min="50" max="250" placeholder="170"/></div><div><label for="p-peso" style="font-size:12px;font-weight:600">Peso (kg)</label><input id="p-peso" type="number" min="15" max="350" step="0.1" placeholder="70"/></div></div><label for="patient-other" style="font-size:13px;font-weight:600">Altre informazioni utili (es. gravidanza, allattamento, interventi, esami recenti)</label><textarea id="patient-other" placeholder="Solo se rilevante per la tua richiesta" style="min-height:60px"></textarea></details><div class="ftit">📝 Informativa e consensi</div>
         <div class="con-box" style="margin-bottom:10px">
           <div class="con-tit">1. Trattamento dati sanitari</div>
           <div class="con-txt">Il trattamento dei tuoi dati sanitari, strettamente necessari alla valutazione clinica e alla risposta alla tua richiesta, avviene sulla base giuridica prevista dall'art. 9, par. 2, lett. h) del GDPR (finalità di medicina, previo obbligo di segreto professionale del medico), come da <a onclick="prevScr='s-richiesta';showScreen('s-privacy')">Privacy Policy</a> e <a onclick="prevScr='s-richiesta';showScreen('s-termini')">Termini</a>. I dati sono trattati per finalità sanitarie; per i fornitori tecnici e i diritti consulta l’informativa. Il servizio non sostituisce il medico di base.<br><br>Confermando di aver letto questa informativa, prendi atto delle modalità di trattamento sopra descritte.</div>
@@ -2594,7 +2589,7 @@ let requestAccessEmail = "";
 let requestAccessSequence = 0;
 function clearPreviewFields(){
   const form=document.getElementById("main-form");
-  form.querySelectorAll("input,textarea,select").forEach(el=>{el.value="";});
+  form.querySelectorAll("input,textarea,select").forEach(el=>{el.value="";});updatePatientAge();
   form.querySelectorAll(".tog-btn").forEach(el=>{el.classList.remove("si","no");el.style.background="";el.style.color="";el.style.borderColor="";});
   ["patient-cf","patient-doc-wrap","allergie-det","farmaci-det","patologie-det","warning"].forEach(id=>document.getElementById(id).style.display="none");
   ["response","rx-section","doctor-form","email-gate","success-box","loading"].forEach(id=>document.getElementById(id).classList.add("hidden"));
@@ -2731,6 +2726,15 @@ function showLoading(){
   document.getElementById('doctor-form').classList.add('hidden');
   document.getElementById('email-gate').classList.add('hidden');
 }
+function patientAge(value){
+  const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value||""));if(!m)return null;
+  const y=Number(m[1]),mo=Number(m[2]),d=Number(m[3]),birth=new Date(y,mo-1,d),now=new Date();
+  if(birth.getFullYear()!==y||birth.getMonth()!==mo-1||birth.getDate()!==d||birth>now)return null;
+  let age=now.getFullYear()-y;if(now.getMonth()<mo-1||(now.getMonth()===mo-1&&now.getDate()<d))age--;
+  return age>=0&&age<=125?age:null;
+}
+function updatePatientAge(){const age=patientAge(document.getElementById("patient-dob").value);document.getElementById("patient-age-display").textContent=age===null?"Età: calcolata dalla data di nascita":"Età: "+age+" anni";}
+function clinicalChoice(key){const yes=document.getElementById(key+"-si").classList.contains("si"),no=document.getElementById(key+"-no").classList.contains("no");if(yes)return {answer:"yes",detail:document.getElementById(key+"-det").value.trim()};if(no)return {answer:"no",detail:""};return null;}
 function showDoctorForm(){document.getElementById('doctor-form').classList.remove('hidden');document.getElementById('doctor-form').scrollIntoView({behavior:'smooth'});}
 
 async function checkSubscriptionAndProceed(prefillEmail){
@@ -2751,7 +2755,12 @@ async function submitToDoctor(){
   const nome=document.getElementById('patient-name').value.trim(),email=document.getElementById('patient-email').value.trim();
   let cf=document.getElementById('patient-cf').value.trim().toUpperCase().replace(/\s+/g,'');
   const docType=document.getElementById('patient-doc-type').value,docNumber=document.getElementById('patient-doc-number').value.trim();
-  if(!nome){alert('Inserisci nome e cognome');return;}
+  if(!nome||nome.split(/\s+/).length<2){alert("Inserisci nome e cognome");return;}
+  const dob=document.getElementById("patient-dob").value;
+  const age=patientAge(dob);
+  if(age===null||age<18){alert("Inserisci una data di nascita valida. Il servizio è riservato ai maggiorenni.");return;}
+  const anamnesis={allergies:clinicalChoice("allergie"),medications:clinicalChoice("farmaci"),conditions:clinicalChoice("patologie")};
+  for(const [key,label] of [["allergies","allergie"],["medications","farmaci"],["conditions","patologie"]]){const answer=anamnesis[key];if(!answer){alert("Rispondi alla domanda su "+label);return;}if(answer.answer==="yes"&&!answer.detail){alert("Specifica "+label+" (se non conosci i dettagli, scrivilo).");return;}}
   if(hasCF===null){alert('Indica se possiedi un codice fiscale italiano');return;}
   if(hasCF){
     const cfPattern=/^[A-Z]{6}[0-9LMNPQRSTUV]{2}[A-EHLMPRST][0-9LMNPQRSTUV]{2}[A-Z][0-9LMNPQRSTUV]{3}[A-Z]$/;
@@ -2783,14 +2792,15 @@ async function submitToDoctor(){
       paymentSessionId,
       tipo:tipoRichiesta,patientText:document.getElementById('problem').value,patientName:nome,codiceFiscale:cf,
       docType,docNumber,
-      dateOfBirth:document.getElementById('patient-dob').value,email,phone:document.getElementById('patient-phone').value,
+      dateOfBirth:dob,age,anamnesis,email,phone:document.getElementById('patient-phone').value,
       clinicalData:[
-        document.getElementById('allergie-det')?.style.display!=='none'?'Allergie: '+document.getElementById('allergie-det').value:'',
-        document.getElementById('farmaci-det')?.style.display!=='none'?'Farmaci: '+document.getElementById('farmaci-det').value:'',
-        document.getElementById('patologie-det')?.style.display!=='none'?'Patologie: '+document.getElementById('patologie-det').value:'',
+        'Età: '+age+' anni',
+        'Allergie: '+(anamnesis.allergies.answer==='no'?'Nessuna nota':anamnesis.allergies.detail),
+        'Farmaci: '+(anamnesis.medications.answer==='no'?'Nessuno':anamnesis.medications.detail),
+        'Patologie: '+(anamnesis.conditions.answer==='no'?'Nessuna riferita':anamnesis.conditions.detail),
         document.getElementById('p-alt')?.value?'Altezza: '+document.getElementById('p-alt').value+'cm':'',
         document.getElementById('p-peso')?.value?'Peso: '+document.getElementById('p-peso').value+'kg':'',
-        document.getElementById('p-sg')?.value?'Gruppo sangue: '+document.getElementById('p-sg').value:'',
+        document.getElementById('patient-other')?.value.trim()?'Altre informazioni: '+document.getElementById('patient-other').value.trim():'',
       ].filter(Boolean).join(' | '),
       aiResponse:ulr,conversazione:conversazione.map(m=>m.role+': '+m.content).join('\n\n'),
       allegati,consenso:true,consensoTimestamp,archivioReferti:archivioOk
