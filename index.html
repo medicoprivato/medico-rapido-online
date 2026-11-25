@@ -373,21 +373,26 @@ textarea{min-height:120px;resize:none}
       </a>
     </div>
 
-    <div style="text-align:center;font-size:15px;font-weight:900;color:#81D4FA;letter-spacing:.2px;margin-bottom:2px">Ginecologia e salute della donna</div>
+    <div style="text-align:center;font-size:15px;font-weight:900;color:#0D4F5C;letter-spacing:.2px;margin-bottom:2px">Ginecologia e salute della donna</div>
     <div style="text-align:center;font-size:15px;color:#1a1a1a;margin-bottom:10px;padding:0 10px">Consulto scritto con una specialista in Ginecologia e Ostetricia: referti, ciclo, menopausa e fertilità naturale.</div>
 
-    <div style="margin-bottom:18px" onclick="event.stopPropagation()">
-      <div style="display:flex;align-items:center;background:#fff;border:2px solid #B2E0DC;border-radius:100px;padding:6px 8px 6px 20px;box-shadow:0 4px 16px rgba(13,79,92,.1)">
-        <span style="font-size:20px;margin-right:10px;flex-shrink:0">🔍</span>
-        <input id="home-search" type="text" placeholder="Descrivi il problema" style="flex:1;border:none;outline:none;font-size:16px;font-family:'Plus Jakarta Sans',sans-serif;color:#4E79A7;background:transparent;min-width:0" onkeydown="if(event.key==='Enter')searchStart()">
-        <button onclick="searchStart()" style="flex-shrink:0;background:#f97316;color:#fff;border:none;border-radius:100px;padding:12px 20px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Scrivi</button>
+    <section class="hero-price" style="cursor:default" aria-label="Consulto medico scritto">
+      <strong>30 € per consulto</strong>
+      <span class="price-summary">Valutazione medica scritta online</span>
+      <p>Risposta normalmente entro 24 ore, anche nei festivi. Nessuna telefonata o videochiamata.</p>
+      <button type="button" onclick="showScreen('s-payment')" style="display:block;width:100%;margin:16px auto 12px;padding:15px 10px;background:#f97316;color:#fff;border:0;border-radius:12px;font:800 17px 'Plus Jakarta Sans',sans-serif;cursor:pointer">Acquista il consulto – 30 €</button>
+      <p>Potrai inviare la richiesta e i referti dopo la verifica del pagamento. Il consulto non garantisce una prescrizione.</p>
+    </section>
+    <section style="max-width:640px;margin:0 auto 18px;background:#fff;border:1px solid #B2E0DC;border-radius:18px;padding:16px;text-align:center" aria-label="Servizi disponibili">
+      <h2 style="font-size:18px;color:#0D4F5C;margin-bottom:12px">Scegli il servizio</h2>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px">
+        <a href="/consulto-ginecologico-online" style="display:flex;align-items:center;justify-content:center;min-height:62px;border:1px solid #B2E0DC;background:#F0FAFA;border-radius:10px;padding:10px 5px;color:#0D4F5C;font-size:14px;font-weight:800;text-decoration:none;line-height:1.35">Consulto ginecologico</a>
+        <a href="/interpretazione-referti-online" style="display:flex;align-items:center;justify-content:center;min-height:62px;border:1px solid #B2E0DC;background:#F0FAFA;border-radius:10px;padding:10px 5px;color:#0D4F5C;font-size:14px;font-weight:800;text-decoration:none;line-height:1.35">Lettura referti</a>
+        <a href="/percorso-menopausa" style="display:flex;align-items:center;justify-content:center;min-height:62px;border:1px solid #B2E0DC;background:#F0FAFA;border-radius:10px;padding:10px 5px;color:#0D4F5C;font-size:14px;font-weight:800;text-decoration:none;line-height:1.35">Percorso menopausa</a>
+        <a href="/medico-italiano-online-espanol" lang="es" style="display:flex;align-items:center;justify-content:center;min-height:62px;background:#0D4F5C;border-radius:10px;padding:10px 5px;color:white;font-size:14px;font-weight:800;text-decoration:none;line-height:1.35">Médico en español</a>
       </div>
-    </div>
-
-
-    <div class="hero-price" role="button" tabindex="0" onclick="showScreen('s-payment')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showScreen('s-payment')}"><strong>30 € per consulto</strong><span class="price-summary">Valutazione medica scritta online</span><p>Il pagamento remunera la valutazione professionale, non garantisce una prescrizione.</p><p>La richiesta viene valutata personalmente da un medico, a distanza.</p></div>
-
-
+      <p style="font-size:12px;color:#475569;margin-top:12px">Informazioni sul servizio prima dell'acquisto.</p>
+    </section>
 
     <div style="background:#F0FAFA;border:1.5px solid #B2E0DC;border-radius:16px;padding:18px 20px;margin:0 0 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
       <div style="flex:1;min-width:160px">
@@ -422,7 +427,7 @@ textarea{min-height:120px;resize:none}
       <button onclick="searchBlogFromHome()" style="flex-shrink:0;background:#4E79A7;color:#fff;border:none;border-radius:100px;padding:10px 18px;font-size:13px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Cerca</button>
     </div>
 
-    <section style="max-width:850px;margin:0 auto 18px;background:#fff;border:1px solid #B2E0DC;border-radius:16px;padding:18px;text-align:center"><h2 style="font-size:20px;color:#0D4F5C;margin-bottom:12px">Come possiamo aiutarti</h2><div style="display:grid;gap:10px"><a href="/interpretazione-referti-online" style="display:block;border:1px solid #B2E0DC;border-radius:10px;padding:12px;color:#0D4F5C;font-weight:800;text-decoration:none">Lettura referti ginecologici · 30 €</a><a href="/percorso-menopausa" style="display:block;border:1px solid #B2E0DC;border-radius:10px;padding:12px;color:#0D4F5C;font-weight:800;text-decoration:none">Percorso menopausa · valutazioni individuali</a><a href="/consulto-ginecologico-online" style="display:block;border:1px solid #B2E0DC;border-radius:10px;padding:12px;color:#0D4F5C;font-weight:800;text-decoration:none">Consulto ginecologico scritto · 30 €</a><a href="/medico-italiano-online-espanol" lang="es" style="display:block;background:#0D4F5C;color:white;border-radius:10px;padding:12px;font-weight:800;text-decoration:none">Médico en español · ginecología y salud femenina</a></div></section><div class="hero-serv">
+    <div class="hero-serv">
       <div class="hero-serv-lbl">Cosa puoi richiedere</div>
       <div class="hero-serv-list">
         GINECOLOGIA E OSTETRICIA<br>
@@ -2713,17 +2718,6 @@ function searchBlogFromHome(){
     const bs=document.getElementById('blog-search');
     if(bs){bs.value=val;cercaBlog(val);}
   },200);
-}
-
-function searchStart(){
-  const inp=document.getElementById('home-search');
-  const val=inp?inp.value.trim():'';
-  if(!val){if(inp)inp.focus();return;}
-  if(typeof gtag==='function')gtag('event','home_search_used');
-  document.getElementById('requestType').value='Valutazione sintomi';
-  document.getElementById('problem').value=val;
-  showScreen('s-richiesta');
-  setTimeout(()=>document.getElementById('problem').focus(),300);
 }
 
 function quickStart(tipo){
