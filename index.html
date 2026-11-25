@@ -512,17 +512,17 @@ textarea{min-height:120px;resize:none}
         <div class="tog-grid"><button type="button" id="hascf-no" class="tog-btn" onclick="setHasCF(false)">No</button><button type="button" id="hascf-si" class="tog-btn" onclick="setHasCF(true)">Sì</button></div>
         <input id="patient-cf" placeholder="Codice fiscale *" style="text-transform:uppercase;display:none;margin-top:8px"/>
         <div id="patient-doc-wrap" style="display:none;margin-top:8px">
-          <select id="patient-doc-type" style="margin-bottom:8px">
+          <p style="font-size:13px;color:#475569;line-height:1.5;margin:0 0 10px">Se non hai un codice fiscale italiano, puoi identificarti con un passaporto o un documento d’identità valido, anche rilasciato all’estero. Non è necessario un permesso di soggiorno.</p>
+          <label for="patient-doc-type" style="font-size:13px;font-weight:700;color:#0D4F5C">Documento d’identità *</label><select id="patient-doc-type" style="margin-bottom:8px">
             <option value="">Tipo di documento *</option>
             <option value="Passaporto">Passaporto</option>
-            <option value="Carta d'identità">Carta d'identità</option>
-            <option value="Permesso di soggiorno">Permesso di soggiorno</option>
-            <option value="Patente">Patente</option>
+            <option value="Carta d'identità">Carta d’identità italiana o estera</option>
+            <option value="Altro documento d’identità valido">Altro documento d’identità valido</option>
           </select>
           <input id="patient-doc-number" placeholder="Numero documento *"/>
         </div>
-        <label for="patient-dob" style="font-size:13px;font-weight:700;color:#0D4F5C">Data di nascita *</label><input id="patient-dob" type="date" autocomplete="bday" required oninput="updatePatientAge()"/><div id="patient-age-display" style="font-size:14px;color:#0D4F5C;font-weight:700;margin:0 0 12px" aria-live="polite">Età: calcolata dalla data di nascita</div>
-        <input id="patient-email" type="email" placeholder="Email per ricevere la risposta *" autocomplete="email"/>
+        <label for="patient-dob" style="font-size:13px;font-weight:700;color:#0D4F5C">Data di nascita *</label><input id="patient-dob" type="date" autocomplete="bday" required/>
+        <label for="patient-email" style="font-size:13px;font-weight:700;color:#0D4F5C">Email per ricevere la risposta *</label><input id="patient-email" type="email" placeholder="Email" autocomplete="email"/>
         <input id="patient-phone" placeholder="Telefono (opzionale)" autocomplete="tel"/>
         <div class="ftit">🏥 Dati sanitari</div>
         <div class="card" style="padding:14px;margin-bottom:12px">
@@ -2589,7 +2589,7 @@ let requestAccessEmail = "";
 let requestAccessSequence = 0;
 function clearPreviewFields(){
   const form=document.getElementById("main-form");
-  form.querySelectorAll("input,textarea,select").forEach(el=>{el.value="";});updatePatientAge();
+  form.querySelectorAll("input,textarea,select").forEach(el=>{el.value="";});
   form.querySelectorAll(".tog-btn").forEach(el=>{el.classList.remove("si","no");el.style.background="";el.style.color="";el.style.borderColor="";});
   ["patient-cf","patient-doc-wrap","allergie-det","farmaci-det","patologie-det","warning"].forEach(id=>document.getElementById(id).style.display="none");
   ["response","rx-section","doctor-form","email-gate","success-box","loading"].forEach(id=>document.getElementById(id).classList.add("hidden"));
@@ -2733,7 +2733,6 @@ function patientAge(value){
   let age=now.getFullYear()-y;if(now.getMonth()<mo-1||(now.getMonth()===mo-1&&now.getDate()<d))age--;
   return age>=0&&age<=125?age:null;
 }
-function updatePatientAge(){const age=patientAge(document.getElementById("patient-dob").value);document.getElementById("patient-age-display").textContent=age===null?"Età: calcolata dalla data di nascita":"Età: "+age+" anni";}
 function clinicalChoice(key){const yes=document.getElementById(key+"-si").classList.contains("si"),no=document.getElementById(key+"-no").classList.contains("no");if(yes)return {answer:"yes",detail:document.getElementById(key+"-det").value.trim()};if(no)return {answer:"no",detail:""};return null;}
 function showDoctorForm(){document.getElementById('doctor-form').classList.remove('hidden');document.getElementById('doctor-form').scrollIntoView({behavior:'smooth'});}
 
