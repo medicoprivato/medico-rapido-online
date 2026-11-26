@@ -77,7 +77,7 @@ export default async function handler(req, res) {
         from: `Medico Subito <${process.env.GMAIL_USER}>`,
         to: email,
         subject: "Medico Subito - richiesta ricevuta",
-        html: `<p>Gentile ${escapeHtml(patientName)}, la tua richiesta è stata ricevuta. Un medico la valuterà e risponderà entro 24 ore.</p><p>Per le emergenze chiama il 118.</p>`
+        html: `<p>Gentile ${escapeHtml(patientName)}, la tua richiesta è stata ricevuta. Un medico la valuterà e risponderà entro 24 ore dalla ricezione della richiesta completa.</p><p>Per le emergenze chiama il 118.</p>`
       });
     } catch (mailError) { console.error("Email delivery:", mailError.message); }
     return res.status(200).json({ ok: true });

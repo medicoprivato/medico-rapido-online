@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ error: "Email non valida" });
   }
-  const termsVersion="2026-11-26-v1";
+  const termsVersion="2026-11-26-v2";
   if(req.body?.termsAccepted!==true||req.body?.termsVersion!==termsVersion)return res.status(400).json({error:"Leggi e accetta le condizioni del servizio aggiornate prima di pagare."});
   const termsAcceptedAt=new Date().toISOString();
   const secretKey = process.env.STRIPE_SECRET_KEY;
