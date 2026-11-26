@@ -28,8 +28,19 @@ function normalize(html,lang){
       [/Ricetta bianca online in 24 ore/gi,'Ricetta bianca online: valutazione medica scritta'],
       [/Certificato medico online privato in 24 ore/gi,'Certificato medico online privato: valutazione medica'],
       [/con prescrizione scritta entro 24 ore/gi,'con valutazione scritta entro 24 ore dalla ricezione della richiesta completa'],
-      [/((?:prescrizione|ricetta)\s+(?:è\s+)?garantita)(?=[<.,;!?]|$)/gi,(m)=>m]
     ];
+    // Cover older landing-page templates which promise a specific prescription.
+    replacements.push(
+      [/\bprescrive (la terapia(?: online| appropriata| antiallergica)?|triptani e terapia preventiva|i farmaci utili|i farmaci in PDF) (?:in|entro) 24 ore\b/gi,'risponde entro 24 ore dalla ricezione della richiesta completa e prescrive $1 solo se clinicamente appropriato'],
+      [/\b(ricevi) (?:una prescrizione scritta|la ricetta firmata in PDF|la prescrizione firmata in PDF|la prescrizione rinnovata in PDF) entro 24 ore\b/gi,'$1 una valutazione scritta entro 24 ore dalla ricezione della richiesta completa, con eventuale prescrizione se clinicamente appropriata'],
+      [/\bRicevi una ricetta medica online in 24 ore\b/g,'Richiedi una valutazione medica scritta entro 24 ore dalla ricezione della richiesta completa'],
+      [/\bOttieni la prescrizione per un['’]ecografia online in 24 ore\b/g,'Richiedi una valutazione per un’ecografia, con risposta entro 24 ore dalla ricezione della richiesta completa'],
+      [/\bRicetta medica online in 24 ore\b/g,'Ricetta medica online: valutazione scritta'],
+      [/((?:risposta|risponde|risponderà|valutazione|parere)(?:\s+(?:medic[ao]|individuale|scritt[ao]|firmat[ao]|per iscritto|via email|nella tua lingua)){0,4})\s*,?\s*(?:(?:normalmente|di solito|generalmente)\s+)?(?:in|entro) 24 ore(?!\s+(?:dalla|dal|dall['’]|su 24))/gi,'$1 entro 24 ore dalla ricezione della richiesta completa'],
+      [/\b(?:con )?teleconsulto disponibile al bisogno\b/gi,'con consulto esclusivamente scritto'],
+      [/\bteleconsulto al bisogno\b/gi,'consulto scritto'],
+      [/\b(?:normalmente|di solito|generalmente)\s+(?=entro 24 ore dalla (?:ricezione della )?richiesta completa)/gi,'']
+    );
     // Keep clinical statements and negations intact. Exact obsolete marketing phrases
     // are replaced wherever present in visible copy, metadata, or FAQ structured data.
     for(const [pattern,replacement] of replacements)html=html.replace(pattern,replacement);
