@@ -525,19 +525,29 @@ textarea{min-height:120px;resize:none}
         <label for="patient-dob" style="font-size:13px;font-weight:700;color:#0D4F5C">Data di nascita *</label><input id="patient-dob" type="date" autocomplete="bday" required/>
         <label for="patient-email" style="font-size:13px;font-weight:700;color:#0D4F5C">Email per ricevere la risposta *</label><input id="patient-email" type="email" placeholder="Email" autocomplete="email"/>
         <label for="patient-phone" style="font-size:13px;font-weight:700;color:#0D4F5C">Telefono (facoltativo)</label><input id="patient-phone" placeholder="Numero di telefono" autocomplete="tel"/>
-        <div class="ftit">🏥 Dati sanitari</div>
+        <div class="ftit">🏥 Anamnesi</div>
         <div class="card" style="padding:14px;margin-bottom:12px">
-          <p style="font-size:14px;color:#475569;margin:0 0 12px">Rispondi a tre brevi domande per aiutare il medico a valutare la richiesta in sicurezza.</p><div style="font-size:14px;font-weight:700;color:var(--txt);margin-bottom:7px">Hai allergie note, soprattutto a farmaci? *</div>
-          <div class="tog-grid"><button type="button" id="allergie-no" class="tog-btn" onclick="togSan('allergie',false)">No</button><button type="button" id="allergie-si" class="tog-btn" onclick="togSan('allergie',true)">Sì</button></div>
-          <div id="allergie-detail-wrap" class="detail-field" style="display:none"><label for="allergie-det" class="field-help">Indica a cosa sei allergico e, se la ricordi, quale reazione hai avuto</label><textarea id="allergie-det" placeholder="Scrivi qui" style="display:none;min-height:60px;margin-bottom:0"></textarea></div>
-          <div style="font-size:14px;font-weight:700;color:var(--txt);margin:10px 0 7px">Assumi farmaci o integratori, anche occasionalmente? *</div>
-          <div class="tog-grid"><button type="button" id="farmaci-no" class="tog-btn" onclick="togSan('farmaci',false)">No</button><button type="button" id="farmaci-si" class="tog-btn" onclick="togSan('farmaci',true)">Sì</button></div>
-          <div id="farmaci-detail-wrap" class="detail-field" style="display:none"><label for="farmaci-det" class="field-help">Nome, dose e frequenza dei farmaci, se li conosci</label><textarea id="farmaci-det" placeholder="Scrivi qui" style="display:none;min-height:60px;margin-bottom:0"></textarea></div>
-          <div style="font-size:14px;font-weight:700;color:var(--txt);margin:10px 0 7px">Hai malattie, interventi o condizioni di salute rilevanti? *</div>
-          <div class="tog-grid"><button type="button" id="patologie-no" class="tog-btn" onclick="togSan('patologie',false)">No</button><button type="button" id="patologie-si" class="tog-btn" onclick="togSan('patologie',true)">Sì</button></div>
-          <div id="patologie-detail-wrap" class="detail-field" style="display:none"><label for="patologie-det" class="field-help">Indica le condizioni rilevanti, anche pregresse</label><textarea id="patologie-det" placeholder="Scrivi qui" style="display:none;min-height:60px;margin-bottom:0"></textarea></div>
+          <p style="font-size:14px;color:#475569;margin:0 0 14px">Compila le informazioni utili o seleziona Nessuna / Nessuno.</p>
+          <label for="allergie-det" style="display:block;font-size:14px;font-weight:700;color:#123b46;margin-bottom:5px">Allergie (farmaci o altro) *</label>
+          <p class="field-help">Indica le allergie note e, se la ricordi, la reazione</p>
+          <textarea id="allergie-det" placeholder="Scrivi qui" style="min-height:54px;margin-bottom:4px" oninput="updateAnamnesisChoice('allergie',false)"></textarea>
+          <label style="display:flex;align-items:flex-start;gap:9px;padding:9px 10px;margin:0 0 12px;font-size:14px;line-height:1.5;color:#0D4F5C;cursor:pointer;border-radius:8px"><input type="checkbox" id="allergie-none" onchange="updateAnamnesisChoice('allergie',true)" style="appearance:auto;-webkit-appearance:checkbox;accent-color:#0D4F5C;width:21px;height:21px;min-width:21px;padding:0;margin:1px 0 0;flex-shrink:0"/><span>Nessuna</span></label>
+          <label for="farmaci-det" style="display:block;font-size:14px;font-weight:700;color:#123b46;margin-bottom:5px">Farmaci che assumi regolarmente *</label>
+          <p class="field-help">Nome e dosaggio, se li conosci</p>
+          <textarea id="farmaci-det" placeholder="Scrivi qui" style="min-height:54px;margin-bottom:4px" oninput="updateAnamnesisChoice('farmaci',false)"></textarea>
+          <label style="display:flex;align-items:flex-start;gap:9px;padding:9px 10px;margin:0 0 12px;font-size:14px;line-height:1.5;color:#0D4F5C;cursor:pointer;border-radius:8px"><input type="checkbox" id="farmaci-none" onchange="updateAnamnesisChoice('farmaci',true)" style="appearance:auto;-webkit-appearance:checkbox;accent-color:#0D4F5C;width:21px;height:21px;min-width:21px;padding:0;margin:1px 0 0;flex-shrink:0"/><span>Nessuno</span></label>
+          <label for="patologie-det" style="display:block;font-size:14px;font-weight:700;color:#123b46;margin-bottom:5px">Malattie importanti o croniche *</label>
+          <p class="field-help">Es. cuore, diabete, pressione, reni, fegato, tumori</p>
+          <textarea id="patologie-det" placeholder="Scrivi qui" style="min-height:54px;margin-bottom:4px" oninput="updateAnamnesisChoice('patologie',false)"></textarea>
+          <label style="display:flex;align-items:flex-start;gap:9px;padding:9px 10px;margin:0 0 12px;font-size:14px;line-height:1.5;color:#0D4F5C;cursor:pointer;border-radius:8px"><input type="checkbox" id="patologie-none" onchange="updateAnamnesisChoice('patologie',true)" style="appearance:auto;-webkit-appearance:checkbox;accent-color:#0D4F5C;width:21px;height:21px;min-width:21px;padding:0;margin:1px 0 0;flex-shrink:0"/><span>Nessuna</span></label>
+          <div style="font-size:14px;font-weight:700;color:#123b46;margin:12px 0 5px">Solo se pertinente: sei in gravidanza o allatti?</div>
+<label style="display:flex;align-items:flex-start;gap:9px;padding:9px 10px;margin:0 0 12px;font-size:14px;line-height:1.5;color:#0D4F5C;cursor:pointer;border-radius:8pxmargin-bottom:2px"><input type="checkbox" id="repro-no" onchange="updateReproductiveChoice('no')" style="appearance:auto;-webkit-appearance:checkbox;accent-color:#0D4F5C;width:21px;height:21px;min-width:21px;padding:0;margin:1px 0 0;flex-shrink:0"/><span>No</span></label>
+<label style="display:flex;align-items:flex-start;gap:9px;padding:9px 10px;margin:0 0 12px;font-size:14px;line-height:1.5;color:#0D4F5C;cursor:pointer;border-radius:8pxmargin-bottom:2px"><input type="checkbox" id="repro-pregnancy" onchange="updateReproductiveChoice('pregnancy')" style="appearance:auto;-webkit-appearance:checkbox;accent-color:#0D4F5C;width:21px;height:21px;min-width:21px;padding:0;margin:1px 0 0;flex-shrink:0"/><span>Gravidanza</span></label>
+<label style="display:flex;align-items:flex-start;gap:9px;padding:9px 10px;margin:0 0 12px;font-size:14px;line-height:1.5;color:#0D4F5C;cursor:pointer;border-radius:8pxmargin-bottom:2px"><input type="checkbox" id="repro-breastfeeding" onchange="updateReproductiveChoice('breastfeeding')" style="appearance:auto;-webkit-appearance:checkbox;accent-color:#0D4F5C;width:21px;height:21px;min-width:21px;padding:0;margin:1px 0 0;flex-shrink:0"/><span>Allattamento</span></label>
+<label style="display:flex;align-items:flex-start;gap:9px;padding:9px 10px;margin:0 0 12px;font-size:14px;line-height:1.5;color:#0D4F5C;cursor:pointer;border-radius:8pxmargin-bottom:2px"><input type="checkbox" id="repro-not_applicable" onchange="updateReproductiveChoice('not_applicable')" style="appearance:auto;-webkit-appearance:checkbox;accent-color:#0D4F5C;width:21px;height:21px;min-width:21px;padding:0;margin:1px 0 0;flex-shrink:0"/><span>Non applicabile</span></label>
+<label style="display:flex;align-items:flex-start;gap:9px;padding:9px 10px;margin:0 0 12px;font-size:14px;line-height:1.5;color:#0D4F5C;cursor:pointer;border-radius:8pxmargin-bottom:2px"><input type="checkbox" id="repro-unknown" onchange="updateReproductiveChoice('unknown')" style="appearance:auto;-webkit-appearance:checkbox;accent-color:#0D4F5C;width:21px;height:21px;min-width:21px;padding:0;margin:1px 0 0;flex-shrink:0"/><span>Non so / possibile gravidanza</span></label>
         </div>
-        <details style="border:1px solid #bddede;border-radius:12px;padding:12px;margin:0 0 16px"><summary style="cursor:pointer;font-weight:700;color:#0D4F5C">Altri dati utili (facoltativi)</summary><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px"><div><label for="p-alt" style="font-size:12px;font-weight:600">Altezza (cm)</label><input id="p-alt" type="number" min="50" max="250" placeholder="170"/></div><div><label for="p-peso" style="font-size:12px;font-weight:600">Peso (kg)</label><input id="p-peso" type="number" min="15" max="350" step="0.1" placeholder="70"/></div></div><label for="patient-other" style="font-size:13px;font-weight:600">Altre informazioni utili (es. gravidanza, allattamento, interventi, esami recenti)</label><textarea id="patient-other" placeholder="Solo se rilevante per la tua richiesta" style="min-height:60px"></textarea></details><div class="ftit">📝 Informativa e consensi</div>
+        <div class="ftit">📝 Informativa e consensi</div>
         <div class="con-box" style="margin-bottom:10px">
           <div class="con-tit">1. Trattamento dati sanitari</div>
           <div class="con-txt">Il trattamento dei tuoi dati sanitari, strettamente necessari alla valutazione clinica e alla risposta alla tua richiesta, avviene sulla base giuridica prevista dall'art. 9, par. 2, lett. h) del GDPR (finalità di medicina, previo obbligo di segreto professionale del medico), come da <a onclick="prevScr='s-richiesta';showScreen('s-privacy')">Privacy Policy</a> e <a onclick="prevScr='s-richiesta';showScreen('s-termini')">Termini</a>. I dati sono trattati per finalità sanitarie; per i fornitori tecnici e i diritti consulta l’informativa. Il servizio non sostituisce il medico di base.<br><br>Confermando di aver letto questa informativa, prendi atto delle modalità di trattamento sopra descritte.</div>
@@ -2593,7 +2603,8 @@ function clearPreviewFields(){
   const form=document.getElementById("main-form");
   form.querySelectorAll("input,textarea,select").forEach(el=>{if(el.type==="checkbox")el.checked=false;else el.value="";});updateFiscalFields();
   form.querySelectorAll(".tog-btn").forEach(el=>{el.classList.remove("si","no");el.setAttribute("aria-pressed","false");el.style.background="";el.style.color="";el.style.borderColor="";});
-  ["allergie-det","farmaci-det","patologie-det","allergie-detail-wrap","farmaci-detail-wrap","patologie-detail-wrap","warning"].forEach(id=>document.getElementById(id).style.display="none");
+  ["allergie","farmaci","patologie"].forEach(key=>updateAnamnesisChoice(key,true));
+  document.getElementById("warning").style.display="none";
   ["response","rx-section","doctor-form","email-gate","success-box","loading"].forEach(id=>document.getElementById(id).classList.add("hidden"));
   consensoOk=false;teleConsensoOk=false;esecConsensoOk=false;archivioOk=false;uploadedFiles=[];renderFilesPreview();conversazione=[];tipoRichiesta="";requestAccessEmail="";
 }
@@ -2735,7 +2746,25 @@ function patientAge(value){
   let age=now.getFullYear()-y;if(now.getMonth()<mo-1||(now.getMonth()===mo-1&&now.getDate()<d))age--;
   return age>=0&&age<=125?age:null;
 }
-function clinicalChoice(key){const yes=document.getElementById(key+"-si").classList.contains("si"),no=document.getElementById(key+"-no").classList.contains("no");if(yes)return {answer:"yes",detail:document.getElementById(key+"-det").value.trim()};if(no)return {answer:"no",detail:""};return null;}
+function updateAnamnesisChoice(key,fromCheckbox){
+  const field=document.getElementById(key+'-det'),none=document.getElementById(key+'-none');
+  if(!fromCheckbox&&field.value.trim())none.checked=false;
+  field.disabled=none.checked;field.style.background=none.checked?'#d4f2ec':'';
+  field.style.color='#123b46';
+}
+function clinicalChoice(key){
+  const detail=document.getElementById(key+'-det').value.trim();
+  if(document.getElementById(key+'-none').checked)return {answer:'no',detail:''};
+  return detail?{answer:'yes',detail}:null;
+}
+const REPRO_KEYS=['no','pregnancy','breastfeeding','not_applicable','unknown'];
+function updateReproductiveChoice(key){
+  const el=document.getElementById('repro-'+key);
+  if(!el.checked)return;
+  const compatible=['pregnancy','breastfeeding'];
+  for(const other of REPRO_KEYS){if(other!==key&&!(compatible.includes(key)&&compatible.includes(other)))document.getElementById('repro-'+other).checked=false;}
+}
+function reproductiveChoice(){return REPRO_KEYS.filter(key=>document.getElementById('repro-'+key).checked);}
 function showDoctorForm(){document.getElementById('doctor-form').classList.remove('hidden');document.getElementById('doctor-form').scrollIntoView({behavior:'smooth'});}
 
 async function checkSubscriptionAndProceed(prefillEmail){
@@ -2759,7 +2788,7 @@ async function submitToDoctor(){
   const dob=document.getElementById("patient-dob").value;
   const age=patientAge(dob);
   if(age===null||age<18){alert("Inserisci una data di nascita valida. Il servizio è riservato ai maggiorenni.");return;}
-  const anamnesis={allergies:clinicalChoice("allergie"),medications:clinicalChoice("farmaci"),conditions:clinicalChoice("patologie")};
+  const anamnesis={allergies:clinicalChoice("allergie"),medications:clinicalChoice("farmaci"),conditions:clinicalChoice("patologie"),reproductiveStatus:reproductiveChoice()};
   for(const [key,label] of [["allergies","allergie"],["medications","farmaci"],["conditions","patologie"]]){const answer=anamnesis[key];if(!answer){alert("Rispondi alla domanda su "+label);return;}if(answer.answer==="yes"&&!answer.detail){alert("Specifica "+label+" (se non conosci i dettagli, scrivilo).");return;}}
   const noItalianCF=document.getElementById('patient-no-cf').checked;
   const birthCountry=noItalianCF?document.getElementById('patient-birth-country').value.trim():'';
@@ -2800,9 +2829,7 @@ async function submitToDoctor(){
         'Allergie: '+(anamnesis.allergies.answer==='no'?'Nessuna nota':anamnesis.allergies.detail),
         'Farmaci: '+(anamnesis.medications.answer==='no'?'Nessuno':anamnesis.medications.detail),
         'Patologie: '+(anamnesis.conditions.answer==='no'?'Nessuna riferita':anamnesis.conditions.detail),
-        document.getElementById('p-alt')?.value?'Altezza: '+document.getElementById('p-alt').value+'cm':'',
-        document.getElementById('p-peso')?.value?'Peso: '+document.getElementById('p-peso').value+'kg':'',
-        document.getElementById('patient-other')?.value.trim()?'Altre informazioni: '+document.getElementById('patient-other').value.trim():'',
+        'Gravidanza/allattamento: '+(anamnesis.reproductiveStatus.length?anamnesis.reproductiveStatus.map(key=>({no:'No',pregnancy:'Gravidanza',breastfeeding:'Allattamento',not_applicable:'Non applicabile',unknown:'Non so / possibile gravidanza'})[key]).join(', '):'Non indicato'),
       ].filter(Boolean).join(' | '),
       aiResponse:ulr,conversazione:conversazione.map(m=>m.role+': '+m.content).join('\n\n'),
       allegati,consenso:true,consensoTimestamp,archivioReferti:archivioOk
@@ -2834,6 +2861,8 @@ async function submitToDoctor(){
 function newRequest(){
   document.getElementById('problem').value='';document.getElementById('requestType').value='';document.getElementById('followup').value='';
   uploadedFiles=[];renderFilesPreview();setConsenso(false);document.getElementById('patient-adult-declaration').checked=false;
+  ['allergie','farmaci','patologie'].forEach(key=>{document.getElementById(key+'-det').value='';document.getElementById(key+'-none').checked=false;updateAnamnesisChoice(key,true);});
+  REPRO_KEYS.forEach(key=>document.getElementById('repro-'+key).checked=false);
   ['response','rx-section','doctor-form','email-gate','success-box','loading'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.add('hidden');});
   document.getElementById('warning').style.display='none';
   conversazione=[];tipoRichiesta='';
@@ -2852,13 +2881,7 @@ function setRequestChoice(key,val){
     el.setAttribute('aria-pressed',String(selected));
   }
 }
-function togSan(campo,val){
-  setRequestChoice(campo,val);
-  const det=document.getElementById(campo+'-det');
-  const wrap=document.getElementById(campo+'-detail-wrap');
-  if(det)det.style.display=val?'block':'none';
-  if(wrap)wrap.style.display=val?'block':'none';
-}
+
 
 function setConsenso(val){
   consensoOk=val;setRequestChoice('consenso',val);
