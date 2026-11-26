@@ -1,4 +1,4 @@
-import { validateAnamnesis } from "../lib/validate-anamnesis.js";
+import { validateAnamnesis, identityDeclarationNotes } from "../lib/validate-anamnesis.js";
 import { createClient } from "@supabase/supabase-js";
 import nodemailer from "nodemailer";
 import { verifyConsultAccess } from "../lib/verify-consult-access.js";
@@ -145,6 +145,7 @@ export default async function handler(req, res) {
       email: emailNorm, phone,
       clinical_data: [
         clinicalData,
+        identityDeclarationNotes(req.body),
         (!cfNorm && docType && docNumber) ? `Documento identità: ${docType} ${docNumber.trim().toUpperCase()}` : '',
         identitaDaVerificare ? '⚠️ IDENTITÀ DA VERIFICARE: dati anagrafici diversi da una richiesta precedente con questa email' : ''
       ].filter(Boolean).join(' | '),

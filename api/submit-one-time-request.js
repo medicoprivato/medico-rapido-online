@@ -1,4 +1,4 @@
-import { validateAnamnesis } from "../lib/validate-anamnesis.js";
+import { validateAnamnesis, identityDeclarationNotes } from "../lib/validate-anamnesis.js";
 import { createClient } from "@supabase/supabase-js";
 import nodemailer from "nodemailer";
 
@@ -48,6 +48,7 @@ export default async function handler(req, res) {
     const cf = codiceFiscale ? String(codiceFiscale).trim().toUpperCase().replace(/\s+/g, "") : null;
     const clinicalNotes = [
       clinicalData,
+      identityDeclarationNotes(req.body),
       (!cf && docType && docNumber) ? `Documento identità: ${docType} ${String(docNumber).trim().toUpperCase()}` : "",
       `Pagamento Stripe: ${paymentSessionId}`
     ].filter(Boolean).join(" | ");
