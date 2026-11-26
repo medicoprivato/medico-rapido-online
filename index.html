@@ -431,6 +431,7 @@ textarea{min-height:120px;resize:none}
 
     <div class="card">
       <p style="font-size:14px;line-height:1.5;color:#334155;margin:0 0 12px">Ti trovi all’estero? Prima di acquistare, verifica la disponibilità del servizio nel tuo Paese tramite <a href="mailto:supportomedicosubito@gmail.com?subject=Disponibilit%C3%A0%20consulto%20dall%27estero" style="color:#0D4F5C;font-weight:700">l’assistenza amministrativa</a>. Indica solo il Paese, senza inviare dati sanitari.</p><div id="prepayment-consult-notice" style="background:#f0faf8;border:1.5px solid #168577;border-radius:12px;padding:14px;margin:0 0 14px;color:#123b46;line-height:1.55;font-size:14px"><strong style="display:block;margin-bottom:6px;font-size:16px">Prima di acquistare il consulto</strong><p style="margin:0 0 8px">Il pagamento riguarda un consulto medico professionale, non l’acquisto di una prescrizione. Il rilascio di ricette e certificati dipende dalla valutazione clinica del medico.</p><p style="margin:0 0 8px">Se il medico ha già iniziato a valutare la richiesta, il compenso per il lavoro effettivamente svolto resta dovuto anche se decidi di non proseguire. Eventuali rimborsi sono valutati caso per caso.</p><a href="#s-termini" onclick="prevScr='s-payment';showScreen('s-termini');return false;" style="color:#0D4F5C;font-weight:700;text-decoration:underline">Leggi le condizioni di servizio e rimborso</a></div><input id="stripe-email" type="email" placeholder="La tua email *" autocomplete="email"/>
+      <label style="display:flex;align-items:flex-start;gap:10px;text-align:left;background:#f0faf8;color:#123b46;border:1.5px solid #168577;border-radius:10px;padding:12px;margin:0 0 12px;font-size:14px;line-height:1.5;cursor:pointer"><input id="checkout-terms" type="checkbox" required style="appearance:auto;-webkit-appearance:checkbox;accent-color:#0D4F5C;width:21px;height:21px;min-width:21px;margin:2px 0 0;padding:0;flex-shrink:0"><span><strong>Ho letto e accetto le <a href="#s-termini" onclick="prevScr='s-payment';showScreen('s-termini');return false;" style="color:#0D4F5C;text-decoration:underline">Condizioni del servizio e rimborsi</a>.</strong> Il pagamento riguarda il consulto medico, non l'acquisto di una prescrizione. Se rinuncio dopo l'avvio della valutazione, il compenso per l'attività effettivamente svolta resta dovuto. *</span></label>
       <button class="btn btn-p" onclick="startStripe()" style="margin-top:0;font-size:24px;font-weight:900;letter-spacing:.5px">Paga €30 ora</button>
       <div style="margin-top:10px;font-size:12px;color:var(--txt-l);text-align:center;line-height:1.5">Pagamento sicuro con Stripe. WhatsApp si attiva solo dopo la verifica del pagamento.<br>La spesa può essere detraibile come spesa sanitaria nei casi previsti dalla normativa fiscale vigente.<br><span style="font-size:11px;opacity:.85">La detrazione dipende dalla normativa fiscale vigente e dalla posizione del contribuente.</span></div>
     </div>
@@ -585,6 +586,7 @@ textarea{min-height:120px;resize:none}
           <div style="color:#fff;font-size:20px;font-weight:900;margin-bottom:4px">€30 per consulto</div>
           <div style="color:rgba(255,255,255,.75);font-size:13px;margin-bottom:14px">Una richiesta medica a €30, senza rinnovo automatico. Ogni nuova richiesta richiede un nuovo pagamento.</div>
           <input id="stripe-email-suc" type="email" placeholder="La tua email" autocomplete="email" style="width:100%;border-radius:8px;border:none;padding:12px;font-size:15px;margin-bottom:10px;font-family:'Plus Jakarta Sans',sans-serif;box-sizing:border-box"/>
+          <label style="display:flex;align-items:flex-start;gap:10px;text-align:left;background:#f0faf8;color:#123b46;border:1.5px solid #168577;border-radius:10px;padding:12px;margin:0 0 12px;font-size:14px;line-height:1.5;cursor:pointer"><input id="checkout-terms-suc" type="checkbox" required style="appearance:auto;-webkit-appearance:checkbox;accent-color:#0D4F5C;width:21px;height:21px;min-width:21px;margin:2px 0 0;padding:0;flex-shrink:0"><span><strong>Ho letto e accetto le <a href="#s-termini" onclick="prevScr='s-richiesta';chiudiPaywall();showScreen('s-termini');return false;" style="color:#0D4F5C;text-decoration:underline">Condizioni del servizio e rimborsi</a>.</strong> Il pagamento riguarda il consulto medico, non l'acquisto di una prescrizione. Se rinuncio dopo l'avvio della valutazione, il compenso per l'attività effettivamente svolta resta dovuto. *</span></label>
           <button onclick="startStripeSuc()" style="width:100%;background:#f97316;color:#fff;border:none;border-radius:8px;padding:13px;font-size:17px;font-weight:900;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Paga €30 ora</button>
           <div style="color:rgba(255,255,255,.5);font-size:11px;margin-top:8px;text-align:center">Pagamento sicuro con Stripe. La spesa può essere detraibile come spesa sanitaria nei casi previsti dalla normativa fiscale vigente.</div>
         </div>
@@ -2006,8 +2008,8 @@ textarea{min-height:120px;resize:none}
 <div id="s-termini" class="screen">
   <div class="hdr"><button class="btn-back" onclick="showScreen(prevScr||'s-home')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg> Torna</button><div class="logo-txt" style="margin-left:8px">Termini di Servizio</div></div>
   <div class="legal">
-    <h2>Termini e Condizioni</h2>
-    <p><strong>Ultimo aggiornamento:</strong> 25 maggio 2026</p>
+    <h2>Condizioni del servizio e rimborsi</h2>
+    <p><strong>Ultimo aggiornamento:</strong> 26 novembre 2026 (versione 2026-11-26-v1)</p>
 
     <h3>1. Il servizio</h3>
     <p>Medico Subito è un intermediario tecnologico che mette in contatto pazienti e medici qualificati iscritti all'Ordine dei Medici, in conformità alle Linee Guida sulla Telemedicina del Ministero della Salute (settembre 2022) e alle indicazioni FNOMCeO. Medico Subito non è un'azienda sanitaria e non eroga direttamente prestazioni mediche.</p>
@@ -2036,7 +2038,7 @@ textarea{min-height:120px;resize:none}
 <h3>7-bis. Natura personale</h3><p>Ogni acquisto si riferisce a una sola richiesta del paziente identificato nel modulo ed è personale e non cedibile. Ogni nuova richiesta distinta richiede un nuovo pagamento.</p>
 <h3>7-ter. Abbonamenti preesistenti</h3><p>Gli abbonamenti sottoscritti in precedenza conservano le condizioni pattuite per la durata di validità. Per informazioni su rinnovi e disdette contattare l'assistenza.</p>
 <h3>8. Recesso dal consulto</h3><p>Ai sensi dell’art. 47, comma 1, lett. b), del D.Lgs. 206/2005, la disciplina del diritto di recesso dei contratti a distanza prevista dal Codice del Consumo non si applica ai servizi di assistenza sanitaria resi da professionisti sanitari ai pazienti, comprese le prestazioni finalizzate alla prescrizione di medicinali. Resta fermo il diritto del cliente di recedere ai sensi dell’art. 2237 del Codice Civile, corrispondendo il compenso per l’opera effettivamente svolta e rimborsando le spese sostenute, ove dovute. Per comunicazioni e richieste: supportomedicosubito@gmail.com.</p>
-<h3>8-bis. Rimborsi e collaborazione del paziente</h3><p>Il pagamento riguarda un consulto medico professionale, non l’acquisto di una prescrizione. Il rilascio di ricette e certificati dipende dalla valutazione clinica del medico. La presa in carico può comprendere l’esame della richiesta e della documentazione nonché la formulazione di domande cliniche necessarie. Il paziente è invitato a fornire le informazioni richieste per permettere al medico di completare la valutazione.</p><p>Se il paziente rinuncia al consulto dopo che il medico ha iniziato la valutazione, anche richiedendo informazioni cliniche necessarie, il compenso per l’attività effettivamente svolta resta dovuto. Il mancato rilascio di una ricetta o il successivo ricorso al proprio medico non danno, di per sé, diritto a un rimborso integrale. Eventuali rimborsi sono valutati in base all’attività svolta e alla legge applicabile. Se la prestazione non è stata avviata, o è stata eseguita solo in parte, si valuta il rimborso dell’importo non maturato, nel rispetto dei diritti inderogabili del paziente.</p>
+<h3>8-bis. Rimborsi e collaborazione del paziente</h3><p>Il pagamento riguarda un consulto medico professionale, non l’acquisto di una prescrizione. Il rilascio di ricette e certificati dipende dalla valutazione clinica del medico. La presa in carico può comprendere l’esame della richiesta e della documentazione nonché la formulazione di domande cliniche necessarie. Il paziente è invitato a fornire le informazioni richieste per permettere al medico di completare la valutazione.</p><p>Se il paziente rinuncia al consulto dopo che il medico ha iniziato la valutazione, anche richiedendo informazioni cliniche necessarie, il compenso per l’attività effettivamente svolta resta dovuto. Il mancato rilascio di una ricetta o il successivo ricorso al proprio medico non danno, di per sé, diritto a un rimborso integrale. Eventuali rimborsi sono valutati in base all’attività svolta e alla legge applicabile. Se la prestazione non è stata avviata, o è stata eseguita solo in parte, si valuta il rimborso dell’importo non maturato, nel rispetto dei diritti inderogabili del paziente.</p><p>In caso di pagamento duplicato o errore tecnico di addebito, l’importo indebitamente pagato viene rimborsato. Se la richiesta completa non viene presa in carico entro 24 ore per causa imputabile al servizio, il paziente può chiedere il rimborso. Se il medico richiede integrazioni cliniche e il paziente non risponde entro 72 ore, il medico può chiudere amministrativamente la richiesta, previa valutazione del caso e delle esigenze di sicurezza clinica; resta possibile concordare la prosecuzione. Si applicano le condizioni di rimborso sopra indicate.</p>
 <h3>9. Detrazioni fiscali</h3>
     <p>I servizi medici erogati tramite Medico Subito possono essere detraibili ai sensi dell'art. 15 TUIR (detrazione IRPEF del 19% su spese sanitarie). Viene emessa ricevuta fiscale utilizzabile per il modello 730/Unico. Consultare il proprio commercialista per la situazione specifica.</p>
 
@@ -2175,6 +2177,7 @@ textarea{min-height:120px;resize:none}
       <div style="font-size:12.5px;color:#0D4F5C;line-height:1.7">✓ Risposta firmata (PDF) entro 24 ore<br>✓ Consulto esclusivamente scritto<br>✓ Potenzialmente detraibile come spesa sanitaria</div>
     </div>
     <input id="paywall-email" type="email" placeholder="La tua email *" autocomplete="email" style="width:100%;border:1.5px solid var(--brd);border-radius:10px;padding:14px 16px;font-size:16px;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:12px"/>
+    <label style="display:flex;align-items:flex-start;gap:10px;text-align:left;background:#f0faf8;color:#123b46;border:1.5px solid #168577;border-radius:10px;padding:12px;margin:0 0 12px;font-size:14px;line-height:1.5;cursor:pointer"><input id="checkout-terms-paywall" type="checkbox" required style="appearance:auto;-webkit-appearance:checkbox;accent-color:#0D4F5C;width:21px;height:21px;min-width:21px;margin:2px 0 0;padding:0;flex-shrink:0"><span><strong>Ho letto e accetto le <a href="#s-termini" onclick="prevScr='s-richiesta';chiudiPaywall();showScreen('s-termini');return false;" style="color:#0D4F5C;text-decoration:underline">Condizioni del servizio e rimborsi</a>.</strong> Il pagamento riguarda il consulto medico, non l'acquisto di una prescrizione. Se rinuncio dopo l'avvio della valutazione, il compenso per l'attività effettivamente svolta resta dovuto. *</span></label>
     <button onclick="startStripePaywall()" style="width:100%;background:var(--blu);color:#fff;border:none;border-radius:10px;padding:15px;font-size:16px;font-weight:800;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:10px">Paga 30 € ora (pagamento sicuro)</button>
     <div style="font-size:12px;color:var(--txt-l);margin-bottom:14px">🔒 Stripe · Detraibilità fiscale subordinata ai requisiti di legge</div>
     <button onclick="chiudiPaywall()" style="background:none;border:none;color:var(--txt-l);font-size:13px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif">Annulla</button>
@@ -2924,16 +2927,17 @@ function setArchivio(val){
   archivioOk=val;setRequestChoice('archivio',val);
 }
 
-async function checkoutConsulto(email,btn){
+async function checkoutConsulto(email,btn,termsId){
   if(doctorPreviewActive)return;
   if(!email||!email.includes('@')){alert('Inserisci una email valida');return;}
+  if(!document.getElementById(termsId)?.checked){alert('Leggi e accetta le Condizioni del servizio e rimborsi prima di proseguire.');return;}
   if(email.trim().toLowerCase().endsWith('@example.invalid')){
     try{if(await isPatientPreviewEmail(email)){openPatientPreview(email);return;}}catch(e){}
     alert('Indirizzo di prova non valido. Nessun pagamento effettuato.');return;
   }
   if(btn){btn.disabled=true;btn.textContent='Caricamento...';}
   try{
-    const response=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,paymentSessionId:localStorage.getItem('medico_subito_checkout_session')||''})});
+    const response=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,termsAccepted:true,termsVersion:'2026-11-26-v1',paymentSessionId:localStorage.getItem('medico_subito_checkout_session')||''})});
     const data=await response.json();
     if(!response.ok||!data.url)throw new Error(data.error||'Pagamento non disponibile');
     if(typeof gtag==='function')gtag('event','inizio_checkout_stripe',{value:30,currency:'EUR'});
@@ -2977,11 +2981,11 @@ async function refreshWhatsAppAccess(){
 
 function startStripe(){
   const el=document.getElementById('stripe-email');
-  checkoutConsulto(el?.value.trim(),document.querySelector('#s-payment .btn-p'));
+  checkoutConsulto(el?.value.trim(),document.querySelector('#s-payment .btn-p'),'checkout-terms');
 }
 function startStripeSuc(){
   const el=document.getElementById('stripe-email-suc');
-  checkoutConsulto(el?.value.trim(),el?.nextElementSibling);
+  checkoutConsulto(el?.value.trim(),document.querySelector('#success-box button[onclick="startStripeSuc()"]'),'checkout-terms-suc');
 }
 async function loginMedico(){
   const field=document.getElementById('doc-pwd');
@@ -3201,7 +3205,7 @@ function chiudiPaywall(){
 }
 function startStripePaywall(){
   const email=document.getElementById('paywall-email').value.trim();
-  checkoutConsulto(email,document.querySelector('#paywall-modal button'));
+  checkoutConsulto(email,document.querySelector('#paywall-modal button[onclick="startStripePaywall()"]'),'checkout-terms-paywall');
 }
 function toggleConsenso(){
   const cb = document.getElementById('tr-consenso');

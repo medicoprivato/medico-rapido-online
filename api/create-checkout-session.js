@@ -9,6 +9,9 @@ export default async function handler(req, res) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ error: "Email non valida" });
   }
+  const termsVersion="2026-11-26-v1";
+  if(req.body?.termsAccepted!==true||req.body?.termsVersion!==termsVersion)return res.status(400).json({error:"Leggi e accetta le condizioni del servizio aggiornate prima di pagare."});
+  const termsAcceptedAt=new Date().toISOString();
   const secretKey = process.env.STRIPE_SECRET_KEY;
   if (!secretKey) return res.status(503).json({ error: "Stripe non configurato" });
 
@@ -29,6 +32,9 @@ export default async function handler(req, res) {
       "locale": "it",
       "metadata[servizio]": "consulto_singolo_30",
       "metadata[email_paziente]": email,
+      "metadata[terms_accepted]": "true",
+      "metadata[terms_version]": termsVersion,
+      "metadata[terms_accepted_at]": termsAcceptedAt,
       "tax_id_collection[enabled]": "true"
     });
     const response = await fetch("https://api.stripe.com/v1/checkout/sessions", {
