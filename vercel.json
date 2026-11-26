@@ -1,5 +1,5 @@
 {
-  "buildCommand": "",
+  "buildCommand": "node .scripts/normalize-consult-copy.mjs",
   "outputDirectory": ".",
   "rewrites": [
     {
