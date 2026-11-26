@@ -514,7 +514,7 @@ textarea{min-height:120px;resize:none}
         <div id="patient-doc-wrap" style="display:none;margin-top:8px"><p style="font-size:13px;color:#475569;line-height:1.5;margin:0 0 10px">Puoi proseguire anche senza codice fiscale italiano. Il medico potrà richiedere ulteriori dati identificativi, se necessari per la prestazione.</p></div>
         <label for="patient-dob" style="font-size:13px;font-weight:700;color:#0D4F5C">Data di nascita *</label><input id="patient-dob" type="date" autocomplete="bday" required/>
         <label for="patient-email" style="font-size:13px;font-weight:700;color:#0D4F5C">Email per ricevere la risposta *</label><input id="patient-email" type="email" placeholder="Email" autocomplete="email"/>
-        <input id="patient-phone" placeholder="Telefono (opzionale)" autocomplete="tel"/>
+        <input id="patient-phone" placeholder="Telefono (opzionale)" autocomplete="tel"/><p style="font-size:13px;line-height:1.5;color:#475569;margin:0 0 14px">Non occorre caricare un documento per inviare la richiesta. Prima di erogare la prestazione, il medico verificherà l’identità del paziente con modalità adeguate e potrà richiedere ulteriori informazioni o un documento identificativo, se necessario.</p>
         <div class="ftit">🏥 Dati sanitari</div>
         <div class="card" style="padding:14px;margin-bottom:12px">
           <p style="font-size:14px;color:#475569;margin:0 0 12px">Rispondi a tre brevi domande per aiutare il medico a valutare la richiesta in sicurezza.</p><div style="font-size:14px;font-weight:700;color:var(--txt);margin-bottom:7px">Hai allergie note, soprattutto a farmaci? *</div>
@@ -549,7 +549,7 @@ textarea{min-height:120px;resize:none}
           <div class="con-txt">Acconsento alla conservazione digitale delle mie richieste e risposte nella piattaforma Medico Subito.</div>
           <div class="tog-grid"><button type="button" id="archivio-no" class="tog-btn" onclick="setArchivio(false)">No</button><button type="button" id="archivio-si" class="tog-btn" onclick="setArchivio(true)">Sì</button></div>
         </div>
-        <div style="font-size:12.5px;color:var(--txt-l);line-height:1.6;text-align:center;margin-bottom:10px">Con l'invio della richiesta dichiaro di aver letto e compreso quanto sopra e confermo le scelte effettuate.</div>
+        <div style="font-size:12.5px;color:var(--txt-l);line-height:1.6;text-align:center;margin-bottom:10px">Con l’invio dichiaro che i dati identificativi forniti sono veritieri e che ho letto e compreso quanto sopra, confermando le scelte effettuate.</div>
         <button id="request-submit-btn" class="btn btn-p" onclick="submitToDoctor()">Invia la richiesta</button>
         <button class="btn btn-o" onclick="hideDoctorForm()" style="margin-top:8px;height:44px;font-size:14px">Annulla</button>
       </div>
