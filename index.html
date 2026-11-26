@@ -2986,7 +2986,7 @@ function startStripe(){
 }
 function startStripeSuc(){
   const el=document.getElementById('stripe-email-suc');
-  checkoutConsulto(el?.value.trim(),document.querySelector('#success-box button[onclick="startStripeSuc()" disabled aria-disabled="true"]'),'checkout-terms-suc');
+  checkoutConsulto(el?.value.trim(),document.querySelector('#success-box button[onclick="startStripeSuc()"]'),'checkout-terms-suc');
 }
 async function loginMedico(){
   const field=document.getElementById('doc-pwd');
@@ -3206,7 +3206,7 @@ function chiudiPaywall(){
 }
 function startStripePaywall(){
   const email=document.getElementById('paywall-email').value.trim();
-  checkoutConsulto(email,document.querySelector('#paywall-modal button[onclick="startStripePaywall()" disabled aria-disabled="true"]'),'checkout-terms-paywall');
+  checkoutConsulto(email,document.querySelector('#paywall-modal button[onclick="startStripePaywall()"]'),'checkout-terms-paywall');
 }
 function toggleConsenso(){
   const cb = document.getElementById('tr-consenso');
