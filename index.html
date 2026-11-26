@@ -461,7 +461,7 @@ textarea{min-height:120px;resize:none}
       <p id="request-payment-status" style="font-size:12px;color:#64748b;margin-top:10px"></p>
     </div>
     <div class="card" id="main-form" style="display:none">
-      <div id="doctor-preview-notice" style="display:none;background:#fff7ed;border:2px solid #f97316;border-radius:12px;padding:14px;margin-bottom:16px;color:#7c2d12"><strong id="preview-notice-title">Anteprima riservata al medico</strong><p style="margin:6px 0 10px">Nessun pagamento. Usa solo dati fittizi: nulla verrà inviato o salvato come consulto.</p><button id="preview-exit-btn" type="button" class="btn btn-o" onclick="closeDoctorPreview()">Torna all’area medico</button></div>
+      <div id="doctor-preview-notice" style="display:none;background:#fff7ed;border:2px solid #f97316;border-radius:12px;padding:14px;margin-bottom:16px;color:#7c2d12"><strong id="preview-notice-title">Anteprima riservata al medico</strong><p id="preview-notice-text" style="margin:6px 0 10px">Nessun pagamento. Usa solo dati fittizi: nulla verrà inviato o salvato come consulto.</p><button id="preview-exit-btn" type="button" class="btn btn-o" onclick="closeDoctorPreview()">Torna all’area medico</button></div>
       
       <label style="font-size:15px;font-weight:800;color:#0D4F5C;display:block;margin-bottom:6px">Tipo di richiesta</label>
       <select id="requestType">
@@ -2619,6 +2619,7 @@ function openDoctorPreview(){
   if(!DOC_PWD){showScreen("s-doc-login");return;}
   clearPreviewFields();doctorPreviewActive=true;patientPreviewActive=false;++requestAccessSequence;
   document.getElementById("preview-notice-title").textContent="Anteprima riservata al medico";
+  document.getElementById("preview-notice-text").textContent="Nessun pagamento. Usa solo dati fittizi: nulla verrà inviato o salvato come consulto.";
   document.getElementById("preview-exit-btn").textContent="Torna all’area medico";
   document.getElementById("doctor-preview-notice").style.display="block";
   document.getElementById("paid-confirmation-label").style.display="none";
@@ -2630,10 +2631,11 @@ function openPatientPreview(email){
   clearPreviewFields();doctorPreviewActive=true;patientPreviewActive=true;previewPaymentEmail=email.trim().toLowerCase();++requestAccessSequence;++whatsappRequestSequence;
   document.querySelectorAll('.paid-whatsapp').forEach(el=>{el.style.display='none';if(el.tagName==='A')el.removeAttribute('href');});
   document.getElementById('preview-notice-title').textContent='Modalità di prova paziente';
+  document.getElementById('preview-notice-text').textContent='Nessun pagamento. Inserisci esclusivamente dati fittizi: al termine saranno inviate una conferma paziente e una copia di prova della richiesta a abolzon05@gmail.com. Nessun consulto reale sarà registrato.';
   document.getElementById('preview-exit-btn').textContent='Esci dalla prova';
   document.getElementById('doctor-preview-notice').style.display='block';
   document.getElementById('paid-confirmation-label').style.display='none';
-  document.getElementById('request-submit-btn').textContent='Simula invio (nessun dato trasmesso)';
+  document.getElementById('request-submit-btn').textContent='Invia richiesta di prova via email';
   document.getElementById('patient-email').value=previewPaymentEmail;
   showScreen('s-richiesta');
 }
@@ -2780,6 +2782,18 @@ async function checkSubscriptionAndProceed(prefillEmail){
 }
 function hideDoctorForm(){document.getElementById('doctor-form').classList.add('hidden');}
 
+async function sendPatientPreviewEmail(data){
+  const btn=document.getElementById('request-submit-btn');
+  if(!confirm('Inviare i dati fittizi di questa prova a abolzon05@gmail.com? Non inserire dati sanitari reali.'))return;
+  btn.disabled=true;btn.textContent='Invio di prova in corso...';
+  try{
+    const response=await fetch('/api/patient-preview-email',{method:'POST',headers:{'Content-Type':'application/json'},cache:'no-store',body:JSON.stringify({...data,previewKey:previewPaymentEmail})});
+    const result=await response.json();
+    if(!response.ok)throw new Error(result.error||'Invio di prova non riuscito.');
+    alert(result.summarySent?'Prova completata: conferma paziente e riepilogo di prova inviati a abolzon05@gmail.com. Nessun addebito.':'Conferma paziente inviata a abolzon05@gmail.com. Il riepilogo non è stato consegnato. Nessun addebito.');
+    btn.textContent='Prova inviata';
+  }catch(error){alert(error.message||'Invio di prova non riuscito.');btn.textContent='Invia richiesta di prova via email';btn.disabled=false;}
+}
 async function submitToDoctor(){
   
   const nome=document.getElementById('patient-name').value.trim(),email=document.getElementById('patient-email').value.trim();
@@ -2809,6 +2823,9 @@ async function submitToDoctor(){
   if(!esecConsensoOk){alert('Devi accettare l\'esecuzione immediata del servizio per poter inviare la richiesta');return;}
   const adultDeclaration=document.getElementById('patient-adult-declaration').checked;
   if(!adultDeclaration){alert('Conferma di essere maggiorenne e che i dati inseriti sono veri.');return;}
+  if(patientPreviewActive){
+    await sendPatientPreviewEmail({patientName:nome,patientText:document.getElementById('problem').value,tipo:tipoRichiesta,dateOfBirth:dob,codiceFiscale:cf,noItalianCF,birthCountry,adultDeclaration,anamnesis,phone:document.getElementById('patient-phone').value,consenso:consensoOk,teleConsenso:teleConsensoOk,esecConsenso:esecConsensoOk,archivioReferti:archivioOk});return;
+  }
   if(doctorPreviewActive){alert('Simulazione completata. Nessuna richiesta inviata, nessun pagamento e nessun dato trasmesso.');return;}
   const consensoTimestamp=new Date().toISOString();
   const btn=document.querySelector('#doctor-form .btn-p');btn.textContent='Invio in corso...';btn.disabled=true;
