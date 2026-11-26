@@ -170,6 +170,16 @@ textarea{min-height:120px;resize:none}
 .tog-btn{padding:12px;border-radius:8px;border:1.5px solid var(--brd);background:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;color:var(--txt-s);transition:all .15s}
 .tog-btn.si{background:var(--blu);color:#fff;border-color:var(--blu)}
 .tog-btn.no{background:#f1f5f9;color:var(--txt);border-color:var(--brd)}
+#s-richiesta .tog-btn{background:#fff;color:#334155;border-color:#cbd5e1;-webkit-text-fill-color:currentColor;opacity:1;transition:background-color .15s,border-color .15s,color .15s}
+#s-richiesta .tog-btn.si,#s-richiesta .tog-btn.no{background:#d4f2ec;color:#0D4F5C;border-color:#168577;font-weight:800;box-shadow:inset 0 0 0 1px #168577}
+#s-richiesta .con-box .tog-btn.no{background:#fff0e5;color:#9a3412;border-color:#ea580c;box-shadow:inset 0 0 0 1px #ea580c}
+#s-richiesta .tog-btn:focus-visible{outline:2px solid #168577;outline-offset:2px}
+#s-richiesta label:has(>input[type=checkbox]:checked){background:#d4f2ec;color:#0D4F5C;border-radius:8px}
+#s-richiesta input:not([type=checkbox]):focus,#s-richiesta textarea:focus{background:#f0faf8;color:#123b46}
+#s-richiesta input::placeholder,#s-richiesta textarea::placeholder{color:#64748b;opacity:1}
+#s-richiesta .field-help{display:block;color:#475569;font-size:13px;line-height:1.5;margin:0 0 7px}
+#s-richiesta .detail-field{margin-bottom:8px}
+
 
 .con-box{background:var(--bg);border:1px solid var(--brd);border-radius:var(--r);padding:16px;margin-bottom:12px}
 .con-tit{font-size:14px;font-weight:700;color:var(--txt);margin-bottom:6px}
@@ -466,7 +476,7 @@ textarea{min-height:120px;resize:none}
         <option>Altro</option>
       </select>
       <label style="font-size:15px;font-weight:800;color:#0D4F5C;display:block;margin-bottom:6px;margin-top:12px">Descrivi la tua situazione</label>
-      <textarea id="problem" required placeholder="Qual è il problema? Da quanto tempo? Come è iniziato e come sta andando? Hai già fatto cure o esami? Per rinnovi o referti indica ciò che ti serve."></textarea>
+      <p class="field-help">Qual è il problema? Da quanto tempo? Come è iniziato e come sta andando? Hai già fatto cure o esami? Per rinnovi o referti indica ciò che ti serve.</p><textarea id="problem" required placeholder="Scrivi qui la tua richiesta"></textarea>
 
       <!-- ALLEGATI subito dopo la descrizione -->
       <div class="ftit">📎 Allega documenti (facoltativo)</div>
@@ -514,18 +524,18 @@ textarea{min-height:120px;resize:none}
         <div id="patient-birth-country-wrap" style="display:none;margin-bottom:12px"><label for="patient-birth-country" style="font-size:13px;font-weight:700;color:#0D4F5C">Paese di nascita *</label><input id="patient-birth-country" placeholder="Es. Francia, Brasile, Marocco" maxlength="100" disabled/></div>
         <label for="patient-dob" style="font-size:13px;font-weight:700;color:#0D4F5C">Data di nascita *</label><input id="patient-dob" type="date" autocomplete="bday" required/>
         <label for="patient-email" style="font-size:13px;font-weight:700;color:#0D4F5C">Email per ricevere la risposta *</label><input id="patient-email" type="email" placeholder="Email" autocomplete="email"/>
-        <input id="patient-phone" placeholder="Telefono (opzionale)" autocomplete="tel"/>
+        <label for="patient-phone" style="font-size:13px;font-weight:700;color:#0D4F5C">Telefono (facoltativo)</label><input id="patient-phone" placeholder="Numero di telefono" autocomplete="tel"/>
         <div class="ftit">🏥 Dati sanitari</div>
         <div class="card" style="padding:14px;margin-bottom:12px">
           <p style="font-size:14px;color:#475569;margin:0 0 12px">Rispondi a tre brevi domande per aiutare il medico a valutare la richiesta in sicurezza.</p><div style="font-size:14px;font-weight:700;color:var(--txt);margin-bottom:7px">Hai allergie note, soprattutto a farmaci? *</div>
           <div class="tog-grid"><button type="button" id="allergie-no" class="tog-btn" onclick="togSan('allergie',false)">No</button><button type="button" id="allergie-si" class="tog-btn" onclick="togSan('allergie',true)">Sì</button></div>
-          <textarea id="allergie-det" placeholder="Indica a cosa sei allergico e, se la ricordi, quale reazione hai avuto" style="display:none;min-height:60px;margin-bottom:0"></textarea>
+          <div id="allergie-detail-wrap" class="detail-field" style="display:none"><label for="allergie-det" class="field-help">Indica a cosa sei allergico e, se la ricordi, quale reazione hai avuto</label><textarea id="allergie-det" placeholder="Scrivi qui" style="display:none;min-height:60px;margin-bottom:0"></textarea></div>
           <div style="font-size:14px;font-weight:700;color:var(--txt);margin:10px 0 7px">Assumi farmaci o integratori, anche occasionalmente? *</div>
           <div class="tog-grid"><button type="button" id="farmaci-no" class="tog-btn" onclick="togSan('farmaci',false)">No</button><button type="button" id="farmaci-si" class="tog-btn" onclick="togSan('farmaci',true)">Sì</button></div>
-          <textarea id="farmaci-det" placeholder="Nome, dose e frequenza dei farmaci, se li conosci" style="display:none;min-height:60px;margin-bottom:0"></textarea>
+          <div id="farmaci-detail-wrap" class="detail-field" style="display:none"><label for="farmaci-det" class="field-help">Nome, dose e frequenza dei farmaci, se li conosci</label><textarea id="farmaci-det" placeholder="Scrivi qui" style="display:none;min-height:60px;margin-bottom:0"></textarea></div>
           <div style="font-size:14px;font-weight:700;color:var(--txt);margin:10px 0 7px">Hai malattie, interventi o condizioni di salute rilevanti? *</div>
           <div class="tog-grid"><button type="button" id="patologie-no" class="tog-btn" onclick="togSan('patologie',false)">No</button><button type="button" id="patologie-si" class="tog-btn" onclick="togSan('patologie',true)">Sì</button></div>
-          <textarea id="patologie-det" placeholder="Indica le condizioni rilevanti, anche pregresse" style="display:none;min-height:60px;margin-bottom:0"></textarea>
+          <div id="patologie-detail-wrap" class="detail-field" style="display:none"><label for="patologie-det" class="field-help">Indica le condizioni rilevanti, anche pregresse</label><textarea id="patologie-det" placeholder="Scrivi qui" style="display:none;min-height:60px;margin-bottom:0"></textarea></div>
         </div>
         <details style="border:1px solid #bddede;border-radius:12px;padding:12px;margin:0 0 16px"><summary style="cursor:pointer;font-weight:700;color:#0D4F5C">Altri dati utili (facoltativi)</summary><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px"><div><label for="p-alt" style="font-size:12px;font-weight:600">Altezza (cm)</label><input id="p-alt" type="number" min="50" max="250" placeholder="170"/></div><div><label for="p-peso" style="font-size:12px;font-weight:600">Peso (kg)</label><input id="p-peso" type="number" min="15" max="350" step="0.1" placeholder="70"/></div></div><label for="patient-other" style="font-size:13px;font-weight:600">Altre informazioni utili (es. gravidanza, allattamento, interventi, esami recenti)</label><textarea id="patient-other" placeholder="Solo se rilevante per la tua richiesta" style="min-height:60px"></textarea></details><div class="ftit">📝 Informativa e consensi</div>
         <div class="con-box" style="margin-bottom:10px">
@@ -2582,8 +2592,8 @@ let requestAccessSequence = 0;
 function clearPreviewFields(){
   const form=document.getElementById("main-form");
   form.querySelectorAll("input,textarea,select").forEach(el=>{if(el.type==="checkbox")el.checked=false;else el.value="";});updateFiscalFields();
-  form.querySelectorAll(".tog-btn").forEach(el=>{el.classList.remove("si","no");el.style.background="";el.style.color="";el.style.borderColor="";});
-  ["allergie-det","farmaci-det","patologie-det","warning"].forEach(id=>document.getElementById(id).style.display="none");
+  form.querySelectorAll(".tog-btn").forEach(el=>{el.classList.remove("si","no");el.setAttribute("aria-pressed","false");el.style.background="";el.style.color="";el.style.borderColor="";});
+  ["allergie-det","farmaci-det","patologie-det","allergie-detail-wrap","farmaci-detail-wrap","patologie-detail-wrap","warning"].forEach(id=>document.getElementById(id).style.display="none");
   ["response","rx-section","doctor-form","email-gate","success-box","loading"].forEach(id=>document.getElementById(id).classList.add("hidden"));
   consensoOk=false;teleConsensoOk=false;esecConsensoOk=false;archivioOk=false;uploadedFiles=[];renderFilesPreview();conversazione=[];tipoRichiesta="";requestAccessEmail="";
 }
@@ -2834,42 +2844,43 @@ function newRequest(){
 
 function togFaq(el){const a=el.nextElementSibling,arr=el.querySelector('span');if(a.classList.contains('open')){a.classList.remove('open');arr.textContent='▾';}else{a.classList.add('open');arr.textContent='▴';}}
 
+function setRequestChoice(key,val){
+  const yes=document.getElementById(key+'-si'),no=document.getElementById(key+'-no');
+  for(const [el,selected,cls] of [[yes,val,'si'],[no,!val,'no']]){
+    el.classList.remove('si','no');if(selected)el.classList.add(cls);
+    el.style.background='';el.style.color='';el.style.borderColor='';
+    el.setAttribute('aria-pressed',String(selected));
+  }
+}
 function togSan(campo,val){
-  const si=document.getElementById(campo+'-si'),no=document.getElementById(campo+'-no'),det=document.getElementById(campo+'-det');
-  if(val){si.classList.add('si');si.classList.remove('no');no.classList.remove('si');no.classList.remove('no');if(det)det.style.display='block';}
-  else{no.classList.add('no');no.classList.remove('si');si.classList.remove('si');si.classList.remove('no');if(det)det.style.display='none';}
+  setRequestChoice(campo,val);
+  const det=document.getElementById(campo+'-det');
+  const wrap=document.getElementById(campo+'-detail-wrap');
+  if(det)det.style.display=val?'block':'none';
+  if(wrap)wrap.style.display=val?'block':'none';
 }
 
 function setConsenso(val){
-  consensoOk=val;const si=document.getElementById('consenso-si'),no=document.getElementById('consenso-no');
-  if(val){si.classList.add('si');no.classList.remove('si');no.style.background='';no.style.color='';no.style.borderColor='';}
-  else{no.style.background='#dc2626';no.style.color='#fff';no.style.borderColor='#dc2626';si.classList.remove('si');}
+  consensoOk=val;setRequestChoice('consenso',val);
 }
 
 function updateFiscalFields(){
   const exempt=document.getElementById('patient-no-cf').checked;
   const cf=document.getElementById('patient-cf'),country=document.getElementById('patient-birth-country'),wrap=document.getElementById('patient-birth-country-wrap');
   cf.disabled=exempt;cf.required=!exempt;cf.style.opacity=exempt?'.5':'1';
-  if(exempt)cf.value='';
   country.disabled=!exempt;country.required=exempt;wrap.style.display=exempt?'block':'none';
-  if(!exempt)country.value='';
 }
 
 function setTeleConsenso(val){
-  teleConsensoOk=val;const si=document.getElementById('tele-consenso-si'),no=document.getElementById('tele-consenso-no');
-  if(val){si.classList.add('si');no.classList.remove('si');no.style.background='';no.style.color='';no.style.borderColor='';}
-  else{no.style.background='#dc2626';no.style.color='#fff';no.style.borderColor='#dc2626';si.classList.remove('si');}
+  teleConsensoOk=val;setRequestChoice('tele-consenso',val);
 }
 
 function setEsecConsenso(val){
-  esecConsensoOk=val;const si=document.getElementById('esec-consenso-si'),no=document.getElementById('esec-consenso-no');
-  if(val){si.classList.add('si');no.classList.remove('si');no.style.background='';no.style.color='';no.style.borderColor='';}
-  else{no.style.background='#dc2626';no.style.color='#fff';no.style.borderColor='#dc2626';si.classList.remove('si');}
+  esecConsensoOk=val;setRequestChoice('esec-consenso',val);
 }
 
 function setArchivio(val){
-  archivioOk=val;const si=document.getElementById('archivio-si'),no=document.getElementById('archivio-no');
-  if(val){si.classList.add('si');no.classList.remove('si');}else{no.classList.add('no');si.classList.remove('si');}
+  archivioOk=val;setRequestChoice('archivio',val);
 }
 
 async function checkoutConsulto(email,btn){
