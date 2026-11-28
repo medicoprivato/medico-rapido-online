@@ -56,6 +56,30 @@ const copy={
  en:'<strong>Consultation terms:</strong> €30 per request. Written response within 24 hours of receiving the complete request, including holidays. Payment covers the medical assessment, not the purchase of a prescription. Prescriptions and certificates are issued only when clinically appropriate. No telephone or video calls. <a href="/#s-termini" style="color:#0D4F5C;text-decoration:underline;font-weight:700">Service and refund terms (Italian)</a>.',
  es:'<strong>Condiciones de la consulta:</strong> 30 € por solicitud. Respuesta escrita en las 24 horas siguientes a la recepción de la solicitud completa, incluidos festivos. El pago corresponde a la valoración médica, no a la compra de una receta. Solo se emiten recetas y certificados cuando son clínicamente apropiados. Sin llamadas ni videollamadas. <a href="/#s-termini" style="color:#0D4F5C;text-decoration:underline;font-weight:700">Condiciones del servicio y reembolsos (italiano)</a>.'
 };
+
+const prescriptionCopy={
+it:"<strong>Prescrizioni mediche online</strong><p>Per l'emissione della ricetta elettronica è necessario disporre di un codice fiscale italiano riconosciuto dal Sistema Tessera Sanitaria.</p><p>Le prescrizioni vengono rilasciate esclusivamente quando clinicamente appropriate e nel rispetto della normativa vigente.</p><p>Il pagamento remunera il consulto medico, non garantisce il rilascio di una prescrizione.</p><p>Risposta entro 24 ore dalla ricezione della richiesta completa.</p>",
+en:"<strong>Online medical prescriptions</strong><p>Electronic prescriptions require an Italian tax code recognised by the Tessera Sanitaria system.</p><p>Prescriptions are issued only when clinically appropriate and compliant with applicable law.</p><p>Payment covers the medical consultation and does not guarantee a prescription.</p><p>Response within 24 hours of receiving the complete request.</p>",
+es:"<strong>Prescripciones médicas en línea</strong><p>La receta electrónica requiere un código fiscal italiano reconocido por el Sistema Tessera Sanitaria.</p><p>Las recetas se emiten únicamente cuando son clínicamente apropiadas y conformes a la normativa vigente.</p><p>El pago remunera la consulta médica y no garantiza una receta.</p><p>Respuesta dentro de las 24 horas siguientes a la recepción de la solicitud completa.</p>"
+};
+function prescriptionNormalize(html,lang){
+const pairs=[
+[/Prescrizione privata valida in farmacia/gi,"Eventuale prescrizione secondo la normativa vigente"],
+[/Valido in farmacia, laboratorio e da qualsiasi specialista/gi,"Eventuale prescrizione secondo la normativa vigente"],
+[/valid in any Italian pharmacy/gi,"subject to applicable prescription requirements"],
+[/valide in qualsiasi farmacia italiana/gi,"soggette ai requisiti di prescrizione vigenti"],
+[/ricevi la ricetta firmata in PDF entro 24 ore/gi,"ricevi la valutazione entro 24 ore dalla ricezione della richiesta completa"],
+[/la ricetta in PDF\./gi,"l'eventuale prescrizione secondo la normativa vigente."],
+[/Private prescriptions valid in any Italian pharmacy/gi,"Prescriptions only when clinically appropriate and compliant with applicable law"]
+];
+for(const [p,v] of pairs)html=html.replace(p,v);
+if(!html.includes('id="ms-prescription-conditions"')){
+const notice='<aside id="ms-prescription-conditions" style="box-sizing:border-box;max-width:850px;margin:18px auto;padding:14px 18px;border:1px solid #B2E0DC;border-radius:12px;background:#f0faf8;color:#123b46;font:14px/1.6 system-ui,sans-serif">'+prescriptionCopy[lang]+'</aside>';
+html=html.replace(/<\/body>/i,notice+'</body>');
+}
+return html;
+}
+
 for(const url of urls){
   const u=new URL(url);
   if(u.origin!==site)continue;
@@ -68,6 +92,7 @@ for(const url of urls){
   const before=fs.readFileSync(file,'utf8');
   const lang=(before.match(/<html\b[^>]*\blang=["'](it|en|es)(?:-[a-z]+)?["']/i)?.[1]||'it').toLowerCase();
   let {html}=normalize(before,lang);
+  html=prescriptionNormalize(html,lang);
   checked++;
   // Add one consistent explanation before the footer on every guide/landing page.
   if(!html.includes('id="ms-consult-conditions"')&&/<\/body>/i.test(html)){
@@ -83,6 +108,7 @@ for(const url of urls){
     const snippet=match[0].trim();
     if(!/(?:non (?:è |sono )?garantit|nessuna|senza telefonate|non è possibile|non prevede)/i.test(snippet))flags.push(snippet);
   }
+  for(const match of html.matchAll(/[^<>"\n]{0,65}(?:senza codice fiscale|without (?:an? )?(?:Italian )?(?:tax|fiscal) code|valid in any pharmacy|valid[oaie] in qualsiasi farmacia|ricetta in PDF|prescription in PDF|no Italian health card)[^<>"\n]{0,65}/gi))flags.push(match[0].trim());
   if(flags.length)unresolved.push({page:slug,flags:[...new Set(flags)].slice(0,5)});
   if(html!==before){fs.writeFileSync(file,html);changed++;}
 }
